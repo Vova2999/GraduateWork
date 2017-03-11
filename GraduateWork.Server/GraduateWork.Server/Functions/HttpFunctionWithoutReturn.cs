@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace GraduateWork.Server.Functions.FunctionsWithoutReturn {
+namespace GraduateWork.Server.Functions {
 	public abstract class HttpFunctionWithoutReturn : IHttpFunction {
 		public abstract string NameOfCalledMethod { get; }
 
