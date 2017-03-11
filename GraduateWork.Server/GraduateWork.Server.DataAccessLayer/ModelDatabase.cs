@@ -8,7 +8,6 @@ namespace GraduateWork.Server.DataAccessLayer {
 		public DbSet<Discipline> Disciplines { get; set; }
 
 		public ModelDatabase() : base("GraduateWorkDatabase") {
-			
 		}
 	}
 }

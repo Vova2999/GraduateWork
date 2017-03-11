@@ -10,7 +10,7 @@ namespace GraduateWork.Server.DataAccessLayer.Extensions {
 		}
 
 		private static GroupProxy ToProxy(this Group group) {
-			return new GroupProxy() {
+			return new GroupProxy {
 				NameOfGroup = group.NameOfGroup
 			};
 		}

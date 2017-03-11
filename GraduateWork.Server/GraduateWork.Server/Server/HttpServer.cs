@@ -19,6 +19,7 @@ namespace GraduateWork.Server.Server {
 			while (httpListener.IsListening) {
 				var context = httpListener.GetContext();
 				var function = httpFunctions.Single(f => string.Equals(f.NameOfCalledMethod, context.Request.RawUrl, StringComparison.InvariantCultureIgnoreCase));
+
 				function.RunMethod(context);
 			}
 		}

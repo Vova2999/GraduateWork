@@ -10,7 +10,7 @@ namespace GraduateWork.Server.DataAccessLayer.Extensions {
 		}
 
 		private static DisciplineProxy ToProxy(this Discipline discipline) {
-			return new DisciplineProxy() {
+			return new DisciplineProxy {
 				NameOfDiscipline = discipline.NameOfDiscipline
 			};
 		}

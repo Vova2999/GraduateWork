@@ -10,7 +10,7 @@ namespace GraduateWork.Server.DataAccessLayer.Extensions {
 		}
 
 		private static StudentProxy ToProxy(this Student student) {
-			return new StudentProxy() {
+			return new StudentProxy {
 				FirstName = student.FirstName,
 				SecondName = student.SecondName,
 				ThirdName = student.ThirdName,
