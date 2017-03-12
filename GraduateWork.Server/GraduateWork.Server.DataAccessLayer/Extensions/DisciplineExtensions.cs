@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GraduateWork.Common.Proxies;
+using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.DataAccessLayer.Tables;
 
 namespace GraduateWork.Server.DataAccessLayer.Extensions {

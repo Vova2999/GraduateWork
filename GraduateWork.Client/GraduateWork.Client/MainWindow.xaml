@@ -16,10 +16,11 @@
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 							<DataGrid Grid.Row="0" Name="DataGridTableGroups" />
-							<Button Grid.Row="1" Click="ButtonUpdateTableGroups_OnClick" />
+							<Button Grid.Row="1" Content="Обновить таблицу" HorizontalAlignment="Right"
+									Click="ButtonUpdateTableGroups_OnClick" Width="130" Height="30" />
 						</Grid>
 					</TabItem>
-					
+
 					<TabItem Header="Предметы">
 						<Grid>
 							<Grid.RowDefinitions>
@@ -27,7 +28,8 @@
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 							<DataGrid Grid.Row="0" Name="DataGridTableDisciplines" />
-							<Button Grid.Row="1" Click="ButtonUpdateTableDisciplines_OnClick" />
+							<Button Grid.Row="1" Content="Обновить таблицу" HorizontalAlignment="Right"
+									Click="ButtonUpdateTableDisciplines_OnClick" Width="130" Height="30" />
 						</Grid>
 					</TabItem>
 
@@ -38,7 +40,8 @@
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 							<DataGrid Grid.Row="0" Name="DataGridTableStudents" />
-							<Button Grid.Row="1" Click="ButtonUpdateTableStudents_OnClick" />
+							<Button Grid.Row="1" Content="Обновить таблицу" HorizontalAlignment="Right"
+									Click="ButtonUpdateTableStudents_OnClick" Width="130" Height="30" />
 						</Grid>
 					</TabItem>
 				</TabControl>
