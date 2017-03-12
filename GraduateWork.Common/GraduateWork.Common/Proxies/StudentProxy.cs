@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace GraduateWork.Server.DataAccessLayer.Proxies {
+namespace GraduateWork.Common.Proxies {
 	public class StudentProxy {
 		public string FirstName { get; set; }
 		public string SecondName { get; set; }
