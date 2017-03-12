@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows;
 using GraduateWork.Client.Client;
-using GraduateWork.Client.Extensions;
+using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Common.Tables.Proxies;
 
-namespace GraduateWork.Client {
+namespace GraduateWork.Client.UI {
 	public partial class MainWindow {
 		private readonly IHttpClient httpClient = new HttpClient();
 

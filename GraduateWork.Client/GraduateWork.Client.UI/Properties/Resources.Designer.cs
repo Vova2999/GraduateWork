@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GraduateWork.Client.Properties {
+namespace GraduateWork.Client.UI.Properties {
 
 
 	/// <summary>
@@ -38,7 +38,7 @@ namespace GraduateWork.Client.Properties {
 		internal static global::System.Resources.ResourceManager ResourceManager {
 			get {
 				if ((resourceMan == null)) {
-					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GraduateWork.Client.Properties.Resources", typeof(Resources).Assembly);
+					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GraduateWork.Client.UI.Properties.Resources", typeof(Resources).Assembly);
 					resourceMan = temp;
 				}
 				return resourceMan;

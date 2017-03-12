@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using GraduateWork.Client.Extensions;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies;

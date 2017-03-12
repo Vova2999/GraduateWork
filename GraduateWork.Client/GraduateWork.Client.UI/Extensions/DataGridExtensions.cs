@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using GraduateWork.Common.Tables.Attributes;
 
-namespace GraduateWork.Client.Extensions {
+namespace GraduateWork.Client.UI.Extensions {
 	public static class DataGridExtensions {
 		private static readonly Dictionary<Type, Func<string, string, DataGridColumn>> generateColumn =
 			new Dictionary<Type, Func<string, string, DataGridColumn>> {
