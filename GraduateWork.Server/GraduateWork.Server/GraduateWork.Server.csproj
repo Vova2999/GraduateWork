@@ -59,12 +59,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalObjects\NameValues.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllDisciplinesFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllGroupsFunction.cs" />
+    <Compile Include="Functions\FunctionsWithReturn\GetAllStudentsFormGroupFunction.cs" />
     <Compile Include="Functions\HttpFunctionWithoutReturn.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllStudentsFunction.cs" />
     <Compile Include="Functions\HttpFunctionWithReturn.cs" />
-    <Compile Include="Functions\IHttpFunction.cs" />
+    <Compile Include="Functions\HttpFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\PingFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

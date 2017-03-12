@@ -15,7 +15,7 @@ namespace GraduateWork.Server {
 		private static IHttpServer CreateHttpServer() {
 			var container = new StandardKernel();
 
-			container.Bind<ModelDatabase>().To<ModelDatabase>().InSingletonScope();
+			container.Bind<IModelDatabase>().To<ModelDatabase>().InSingletonScope();
 			container.Bind(c => c.FromThisAssembly().SelectAllClasses().BindAllInterfaces());
 			container.Bind(c => c.FromThisAssembly().SelectAllClasses().BindAllBaseClasses());
 

@@ -1,8 +1,9 @@
 ﻿using System.Net;
+using GraduateWork.Server.AdditionalObjects;
 
 namespace GraduateWork.Server.Functions {
 	public interface IHttpFunction {
 		string NameOfCalledMethod { get; }
-		void RunMethod(HttpListenerContext context);
+		void Execute(HttpListenerContext context, NameValues parameters);
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Functions;
 
 namespace GraduateWork.Server.Server {
@@ -18,10 +19,21 @@ namespace GraduateWork.Server.Server {
 
 			while (httpListener.IsListening) {
 				var context = httpListener.GetContext();
-				var function = httpFunctions.Single(f => string.Equals(f.NameOfCalledMethod, context.Request.RawUrl, StringComparison.InvariantCultureIgnoreCase));
+				var functionNameAndParameters = context.Request.RawUrl.Split('?');
+				var functionName = functionNameAndParameters[0];
+				var parameters = functionNameAndParameters.Length > 1
+					? GetParameters(functionNameAndParameters[1])
+					: new NameValues();
 
-				function.RunMethod(context);
+				var function = httpFunctions.Single(f => string.Equals(f.NameOfCalledMethod, functionName, StringComparison.InvariantCultureIgnoreCase));
+
+				function.Execute(context, parameters);
 			}
+		}
+		private NameValues GetParameters(string parameters) {
+			return new NameValues(parameters.Split('&')
+				.Select(parameter => parameter.Split('='))
+				.ToDictionary(keyValue => keyValue[0], keyValue => keyValue[1]));
 		}
 	}
 }
