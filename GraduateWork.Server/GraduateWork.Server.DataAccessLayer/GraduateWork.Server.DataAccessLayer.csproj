@@ -45,6 +45,7 @@
     <Compile Include="Extensions\DisciplineExtensions.cs" />
     <Compile Include="Extensions\GroupExtensions.cs" />
     <Compile Include="Extensions\StudentExtensions.cs" />
+    <Compile Include="IModelDatabase.cs" />
     <Compile Include="ModelDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tables\Discipline.cs" />
