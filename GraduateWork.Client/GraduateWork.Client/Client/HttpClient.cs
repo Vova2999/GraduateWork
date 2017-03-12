@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using GraduateWork.Client.Extensions;
 using GraduateWork.Common.Extensions;
@@ -9,8 +10,16 @@ namespace GraduateWork.Client.Client {
 			return SendRequest(RequestType.Get, "Ping").StatusCode == HttpStatusCode.OK;
 		}
 
-		public StudentProxy[] GetAllStudents() {
-			return SendRequest(RequestType.Get, "GetAllStudents").GetResponseBytes().FromJson<StudentProxy[]>();
+		public IEnumerable<GroupProxy> GetAllGroups() {
+			return SendRequest(RequestType.Get, "GetAllGroups").GetResponseBytes().FromJson<IEnumerable<GroupProxy>>();
+		}
+
+		public IEnumerable<DisciplineProxy> GetAllDisciplines() {
+			return SendRequest(RequestType.Get, "GetAllDisciplines").GetResponseBytes().FromJson<IEnumerable<DisciplineProxy>>();
+		}
+
+		public IEnumerable<StudentProxy> GetAllStudents() {
+			return SendRequest(RequestType.Get, "GetAllStudents").GetResponseBytes().FromJson<IEnumerable<StudentProxy>>();
 		}
 
 		private HttpWebResponse SendRequest(RequestType requestType, string methodName, byte[] requestBody = null, int timeoutMs = 5000) {

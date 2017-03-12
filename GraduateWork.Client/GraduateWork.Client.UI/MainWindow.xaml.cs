@@ -17,10 +17,10 @@ namespace GraduateWork.Client.UI {
 		}
 
 		private void ButtonUpdateTableGroups_OnClick(object sender, RoutedEventArgs e) {
-			throw new NotImplementedException();
+			DataGridTableGroups.ItemsSource = httpClient.GetAllGroups();
 		}
 		private void ButtonUpdateTableDisciplines_OnClick(object sender, RoutedEventArgs e) {
-			throw new NotImplementedException();
+			DataGridTableDisciplines.ItemsSource = httpClient.GetAllDisciplines();
 		}
 		private void ButtonUpdateTableStudents_OnClick(object sender, RoutedEventArgs e) {
 			DataGridTableStudents.ItemsSource = httpClient.GetAllStudents();

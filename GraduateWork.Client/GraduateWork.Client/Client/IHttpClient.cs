@@ -1,8 +1,11 @@
-﻿using GraduateWork.Common.Tables.Proxies;
+﻿using System.Collections.Generic;
+using GraduateWork.Common.Tables.Proxies;
 
 namespace GraduateWork.Client.Client {
 	public interface IHttpClient {
 		bool Ping();
-		StudentProxy[] GetAllStudents();
+		IEnumerable<GroupProxy> GetAllGroups();
+		IEnumerable<DisciplineProxy> GetAllDisciplines();
+		IEnumerable<StudentProxy> GetAllStudents();
 	}
 }
