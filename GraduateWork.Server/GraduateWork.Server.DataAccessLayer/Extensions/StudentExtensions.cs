@@ -5,8 +5,8 @@ using GraduateWork.Server.DataAccessLayer.Tables;
 
 namespace GraduateWork.Server.DataAccessLayer.Extensions {
 	public static class StudentExtensions {
-		public static StudentProxy[] ToProxies(this IEnumerable<Student> students) {
-			return students.Select(student => student.ToProxy()).ToArray();
+		public static IEnumerable<StudentProxy> ToProxies(this IEnumerable<Student> students) {
+			return students.Select(student => student.ToProxy());
 		}
 
 		private static StudentProxy ToProxy(this Student student) {
