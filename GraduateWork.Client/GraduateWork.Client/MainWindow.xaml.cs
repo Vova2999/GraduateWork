@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Windows;
+using GraduateWork.Client.Client;
 using GraduateWork.Client.Extensions;
 using GraduateWork.Common.Tables.Proxies;
 
 namespace GraduateWork.Client {
 	public partial class MainWindow {
+		private readonly IHttpClient httpClient = new HttpClient();
+
 		public MainWindow() {
 			InitializeComponent();
 
@@ -20,7 +23,7 @@ namespace GraduateWork.Client {
 			throw new NotImplementedException();
 		}
 		private void ButtonUpdateTableStudents_OnClick(object sender, RoutedEventArgs e) {
-			throw new NotImplementedException();
+			DataGridTableStudents.ItemsSource = httpClient.GetAllStudents();
 		}
 	}
 }

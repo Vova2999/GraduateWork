@@ -1,7 +1,7 @@
 ﻿using System.Net;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Server.DataAccessLayer;
 using GraduateWork.Server.DataAccessLayer.Extensions;
-using GraduateWork.Server.Extensions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 	public class GetAllStudentsFunction : HttpFunctionWithReturn {
