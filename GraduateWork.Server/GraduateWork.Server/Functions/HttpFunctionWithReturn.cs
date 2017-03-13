@@ -9,7 +9,7 @@ namespace GraduateWork.Server.Functions {
 			var outputBytes = Run(context, parameters);
 
 			using (var stream = context.Response.OutputStream)
-				stream.Write(outputBytes, 0, outputBytes.Length);
+				stream.Write(outputBytes, 0, outputBytes?.Length ?? 0);
 		}
 
 		protected abstract byte[] Run(HttpListenerContext context, NameValues parameters);
