@@ -66,7 +66,7 @@
     <Compile Include="Functions\HttpFunctionWithoutReturn.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllStudentsFunction.cs" />
     <Compile Include="Functions\HttpFunctionWithReturn.cs" />
-    <Compile Include="Functions\HttpFunction.cs" />
+    <Compile Include="Functions\IHttpFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\PingFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,9 +77,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\GraduateWork.Server.DataAccessLayer\GraduateWork.Server.DataAccessLayer.csproj">
       <Project>{494bed79-81e9-4d39-a0e6-47577c701172}</Project>

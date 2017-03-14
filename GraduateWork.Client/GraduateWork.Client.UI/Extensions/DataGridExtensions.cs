@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Data;
 using GraduateWork.Common.Tables.Attributes;
+using GraduateWork.Common.Tables.Proxies;
 
 namespace GraduateWork.Client.UI.Extensions {
 	public static class DataGridExtensions {
@@ -14,7 +15,8 @@ namespace GraduateWork.Client.UI.Extensions {
 				{ typeof(string), GenerateTextColumn },
 				{ typeof(DateTime), GenerateDataColumn },
 				{ typeof(DateTime?), GenerateDataColumn },
-				{ typeof(string[]), (header, bindingName) => null }
+				{ typeof(string[]), (header, bindingName) => null },
+				{ typeof(AssessmentByDiscipline[]), (header, bindingName) => null }
 			};
 
 		public static void LoadTable(this DataGrid dataGrid, Type type) {
