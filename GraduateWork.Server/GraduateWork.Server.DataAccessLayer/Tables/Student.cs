@@ -30,6 +30,6 @@ namespace GraduateWork.Server.DataAccessLayer.Tables {
 		[Required]
 		public virtual Group Group { get; set; }
 
-		public virtual List<Discipline> Disciplines { get; set; }
+		public virtual List<AssessmentByDiscipline> AssessmentByDisciplines { get; set; }
 	}
 }

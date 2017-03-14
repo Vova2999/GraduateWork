@@ -2,6 +2,8 @@
 using System.Linq;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.DataAccessLayer.Tables;
+using Assessment = GraduateWork.Common.Tables.Proxies.Assessment;
+using AssessmentByDiscipline = GraduateWork.Common.Tables.Proxies.AssessmentByDiscipline;
 
 namespace GraduateWork.Server.DataAccessLayer.Extensions {
 	public static class StudentExtensions {
@@ -17,7 +19,11 @@ namespace GraduateWork.Server.DataAccessLayer.Extensions {
 				YearOfReceipt = student.YearOfReceipt,
 				YearOfDeduction = student.YearOfDeduction,
 				NameOfGroup = student.Group.NameOfGroup,
-				NameOfDisciplines = student.Disciplines.Select(discipline => discipline.NameOfDiscipline).ToArray()
+				AssessmentByDisciplines = student.AssessmentByDisciplines
+					.Select(assessmentByDiscipline => new AssessmentByDiscipline {
+						NameOfDiscipline = assessmentByDiscipline.Discipline.NameOfDiscipline,
+						Assessment = (Assessment)(int)assessmentByDiscipline.Assessment
+					}).ToArray()
 			};
 		}
 	}

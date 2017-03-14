@@ -48,6 +48,7 @@
     <Compile Include="IModelDatabase.cs" />
     <Compile Include="ModelDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tables\AssessmentByDiscipline.cs" />
     <Compile Include="Tables\Discipline.cs" />
     <Compile Include="Tables\Group.cs" />
     <Compile Include="Tables\Student.cs" />

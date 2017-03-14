@@ -21,7 +21,18 @@ namespace GraduateWork.Common.Tables.Proxies {
 		[HeaderColumn("Группа")]
 		public string NameOfGroup { get; set; }
 
-		[HeaderColumn("Дисциплины")]
-		public string[] NameOfDisciplines { get; set; }
+		[HeaderColumn("Оценки по дисциплинам")]
+		public AssessmentByDiscipline[] AssessmentByDisciplines { get; set; }
+	}
+
+	public class AssessmentByDiscipline {
+		public string NameOfDiscipline { get; set; }
+		public Assessment Assessment { get; set; }
+	}
+
+	public enum Assessment {
+		Excellent = 5,
+		Good = 4,
+		Satisfactory = 3
 	}
 }

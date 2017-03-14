@@ -12,6 +12,6 @@ namespace GraduateWork.Server.DataAccessLayer.Tables {
 		[Index(IsUnique = true)]
 		public string NameOfDiscipline { get; set; }
 
-		public virtual List<Student> Students { get; set; }
+		public virtual List<AssessmentByDiscipline> AssessmentByDisciplines { get; set; }
 	}
 }
