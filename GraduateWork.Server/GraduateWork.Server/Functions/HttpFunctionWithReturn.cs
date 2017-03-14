@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Extensions;
 
 namespace GraduateWork.Server.Functions {
 	public abstract class HttpFunctionWithReturn<TKey> : IHttpFunction {

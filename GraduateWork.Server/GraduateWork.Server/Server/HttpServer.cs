@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using GraduateWork.Common.Exceptions;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Exceptions;
-using GraduateWork.Server.Extensions;
 using GraduateWork.Server.Functions;
 
 namespace GraduateWork.Server.Server {
