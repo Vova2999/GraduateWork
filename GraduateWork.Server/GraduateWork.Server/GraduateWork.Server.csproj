@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalObjects\NameValues.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Exceptions\HttpException.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllDisciplinesFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllGroupsFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllStudentsFormGroupFunction.cs" />

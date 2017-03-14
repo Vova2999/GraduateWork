@@ -1,12 +1,14 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using GraduateWork.Common.Extensions;
+using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.DataAccessLayer;
 using GraduateWork.Server.DataAccessLayer.Extensions;
+using GraduateWork.Server.Exceptions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
-	public class GetAllStudentsFormGroupFunction : HttpFunctionWithReturn {
+	public class GetAllStudentsFormGroupFunction : HttpFunctionWithReturn<IEnumerable<StudentProxy>> {
 		public override string NameOfCalledMethod => "/GetAllStudentsFormGroup";
 		private readonly IModelDatabase modelDatabase;
 
@@ -14,10 +16,14 @@ namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 			this.modelDatabase = modelDatabase;
 		}
 
-		protected override byte[] Run(HttpListenerContext context, NameValues parameters) {
+		protected override IEnumerable<StudentProxy> Run(NameValues parameters) {
 			var nameOfGroup = parameters["NameOfGroup"];
 
-			return modelDatabase.Groups.FirstOrDefault(group => group.NameOfGroup == nameOfGroup)?.Students.ToProxies().ToJson();
+			var group = modelDatabase.Groups.FirstOrDefault(g => g.NameOfGroup == nameOfGroup);
+			if (group == null)
+				throw new HttpException(HttpStatusCode.NotFound, $"Группа '{nameOfGroup}' не найдена");
+
+			return group.Students.ToProxies();
 		}
 	}
 }

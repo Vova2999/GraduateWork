@@ -1,11 +1,11 @@
-using System.Net;
-using GraduateWork.Common.Extensions;
+using System.Collections.Generic;
+using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.DataAccessLayer;
 using GraduateWork.Server.DataAccessLayer.Extensions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
-	public class GetAllDisciplinesFunction : HttpFunctionWithReturn {
+	public class GetAllDisciplinesFunction : HttpFunctionWithReturn<IEnumerable<DisciplineProxy>> {
 		public override string NameOfCalledMethod => "/GetAllDisciplines";
 		private readonly IModelDatabase modelDatabase;
 
@@ -13,8 +13,8 @@ namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 			this.modelDatabase = modelDatabase;
 		}
 
-		protected override byte[] Run(HttpListenerContext context, NameValues parameters) {
-			return modelDatabase.Disciplines.ToProxies().ToJson();
+		protected override IEnumerable<DisciplineProxy> Run(NameValues parameters) {
+			return modelDatabase.Disciplines.ToProxies();
 		}
 	}
 }

@@ -1,11 +1,11 @@
-using System.Net;
-using GraduateWork.Common.Extensions;
+using System.Collections.Generic;
+using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.DataAccessLayer;
 using GraduateWork.Server.DataAccessLayer.Extensions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
-	public class GetAllGroupsFunction : HttpFunctionWithReturn {
+	public class GetAllGroupsFunction : HttpFunctionWithReturn<IEnumerable<GroupProxy>> {
 		public override string NameOfCalledMethod => "/GetAllGroups";
 		private readonly IModelDatabase modelDatabase;
 
@@ -13,8 +13,8 @@ namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 			this.modelDatabase = modelDatabase;
 		}
 
-		protected override byte[] Run(HttpListenerContext context, NameValues parameters) {
-			return modelDatabase.Groups.ToProxies().ToJson();
+		protected override IEnumerable<GroupProxy> Run(NameValues parameters) {
+			return modelDatabase.Groups.ToProxies();
 		}
 	}
 }

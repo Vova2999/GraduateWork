@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Server.AdditionalObjects;
+using GraduateWork.Server.Exceptions;
+using GraduateWork.Server.Extensions;
 using GraduateWork.Server.Functions;
 
 namespace GraduateWork.Server.Server {
@@ -25,24 +26,47 @@ namespace GraduateWork.Server.Server {
 				try {
 					var functionNameAndParameters = context.Request.RawUrl.Split('?');
 					var functionName = functionNameAndParameters[0];
-					var parameters = functionNameAndParameters.Length > 1 ? GetParameters(functionNameAndParameters[1]) : new NameValues();
+					var parameters = GetParameters(functionNameAndParameters);
 
-					httpFunctions
-						.Single(f => string.Equals(f.NameOfCalledMethod, functionName, StringComparison.InvariantCultureIgnoreCase))
-						.Execute(context, parameters);
+					GetFunction(functionName).Execute(context, parameters);
+				}
+				catch (HttpException exception) {
+					context.Response.StatusCode = (int)exception.StatusCode;
+					context.Response.OutputStream.WriteAndDispose(exception.Message.ToJson());
 				}
 				catch (Exception exception) {
-					context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-					context.Response.StatusDescription = exception.Message;
-					context.Response.OutputStream.Dispose();
+					context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+					context.Response.OutputStream.WriteAndDispose(exception.Message.ToJson());
 				}
 			}
 		}
+		private NameValues GetParameters(string[] functionNameAndParameters) {
+			if (functionNameAndParameters.Length > 2)
+				throw new HttpException(HttpStatusCode.BadRequest, "В запроме не может быть несколько знаков '?'");
+
+			return functionNameAndParameters.Length > 1
+				? GetParameters(functionNameAndParameters[1])
+				: new NameValues();
+		}
 		private NameValues GetParameters(string parameters) {
-			return new NameValues(parameters.Split('&')
-				.Select(parameter => parameter.Split('='))
-				.Where(keyValue => keyValue.Length > 1)
-				.ToDictionary(keyValue => keyValue[0], keyValue => keyValue[1]));
+			try {
+				return new NameValues(parameters.Split('&')
+					.Select(parameter => parameter.Split('='))
+					.Where(keyValue => keyValue.Length > 1)
+					.ToDictionary(keyValue => keyValue[0], keyValue => keyValue[1]));
+			}
+			catch (Exception) {
+				throw new HttpException(HttpStatusCode.BadRequest, "Неверные прарметры функции");
+			}
+		}
+		private IHttpFunction GetFunction(string functionName) {
+			var function = httpFunctions
+				.FirstOrDefault(f => string.Equals(f.NameOfCalledMethod, functionName, StringComparison.InvariantCultureIgnoreCase));
+
+			if (function == null)
+				throw new HttpException(HttpStatusCode.NotFound, $"Функция '{functionName}' не найдена");
+
+			return function;
 		}
 	}
 }

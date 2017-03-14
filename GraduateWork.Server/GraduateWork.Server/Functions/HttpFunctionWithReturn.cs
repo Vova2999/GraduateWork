@@ -1,17 +1,19 @@
 ﻿using System.Net;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Server.AdditionalObjects;
+using GraduateWork.Server.Extensions;
 
 namespace GraduateWork.Server.Functions {
-	public abstract class HttpFunctionWithReturn : IHttpFunction {
+	public abstract class HttpFunctionWithReturn<TKey> : IHttpFunction {
 		public abstract string NameOfCalledMethod { get; }
 
 		public void Execute(HttpListenerContext context, NameValues parameters) {
-			var outputBytes = Run(context, parameters);
+			var outputBytes = Run(parameters).ToJson();
 
-			using (var stream = context.Response.OutputStream)
-				stream.Write(outputBytes, 0, outputBytes?.Length ?? 0);
+			context.Response.StatusCode = (int)HttpStatusCode.OK;
+			context.Response.OutputStream.WriteAndDispose(outputBytes);
 		}
 
-		protected abstract byte[] Run(HttpListenerContext context, NameValues parameters);
+		protected abstract TKey Run(NameValues parameters);
 	}
 }

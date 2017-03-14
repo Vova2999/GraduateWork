@@ -6,11 +6,12 @@ namespace GraduateWork.Server.Functions {
 		public abstract string NameOfCalledMethod { get; }
 
 		public void Execute(HttpListenerContext context, NameValues parameters) {
-			Run(context, parameters);
+			Run(parameters);
 
+			context.Response.StatusCode = (int)HttpStatusCode.OK;
 			context.Response.OutputStream.Dispose();
 		}
 
-		protected abstract void Run(HttpListenerContext context, NameValues parameters);
+		protected abstract void Run(NameValues parameters);
 	}
 }
