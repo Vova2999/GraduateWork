@@ -33,7 +33,9 @@ namespace GraduateWork.Client.UI.Extensions {
 				})
 				.Where(t => t.attribute != null)
 				.Select(t => generateColumn[t.propertyInfo.PropertyType](t.attribute.HeaderColumn, t.propertyInfo.Name))
-				.Where(column => column != null);
+				.Where(column => column != null)
+				.ToArray();
+			columns.Last().Width = new DataGridLength(1, DataGridLengthUnitType.Star);
 
 			foreach (var column in columns)
 				dataGrid.Columns.Add(column);

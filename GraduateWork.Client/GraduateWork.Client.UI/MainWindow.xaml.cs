@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using GraduateWork.Client.Client;
 using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Common.Tables.Proxies;

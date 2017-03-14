@@ -37,9 +37,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\BaseHttpClient.cs" />
     <Compile Include="Client\HttpClient.cs" />
     <Compile Include="Client\IHttpClient.cs" />
-    <Compile Include="Client\RequestType.cs" />
     <Compile Include="Extensions\HttpWebResponseExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
