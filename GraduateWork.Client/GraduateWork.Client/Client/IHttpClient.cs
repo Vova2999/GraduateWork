@@ -2,14 +2,14 @@
 
 namespace GraduateWork.Client.Client {
 	public interface IHttpClient {
-		bool Ping();
+		void Ping();
 
 		GroupProxy[] GetAllGroups();
 		DisciplineProxy[] GetAllDisciplines();
 		StudentProxy[] GetAllStudents();
 
-		bool AddGroup(GroupProxy group);
-		bool EditGroup(GroupProxy oldGroup, GroupProxy newGroup);
-		bool DeleteGroup(GroupProxy group);
+		void AddGroup(GroupProxy group);
+		void EditGroup(GroupProxy oldGroup, GroupProxy newGroup);
+		void DeleteGroup(GroupProxy group);
 	}
 }

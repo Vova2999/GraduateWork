@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using GraduateWork.Client.Client;
 using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Client.UI.TableWindows;
@@ -21,13 +22,13 @@ namespace GraduateWork.Client.UI {
 		}
 
 		private void ButtonUpdateTableGroups_OnClick(object sender, RoutedEventArgs e) {
-			DataGridTableGroups.ItemsSource = httpClient.GetAllGroups();
+			DataGridTableGroups.ItemsSource = GetOrShowMessage(() => httpClient.GetAllGroups());
 		}
 		private void ButtonUpdateTableDisciplines_OnClick(object sender, RoutedEventArgs e) {
-			DataGridTableDisciplines.ItemsSource = httpClient.GetAllDisciplines();
+			DataGridTableDisciplines.ItemsSource = GetOrShowMessage(() => httpClient.GetAllDisciplines());
 		}
 		private void ButtonUpdateTableStudents_OnClick(object sender, RoutedEventArgs e) {
-			DataGridTableStudents.ItemsSource = httpClient.GetAllStudents();
+			DataGridTableStudents.ItemsSource = GetOrShowMessage(() => httpClient.GetAllStudents());
 		}
 
 		private void AddGroup() {
@@ -36,8 +37,7 @@ namespace GraduateWork.Client.UI {
 			if (groupWindow.Group == null)
 				return;
 
-			if (!httpClient.AddGroup(groupWindow.Group))
-				MessageBox.Show("Ошибка при добавлении группы", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+			RunOrShowMessage(() => httpClient.AddGroup(groupWindow.Group));
 		}
 		private void EditGroup() {
 			var selectedGroup = GetSelectedGroup();
@@ -51,8 +51,7 @@ namespace GraduateWork.Client.UI {
 			if (groupWindow.Group == null)
 				return;
 
-			if (!httpClient.EditGroup(selectedGroup, groupWindow.Group))
-				MessageBox.Show("Ошибка при изменении группы", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+			RunOrShowMessage(() => httpClient.EditGroup(selectedGroup, groupWindow.Group));
 		}
 		private void DeleteGroup() {
 			var selectedGroup = GetSelectedGroup();
@@ -61,8 +60,7 @@ namespace GraduateWork.Client.UI {
 				return;
 			}
 
-			if (!httpClient.DeleteGroup(selectedGroup))
-				MessageBox.Show("Ошибка при добавлении группы", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+			RunOrShowMessage(() => httpClient.DeleteGroup(selectedGroup));
 		}
 
 		private void AddDiscipline() {
@@ -87,6 +85,24 @@ namespace GraduateWork.Client.UI {
 		}
 		private StudentProxy GetSelectedStudent() {
 			return (StudentProxy)DataGridTableStudents.SelectedItem;
+		}
+
+		private TKey GetOrShowMessage<TKey>(Func<TKey> get) {
+			try {
+				return get();
+			}
+			catch (Exception exception) {
+				MessageBox.Show(exception.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+				return default(TKey);
+			}
+		}
+		private void RunOrShowMessage(Action run) {
+			try {
+				run();
+			}
+			catch (Exception exception) {
+				MessageBox.Show(exception.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 		}
 	}
 }

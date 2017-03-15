@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Net;
 using GraduateWork.Common.Exceptions;
@@ -6,56 +5,29 @@ using GraduateWork.Common.Extensions;
 
 namespace GraduateWork.Client.Client {
 	public class BaseHttpClient {
-		protected static bool TrySendRequestWithoutReturn(string methodName, int timeoutMs = 10000) {
-			return TrySendRequest(() => {
-				SendRequest<bool>(methodName, timeoutMs);
-				return true;
-			},
-				() => false);
+		protected static void SendRequest(string methodName, byte[] requestBody = null, int timeoutMs = 5000) {
+			var webRequest = CreateWebRequest(methodName, requestBody, timeoutMs);
+			SendRequest(webRequest);
 		}
-		protected static bool TrySendRequestWithoutReturn(string methodName, byte[] requestBody, int timeoutMs = 10000) {
-			return TrySendRequest(() => {
-				SendRequest<bool>(methodName, requestBody, timeoutMs);
-				return true;
-			},
-				() => false);
-		}
-		protected static TKey TrySendRequestWithReturn<TKey>(string methodName, Func<TKey> actionWhenException, int timeoutMs = 10000) {
-			return TrySendRequest(() => SendRequest<TKey>(methodName, timeoutMs), actionWhenException);
-		}
-		protected static TKey TrySendRequestWithReturn<TKey>(string methodName, byte[] requestBody, Func<TKey> actionWhenException, int timeoutMs = 10000) {
-			return TrySendRequest(() => SendRequest<TKey>(methodName, requestBody, timeoutMs), actionWhenException);
-		}
-		private static TKey TrySendRequest<TKey>(Func<TKey> primaryAction, Func<TKey> actionWhenException) {
-			try {
-				return primaryAction();
-			}
-			catch (Exception) {
-				return actionWhenException();
-			}
+		protected static TKey SendRequest<TKey>(string methodName, byte[] requestBody = null, int timeoutMs = 5000) {
+			var webRequest = CreateWebRequest(methodName, requestBody, timeoutMs);
+			return GetAnswer<TKey>(SendRequest(webRequest));
 		}
 
-		private static TKey SendRequest<TKey>(string methodName, int timeoutMs = 10000) {
-			var webRequest = CreateGetRequest(methodName, timeoutMs);
-			return SendRequest<TKey>(webRequest);
-		}
-		private static TKey SendRequest<TKey>(string methodName, byte[] requestBody, int timeoutMs = 10000) {
-			var webRequest = CreatePostRequest(methodName, requestBody, timeoutMs);
-			return SendRequest<TKey>(webRequest);
-		}
-
-		private static HttpWebRequest CreateGetRequest(string methodName, int timeoutMs) {
+		private static HttpWebRequest CreateWebRequest(string methodName, byte[] requestBody, int timeoutMs) {
 			var webRequest = (HttpWebRequest)WebRequest.Create($"http://127.0.0.1/{methodName}");
 			webRequest.Timeout = timeoutMs;
-			webRequest.Method = "GET";
 
+			return requestBody == null
+				? CreateGetRequest(webRequest)
+				: CreatePostRequest(webRequest, requestBody);
+		}
+		private static HttpWebRequest CreateGetRequest(HttpWebRequest webRequest) {
+			webRequest.Method = "GET";
 			return webRequest;
 		}
-		private static HttpWebRequest CreatePostRequest(string methodName, byte[] requestBody, int timeoutMs) {
-			var webRequest = (HttpWebRequest)WebRequest.Create($"http://127.0.0.1/{methodName}");
-			webRequest.Timeout = timeoutMs;
+		private static HttpWebRequest CreatePostRequest(HttpWebRequest webRequest, byte[] requestBody) {
 			webRequest.Method = "POST";
-
 			webRequest.ContentLength = requestBody.Length;
 			using (var stream = webRequest.GetRequestStream())
 				stream.Write(requestBody, 0, requestBody.Length);
@@ -63,12 +35,12 @@ namespace GraduateWork.Client.Client {
 			return webRequest;
 		}
 
-		private static TKey SendRequest<TKey>(HttpWebRequest webRequest) {
+		private static HttpWebResponse SendRequest(HttpWebRequest webRequest) {
 			var webResponse = (HttpWebResponse)webRequest.GetResponse();
 			if (webResponse.StatusCode != HttpStatusCode.OK)
 				throw new HttpException(webResponse.StatusCode, webResponse.GetResponseStream().ReadAndDispose().FromJson<string>());
 
-			return GetAnswer<TKey>(webResponse);
+			return webResponse;
 		}
 		private static TKey GetAnswer<TKey>(HttpWebResponse webResponse) {
 			var outputBytes = webResponse.GetResponseStream().ReadAndDispose();
