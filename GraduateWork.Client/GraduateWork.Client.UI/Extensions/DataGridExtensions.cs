@@ -20,6 +20,7 @@ namespace GraduateWork.Client.UI.Extensions {
 			};
 
 		public static void LoadTable(this DataGrid dataGrid, Type type) {
+			dataGrid.SelectionMode = DataGridSelectionMode.Single;
 			dataGrid.AutoGenerateColumns = false;
 			dataGrid.CanUserAddRows = false;
 			dataGrid.CanUserDeleteRows = false;
@@ -42,7 +43,6 @@ namespace GraduateWork.Client.UI.Extensions {
 			foreach (var column in columns)
 				dataGrid.Columns.Add(column);
 		}
-
 		private static DataGridColumn GenerateTextColumn(string header, string bindingName) {
 			return new DataGridTextColumn {
 				Header = header,
@@ -56,6 +56,22 @@ namespace GraduateWork.Client.UI.Extensions {
 					StringFormat = "dd.hh.yyyy"
 				}
 			};
+		}
+
+		public static void CreateContextMenuForDatabase(this DataGrid dataGrid, Action add, Action edit, Action delete) {
+			dataGrid.ContextMenu = new ContextMenu {
+				ItemsSource = new[] {
+					CreateMenuItem("Добавить", add),
+					CreateMenuItem("Редактировать", edit),
+					CreateMenuItem("Удалить", delete)
+				}
+			};
+		}
+		private static MenuItem CreateMenuItem(string header, Action action) {
+			var menuItem = new MenuItem { Header = header };
+			menuItem.Click += (sender, args) => action();
+
+			return menuItem;
 		}
 	}
 }

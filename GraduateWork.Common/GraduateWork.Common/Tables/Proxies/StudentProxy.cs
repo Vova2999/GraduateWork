@@ -13,10 +13,10 @@ namespace GraduateWork.Common.Tables.Proxies {
 		public string ThirdName { get; set; }
 
 		[HeaderColumn("Дата поступления")]
-		public DateTime YearOfReceipt { get; set; }
+		public DateTime DateOfReceipt { get; set; }
 
 		[HeaderColumn("Дата отчисления")]
-		public DateTime? YearOfDeduction { get; set; }
+		public DateTime? DateOfDeduction { get; set; }
 
 		[HeaderColumn("Группа")]
 		public string NameOfGroup { get; set; }

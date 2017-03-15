@@ -23,9 +23,9 @@ namespace GraduateWork.Server.DataAccessLayer.Tables {
 		[Index("IX_Names", 3, IsUnique = true)]
 		public string ThirdName { get; set; }
 
-		public DateTime YearOfReceipt { get; set; }
+		public DateTime DateOfReceipt { get; set; }
 
-		public DateTime? YearOfDeduction { get; set; }
+		public DateTime? DateOfDeduction { get; set; }
 
 		[Required]
 		public virtual Group Group { get; set; }

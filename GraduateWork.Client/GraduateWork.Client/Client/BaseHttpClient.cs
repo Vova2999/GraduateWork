@@ -13,7 +13,7 @@ namespace GraduateWork.Client.Client {
 			},
 				() => false);
 		}
-		protected static bool TrySendRequestWithoutReturn<TKey>(string methodName, byte[] requestBody, int timeoutMs = 5000) {
+		protected static bool TrySendRequestWithoutReturn(string methodName, byte[] requestBody, int timeoutMs = 5000) {
 			return TrySendRequest(() => {
 				SendRequest<bool>(methodName, requestBody, timeoutMs);
 				return true;

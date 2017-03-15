@@ -16,8 +16,8 @@ namespace GraduateWork.Server.DataAccessLayer.Extensions {
 				FirstName = student.FirstName,
 				SecondName = student.SecondName,
 				ThirdName = student.ThirdName,
-				YearOfReceipt = student.YearOfReceipt,
-				YearOfDeduction = student.YearOfDeduction,
+				DateOfReceipt = student.DateOfReceipt,
+				DateOfDeduction = student.DateOfDeduction,
 				NameOfGroup = student.Group.NameOfGroup,
 				AssessmentByDisciplines = student.AssessmentByDisciplines
 					.Select(assessmentByDiscipline => new AssessmentByDiscipline {
