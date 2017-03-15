@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainWindowAddEditDelete.cs" />
     <Compile Include="TableWindows\DisciplineWindow.xaml.cs">
       <DependentUpon>DisciplineWindow.xaml</DependentUpon>
     </Compile>

@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Net;
-using GraduateWork.Common.Exceptions;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.DataAccessLayer;
 using GraduateWork.Server.DataAccessLayer.Extensions;
+using GraduateWork.Server.Exceptions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 	public class GetAllStudentsFormGroupByNameFunction : HttpFunctionWithReturn<StudentProxy[]> {

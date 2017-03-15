@@ -11,5 +11,13 @@ namespace GraduateWork.Client.Client {
 		void AddGroup(GroupProxy group);
 		void EditGroup(GroupProxy oldGroup, GroupProxy newGroup);
 		void DeleteGroup(GroupProxy group);
+
+		void AddDiscipline(DisciplineProxy discipline);
+		void EditDiscipline(DisciplineProxy oldDiscipline, DisciplineProxy newDiscipline);
+		void DeleteDiscipline(DisciplineProxy discipline);
+
+		void AddStudent(StudentProxy student);
+		void EditStudent(StudentProxy oldGroup, StudentProxy newGroup);
+		void DeleteStudent(StudentProxy student);
 	}
 }

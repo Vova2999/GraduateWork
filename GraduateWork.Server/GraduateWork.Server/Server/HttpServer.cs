@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using GraduateWork.Common.Exceptions;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Server.AdditionalObjects;
+using GraduateWork.Server.Exceptions;
 using GraduateWork.Server.Functions;
 
 namespace GraduateWork.Server.Server {
@@ -45,6 +45,7 @@ namespace GraduateWork.Server.Server {
 				}
 				catch (Exception exception) {
 					context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+					//context.Response.
 					context.Response.OutputStream.WriteAndDispose(exception.Message.ToJson());
 				}
 			}

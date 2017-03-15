@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Net;
-using GraduateWork.Common.Exceptions;
 using GraduateWork.Common.Extensions;
 
 namespace GraduateWork.Client.Client {
@@ -36,11 +35,12 @@ namespace GraduateWork.Client.Client {
 		}
 
 		private static HttpWebResponse SendRequest(HttpWebRequest webRequest) {
-			var webResponse = (HttpWebResponse)webRequest.GetResponse();
-			if (webResponse.StatusCode != HttpStatusCode.OK)
-				throw new HttpException(webResponse.StatusCode, webResponse.GetResponseStream().ReadAndDispose().FromJson<string>());
-
-			return webResponse;
+			try {
+				return (HttpWebResponse)webRequest.GetResponse();
+			}
+			catch (WebException exception) {
+				throw new WebException($"{exception.Message}\n{exception.Response.GetResponseStream().ReadAndDispose().FromJson<string>()}");
+			}
 		}
 		private static TKey GetAnswer<TKey>(HttpWebResponse webResponse) {
 			var outputBytes = webResponse.GetResponseStream().ReadAndDispose();

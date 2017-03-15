@@ -27,5 +27,25 @@ namespace GraduateWork.Client.Client {
 		public void DeleteGroup(GroupProxy group) {
 			SendRequest("DeleteGroup", group.ToJson());
 		}
+
+		public void AddDiscipline(DisciplineProxy discipline) {
+			SendRequest("AddDiscipline", discipline.ToJson());
+		}
+		public void EditDiscipline(DisciplineProxy oldDiscipline, DisciplineProxy newDiscipline) {
+			SendRequest("EditDiscipline", Tuple.Create(oldDiscipline, newDiscipline).ToJson());
+		}
+		public void DeleteDiscipline(DisciplineProxy discipline) {
+			SendRequest("DeleteDiscipline", discipline.ToJson());
+		}
+
+		public void AddStudent(StudentProxy student) {
+			SendRequest("AddStudent", student.ToJson());
+		}
+		public void EditStudent(StudentProxy oldStudent, StudentProxy newStudent) {
+			SendRequest("EditStudent", Tuple.Create(oldStudent, newStudent).ToJson());
+		}
+		public void DeleteStudent(StudentProxy student) {
+			SendRequest("DeleteStudent", student.ToJson());
+		}
 	}
 }

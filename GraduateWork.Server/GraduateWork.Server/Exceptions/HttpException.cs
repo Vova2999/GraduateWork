@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace GraduateWork.Common.Exceptions {
+namespace GraduateWork.Server.Exceptions {
 	public class HttpException : Exception {
 		public readonly HttpStatusCode StatusCode;
 

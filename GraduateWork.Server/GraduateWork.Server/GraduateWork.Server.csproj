@@ -60,9 +60,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalObjects\NameValues.cs" />
+    <Compile Include="Exceptions\HttpException.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\AddDisciplineFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\AddGroupFunction.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\AddStudentFunction.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\DeleteDisciplineFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\DeleteGroupFunction.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\DeleteStudentFunction.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\EditDisciplineFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\EditGroupFunction.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\EditStudentFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllDisciplinesFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllGroupsFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllStudentsFormGroupFunction.cs" />

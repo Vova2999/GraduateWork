@@ -22,7 +22,7 @@ namespace GraduateWork.Server.DataAccessLayer.Extensions {
 				AssessmentByDisciplines = student.AssessmentByDisciplines
 					.Select(assessmentByDiscipline => new AssessmentByDiscipline {
 						NameOfDiscipline = assessmentByDiscipline.Discipline.NameOfDiscipline,
-						Assessment = (Assessment)(int)assessmentByDiscipline.Assessment
+						Assessment = (Assessment)assessmentByDiscipline.Assessment
 					}).ToArray()
 			};
 		}
