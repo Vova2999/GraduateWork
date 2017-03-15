@@ -7,12 +7,13 @@ namespace GraduateWork.Server.Functions {
 		public abstract string NameOfCalledMethod { get; }
 
 		public void Execute(HttpListenerContext context, NameValues parameters) {
-			var outputBytes = Run(parameters).ToJson();
+			var requestBody = context.Request.InputStream.ReadAndDispose();
+			var outputBytes = Run(parameters, requestBody).ToJson();
 
 			context.Response.StatusCode = (int)HttpStatusCode.OK;
 			context.Response.OutputStream.WriteAndDispose(outputBytes);
 		}
 
-		protected abstract TKey Run(NameValues parameters);
+		protected abstract TKey Run(NameValues parameters, byte[] requestBody);
 	}
 }

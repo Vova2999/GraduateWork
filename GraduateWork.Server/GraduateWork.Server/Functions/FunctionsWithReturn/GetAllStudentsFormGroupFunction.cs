@@ -7,15 +7,15 @@ using GraduateWork.Server.DataAccessLayer;
 using GraduateWork.Server.DataAccessLayer.Extensions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
-	public class GetAllStudentsFormGroupFunction : HttpFunctionWithReturn<StudentProxy[]> {
-		public override string NameOfCalledMethod => "/GetAllStudentsFormGroup";
+	public class GetAllStudentsFormGroupByNameFunction : HttpFunctionWithReturn<StudentProxy[]> {
+		public override string NameOfCalledMethod => "/GetAllStudentsFormGroupByName";
 		private readonly IModelDatabase modelDatabase;
 
-		public GetAllStudentsFormGroupFunction(IModelDatabase modelDatabase) {
+		public GetAllStudentsFormGroupByNameFunction(IModelDatabase modelDatabase) {
 			this.modelDatabase = modelDatabase;
 		}
 
-		protected override StudentProxy[] Run(NameValues parameters) {
+		protected override StudentProxy[] Run(NameValues parameters, byte[] requestBody) {
 			var nameOfGroup = parameters["NameOfGroup"];
 
 			var group = modelDatabase.Groups.FirstOrDefault(g => g.NameOfGroup == nameOfGroup);

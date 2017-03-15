@@ -7,8 +7,8 @@ using AssessmentByDiscipline = GraduateWork.Common.Tables.Proxies.AssessmentByDi
 
 namespace GraduateWork.Server.DataAccessLayer.Extensions {
 	public static class StudentExtensions {
-		public static IEnumerable<StudentProxy> ToProxies(this IEnumerable<Student> students) {
-			return students.Select(student => student.ToProxy());
+		public static StudentProxy[] ToProxies(this IEnumerable<Student> students) {
+			return students.Select(student => student.ToProxy()).ToArray();
 		}
 
 		private static StudentProxy ToProxy(this Student student) {

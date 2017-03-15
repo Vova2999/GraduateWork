@@ -52,7 +52,7 @@ namespace GraduateWork.Client.UI {
 				return;
 
 			if (!httpClient.EditGroup(selectedGroup, groupWindow.Group))
-				MessageBox.Show("Ошибка при добавлении группы", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show("Ошибка при изменении группы", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 		}
 		private void DeleteGroup() {
 			var selectedGroup = GetSelectedGroup();

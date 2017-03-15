@@ -1,4 +1,3 @@
-using System.Linq;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.DataAccessLayer;
@@ -13,8 +12,8 @@ namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 			this.modelDatabase = modelDatabase;
 		}
 
-		protected override GroupProxy[] Run(NameValues parameters) {
-			return modelDatabase.Groups.ToProxies().ToArray();
+		protected override GroupProxy[] Run(NameValues parameters, byte[] requestBody) {
+			return modelDatabase.Groups.ToProxies();
 		}
 	}
 }

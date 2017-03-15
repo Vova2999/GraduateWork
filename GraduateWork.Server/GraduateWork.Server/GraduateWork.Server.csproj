@@ -60,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdditionalObjects\NameValues.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\AddGroupFunction.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\DeleteGroupFunction.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\EditGroupFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllDisciplinesFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllGroupsFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllStudentsFormGroupFunction.cs" />

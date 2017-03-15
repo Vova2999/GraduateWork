@@ -6,24 +6,24 @@ using GraduateWork.Common.Extensions;
 
 namespace GraduateWork.Client.Client {
 	public class BaseHttpClient {
-		protected static bool TrySendRequestWithoutReturn(string methodName, int timeoutMs = 5000) {
+		protected static bool TrySendRequestWithoutReturn(string methodName, int timeoutMs = 10000) {
 			return TrySendRequest(() => {
 				SendRequest<bool>(methodName, timeoutMs);
 				return true;
 			},
 				() => false);
 		}
-		protected static bool TrySendRequestWithoutReturn(string methodName, byte[] requestBody, int timeoutMs = 5000) {
+		protected static bool TrySendRequestWithoutReturn(string methodName, byte[] requestBody, int timeoutMs = 10000) {
 			return TrySendRequest(() => {
 				SendRequest<bool>(methodName, requestBody, timeoutMs);
 				return true;
 			},
 				() => false);
 		}
-		protected static TKey TrySendRequestWithReturn<TKey>(string methodName, Func<TKey> actionWhenException, int timeoutMs = 5000) {
+		protected static TKey TrySendRequestWithReturn<TKey>(string methodName, Func<TKey> actionWhenException, int timeoutMs = 10000) {
 			return TrySendRequest(() => SendRequest<TKey>(methodName, timeoutMs), actionWhenException);
 		}
-		protected static TKey TrySendRequestWithReturn<TKey>(string methodName, byte[] requestBody, Func<TKey> actionWhenException, int timeoutMs = 5000) {
+		protected static TKey TrySendRequestWithReturn<TKey>(string methodName, byte[] requestBody, Func<TKey> actionWhenException, int timeoutMs = 10000) {
 			return TrySendRequest(() => SendRequest<TKey>(methodName, requestBody, timeoutMs), actionWhenException);
 		}
 		private static TKey TrySendRequest<TKey>(Func<TKey> primaryAction, Func<TKey> actionWhenException) {
@@ -35,11 +35,11 @@ namespace GraduateWork.Client.Client {
 			}
 		}
 
-		private static TKey SendRequest<TKey>(string methodName, int timeoutMs = 5000) {
+		private static TKey SendRequest<TKey>(string methodName, int timeoutMs = 10000) {
 			var webRequest = CreateGetRequest(methodName, timeoutMs);
 			return SendRequest<TKey>(webRequest);
 		}
-		private static TKey SendRequest<TKey>(string methodName, byte[] requestBody, int timeoutMs = 5000) {
+		private static TKey SendRequest<TKey>(string methodName, byte[] requestBody, int timeoutMs = 10000) {
 			var webRequest = CreatePostRequest(methodName, requestBody, timeoutMs);
 			return SendRequest<TKey>(webRequest);
 		}
