@@ -11,7 +11,17 @@ namespace GraduateWork.Server.Server {
 		private readonly IHttpFunction[] httpFunctions;
 
 		public HttpServer(IHttpFunction[] httpFunctions) {
+			CheckInputFunctions(httpFunctions);
 			this.httpFunctions = httpFunctions;
+		}
+		private void CheckInputFunctions(IHttpFunction[] httpFunctions) {
+			var repeatedFunction = httpFunctions
+				.GroupBy(function => function.NameOfCalledMethod)
+				.FirstOrDefault(group => group.Count() != 1)?
+				.First();
+
+			if (repeatedFunction != null)
+				throw new ArgumentException($"Обнаружены несколько функций с NameOfCalledMethod = {repeatedFunction.NameOfCalledMethod}");
 		}
 
 		public void Run() {
@@ -41,7 +51,7 @@ namespace GraduateWork.Server.Server {
 		}
 		private NameValues GetParameters(string[] functionNameAndParameters) {
 			if (functionNameAndParameters.Length > 2)
-				throw new HttpException(HttpStatusCode.BadRequest, "В запроме не может быть несколько знаков '?'");
+				throw new HttpException(HttpStatusCode.BadRequest, "В запросе не может быть несколько знаков '?'");
 
 			return functionNameAndParameters.Length > 1
 				? GetParameters(functionNameAndParameters[1])
