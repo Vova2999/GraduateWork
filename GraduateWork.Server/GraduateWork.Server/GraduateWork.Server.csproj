@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="AdditionalObjects\NameValues.cs" />
     <Compile Include="Exceptions\HttpException.cs" />
+    <Compile Include="Extensions\HttpListenerContextExtensions.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\AddDisciplineFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\AddGroupFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\AddStudentFunction.cs" />
