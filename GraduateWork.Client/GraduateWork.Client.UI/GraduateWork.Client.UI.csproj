@@ -60,6 +60,9 @@
     <Compile Include="TableWindows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TableWindows\StudentDisciplinesWindow.xaml.cs">
+      <DependentUpon>StudentDisciplinesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TableWindows\StudentWindow.xaml.cs">
       <DependentUpon>StudentWindow.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TableWindows\GroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TableWindows\StudentDisciplinesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

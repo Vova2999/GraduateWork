@@ -4,31 +4,38 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		mc:Ignorable="d"
-		Title="StudentWindow" Height="300" Width="300">
+		Title="StudentWindow" Width="350" SizeToContent="Height">
 	<StackPanel>
-		<DockPanel>
+		<DockPanel Margin="0,5,0,0">
 			<Label DockPanel.Dock="Left" Content="Имя" VerticalContentAlignment="Center" />
 			<TextBox Name="TextBoxFirstName" Height="25" VerticalContentAlignment="Center" />
 		</DockPanel>
-		<DockPanel>
+		<DockPanel Margin="0,5,0,0">
 			<Label DockPanel.Dock="Left" Content="Фамилия" VerticalContentAlignment="Center" />
 			<TextBox Name="TextBoxSecondName" Height="25" VerticalContentAlignment="Center" />
 		</DockPanel>
-		<DockPanel>
+		<DockPanel Margin="0,5,0,0">
 			<Label DockPanel.Dock="Left" Content="Отчество" VerticalContentAlignment="Center" />
 			<TextBox Name="TextBoxThirdName" Height="25" VerticalContentAlignment="Center" />
 		</DockPanel>
-		<DockPanel>
+		<DockPanel Margin="0,5,0,0">
 			<Label DockPanel.Dock="Left" Content="Дата поступления" VerticalContentAlignment="Center" />
 			<DatePicker Name="DatePickerDateOfReceipt" Height="25" VerticalContentAlignment="Center" />
 		</DockPanel>
-		<DockPanel>
+		<DockPanel Margin="0,5,0,0">
 			<Label DockPanel.Dock="Left" Content="Дата отчисления" VerticalContentAlignment="Center" />
 			<DatePicker Name="DatePickerDateOfDeduction" Height="25" VerticalContentAlignment="Center" />
 		</DockPanel>
-		<DockPanel>
+		<DockPanel Margin="0,5,0,0">
 			<Label DockPanel.Dock="Left" Content="Группа" VerticalContentAlignment="Center" />
-			<TextBox Name="TextBoxNameOfGroup" Height="25" VerticalContentAlignment="Center" />
+			<ComboBox Name="ComboBoxNameOfGroup" Height="25" VerticalContentAlignment="Center" />
 		</DockPanel>
+
+		<Grid>
+			<Button Content="Предметы" Width="100" Height="30" Margin="5,10,5,5"
+					Click="ButtonDisciplines_OnClick" HorizontalAlignment="Left" />
+			<Button Content="Ок" Width="100" Height="30" Margin="5,10,5,5"
+					Click="ButtonOk_OnClick" HorizontalAlignment="Right" />
+		</Grid>
 	</StackPanel>
 </Window>

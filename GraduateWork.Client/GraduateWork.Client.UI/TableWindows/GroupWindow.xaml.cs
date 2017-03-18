@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Windows;
 using GraduateWork.Common.Tables.Proxies;
 
 namespace GraduateWork.Client.UI.TableWindows {
@@ -7,7 +7,6 @@ namespace GraduateWork.Client.UI.TableWindows {
 
 		public GroupWindow(GroupProxy group = null) {
 			InitializeComponent();
-			Closed += GroupWindow_Closed;
 
 			SetGroup(group);
 		}
@@ -18,10 +17,11 @@ namespace GraduateWork.Client.UI.TableWindows {
 			TextBoxNameOfGroup.Text = group.NameOfGroup;
 		}
 
-		private void GroupWindow_Closed(object sender, EventArgs e) {
+		private void ButtonOk_OnClick(object sender, RoutedEventArgs e) {
 			Group = new GroupProxy {
 				NameOfGroup = TextBoxNameOfGroup.Text
 			};
+			Close();
 		}
 	}
 }

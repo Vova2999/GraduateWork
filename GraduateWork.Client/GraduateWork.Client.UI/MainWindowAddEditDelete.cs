@@ -68,7 +68,7 @@ namespace GraduateWork.Client.UI {
 		}
 
 		private void AddStudent() {
-			var studentWindow = new StudentWindow();
+			var studentWindow = new StudentWindow(httpClient.GetAllGroups(), httpClient.GetAllDisciplines());
 			studentWindow.ShowDialog();
 			if (studentWindow.Student == null)
 				return;
@@ -82,12 +82,12 @@ namespace GraduateWork.Client.UI {
 				return;
 			}
 
-			var groupWindow = new StudentWindow(selectedStudent);
-			groupWindow.ShowDialog();
-			if (groupWindow.Student == null)
+			var studentWindow = new StudentWindow(httpClient.GetAllGroups(), httpClient.GetAllDisciplines(), selectedStudent);
+			studentWindow.ShowDialog();
+			if (studentWindow.Student == null)
 				return;
 
-			RunOrShowMessage(() => httpClient.EditStudent(selectedStudent, groupWindow.Student));
+			RunOrShowMessage(() => httpClient.EditStudent(selectedStudent, studentWindow.Student));
 		}
 		private void DeleteStudent() {
 			var selectedStudent = GetSelectedStudent();

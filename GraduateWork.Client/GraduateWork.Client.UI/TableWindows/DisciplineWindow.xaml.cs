@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Windows;
 using GraduateWork.Common.Tables.Proxies;
 
 namespace GraduateWork.Client.UI.TableWindows {
@@ -7,7 +7,7 @@ namespace GraduateWork.Client.UI.TableWindows {
 
 		public DisciplineWindow(DisciplineProxy discipline = null) {
 			InitializeComponent();
-			Closed += DisciplineWindow_Closed;
+			SetDiscipline(discipline);
 		}
 		private void SetDiscipline(DisciplineProxy discipline) {
 			if (discipline == null)
@@ -16,10 +16,11 @@ namespace GraduateWork.Client.UI.TableWindows {
 			TextBoxNameOfDiscipline.Text = discipline.NameOfDiscipline;
 		}
 
-		private void DisciplineWindow_Closed(object sender, EventArgs e) {
+		private void ButtonOk_OnClick(object sender, RoutedEventArgs e) {
 			Discipline = new DisciplineProxy {
 				NameOfDiscipline = TextBoxNameOfDiscipline.Text
 			};
+			Close();
 		}
 	}
 }

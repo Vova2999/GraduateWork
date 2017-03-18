@@ -4,11 +4,13 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		mc:Ignorable="d"
-		Title="GroupWindow" Height="300" Width="300">
+		Title="GroupWindow" Width="350" SizeToContent="Height">
 	<StackPanel>
-		<DockPanel>
+		<DockPanel Margin="0,5,0,0">
 			<Label DockPanel.Dock="Left" Content="Название группы" VerticalContentAlignment="Center" />
 			<TextBox Name="TextBoxNameOfGroup" Height="25" VerticalContentAlignment="Center" />
 		</DockPanel>
+		<Button Content="Ок" Width="100" Height="30" Margin="0,5,0,0"
+				Click="ButtonOk_OnClick" HorizontalAlignment="Right" />
 	</StackPanel>
 </Window>

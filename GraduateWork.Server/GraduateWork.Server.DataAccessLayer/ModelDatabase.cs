@@ -78,6 +78,7 @@ namespace GraduateWork.Server.DataAccessLayer {
 		public void EditStudent(StudentProxy oldStudentProxy, StudentProxy newStudentProxy) {
 			var foundStudent = Students.First(student => student.FirstName == oldStudentProxy.FirstName &&
 				student.SecondName == oldStudentProxy.SecondName && student.ThirdName == oldStudentProxy.ThirdName);
+			AssessmentByDisciplines.RemoveRange(foundStudent.AssessmentByDisciplines);
 
 			foundStudent.FirstName = newStudentProxy.FirstName;
 			foundStudent.SecondName = newStudentProxy.SecondName;
@@ -97,6 +98,7 @@ namespace GraduateWork.Server.DataAccessLayer {
 		public void DeleteStudent(StudentProxy studentProxy) {
 			var foundStudent = Students.First(student => student.FirstName == studentProxy.FirstName &&
 				student.SecondName == studentProxy.SecondName && student.ThirdName == studentProxy.ThirdName);
+			AssessmentByDisciplines.RemoveRange(foundStudent.AssessmentByDisciplines);
 			Students.Remove(foundStudent);
 
 			SaveChanges();
