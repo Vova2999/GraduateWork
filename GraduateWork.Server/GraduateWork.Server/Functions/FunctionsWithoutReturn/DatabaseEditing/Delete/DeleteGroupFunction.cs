@@ -3,17 +3,17 @@ using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.DataAccessLayer;
 
-namespace GraduateWork.Server.Functions.FunctionsWithoutReturn {
-	public class AddGroupFunction : HttpFunctionWithoutReturn {
-		public override string NameOfCalledMethod => "/AddGroup";
+namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Delete {
+	public class DeleteGroupFunction : HttpFunctionWithoutReturn {
+		public override string NameOfCalledMethod => "/DeleteGroup";
 		private readonly IModelDatabase modelDatabase;
 
-		public AddGroupFunction(IModelDatabase modelDatabase) {
+		public DeleteGroupFunction(IModelDatabase modelDatabase) {
 			this.modelDatabase = modelDatabase;
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
-			modelDatabase.AddGroup(requestBody.FromJson<GroupProxy>());
+			modelDatabase.DeleteGroup(requestBody.FromJson<GroupProxy>());
 		}
 	}
 }

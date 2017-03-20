@@ -4,7 +4,7 @@ using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.DataAccessLayer;
 
-namespace GraduateWork.Server.Functions.FunctionsWithoutReturn {
+namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Edit {
 	public class EditGroupFunction : HttpFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "/EditGroup";
 		private readonly IModelDatabase modelDatabase;

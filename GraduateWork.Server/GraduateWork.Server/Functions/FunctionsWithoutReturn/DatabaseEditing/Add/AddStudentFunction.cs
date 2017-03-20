@@ -3,17 +3,17 @@ using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.DataAccessLayer;
 
-namespace GraduateWork.Server.Functions.FunctionsWithoutReturn {
-	public class AddDisciplineFunction : HttpFunctionWithoutReturn {
-		public override string NameOfCalledMethod => "/AddDiscipline";
+namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Add {
+	public class AddStudentFunction : HttpFunctionWithoutReturn {
+		public override string NameOfCalledMethod => "/AddStudent";
 		private readonly IModelDatabase modelDatabase;
 
-		public AddDisciplineFunction(IModelDatabase modelDatabase) {
+		public AddStudentFunction(IModelDatabase modelDatabase) {
 			this.modelDatabase = modelDatabase;
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
-			modelDatabase.AddDiscipline(requestBody.FromJson<DisciplineProxy>());
+			modelDatabase.AddStudent(requestBody.FromJson<StudentProxy>());
 		}
 	}
 }

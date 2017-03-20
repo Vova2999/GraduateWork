@@ -3,7 +3,7 @@ using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.DataAccessLayer;
 
-namespace GraduateWork.Server.Functions.FunctionsWithoutReturn {
+namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Delete {
 	public class DeleteDisciplineFunction : HttpFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "/DeleteDiscipline";
 		private readonly IModelDatabase modelDatabase;
