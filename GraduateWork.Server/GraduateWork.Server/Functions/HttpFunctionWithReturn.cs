@@ -6,8 +6,7 @@ namespace GraduateWork.Server.Functions {
 	public abstract class HttpFunctionWithReturn<TKey> : IHttpFunction {
 		public abstract string NameOfCalledMethod { get; }
 
-		public void Execute(HttpListenerContext context, NameValues parameters) {
-			var requestBody = context.Request.InputStream.ReadAndDispose();
+		public void Execute(HttpListenerContext context, NameValues parameters, byte[] requestBody) {
 			var outputBytes = Run(parameters, requestBody).ToJson();
 
 			context.Response.StatusCode = (int)HttpStatusCode.OK;

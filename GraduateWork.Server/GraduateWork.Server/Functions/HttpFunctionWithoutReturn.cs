@@ -1,13 +1,11 @@
 ﻿using System.Net;
-using GraduateWork.Common.Extensions;
 using GraduateWork.Server.AdditionalObjects;
 
 namespace GraduateWork.Server.Functions {
 	public abstract class HttpFunctionWithoutReturn : IHttpFunction {
 		public abstract string NameOfCalledMethod { get; }
 
-		public void Execute(HttpListenerContext context, NameValues parameters) {
-			var requestBody = context.Request.InputStream.ReadAndDispose();
+		public void Execute(HttpListenerContext context, NameValues parameters, byte[] requestBody) {
 			Run(parameters, requestBody);
 
 			context.Response.StatusCode = (int)HttpStatusCode.OK;

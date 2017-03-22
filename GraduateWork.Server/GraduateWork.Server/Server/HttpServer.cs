@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Exceptions;
 using GraduateWork.Server.Extensions;
@@ -36,8 +37,9 @@ namespace GraduateWork.Server.Server {
 					var functionNameAndParameters = context.Request.RawUrl.Split('?');
 					var functionName = functionNameAndParameters[0];
 					var parameters = GetParameters(functionNameAndParameters);
+					var requestBody = context.Request.InputStream.ReadAndDispose();
 
-					GetFunction(functionName).Execute(context, parameters);
+					GetFunction(functionName).Execute(context, parameters, requestBody);
 				}
 				catch (HttpException exception) {
 					context.SendErrorResponse(exception.StatusCode, exception.Message);

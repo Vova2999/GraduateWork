@@ -28,8 +28,7 @@ namespace GraduateWork.Client.Client {
 		private static HttpWebRequest CreatePostRequest(HttpWebRequest webRequest, byte[] requestBody) {
 			webRequest.Method = "POST";
 			webRequest.ContentLength = requestBody.Length;
-			using (var stream = webRequest.GetRequestStream())
-				stream.Write(requestBody, 0, requestBody.Length);
+			webRequest.GetRequestStream().WriteAndDispose(requestBody);
 
 			return webRequest;
 		}

@@ -13,8 +13,8 @@ namespace GraduateWork.Client.UI.Extensions {
 			new Dictionary<Type, Func<string, string, DataGridColumn>> {
 				{ typeof(int), GenerateTextColumn },
 				{ typeof(string), GenerateTextColumn },
-				{ typeof(DateTime), GenerateDataColumn },
-				{ typeof(DateTime?), GenerateDataColumn },
+				{ typeof(DateTime), GenerateDataTimeColumn },
+				{ typeof(DateTime?), GenerateDataTimeColumn },
 				{ typeof(string[]), (header, bindingName) => null },
 				{ typeof(AssessmentByDiscipline[]), (header, bindingName) => null }
 			};
@@ -49,7 +49,7 @@ namespace GraduateWork.Client.UI.Extensions {
 				Binding = new Binding(bindingName)
 			};
 		}
-		private static DataGridColumn GenerateDataColumn(string header, string bindingName) {
+		private static DataGridColumn GenerateDataTimeColumn(string header, string bindingName) {
 			return new DataGridTextColumn {
 				Header = header,
 				Binding = new Binding(bindingName) {
