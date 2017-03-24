@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Exceptions;
@@ -35,19 +36,27 @@ namespace GraduateWork.Server.Server {
 
 				try {
 					var functionNameAndParameters = context.Request.RawUrl.Split('?');
-					var functionName = functionNameAndParameters[0];
+					var functionName = GetFunctionName(functionNameAndParameters);
 					var parameters = GetParameters(functionNameAndParameters);
 					var requestBody = context.Request.InputStream.ReadAndDispose();
 
 					GetFunction(functionName).Execute(context, parameters, requestBody);
 				}
+				catch (HttpStopServerException exception) {
+					context.Response.Respond(exception.StatusCode, exception.Message.ToJson());
+					Thread.Sleep(1000);
+					httpListener.Stop();
+				}
 				catch (HttpException exception) {
-					context.SendErrorResponse(exception.StatusCode, exception.Message);
+					context.Response.Respond(exception.StatusCode, exception.Message.ToJson());
 				}
 				catch (Exception exception) {
-					context.SendErrorResponse(HttpStatusCode.BadRequest, exception.Message);
+					context.Response.Respond(HttpStatusCode.BadRequest, exception.Message.ToJson());
 				}
 			}
+		}
+		private string GetFunctionName(string[] functionNameAndParameters) {
+			return functionNameAndParameters[0].Substring(1);
 		}
 		private NameValues GetParameters(string[] functionNameAndParameters) {
 			if (functionNameAndParameters.Length > 2)

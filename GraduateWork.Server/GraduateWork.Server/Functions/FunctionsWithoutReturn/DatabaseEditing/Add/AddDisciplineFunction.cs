@@ -5,7 +5,7 @@ using GraduateWork.Server.DataAccessLayer;
 
 namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Add {
 	public class AddDisciplineFunction : HttpFunctionWithoutReturn {
-		public override string NameOfCalledMethod => "/AddDiscipline";
+		public override string NameOfCalledMethod => "AddDiscipline";
 		private readonly IModelDatabase modelDatabase;
 
 		public AddDisciplineFunction(IModelDatabase modelDatabase) {

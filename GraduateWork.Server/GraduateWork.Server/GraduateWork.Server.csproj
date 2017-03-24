@@ -61,7 +61,8 @@
   <ItemGroup>
     <Compile Include="AdditionalObjects\NameValues.cs" />
     <Compile Include="Exceptions\HttpException.cs" />
-    <Compile Include="Extensions\HttpListenerContextExtensions.cs" />
+    <Compile Include="Exceptions\HttpStopServerException.cs" />
+    <Compile Include="Extensions\HttpListenerResponseExtensions.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Add\AddDisciplineFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Add\AddGroupFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Add\AddStudentFunction.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Edit\EditDisciplineFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Edit\EditGroupFunction.cs" />
     <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Edit\EditStudentFunction.cs" />
+    <Compile Include="Functions\FunctionsWithoutReturn\StopServerFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllDisciplinesFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllGroupsFunction.cs" />
     <Compile Include="Functions\FunctionsWithReturn\GetAllStudentsFormGroupFunction.cs" />

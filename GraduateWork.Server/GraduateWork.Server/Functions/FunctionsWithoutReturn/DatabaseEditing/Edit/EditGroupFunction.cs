@@ -6,7 +6,7 @@ using GraduateWork.Server.DataAccessLayer;
 
 namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Edit {
 	public class EditGroupFunction : HttpFunctionWithoutReturn {
-		public override string NameOfCalledMethod => "/EditGroup";
+		public override string NameOfCalledMethod => "EditGroup";
 		private readonly IModelDatabase modelDatabase;
 
 		public EditGroupFunction(IModelDatabase modelDatabase) {

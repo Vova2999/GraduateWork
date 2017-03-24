@@ -5,7 +5,7 @@ using GraduateWork.Server.DataAccessLayer.Extensions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 	public class GetAllDisciplinesFunction : HttpFunctionWithReturn<DisciplineProxy[]> {
-		public override string NameOfCalledMethod => "/GetAllDisciplines";
+		public override string NameOfCalledMethod => "GetAllDisciplines";
 		private readonly IModelDatabase modelDatabase;
 
 		public GetAllDisciplinesFunction(IModelDatabase modelDatabase) {

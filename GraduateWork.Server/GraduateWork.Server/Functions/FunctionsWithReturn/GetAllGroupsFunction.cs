@@ -5,7 +5,7 @@ using GraduateWork.Server.DataAccessLayer.Extensions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 	public class GetAllGroupsFunction : HttpFunctionWithReturn<GroupProxy[]> {
-		public override string NameOfCalledMethod => "/GetAllGroups";
+		public override string NameOfCalledMethod => "GetAllGroups";
 		private readonly IModelDatabase modelDatabase;
 
 		public GetAllGroupsFunction(IModelDatabase modelDatabase) {

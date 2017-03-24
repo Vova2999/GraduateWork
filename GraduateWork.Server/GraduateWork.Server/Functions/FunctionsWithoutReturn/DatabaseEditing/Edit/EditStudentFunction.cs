@@ -6,7 +6,7 @@ using GraduateWork.Server.DataAccessLayer;
 
 namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Edit {
 	public class EditStudentFunction : HttpFunctionWithoutReturn {
-		public override string NameOfCalledMethod => "/EditStudent";
+		public override string NameOfCalledMethod => "EditStudent";
 		private readonly IModelDatabase modelDatabase;
 
 		public EditStudentFunction(IModelDatabase modelDatabase) {

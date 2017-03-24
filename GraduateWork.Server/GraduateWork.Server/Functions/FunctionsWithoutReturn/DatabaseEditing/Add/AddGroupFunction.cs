@@ -5,7 +5,7 @@ using GraduateWork.Server.DataAccessLayer;
 
 namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Add {
 	public class AddGroupFunction : HttpFunctionWithoutReturn {
-		public override string NameOfCalledMethod => "/AddGroup";
+		public override string NameOfCalledMethod => "AddGroup";
 		private readonly IModelDatabase modelDatabase;
 
 		public AddGroupFunction(IModelDatabase modelDatabase) {

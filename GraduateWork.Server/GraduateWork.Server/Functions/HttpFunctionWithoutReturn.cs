@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using GraduateWork.Server.AdditionalObjects;
+using GraduateWork.Server.Extensions;
 
 namespace GraduateWork.Server.Functions {
 	public abstract class HttpFunctionWithoutReturn : IHttpFunction {
@@ -7,9 +8,7 @@ namespace GraduateWork.Server.Functions {
 
 		public void Execute(HttpListenerContext context, NameValues parameters, byte[] requestBody) {
 			Run(parameters, requestBody);
-
-			context.Response.StatusCode = (int)HttpStatusCode.OK;
-			context.Response.OutputStream.Dispose();
+			context.Response.Respond(HttpStatusCode.OK, null);
 		}
 
 		protected abstract void Run(NameValues parameters, byte[] requestBody);

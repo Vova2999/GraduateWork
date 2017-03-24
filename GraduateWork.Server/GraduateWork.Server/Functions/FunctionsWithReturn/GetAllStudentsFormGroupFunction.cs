@@ -8,7 +8,7 @@ using GraduateWork.Server.Exceptions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 	public class GetAllStudentsFormGroupByNameFunction : HttpFunctionWithReturn<StudentProxy[]> {
-		public override string NameOfCalledMethod => "/GetAllStudentsFormGroupByName";
+		public override string NameOfCalledMethod => "GetAllStudentsFormGroupByName";
 		private readonly IModelDatabase modelDatabase;
 
 		public GetAllStudentsFormGroupByNameFunction(IModelDatabase modelDatabase) {

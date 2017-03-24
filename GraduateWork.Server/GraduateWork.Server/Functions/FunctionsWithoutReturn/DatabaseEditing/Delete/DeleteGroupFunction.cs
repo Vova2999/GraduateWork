@@ -5,7 +5,7 @@ using GraduateWork.Server.DataAccessLayer;
 
 namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Delete {
 	public class DeleteGroupFunction : HttpFunctionWithoutReturn {
-		public override string NameOfCalledMethod => "/DeleteGroup";
+		public override string NameOfCalledMethod => "DeleteGroup";
 		private readonly IModelDatabase modelDatabase;
 
 		public DeleteGroupFunction(IModelDatabase modelDatabase) {
