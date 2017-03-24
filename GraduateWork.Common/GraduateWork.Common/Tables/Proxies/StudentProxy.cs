@@ -23,6 +23,17 @@ namespace GraduateWork.Common.Tables.Proxies {
 
 		[HeaderColumn("ќценки по дисциплинам")]
 		public AssessmentByDiscipline[] AssessmentByDisciplines { get; set; }
+
+		public override bool Equals(object obj) {
+			var that = obj as StudentProxy;
+			return that != null && FirstName == that.FirstName && SecondName == that.SecondName && ThirdName == that.ThirdName;
+		}
+		protected bool Equals(StudentProxy other) {
+			return string.Equals(FirstName, other.FirstName) && string.Equals(SecondName, other.SecondName) && string.Equals(ThirdName, other.ThirdName);
+		}
+		public override int GetHashCode() {
+			return (FirstName?.GetHashCode() ?? 0 * 397) ^ (SecondName?.GetHashCode() ?? 0) * 397 ^ (ThirdName?.GetHashCode() ?? 0);
+		}
 	}
 
 	public class AssessmentByDiscipline {

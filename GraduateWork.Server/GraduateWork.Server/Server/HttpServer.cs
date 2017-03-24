@@ -44,7 +44,7 @@ namespace GraduateWork.Server.Server {
 				}
 				catch (HttpStopServerException exception) {
 					context.Response.Respond(exception.StatusCode, exception.Message.ToJson());
-					Thread.Sleep(1000);
+					Thread.Sleep(100);
 					httpListener.Stop();
 				}
 				catch (HttpException exception) {
