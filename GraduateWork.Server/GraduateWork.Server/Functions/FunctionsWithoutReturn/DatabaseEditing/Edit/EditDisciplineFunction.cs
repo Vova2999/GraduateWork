@@ -2,7 +2,7 @@
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.DataAccessLayer;
+using GraduateWork.Server.Common;
 
 namespace GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Edit {
 	public class EditDisciplineFunction : HttpFunctionWithoutReturn {

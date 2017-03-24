@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GraduateWork.Server.DataAccessLayer.Tables {
+namespace GraduateWork.Server.Database.Tables {
 	public class Student {
 		[Key]
 		public int StudentId { get; set; }

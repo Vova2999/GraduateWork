@@ -1,9 +1,8 @@
-using System.Linq;
+using System;
 using System.Net;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.DataAccessLayer;
-using GraduateWork.Server.DataAccessLayer.Extensions;
+using GraduateWork.Server.Common;
 using GraduateWork.Server.Exceptions;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
@@ -18,11 +17,12 @@ namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 		protected override StudentProxy[] Run(NameValues parameters, byte[] requestBody) {
 			var nameOfGroup = parameters["NameOfGroup"];
 
-			var group = modelDatabase.Groups.FirstOrDefault(g => g.NameOfGroup == nameOfGroup);
-			if (group == null)
+			try {
+				return modelDatabase.GetAllStudentsFormGroupByName(nameOfGroup);
+			}
+			catch (ArgumentException) {
 				throw new HttpException(HttpStatusCode.NotFound, $"Группа '{nameOfGroup}' не найдена");
-
-			return group.Students.ToProxies().ToArray();
+			}
 		}
 	}
 }

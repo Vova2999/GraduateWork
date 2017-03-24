@@ -1,7 +1,6 @@
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.DataAccessLayer;
-using GraduateWork.Server.DataAccessLayer.Extensions;
+using GraduateWork.Server.Common;
 
 namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 	public class GetAllDisciplinesFunction : HttpFunctionWithReturn<DisciplineProxy[]> {
@@ -13,7 +12,7 @@ namespace GraduateWork.Server.Functions.FunctionsWithReturn {
 		}
 
 		protected override DisciplineProxy[] Run(NameValues parameters, byte[] requestBody) {
-			return modelDatabase.Disciplines.ToProxies();
+			return modelDatabase.GetAllDisciplines();
 		}
 	}
 }

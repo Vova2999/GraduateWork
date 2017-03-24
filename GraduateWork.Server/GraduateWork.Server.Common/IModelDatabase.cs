@@ -1,12 +1,10 @@
-﻿using System.Data.Entity;
-using GraduateWork.Common.Tables.Proxies;
-using GraduateWork.Server.DataAccessLayer.Tables;
+﻿using GraduateWork.Common.Tables.Proxies;
 
-namespace GraduateWork.Server.DataAccessLayer {
+namespace GraduateWork.Server.Common {
 	public interface IModelDatabase {
-		DbSet<Group> Groups { get; }
-		DbSet<Student> Students { get; }
-		DbSet<Discipline> Disciplines { get; }
+		GroupProxy[] GetAllGroups();
+		DisciplineProxy[] GetAllDisciplines();
+		StudentProxy[] GetAllStudents();
 
 		void AddGroup(GroupProxy groupProxy);
 		void EditGroup(GroupProxy oldGroupProxy, GroupProxy newGroupProxy);
@@ -19,5 +17,7 @@ namespace GraduateWork.Server.DataAccessLayer {
 		void AddStudent(StudentProxy studentProxy);
 		void EditStudent(StudentProxy oldGroupProxy, StudentProxy newGroupProxy);
 		void DeleteStudent(StudentProxy studentProxy);
+
+		StudentProxy[] GetAllStudentsFormGroupByName(string nameOfGroup);
 	}
 }

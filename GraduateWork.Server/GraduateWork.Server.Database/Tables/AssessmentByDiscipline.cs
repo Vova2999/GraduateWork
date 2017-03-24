@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GraduateWork.Server.DataAccessLayer.Tables {
+namespace GraduateWork.Server.Database.Tables {
 	public class AssessmentByDiscipline {
 		[Key]
 		public int AssessmentByDisciplineId { get; set; }

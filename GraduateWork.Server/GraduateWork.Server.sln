@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduateWork.Server", "Grad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduateWork.Server.Test", "GraduateWork.Server.Test\GraduateWork.Server.Test.csproj", "{0013EDF1-C1AA-4D23-B933-478FE50466D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduateWork.Server.DataAccessLayer", "GraduateWork.Server.DataAccessLayer\GraduateWork.Server.DataAccessLayer.csproj", "{494BED79-81E9-4D39-A0E6-47577C701172}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduateWork.Server.Database", "GraduateWork.Server.Database\GraduateWork.Server.Database.csproj", "{494BED79-81E9-4D39-A0E6-47577C701172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduateWork.Server.Common", "GraduateWork.Server.Common\GraduateWork.Server.Common.csproj", "{5E51152B-43DC-4B8E-9E22-3C54E6EF416F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{494BED79-81E9-4D39-A0E6-47577C701172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{494BED79-81E9-4D39-A0E6-47577C701172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{494BED79-81E9-4D39-A0E6-47577C701172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E51152B-43DC-4B8E-9E22-3C54E6EF416F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E51152B-43DC-4B8E-9E22-3C54E6EF416F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E51152B-43DC-4B8E-9E22-3C54E6EF416F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E51152B-43DC-4B8E-9E22-3C54E6EF416F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

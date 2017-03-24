@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GraduateWork.Common.Tables.Proxies;
-using GraduateWork.Server.DataAccessLayer.Tables;
+using GraduateWork.Server.Database.Tables;
 using Assessment = GraduateWork.Common.Tables.Proxies.Assessment;
 using AssessmentByDiscipline = GraduateWork.Common.Tables.Proxies.AssessmentByDiscipline;
 
-namespace GraduateWork.Server.DataAccessLayer.Extensions {
+namespace GraduateWork.Server.Database.Extensions {
 	public static class StudentExtensions {
 		public static StudentProxy[] ToProxies(this IEnumerable<Student> students) {
 			return students.Select(student => student.ToProxy()).ToArray();

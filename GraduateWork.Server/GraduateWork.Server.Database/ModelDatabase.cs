@@ -1,18 +1,31 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using GraduateWork.Common.Tables.Proxies;
-using GraduateWork.Server.DataAccessLayer.Tables;
-using Assessment = GraduateWork.Server.DataAccessLayer.Tables.Assessment;
-using AssessmentByDiscipline = GraduateWork.Server.DataAccessLayer.Tables.AssessmentByDiscipline;
+using GraduateWork.Server.Common;
+using GraduateWork.Server.Database.Extensions;
+using GraduateWork.Server.Database.Tables;
+using Assessment = GraduateWork.Server.Database.Tables.Assessment;
+using AssessmentByDiscipline = GraduateWork.Server.Database.Tables.AssessmentByDiscipline;
 
-namespace GraduateWork.Server.DataAccessLayer {
+namespace GraduateWork.Server.Database {
 	public class ModelDatabase : DbContext, IModelDatabase {
-		public DbSet<Group> Groups { get; set; }
-		public DbSet<Student> Students { get; set; }
-		public DbSet<Discipline> Disciplines { get; set; }
-		public DbSet<AssessmentByDiscipline> AssessmentByDisciplines { get; set; }
+		private DbSet<Group> Groups { get; set; }
+		private DbSet<Student> Students { get; set; }
+		private DbSet<Discipline> Disciplines { get; set; }
+		private DbSet<AssessmentByDiscipline> AssessmentByDisciplines { get; set; }
 
 		public ModelDatabase() : base("GraduateWorkDatabase") {
+		}
+
+		public GroupProxy[] GetAllGroups() {
+			return Groups.ToProxies();
+		}
+		public DisciplineProxy[] GetAllDisciplines() {
+			return Disciplines.ToProxies();
+		}
+		public StudentProxy[] GetAllStudents() {
+			return Students.ToProxies();
 		}
 
 		public void AddGroup(GroupProxy groupProxy) {
@@ -102,6 +115,14 @@ namespace GraduateWork.Server.DataAccessLayer {
 			Students.Remove(foundStudent);
 
 			SaveChanges();
+		}
+
+		public StudentProxy[] GetAllStudentsFormGroupByName(string nameOfGroup) {
+			var group = Groups.FirstOrDefault(g => g.NameOfGroup == nameOfGroup);
+			if (group == null)
+				throw new ArgumentException();
+
+			return group.Students.ToProxies().ToArray();
 		}
 	}
 }

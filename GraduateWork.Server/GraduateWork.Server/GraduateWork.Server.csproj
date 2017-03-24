@@ -90,11 +90,14 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\GraduateWork.Server.DataAccessLayer\GraduateWork.Server.DataAccessLayer.csproj">
+    <ProjectReference Include="..\GraduateWork.Server.Common\GraduateWork.Server.Common.csproj">
+      <Project>{5e51152b-43dc-4b8e-9e22-3c54e6ef416f}</Project>
+      <Name>GraduateWork.Server.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraduateWork.Server.Database\GraduateWork.Server.Database.csproj">
       <Project>{494bed79-81e9-4d39-a0e6-47577c701172}</Project>
-      <Name>GraduateWork.Server.DataAccessLayer</Name>
+      <Name>GraduateWork.Server.Database</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
