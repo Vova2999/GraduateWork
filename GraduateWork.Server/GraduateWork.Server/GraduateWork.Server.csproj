@@ -63,24 +63,27 @@
     <Compile Include="Exceptions\HttpException.cs" />
     <Compile Include="Exceptions\HttpStopServerException.cs" />
     <Compile Include="Extensions\HttpListenerResponseExtensions.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Add\AddDisciplineFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Add\AddGroupFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Add\AddStudentFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Delete\DeleteDisciplineFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Delete\DeleteGroupFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Delete\DeleteStudentFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Edit\EditDisciplineFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Edit\EditGroupFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\DatabaseEditing\Edit\EditStudentFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\StopServerFunction.cs" />
-    <Compile Include="Functions\FunctionsWithReturn\GetAllDisciplinesFunction.cs" />
-    <Compile Include="Functions\FunctionsWithReturn\GetAllGroupsFunction.cs" />
-    <Compile Include="Functions\FunctionsWithReturn\GetAllStudentsFormGroupFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\Database\Add\AddDisciplineFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\Database\Add\AddGroupFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\Database\Add\AddStudentFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\Database\Delete\DeleteDisciplineFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\Database\Delete\DeleteGroupFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\Database\Delete\DeleteStudentFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\Database\Edit\EditDisciplineFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\Database\Edit\EditGroupFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\Database\Edit\EditStudentFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\StopServerFunction.cs" />
+    <Compile Include="Functions\WithReturn\Database\GetAllDisciplinesFunction.cs" />
+    <Compile Include="Functions\WithReturn\Database\GetAllGroupsFunction.cs" />
+    <Compile Include="Functions\WithReturn\Database\GetAllStudentsFormGroupFunction.cs" />
     <Compile Include="Functions\HttpFunctionWithoutReturn.cs" />
-    <Compile Include="Functions\FunctionsWithReturn\GetAllStudentsFunction.cs" />
+    <Compile Include="Functions\WithReturn\Database\GetAllStudentsFunction.cs" />
     <Compile Include="Functions\HttpFunctionWithReturn.cs" />
     <Compile Include="Functions\IHttpFunction.cs" />
-    <Compile Include="Functions\FunctionsWithoutReturn\PingFunction.cs" />
+    <Compile Include="Functions\WithoutReturn\PingFunction.cs" />
+    <Compile Include="Functions\WithReturn\Reports\CreateAcademReportFunction.cs" />
+    <Compile Include="Functions\WithReturn\Reports\CreateDiplomaReportFunction.cs" />
+    <Compile Include="Functions\WithReturn\Reports\CreateDiplomaSupplementReportFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\HttpServer.cs" />
@@ -98,6 +101,10 @@
     <ProjectReference Include="..\GraduateWork.Server.Database\GraduateWork.Server.Database.csproj">
       <Project>{494bed79-81e9-4d39-a0e6-47577c701172}</Project>
       <Name>GraduateWork.Server.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraduateWork.Server.Reports\GraduateWork.Server.Reports.csproj">
+      <Project>{3ad462a2-5756-4576-926c-9737efd0bf9e}</Project>
+      <Name>GraduateWork.Server.Reports</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

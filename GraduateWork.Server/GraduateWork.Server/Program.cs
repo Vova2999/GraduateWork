@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
-using GraduateWork.Server.Common;
 using GraduateWork.Server.Database;
+using GraduateWork.Server.Reports;
 using GraduateWork.Server.Server;
 using Ninject;
 using Ninject.Extensions.Conventions;
@@ -14,9 +14,8 @@ namespace GraduateWork.Server {
 		}
 
 		private static IHttpServer CreateHttpServer() {
-			var container = new StandardKernel();
+			var container = new StandardKernel(new NinjectDatabaseModule(), new NinjectReportsModule());
 
-			container.Bind<IModelDatabase>().To<ModelDatabase>().InSingletonScope();
 			container.Bind(c => c.FromThisAssembly().SelectAllClasses().BindAllInterfaces());
 			container.Bind(c => c.FromThisAssembly().SelectAllClasses().BindAllBaseClasses());
 

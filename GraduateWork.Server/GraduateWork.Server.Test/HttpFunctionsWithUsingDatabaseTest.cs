@@ -3,11 +3,11 @@ using FakeItEasy;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.Common;
-using GraduateWork.Server.Functions.FunctionsWithoutReturn;
-using GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Add;
-using GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Delete;
-using GraduateWork.Server.Functions.FunctionsWithoutReturn.DatabaseEditing.Edit;
-using GraduateWork.Server.Functions.FunctionsWithReturn;
+using GraduateWork.Server.Functions.WithoutReturn;
+using GraduateWork.Server.Functions.WithoutReturn.Database.Add;
+using GraduateWork.Server.Functions.WithoutReturn.Database.Delete;
+using GraduateWork.Server.Functions.WithoutReturn.Database.Edit;
+using GraduateWork.Server.Functions.WithReturn.Database;
 using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
 
@@ -34,9 +34,7 @@ namespace GraduateWork.Server.Test {
 			RunServer(new AddDisciplineFunction(modelDatabase));
 			SendRequest("AddDiscipline", discipline.ToJson());
 
-			A.CallTo(() => modelDatabase
-				.AddDiscipline(A<DisciplineProxy>.That.Matches(d => d.NameOfDiscipline == discipline.NameOfDiscipline)))
-				.MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => modelDatabase.AddDiscipline(discipline)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
 		[Test]
@@ -46,9 +44,7 @@ namespace GraduateWork.Server.Test {
 			RunServer(new AddGroupFunction(modelDatabase));
 			SendRequest("AddGroup", group.ToJson());
 
-			A.CallTo(() => modelDatabase
-				.AddGroup(A<GroupProxy>.That.Matches(g => g.NameOfGroup == group.NameOfGroup)))
-				.MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => modelDatabase.AddGroup(group)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
 		[Test]
@@ -58,9 +54,7 @@ namespace GraduateWork.Server.Test {
 			RunServer(new AddStudentFunction(modelDatabase));
 			SendRequest("AddStudent", student.ToJson());
 
-			A.CallTo(() => modelDatabase
-				.AddStudent(A<StudentProxy>.That.Matches(s => s.FirstName == student.FirstName)))
-				.MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => modelDatabase.AddStudent(student)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
 		[Test]
@@ -70,9 +64,7 @@ namespace GraduateWork.Server.Test {
 			RunServer(new DeleteDisciplineFunction(modelDatabase));
 			SendRequest("DeleteDiscipline", discipline.ToJson());
 
-			A.CallTo(() => modelDatabase
-				.DeleteDiscipline(A<DisciplineProxy>.That.Matches(d => d.NameOfDiscipline == discipline.NameOfDiscipline)))
-				.MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => modelDatabase.DeleteDiscipline(discipline)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
 		[Test]
@@ -82,9 +74,7 @@ namespace GraduateWork.Server.Test {
 			RunServer(new DeleteGroupFunction(modelDatabase));
 			SendRequest("DeleteGroup", group.ToJson());
 
-			A.CallTo(() => modelDatabase
-				.DeleteGroup(A<GroupProxy>.That.Matches(g => g.NameOfGroup == group.NameOfGroup)))
-				.MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => modelDatabase.DeleteGroup(group)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
 		[Test]
@@ -94,9 +84,7 @@ namespace GraduateWork.Server.Test {
 			RunServer(new DeleteStudentFunction(modelDatabase));
 			SendRequest("DeleteStudent", student.ToJson());
 
-			A.CallTo(() => modelDatabase
-				.DeleteStudent(A<StudentProxy>.That.Matches(s => s.FirstName == student.FirstName)))
-				.MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => modelDatabase.DeleteStudent(student)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
 		[Test]
@@ -107,11 +95,7 @@ namespace GraduateWork.Server.Test {
 			RunServer(new EditDisciplineFunction(modelDatabase));
 			SendRequest("EditDiscipline", Tuple.Create(firstDiscipline, secondDiscipline).ToJson());
 
-			A.CallTo(() => modelDatabase
-				.EditDiscipline(
-					A<DisciplineProxy>.That.Matches(f => f.NameOfDiscipline == firstDiscipline.NameOfDiscipline),
-					A<DisciplineProxy>.That.Matches(s => s.NameOfDiscipline == secondDiscipline.NameOfDiscipline)))
-				.MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => modelDatabase.EditDiscipline(firstDiscipline, secondDiscipline)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
 		[Test]
@@ -122,11 +106,7 @@ namespace GraduateWork.Server.Test {
 			RunServer(new EditGroupFunction(modelDatabase));
 			SendRequest("EditGroup", Tuple.Create(firstGroup, secondGroup).ToJson());
 
-			A.CallTo(() => modelDatabase
-				.EditGroup(
-					A<GroupProxy>.That.Matches(f => f.NameOfGroup == firstGroup.NameOfGroup),
-					A<GroupProxy>.That.Matches(s => s.NameOfGroup == secondGroup.NameOfGroup)))
-				.MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => modelDatabase.EditGroup(firstGroup, secondGroup)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
 		[Test]
@@ -137,11 +117,7 @@ namespace GraduateWork.Server.Test {
 			RunServer(new EditStudentFunction(modelDatabase));
 			SendRequest("EditStudent", Tuple.Create(firstStudent, secondStudent).ToJson());
 
-			A.CallTo(() => modelDatabase
-				.EditStudent(
-					A<StudentProxy>.That.Matches(f => f.FirstName == firstStudent.FirstName),
-					A<StudentProxy>.That.Matches(s => s.FirstName == secondStudent.FirstName)))
-				.MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => modelDatabase.EditStudent(firstStudent, secondStudent)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
 		[Test]

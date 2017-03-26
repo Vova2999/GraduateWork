@@ -10,10 +10,10 @@ using AssessmentByDiscipline = GraduateWork.Server.Database.Tables.AssessmentByD
 
 namespace GraduateWork.Server.Database {
 	public class ModelDatabase : DbContext, IModelDatabase {
-		private DbSet<Group> Groups { get; set; }
-		private DbSet<Student> Students { get; set; }
-		private DbSet<Discipline> Disciplines { get; set; }
-		private DbSet<AssessmentByDiscipline> AssessmentByDisciplines { get; set; }
+		public DbSet<Group> Groups { get; set; }
+		public DbSet<Student> Students { get; set; }
+		public DbSet<Discipline> Disciplines { get; set; }
+		public DbSet<AssessmentByDiscipline> AssessmentByDisciplines { get; set; }
 
 		public ModelDatabase() : base("GraduateWorkDatabase") {
 		}

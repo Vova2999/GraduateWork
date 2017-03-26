@@ -2,7 +2,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using GraduateWork.Server.Functions;
-using GraduateWork.Server.Functions.FunctionsWithoutReturn;
+using GraduateWork.Server.Functions.WithoutReturn;
 using GraduateWork.Server.Server;
 using NUnit.Framework;
 

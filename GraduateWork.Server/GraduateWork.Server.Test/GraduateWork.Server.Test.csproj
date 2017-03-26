@@ -61,11 +61,13 @@
     <Compile Include="BaseClasses\BaseHttpClient.cs" />
     <Compile Include="BaseClasses\HttpFunctionsTest.cs" />
     <Compile Include="HttpFunctionsThrowExceptionTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingReportCreatorTest.cs" />
     <Compile Include="HttpServerCreateTest.cs" />
     <Compile Include="HttpFunctionsWithUsingDatabaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
