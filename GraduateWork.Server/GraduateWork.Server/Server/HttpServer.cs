@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -11,10 +12,13 @@ using GraduateWork.Server.Functions;
 namespace GraduateWork.Server.Server {
 	public class HttpServer : IHttpServer {
 		private readonly IHttpFunction[] httpFunctions;
+		private readonly ConcurrentDictionary<string, IHttpFunction> hashedFunctions;
 
 		public HttpServer(IHttpFunction[] httpFunctions) {
 			CheckInputFunctions(httpFunctions);
+
 			this.httpFunctions = httpFunctions;
+			hashedFunctions = new ConcurrentDictionary<string, IHttpFunction>();
 		}
 		private void CheckInputFunctions(IHttpFunction[] httpFunctions) {
 			var repeatedFunction = httpFunctions
@@ -40,7 +44,7 @@ namespace GraduateWork.Server.Server {
 					var parameters = GetParameters(functionNameAndParameters);
 					var requestBody = context.Request.InputStream.ReadAndDispose();
 
-					GetFunction(functionName).Execute(context, parameters, requestBody);
+					hashedFunctions.GetOrAdd(functionName, GetFunction).Execute(context, parameters, requestBody);
 				}
 				catch (HttpStopServerException exception) {
 					context.Response.Respond(exception.StatusCode, exception.Message.ToJson());
