@@ -9,6 +9,10 @@ using Assessment = GraduateWork.Server.Database.Tables.Assessment;
 using AssessmentByDiscipline = GraduateWork.Server.Database.Tables.AssessmentByDiscipline;
 
 namespace GraduateWork.Server.Database {
+	// ReSharper disable ClassNeverInstantiated.Global
+	// ReSharper disable MemberCanBePrivate.Global
+	// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 	public class ModelDatabase : DbContext, IModelDatabase {
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Student> Students { get; set; }

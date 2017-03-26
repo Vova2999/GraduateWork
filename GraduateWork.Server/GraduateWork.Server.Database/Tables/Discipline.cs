@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GraduateWork.Server.Database.Tables {
+	// ReSharper disable ClassWithVirtualMembersNeverInherited.Global
+	// ReSharper disable UnusedMember.Global
+
 	public class Discipline {
 		[Key]
 		public int DisciplineId { get; set; }

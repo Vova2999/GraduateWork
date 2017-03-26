@@ -2,6 +2,8 @@
 using TemplateEngine.Docx;
 
 namespace GraduateWork.Server.Reports.Creators {
+	// ReSharper disable UnusedMember.Global
+
 	public class DiplomaCreator : ReportCreator {
 		public override string TemplateName => "Диплом.docx";
 

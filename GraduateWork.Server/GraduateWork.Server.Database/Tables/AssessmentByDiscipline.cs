@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace GraduateWork.Server.Database.Tables {
+	// ReSharper disable ClassWithVirtualMembersNeverInherited.Global
+	// ReSharper disable UnusedAutoPropertyAccessor.Global
+	// ReSharper disable UnusedMember.Global
+
 	public class AssessmentByDiscipline {
 		[Key]
 		public int AssessmentByDisciplineId { get; set; }

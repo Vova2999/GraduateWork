@@ -2,6 +2,12 @@ using System;
 using GraduateWork.Common.Tables.Attributes;
 
 namespace GraduateWork.Common.Tables.Proxies {
+	// ReSharper disable ClassNeverInstantiated.Global
+	// ReSharper disable MemberCanBePrivate.Global
+	// ReSharper disable NonReadonlyMemberInGetHashCode
+	// ReSharper disable UnusedAutoPropertyAccessor.Global
+	// ReSharper disable UnusedMember.Global
+
 	public class StudentProxy {
 		[HeaderColumn("Èìÿ")]
 		public string FirstName { get; set; }
@@ -27,9 +33,6 @@ namespace GraduateWork.Common.Tables.Proxies {
 		public override bool Equals(object obj) {
 			var that = obj as StudentProxy;
 			return that != null && FirstName == that.FirstName && SecondName == that.SecondName && ThirdName == that.ThirdName;
-		}
-		protected bool Equals(StudentProxy other) {
-			return string.Equals(FirstName, other.FirstName) && string.Equals(SecondName, other.SecondName) && string.Equals(ThirdName, other.ThirdName);
 		}
 		public override int GetHashCode() {
 			return (FirstName?.GetHashCode() ?? 0 * 397) ^ (SecondName?.GetHashCode() ?? 0) * 397 ^ (ThirdName?.GetHashCode() ?? 0);

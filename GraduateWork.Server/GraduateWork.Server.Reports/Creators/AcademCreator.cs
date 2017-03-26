@@ -2,6 +2,8 @@ using GraduateWork.Common.Tables.Proxies;
 using TemplateEngine.Docx;
 
 namespace GraduateWork.Server.Reports.Creators {
+	// ReSharper disable UnusedMember.Global
+
 	public class AcademCreator : ReportCreator {
 		public override string TemplateName => "Академ.docx";
 

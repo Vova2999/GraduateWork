@@ -1,6 +1,11 @@
 ﻿using GraduateWork.Common.Tables.Attributes;
 
 namespace GraduateWork.Common.Tables.Proxies {
+	// ReSharper disable MemberCanBePrivate.Global
+	// ReSharper disable NonReadonlyMemberInGetHashCode
+	// ReSharper disable UnusedAutoPropertyAccessor.Global
+	// ReSharper disable UnusedMember.Global
+
 	public class DisciplineProxy {
 		[HeaderColumn("Название дисциплины")]
 		public string NameOfDiscipline { get; set; }
