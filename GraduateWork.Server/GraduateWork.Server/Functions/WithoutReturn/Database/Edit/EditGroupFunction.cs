@@ -2,20 +2,20 @@
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common;
+using GraduateWork.Server.Common.Database;
 
 namespace GraduateWork.Server.Functions.WithoutReturn.Database.Edit {
 	public class EditGroupFunction : HttpFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "EditGroup";
-		private readonly IModelDatabase modelDatabase;
+		private readonly IDatabaseEditor databaseEditor;
 
-		public EditGroupFunction(IModelDatabase modelDatabase) {
-			this.modelDatabase = modelDatabase;
+		public EditGroupFunction(IDatabaseEditor databaseEditor) {
+			this.databaseEditor = databaseEditor;
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
 			var tupleGroups = requestBody.FromJson<Tuple<GroupProxy, GroupProxy>>();
-			modelDatabase.EditGroup(tupleGroups.Item1, tupleGroups.Item2);
+			databaseEditor.EditGroup(tupleGroups.Item1, tupleGroups.Item2);
 		}
 	}
 }

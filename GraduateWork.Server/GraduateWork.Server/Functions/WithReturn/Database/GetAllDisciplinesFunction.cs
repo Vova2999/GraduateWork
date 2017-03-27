@@ -1,18 +1,18 @@
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common;
+using GraduateWork.Server.Common.Database;
 
 namespace GraduateWork.Server.Functions.WithReturn.Database {
 	public class GetAllDisciplinesFunction : HttpFunctionWithReturn<DisciplineProxy[]> {
 		public override string NameOfCalledMethod => "GetAllDisciplines";
-		private readonly IModelDatabase modelDatabase;
+		private readonly IDatabaseReader databaseReader;
 
-		public GetAllDisciplinesFunction(IModelDatabase modelDatabase) {
-			this.modelDatabase = modelDatabase;
+		public GetAllDisciplinesFunction(IDatabaseReader databaseReader) {
+			this.databaseReader = databaseReader;
 		}
 
 		protected override DisciplineProxy[] Run(NameValues parameters, byte[] requestBody) {
-			return modelDatabase.GetAllDisciplines();
+			return databaseReader.GetAllDisciplines();
 		}
 	}
 }

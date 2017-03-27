@@ -1,4 +1,4 @@
-﻿using GraduateWork.Server.Common;
+﻿using GraduateWork.Server.Common.Reports;
 using Ninject.Extensions.Conventions;
 using Ninject.Modules;
 

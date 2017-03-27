@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using GraduateWork.Server.Database;
+﻿using GraduateWork.Server.Database;
 using GraduateWork.Server.Reports;
 using GraduateWork.Server.Server;
 using Ninject;
@@ -8,8 +7,6 @@ using Ninject.Extensions.Conventions;
 namespace GraduateWork.Server {
 	public static class Program {
 		public static void Main() {
-			System.Data.Entity.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ModelDatabase>());
-
 			CreateHttpServer().Run();
 		}
 

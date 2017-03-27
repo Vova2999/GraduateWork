@@ -2,7 +2,7 @@
 using GraduateWork.Common.Reports;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common;
+using GraduateWork.Server.Common.Reports;
 
 namespace GraduateWork.Server.Functions.WithReturn.Reports {
 	public class CreateDiplomaSupplementReportFunction : HttpFunctionWithReturn<FileWithContent> {

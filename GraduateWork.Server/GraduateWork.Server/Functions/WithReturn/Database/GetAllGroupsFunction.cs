@@ -1,18 +1,18 @@
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common;
+using GraduateWork.Server.Common.Database;
 
 namespace GraduateWork.Server.Functions.WithReturn.Database {
 	public class GetAllGroupsFunction : HttpFunctionWithReturn<GroupProxy[]> {
 		public override string NameOfCalledMethod => "GetAllGroups";
-		private readonly IModelDatabase modelDatabase;
+		private readonly IDatabaseReader databaseReader;
 
-		public GetAllGroupsFunction(IModelDatabase modelDatabase) {
-			this.modelDatabase = modelDatabase;
+		public GetAllGroupsFunction(IDatabaseReader databaseReader) {
+			this.databaseReader = databaseReader;
 		}
 
 		protected override GroupProxy[] Run(NameValues parameters, byte[] requestBody) {
-			return modelDatabase.GetAllGroups();
+			return databaseReader.GetAllGroups();
 		}
 	}
 }

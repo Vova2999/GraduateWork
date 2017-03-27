@@ -37,8 +37,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IModelDatabase.cs" />
-    <Compile Include="IReportsCreator.cs" />
+    <Compile Include="Database\IDatabaseEditor.cs" />
+    <Compile Include="Database\IDatabaseReader.cs" />
+    <Compile Include="Reports\IReportsCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
