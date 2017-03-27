@@ -39,7 +39,7 @@ namespace GraduateWork.Server.Server {
 				var context = httpListener.GetContext();
 
 				try {
-					var functionNameAndParameters = context.Request.RawUrl.Split('?');
+					var functionNameAndParameters = Uri.UnescapeDataString(context.Request.RawUrl).Split('?');
 					var functionName = GetFunctionName(functionNameAndParameters);
 					var parameters = GetParameters(functionNameAndParameters);
 					var requestBody = context.Request.InputStream.ReadAndDispose();

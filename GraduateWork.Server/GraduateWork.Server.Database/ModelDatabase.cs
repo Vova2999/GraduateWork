@@ -24,13 +24,6 @@ namespace GraduateWork.Server.Database {
 		public GroupProxy[] GetAllGroups() {
 			return Groups.ToProxies();
 		}
-		public DisciplineProxy[] GetAllDisciplines() {
-			return Disciplines.ToProxies();
-		}
-		public StudentProxy[] GetAllStudents() {
-			return Students.ToProxies();
-		}
-
 		public void AddGroup(GroupProxy groupProxy) {
 			Groups.Add(new Group {
 				NameOfGroup = groupProxy.NameOfGroup
@@ -51,6 +44,9 @@ namespace GraduateWork.Server.Database {
 			SaveChanges();
 		}
 
+		public DisciplineProxy[] GetAllDisciplines() {
+			return Disciplines.ToProxies();
+		}
 		public void AddDiscipline(DisciplineProxy disciplineProxy) {
 			Disciplines.Add(new Discipline {
 				NameOfDiscipline = disciplineProxy.NameOfDiscipline
@@ -71,6 +67,9 @@ namespace GraduateWork.Server.Database {
 			SaveChanges();
 		}
 
+		public StudentProxy[] GetAllStudents() {
+			return Students.ToProxies();
+		}
 		public void AddStudent(StudentProxy studentProxy) {
 			var student = new Student {
 				FirstName = studentProxy.FirstName,
