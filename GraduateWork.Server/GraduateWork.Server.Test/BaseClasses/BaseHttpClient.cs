@@ -1,25 +1,39 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using GraduateWork.Common.Extensions;
 
 namespace GraduateWork.Server.Test.BaseClasses {
+	// ReSharper disable UnusedMember.Global
+
 	public class BaseHttpClient {
 		protected static void SendRequest(string methodName, byte[] requestBody = null, int timeoutMs = 1000) {
-			var webRequest = CreateWebRequest(methodName, requestBody, timeoutMs);
+			var webRequest = CreateWebRequest(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
+			SendRequest(webRequest);
+		}
+		protected static void SendRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 1000) {
+			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
 			SendRequest(webRequest);
 		}
 		protected static TKey SendRequest<TKey>(string methodName, byte[] requestBody = null, int timeoutMs = 1000) {
-			var webRequest = CreateWebRequest(methodName, requestBody, timeoutMs);
+			var webRequest = CreateWebRequest(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
+			return GetAnswer<TKey>(SendRequest(webRequest));
+		}
+		protected static TKey SendRequest<TKey>(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 1000) {
+			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
 			return GetAnswer<TKey>(SendRequest(webRequest));
 		}
 
-		private static HttpWebRequest CreateWebRequest(string methodName, byte[] requestBody, int timeoutMs) {
-			var webRequest = (HttpWebRequest)WebRequest.Create($"http://127.0.0.1/{methodName}");
+		private static HttpWebRequest CreateWebRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody, int timeoutMs) {
+			var webRequest = (HttpWebRequest)WebRequest.Create($"http://127.0.0.1/{CreateRequestUri(methodName, parameters)}");
 			webRequest.Timeout = timeoutMs;
 
 			return requestBody == null
 				? CreateGetRequest(webRequest)
 				: CreatePostRequest(webRequest, requestBody);
+		}
+		private static string CreateRequestUri(string methodName, Dictionary<string, string> parameters) {
+			return !parameters.Any() ? methodName : $"{methodName}?{string.Join("&", parameters.Select(parameter => $"{parameter.Key}={parameter.Value}"))}";
 		}
 		private static HttpWebRequest CreateGetRequest(HttpWebRequest webRequest) {
 			webRequest.Method = "GET";

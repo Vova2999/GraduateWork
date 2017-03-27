@@ -59,12 +59,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BaseClasses\BaseHttpClient.cs" />
-    <Compile Include="BaseClasses\HttpFunctionsTest.cs" />
+    <Compile Include="BaseClasses\BaseHttpServerTest.cs" />
+    <Compile Include="BaseClasses\BaseHttpServerWithUsingDatabaseAuthorizerTest.cs" />
+    <Compile Include="StopServerFunctionTest.cs" />
     <Compile Include="HttpFunctionsThrowExceptionTest.cs" />
+    <Compile Include="HttpFunctionsWithoutUsingDatabaseTest.cs" />
     <Compile Include="HttpFunctionsWithUsingDatabaseReaderTest.cs" />
     <Compile Include="HttpFunctionsWithUsingReportCreatorTest.cs" />
     <Compile Include="HttpServerCreateTest.cs" />
-    <Compile Include="HttpFunctionsWithUsingDatabaseTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseEditorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,13 @@
 using FakeItEasy;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.Common.Database;
-using GraduateWork.Server.Functions.WithReturn.Database;
+using GraduateWork.Server.Functions.Protected.WithReturn.Database;
 using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
 
 namespace GraduateWork.Server.Test {
 	[TestFixture]
-	public class HttpFunctionsWithUsingDatabaseReaderTest : HttpFunctionsTest {
+	public class HttpFunctionsWithUsingDatabaseReaderTest : BaseHttpServerWithUsingDatabaseAuthorizerTest {
 		private IDatabaseReader databaseReader;
 
 		[SetUp]
@@ -23,8 +23,8 @@ namespace GraduateWork.Server.Test {
 			};
 			A.CallTo(() => databaseReader.GetAllDisciplines()).Returns(inputDiscipline);
 
-			RunServer(new GetAllDisciplinesFunction(databaseReader));
-			var receivedDisciplines = SendRequest<DisciplineProxy[]>("GetAllDisciplines");
+			RunServer(new GetAllDisciplinesFunction(DatabaseAuthorizer, databaseReader));
+			var receivedDisciplines = SendRequest<DisciplineProxy[]>("GetAllDisciplines", DefaultParameters);
 
 			A.CallTo(() => databaseReader.GetAllDisciplines()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputDiscipline, receivedDisciplines);
@@ -38,8 +38,8 @@ namespace GraduateWork.Server.Test {
 			};
 			A.CallTo(() => databaseReader.GetAllGroups()).Returns(inputGroups);
 
-			RunServer(new GetAllGroupsFunction(databaseReader));
-			var receivedGroups = SendRequest<GroupProxy[]>("GetAllGroups");
+			RunServer(new GetAllGroupsFunction(DatabaseAuthorizer, databaseReader));
+			var receivedGroups = SendRequest<GroupProxy[]>("GetAllGroups", DefaultParameters);
 
 			A.CallTo(() => databaseReader.GetAllGroups()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputGroups, receivedGroups);
@@ -53,8 +53,8 @@ namespace GraduateWork.Server.Test {
 			};
 			A.CallTo(() => databaseReader.GetAllStudents()).Returns(inputStudents);
 
-			RunServer(new GetAllStudentsFunction(databaseReader));
-			var receivedStudents = SendRequest<StudentProxy[]>("GetAllStudents");
+			RunServer(new GetAllStudentsFunction(DatabaseAuthorizer, databaseReader));
+			var receivedStudents = SendRequest<StudentProxy[]>("GetAllStudents", DefaultParameters);
 
 			A.CallTo(() => databaseReader.GetAllStudents()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputStudents, receivedStudents);

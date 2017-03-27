@@ -13,5 +13,9 @@ namespace GraduateWork.Server.Common.Database {
 		void AddDiscipline(DisciplineProxy disciplineProxy);
 		void EditDiscipline(DisciplineProxy oldDisciplineProxy, DisciplineProxy newDisciplineProxy);
 		void DeleteDiscipline(DisciplineProxy disciplineProxy);
+
+		void AddUser(UserProxy userProxy);
+		void EditUser(UserProxy oldUserProxy, UserProxy newUserProxy);
+		void DeleteUser(UserProxy userProxy);
 	}
 }

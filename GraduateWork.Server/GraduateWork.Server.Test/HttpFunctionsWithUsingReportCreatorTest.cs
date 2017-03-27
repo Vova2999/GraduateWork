@@ -3,13 +3,13 @@ using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Reports;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.Common.Reports;
-using GraduateWork.Server.Functions.WithReturn.Reports;
+using GraduateWork.Server.Functions.Protected.WithReturn.Reports;
 using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
 
 namespace GraduateWork.Server.Test {
 	[TestFixture]
-	public class HttpFunctionsWithUsingReportCreatorTest : HttpFunctionsTest {
+	public class HttpFunctionsWithUsingReportCreatorTest : BaseHttpServerWithUsingDatabaseAuthorizerTest {
 		private IReportsCreator reportsCreator;
 
 		[SetUp]
@@ -23,8 +23,8 @@ namespace GraduateWork.Server.Test {
 			var fileWithContent = new FileWithContent("TestName", null);
 			A.CallTo(() => reportsCreator.CreateAcadem(student)).Returns(fileWithContent);
 
-			RunServer(new CreateAcademReportFunction(reportsCreator));
-			var receivedFileWithContent = SendRequest<FileWithContent>("CreateAcademReport", student.ToJson());
+			RunServer(new CreateAcademReportFunction(DatabaseAuthorizer, reportsCreator));
+			var receivedFileWithContent = SendRequest<FileWithContent>("CreateAcademReport", DefaultParameters, student.ToJson());
 
 			A.CallTo(() => reportsCreator.CreateAcadem(student)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedFileWithContent.FileName, Is.EqualTo(fileWithContent.FileName));
@@ -36,8 +36,8 @@ namespace GraduateWork.Server.Test {
 			var fileWithContent = new FileWithContent("TestName", null);
 			A.CallTo(() => reportsCreator.CreateDiploma(student)).Returns(fileWithContent);
 
-			RunServer(new CreateDiplomaReportFunction(reportsCreator));
-			var receivedFileWithContent = SendRequest<FileWithContent>("CreateDiplomaReport", student.ToJson());
+			RunServer(new CreateDiplomaReportFunction(DatabaseAuthorizer, reportsCreator));
+			var receivedFileWithContent = SendRequest<FileWithContent>("CreateDiplomaReport", DefaultParameters, student.ToJson());
 
 			A.CallTo(() => reportsCreator.CreateDiploma(student)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedFileWithContent.FileName, Is.EqualTo(fileWithContent.FileName));
@@ -49,8 +49,8 @@ namespace GraduateWork.Server.Test {
 			var fileWithContent = new FileWithContent("TestName", null);
 			A.CallTo(() => reportsCreator.CreateDiplomaSupplement(student)).Returns(fileWithContent);
 
-			RunServer(new CreateDiplomaSupplementReportFunction(reportsCreator));
-			var receivedFileWithContent = SendRequest<FileWithContent>("CreateDiplomaSupplementReport", student.ToJson());
+			RunServer(new CreateDiplomaSupplementReportFunction(DatabaseAuthorizer, reportsCreator));
+			var receivedFileWithContent = SendRequest<FileWithContent>("CreateDiplomaSupplementReport", DefaultParameters, student.ToJson());
 
 			A.CallTo(() => reportsCreator.CreateDiplomaSupplement(student)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedFileWithContent.FileName, Is.EqualTo(fileWithContent.FileName));

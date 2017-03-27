@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GraduateWork.Server.AdditionalObjects {
 	public class NameValues {
 		private readonly Dictionary<string, string> nameValues;
-
 		public string this[string key] {
-			get { return nameValues[key]; }
+			get {
+				if (!nameValues.ContainsKey(key))
+					throw new ArgumentException($"Укажите параметр '{key}'");
+				return nameValues[key];
+			}
 		}
 
 		public NameValues() : this(new Dictionary<string, string>()) {

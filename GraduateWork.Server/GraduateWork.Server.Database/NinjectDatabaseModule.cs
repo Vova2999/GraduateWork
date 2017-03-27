@@ -8,6 +8,7 @@ namespace GraduateWork.Server.Database {
 			Kernel?.Bind<ModelDatabase>().To<ModelDatabase>().InSingletonScope();
 			Kernel?.Bind<IDatabaseEditor>().To<DatabaseEditor>().InSingletonScope();
 			Kernel?.Bind<IDatabaseReader>().To<DatabaseReader>().InSingletonScope();
+			Kernel?.Bind<IDatabaseAuthorizer>().To<DatabaseAuthorizer>().InSingletonScope();
 		}
 	}
 }

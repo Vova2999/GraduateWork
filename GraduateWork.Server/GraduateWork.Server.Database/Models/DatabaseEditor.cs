@@ -103,5 +103,29 @@ namespace GraduateWork.Server.Database.Models {
 
 			modelDatabase.SaveChanges();
 		}
+
+		public void AddUser(UserProxy userProxy) {
+			modelDatabase.Users.Add(new User {
+				Login = userProxy.Login,
+				Password = userProxy.Password,
+				TypeAccess = userProxy.TypeAccess
+			});
+
+			modelDatabase.SaveChanges();
+		}
+		public void EditUser(UserProxy oldUserProxy, UserProxy newUserProxy) {
+			var foundUser = modelDatabase.Users.First(user => user.Login == oldUserProxy.Login && user.Password == oldUserProxy.Password);
+			foundUser.Login = newUserProxy.Login;
+			foundUser.Password = newUserProxy.Password;
+			foundUser.TypeAccess = newUserProxy.TypeAccess;
+
+			modelDatabase.SaveChanges();
+		}
+		public void DeleteUser(UserProxy userProxy) {
+			var foundUser = modelDatabase.Users.First(user => user.Login == userProxy.Login && user.Password == userProxy.Password);
+			modelDatabase.Users.Remove(foundUser);
+
+			modelDatabase.SaveChanges();
+		}
 	}
 }

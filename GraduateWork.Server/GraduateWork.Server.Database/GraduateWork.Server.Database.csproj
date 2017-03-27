@@ -49,6 +49,7 @@
     <Compile Include="Extensions\DisciplineExtensions.cs" />
     <Compile Include="Extensions\GroupExtensions.cs" />
     <Compile Include="Extensions\StudentExtensions.cs" />
+    <Compile Include="Models\DatabaseAuthorizer.cs" />
     <Compile Include="Models\ModelDatabase.cs" />
     <Compile Include="Models\DatabaseEditor.cs" />
     <Compile Include="Models\DatabaseReader.cs" />

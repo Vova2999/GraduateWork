@@ -1,27 +1,31 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using FakeItEasy;
 using GraduateWork.Common.Extensions;
+using GraduateWork.Common.Http;
 using GraduateWork.Server.AdditionalObjects;
+using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Exceptions;
 using GraduateWork.Server.Functions;
+using GraduateWork.Server.Functions.NonProtected.WithoutReturn;
 using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
 
 namespace GraduateWork.Server.Test {
 	[TestFixture]
-	public class HttpFunctionsThrowExceptionTest : HttpFunctionsTest {
+	public class HttpFunctionsThrowExceptionTest : BaseHttpServerTest {
 		[Test]
 		public void CalledFunctionDoesNotExist_ShouldBeThrowException() {
 			RunServer();
 
-			var exception = Assert.Catch<WebException>(() => SendRequest("notExistFunction"));
+			var exception = Assert.Catch<WebException>(() => SendRequest("notExistFunction", DefaultParameters));
 			Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
 		}
 
 		[Test]
 		public void ThrowHttpExceptionTest_ShouldBeThrowException() {
-			const string exceptionMessage = "message";
+			const string exceptionMessage = "exceptionMessage";
 			const string nameOfCalledMethod = "nameOfCalledMethod";
 			const HttpStatusCode exceptionStatusCode = HttpStatusCode.Forbidden;
 
@@ -32,14 +36,14 @@ namespace GraduateWork.Server.Test {
 
 			RunServer(function);
 
-			var exception = Assert.Catch<WebException>(() => SendRequest(nameOfCalledMethod));
+			var exception = Assert.Catch<WebException>(() => SendRequest(nameOfCalledMethod, DefaultParameters));
 			Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(exceptionStatusCode));
 			Assert.That(exception.Response.GetResponseStream().ReadAndDispose().FromJson<string>(), Is.EqualTo(exceptionMessage));
 		}
 
 		[Test]
 		public void ThrowExceptionTest_ShouldBeThrowException() {
-			const string exceptionMessage = "message";
+			const string exceptionMessage = "exceptionMessage";
 			const string nameOfCalledMethod = "nameOfCalledMethod";
 
 			var function = A.Fake<IHttpFunction>();
@@ -49,9 +53,28 @@ namespace GraduateWork.Server.Test {
 
 			RunServer(function);
 
-			var exception = Assert.Catch<WebException>(() => SendRequest(nameOfCalledMethod));
+			var exception = Assert.Catch<WebException>(() => SendRequest(nameOfCalledMethod, DefaultParameters));
 			Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
 			Assert.That(exception.Response.GetResponseStream().ReadAndDispose().FromJson<string>(), Is.EqualTo(exceptionMessage));
+		}
+
+		[Test]
+		public void CheckUserIsCorrectFunctionTest_ShouldBeThrowException() {
+			const string login = "login";
+			const string password = "password";
+			var parameters = new Dictionary<string, string> {
+				{ HttpParameters.Login, login },
+				{ HttpParameters.Password, password }
+			};
+
+			var databaseAuthorizer = A.Fake<IDatabaseAuthorizer>();
+			A.CallTo(() => databaseAuthorizer.UserIsCorrect(login, password)).Returns(false);
+
+			RunServer(new CheckUserIsCorrectFunction(databaseAuthorizer));
+			var exception = Assert.Catch<WebException>(() => SendRequest("CheckUserIsCorrect", parameters));
+
+			A.CallTo(() => databaseAuthorizer.UserIsCorrect(login, password)).MustHaveHappened(Repeated.Exactly.Once);
+			Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
 		}
 	}
 }
