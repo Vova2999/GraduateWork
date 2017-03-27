@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.Common;
@@ -119,14 +118,6 @@ namespace GraduateWork.Server.Database {
 			Students.Remove(foundStudent);
 
 			SaveChanges();
-		}
-
-		public StudentProxy[] GetAllStudentsFormGroupByName(string nameOfGroup) {
-			var group = Groups.FirstOrDefault(g => g.NameOfGroup == nameOfGroup);
-			if (group == null)
-				throw new ArgumentException();
-
-			return group.Students.ToProxies().ToArray();
 		}
 	}
 }

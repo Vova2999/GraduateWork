@@ -164,21 +164,5 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => modelDatabase.GetAllStudents()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputStudents, receivedStudents);
 		}
-
-		[Test]
-		public void GetAllStudentsFormGroupByNameFunctionTest_ShouldBeSuccess() {
-			const string nameOfGroup = "qwert";
-			var inputStudents = new[] {
-				new StudentProxy { FirstName = "firstFirstName" },
-				new StudentProxy { NameOfGroup = "secondFirstName" }
-			};
-			A.CallTo(() => modelDatabase.GetAllStudentsFormGroupByName(nameOfGroup)).Returns(inputStudents);
-
-			RunServer(new GetAllStudentsFormGroupByNameFunction(modelDatabase));
-			var receivedStudents = SendRequest<StudentProxy[]>($"GetAllStudentsFormGroupByName?NameOfGroup={nameOfGroup}");
-
-			A.CallTo(() => modelDatabase.GetAllStudentsFormGroupByName(nameOfGroup)).MustHaveHappened(Repeated.Exactly.Once);
-			CollectionAssert.AreEqual(inputStudents, receivedStudents);
-		}
 	}
 }

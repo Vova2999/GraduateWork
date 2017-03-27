@@ -75,7 +75,6 @@
     <Compile Include="Functions\WithoutReturn\StopServerFunction.cs" />
     <Compile Include="Functions\WithReturn\Database\GetAllDisciplinesFunction.cs" />
     <Compile Include="Functions\WithReturn\Database\GetAllGroupsFunction.cs" />
-    <Compile Include="Functions\WithReturn\Database\GetAllStudentsFormGroupFunction.cs" />
     <Compile Include="Functions\HttpFunctionWithoutReturn.cs" />
     <Compile Include="Functions\WithReturn\Database\GetAllStudentsFunction.cs" />
     <Compile Include="Functions\HttpFunctionWithReturn.cs" />

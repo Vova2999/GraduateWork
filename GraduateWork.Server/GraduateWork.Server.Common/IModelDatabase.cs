@@ -17,7 +17,5 @@ namespace GraduateWork.Server.Common {
 		void AddStudent(StudentProxy studentProxy);
 		void EditStudent(StudentProxy oldGroupProxy, StudentProxy newGroupProxy);
 		void DeleteStudent(StudentProxy studentProxy);
-
-		StudentProxy[] GetAllStudentsFormGroupByName(string nameOfGroup);
 	}
 }
