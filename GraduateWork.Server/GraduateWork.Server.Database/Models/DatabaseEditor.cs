@@ -108,7 +108,7 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.Users.Add(new User {
 				Login = userProxy.Login,
 				Password = userProxy.Password,
-				TypeAccess = userProxy.TypeAccess
+				AccessType = userProxy.AccessType
 			});
 
 			modelDatabase.SaveChanges();
@@ -117,7 +117,7 @@ namespace GraduateWork.Server.Database.Models {
 			var foundUser = modelDatabase.Users.First(user => user.Login == oldUserProxy.Login && user.Password == oldUserProxy.Password);
 			foundUser.Login = newUserProxy.Login;
 			foundUser.Password = newUserProxy.Password;
-			foundUser.TypeAccess = newUserProxy.TypeAccess;
+			foundUser.AccessType = newUserProxy.AccessType;
 
 			modelDatabase.SaveChanges();
 		}

@@ -14,7 +14,7 @@ namespace GraduateWork.Common.Tables.Proxies {
 		public string Password { get; set; }
 
 		[HeaderColumn("Тип доступа")]
-		public int TypeAccess { get; set; }
+		public int AccessType { get; set; }
 
 		public override bool Equals(object obj) {
 			var that = (UserProxy)obj;
@@ -27,7 +27,7 @@ namespace GraduateWork.Common.Tables.Proxies {
 		}
 	}
 
-	public enum TypeAccess {
+	public enum AccessType {
 		None = 0x00,
 		Read = 0x01,
 		Edit = 0x02

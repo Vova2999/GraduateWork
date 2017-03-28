@@ -6,7 +6,7 @@ using GraduateWork.Server.Common.Database;
 namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Add {
 	public class AddUserFunction : HttpProtectedFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "AddUser";
-		protected override TypeAccess TypeAccess => TypeAccess.Edit;
+		protected override AccessType RequiredAccessType => AccessType.Edit;
 		private readonly IDatabaseEditor databaseEditor;
 
 		public AddUserFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseEditor databaseEditor) : base(databaseAuthorizer) {

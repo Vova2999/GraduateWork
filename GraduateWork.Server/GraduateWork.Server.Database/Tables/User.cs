@@ -18,10 +18,10 @@ namespace GraduateWork.Server.Database.Tables {
 		[Index("IX_Names", 2, IsUnique = true)]
 		public string Password { get; set; }
 
-		public int TypeAccess { get; set; }
+		public int AccessType { get; set; }
 	}
 
-	public enum TypeAccess {
+	public enum AccessType {
 		None = 0x00,
 		Read = 0x01,
 		Edit = 0x02

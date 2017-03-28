@@ -7,7 +7,7 @@ using GraduateWork.Server.Common.Database;
 namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Edit {
 	public class EditDisciplineFunction : HttpProtectedFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "EditDiscipline";
-		protected override TypeAccess TypeAccess => TypeAccess.Edit;
+		protected override AccessType RequiredAccessType => AccessType.Edit;
 		private readonly IDatabaseEditor databaseEditor;
 
 		public EditDisciplineFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseEditor databaseEditor) : base(databaseAuthorizer) {

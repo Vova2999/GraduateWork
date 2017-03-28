@@ -6,7 +6,7 @@ using GraduateWork.Server.Common.Database;
 namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Delete {
 	public class DeleteUserFunction : HttpProtectedFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "DeleteUser";
-		protected override TypeAccess TypeAccess => TypeAccess.Edit;
+		protected override AccessType RequiredAccessType => AccessType.Edit;
 		private readonly IDatabaseEditor databaseEditor;
 
 		public DeleteUserFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseEditor databaseEditor) : base(databaseAuthorizer) {

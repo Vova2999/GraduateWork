@@ -8,7 +8,7 @@ using GraduateWork.Server.Common.Reports;
 namespace GraduateWork.Server.Functions.Protected.WithReturn.Reports {
 	public class CreateDiplomaSupplementReportFunction : HttpProtectedFunctionWithReturn<FileWithContent> {
 		public override string NameOfCalledMethod => "CreateDiplomaSupplementReport";
-		protected override TypeAccess TypeAccess => TypeAccess.Read;
+		protected override AccessType RequiredAccessType => AccessType.Read;
 		private readonly IReportsCreator reportsCreator;
 
 		public CreateDiplomaSupplementReportFunction(IDatabaseAuthorizer databaseAuthorizer, IReportsCreator reportsCreator) : base(databaseAuthorizer) {

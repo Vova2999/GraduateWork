@@ -8,7 +8,7 @@ using GraduateWork.Server.Common.Reports;
 namespace GraduateWork.Server.Functions.Protected.WithReturn.Reports {
 	public class CreateAcademReportFunction : HttpProtectedFunctionWithReturn<FileWithContent> {
 		public override string NameOfCalledMethod => "CreateAcademReport";
-		protected override TypeAccess TypeAccess => TypeAccess.Read;
+		protected override AccessType RequiredAccessType => AccessType.Read;
 		private readonly IReportsCreator reportsCreator;
 
 		public CreateAcademReportFunction(IDatabaseAuthorizer databaseAuthorizer, IReportsCreator reportsCreator) : base(databaseAuthorizer) {

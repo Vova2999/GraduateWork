@@ -18,7 +18,7 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.Users.Add(new User {
 				Login = "login",
 				Password = "password",
-				TypeAccess = (int)TypeAccess.Read | (int)TypeAccess.Edit
+				AccessType = (int)AccessType.Read | (int)AccessType.Edit
 			});
 			modelDatabase.SaveChanges();
 		}
@@ -28,7 +28,7 @@ namespace GraduateWork.Server.Database.Models {
 		}
 		public bool AccessIsAllowed(string login, string password, int requestedAccessType) {
 			var foundUser = modelDatabase.Users.First(user => user.Login == login && user.Password == password);
-			return -(foundUser.TypeAccess | -requestedAccessType - 1) - 1 == 0;
+			return -(foundUser.AccessType | -requestedAccessType - 1) - 1 == 0;
 		}
 	}
 }

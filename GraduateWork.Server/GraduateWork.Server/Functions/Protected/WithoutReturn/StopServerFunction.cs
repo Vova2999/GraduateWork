@@ -7,7 +7,7 @@ using GraduateWork.Server.Exceptions;
 namespace GraduateWork.Server.Functions.Protected.WithoutReturn {
 	public class StopServerFunction : HttpProtectedFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "Stop";
-		protected override TypeAccess TypeAccess => TypeAccess.Read;
+		protected override AccessType RequiredAccessType => AccessType.Read;
 
 		public StopServerFunction(IDatabaseAuthorizer databaseAuthorizer) : base(databaseAuthorizer) {
 		}

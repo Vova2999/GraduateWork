@@ -3,8 +3,6 @@ using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Extensions;
 
 namespace GraduateWork.Server.Functions.NonProtected {
-	// ReSharper disable UnusedParameter.Global
-
 	public abstract class HttpFunctionWithoutReturn : IHttpFunction {
 		public abstract string NameOfCalledMethod { get; }
 

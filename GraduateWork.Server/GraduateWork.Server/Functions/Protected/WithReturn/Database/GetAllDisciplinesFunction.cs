@@ -5,7 +5,7 @@ using GraduateWork.Server.Common.Database;
 namespace GraduateWork.Server.Functions.Protected.WithReturn.Database {
 	public class GetAllDisciplinesFunction : HttpProtectedFunctionWithReturn<DisciplineProxy[]> {
 		public override string NameOfCalledMethod => "GetAllDisciplines";
-		protected override TypeAccess TypeAccess => TypeAccess.Read;
+		protected override AccessType RequiredAccessType => AccessType.Read;
 		private readonly IDatabaseReader databaseReader;
 
 		public GetAllDisciplinesFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseReader databaseReader) : base(databaseAuthorizer) {

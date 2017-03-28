@@ -5,7 +5,7 @@ using GraduateWork.Server.Common.Database;
 namespace GraduateWork.Server.Functions.Protected.WithReturn.Database {
 	public class GetAllGroupsFunction : HttpProtectedFunctionWithReturn<GroupProxy[]> {
 		public override string NameOfCalledMethod => "GetAllGroups";
-		protected override TypeAccess TypeAccess => TypeAccess.Read;
+		protected override AccessType RequiredAccessType => AccessType.Read;
 		private readonly IDatabaseReader databaseReader;
 
 		public GetAllGroupsFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseReader databaseReader) : base(databaseAuthorizer) {

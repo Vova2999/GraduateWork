@@ -4,8 +4,6 @@ using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Extensions;
 
 namespace GraduateWork.Server.Functions.Protected {
-	// ReSharper disable UnusedParameter.Global
-
 	public abstract class HttpProtectedFunctionWithoutReturn : HttpProtectedFunction {
 		protected HttpProtectedFunctionWithoutReturn(IDatabaseAuthorizer databaseAuthorizer) : base(databaseAuthorizer) {
 		}

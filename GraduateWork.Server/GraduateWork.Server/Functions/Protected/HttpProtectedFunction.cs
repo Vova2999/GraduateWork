@@ -8,7 +8,7 @@ using GraduateWork.Server.Exceptions;
 namespace GraduateWork.Server.Functions.Protected {
 	public abstract class HttpProtectedFunction : IHttpFunction {
 		public abstract string NameOfCalledMethod { get; }
-		protected abstract TypeAccess TypeAccess { get; }
+		protected abstract AccessType RequiredAccessType { get; }
 		private readonly IDatabaseAuthorizer databaseAuthorizer;
 
 		protected HttpProtectedFunction(IDatabaseAuthorizer databaseAuthorizer) {
@@ -16,7 +16,7 @@ namespace GraduateWork.Server.Functions.Protected {
 		}
 
 		public void Execute(HttpListenerContext context, NameValues parameters, byte[] requestBody) {
-			if (!databaseAuthorizer.AccessIsAllowed(parameters[HttpParameters.Login], parameters[HttpParameters.Password], (int)TypeAccess))
+			if (!databaseAuthorizer.AccessIsAllowed(parameters[HttpParameters.Login], parameters[HttpParameters.Password], (int)RequiredAccessType))
 				throw new HttpException(HttpStatusCode.Forbidden, "У вас нет доступа к этой функции");
 			PerformRun(context, parameters, requestBody);
 		}
