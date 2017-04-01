@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Tables;
 

@@ -20,10 +20,4 @@ namespace GraduateWork.Server.Database.Tables {
 
 		public int AccessType { get; set; }
 	}
-
-	public enum AccessType {
-		None = 0x00,
-		Read = 0x01,
-		Edit = 0x02
-	}
 }

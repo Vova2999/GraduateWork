@@ -7,19 +7,19 @@ namespace GraduateWork.Server.Test.BaseClasses {
 	// ReSharper disable UnusedMember.Global
 
 	public class BaseHttpClient {
-		protected static void SendRequest(string methodName, byte[] requestBody = null, int timeoutMs = 1000) {
+		protected static void SendRequest(string methodName, byte[] requestBody = null, int timeoutMs = 2000) {
 			var webRequest = CreateWebRequest(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
 			SendRequest(webRequest);
 		}
-		protected static void SendRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 1000) {
+		protected static void SendRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 2000) {
 			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
 			SendRequest(webRequest);
 		}
-		protected static TKey SendRequest<TKey>(string methodName, byte[] requestBody = null, int timeoutMs = 1000) {
+		protected static TKey SendRequest<TKey>(string methodName, byte[] requestBody = null, int timeoutMs = 2000) {
 			var webRequest = CreateWebRequest(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
 			return GetAnswer<TKey>(SendRequest(webRequest));
 		}
-		protected static TKey SendRequest<TKey>(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 1000) {
+		protected static TKey SendRequest<TKey>(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 2000) {
 			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
 			return GetAnswer<TKey>(SendRequest(webRequest));
 		}
