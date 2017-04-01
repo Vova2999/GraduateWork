@@ -10,12 +10,12 @@ namespace GraduateWork.Server.Database.Tables {
 
 		[Required]
 		[MaxLength(25)]
-		[Index("IX_Names", 1, IsUnique = true)]
+		[Index("IX_UserUniques", 1, IsUnique = true)]
 		public string Login { get; set; }
 
 		[Required]
 		[MaxLength(25)]
-		[Index("IX_Names", 2, IsUnique = true)]
+		[Index("IX_UserUniques", 2, IsUnique = true)]
 		public string Password { get; set; }
 
 		public int AccessType { get; set; }

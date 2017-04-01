@@ -1,12 +1,13 @@
 ﻿using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;
 
-namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Add {
+namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Group {
 	public class AddGroupFunction : HttpProtectedFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "AddGroup";
-		protected override AccessType RequiredAccessType => AccessType.Edit;
+		protected override AccessType RequiredAccessType => AccessType.UserEdit;
 		private readonly IDatabaseEditor databaseEditor;
 
 		public AddGroupFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseEditor databaseEditor) : base(databaseAuthorizer) {
@@ -14,7 +15,7 @@ namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Add {
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
-			databaseEditor.AddGroup(requestBody.FromJson<GroupProxy>());
+			databaseEditor.AddGroup(requestBody.FromJson<GroupExtendedProxy>());
 		}
 	}
 }

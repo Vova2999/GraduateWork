@@ -5,30 +5,59 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GraduateWork.Server.Database.Tables {
 	// ReSharper disable ClassWithVirtualMembersNeverInherited.Global
-	// ReSharper disable UnusedMember.Global
+	// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 	public class Student {
 		[Key]
 		public int StudentId { get; set; }
 
-		[Required]
-		[MaxLength(25)]
-		[Index("IX_Names", 1, IsUnique = true)]
+		[Required, MaxLength(25), Index("IX_StudentUniques", 1, IsUnique = true)]
 		public string FirstName { get; set; }
 
-		[Required]
-		[MaxLength(25)]
-		[Index("IX_Names", 2, IsUnique = true)]
+		[Required, MaxLength(25), Index("IX_StudentUniques", 2, IsUnique = true)]
 		public string SecondName { get; set; }
 
-		[Required]
-		[MaxLength(25)]
-		[Index("IX_Names", 3, IsUnique = true)]
+		[Required, MaxLength(25), Index("IX_StudentUniques", 3, IsUnique = true)]
 		public string ThirdName { get; set; }
 
-		public DateTime DateOfReceipt { get; set; }
+		[Required, Index("IX_StudentIdentifiers", 4, IsUnique = true)]
+		public DateTime DateOfBirth { get; set; }
 
-		public DateTime? DateOfDeduction { get; set; }
+		[Required, MaxLength(100)]
+		public string PreviousEducationName { get; set; }
+
+		[Required]
+		public int PreviousEducationYear { get; set; }
+
+		[Required, MaxLength(100)]
+		public string EnrollmentName { get; set; }
+
+		[Required]
+		public int EnrollmentYear { get; set; }
+
+		[Required, MaxLength(100)]
+		public string DeductionName { get; set; }
+
+		[Required]
+		public int DeductionYear { get; set; }
+
+		[Required, MaxLength(100)]
+		public string DiplomaTopic { get; set; }
+
+		[Required, Range(3, 5)]
+		public int DiplomaAssessment { get; set; }
+
+		[Required]
+		public DateTime ProtectionDate { get; set; }
+
+		[Required, MaxLength(20)]
+		public string ProtocolNumber { get; set; }
+
+		[Required, MaxLength(20)]
+		public string RegistrationNumber { get; set; }
+
+		[Required]
+		public DateTime RegistrationDate { get; set; }
 
 		[Required]
 		public virtual Group Group { get; set; }

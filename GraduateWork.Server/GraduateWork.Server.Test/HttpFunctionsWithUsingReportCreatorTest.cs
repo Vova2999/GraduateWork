@@ -1,7 +1,7 @@
 ﻿using FakeItEasy;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Reports;
-using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Reports;
 using GraduateWork.Server.Functions.Protected.WithReturn.Reports;
 using GraduateWork.Server.Test.BaseClasses;
@@ -19,7 +19,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void CreateAcademReportFunctionTest_ShouldBeSuccess() {
-			var student = new StudentProxy { FirstName = "firstName" };
+			var student = new StudentExtendedProxy { FirstName = "firstName" };
 			var fileWithContent = new FileWithContent("TestName", null);
 			A.CallTo(() => reportsCreator.CreateAcadem(student)).Returns(fileWithContent);
 
@@ -32,7 +32,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void CreateDiplomaReportFunctionTest_ShouldBeSuccess() {
-			var student = new StudentProxy { FirstName = "firstName" };
+			var student = new StudentExtendedProxy { FirstName = "firstName" };
 			var fileWithContent = new FileWithContent("TestName", null);
 			A.CallTo(() => reportsCreator.CreateDiploma(student)).Returns(fileWithContent);
 
@@ -45,7 +45,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void CreateDiplomaSupplementReportFunctionTest_ShouldBeSuccess() {
-			var student = new StudentProxy { FirstName = "firstName" };
+			var student = new StudentExtendedProxy { FirstName = "firstName" };
 			var fileWithContent = new FileWithContent("TestName", null);
 			A.CallTo(() => reportsCreator.CreateDiplomaSupplement(student)).Returns(fileWithContent);
 

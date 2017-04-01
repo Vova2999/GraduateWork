@@ -17,9 +17,8 @@ namespace GraduateWork.Server.Test.BaseClasses {
 		[SetUp]
 		public void BaseHttpServerWithUsingDatabaseAuthorizerTest_SetUp() {
 			DatabaseAuthorizer = A.Fake<IDatabaseAuthorizer>();
-			A.CallTo(() => DatabaseAuthorizer
-				.AccessIsAllowed(DefaultParameters[HttpParameters.Login], DefaultParameters[HttpParameters.Password], A<int>.Ignored))
-				.Returns(true);
+			A.CallTo(() => DatabaseAuthorizer.UserIsExist(login, password)).Returns(true);
+			A.CallTo(() => DatabaseAuthorizer.AccessIsAllowed(login, password, A<int>.Ignored)).Returns(true);
 		}
 
 		[TearDown]

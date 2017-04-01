@@ -24,12 +24,12 @@ namespace GraduateWork.Server.Test {
 			};
 
 			var databaseAuthorizer = A.Fake<IDatabaseAuthorizer>();
-			A.CallTo(() => databaseAuthorizer.UserIsCorrect(login, password)).Returns(true);
+			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).Returns(true);
 
 			RunServer(new CheckUserIsCorrectFunction(databaseAuthorizer));
 			SendRequest("CheckUserIsCorrect", parameters);
 
-			A.CallTo(() => databaseAuthorizer.UserIsCorrect(login, password)).MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 	}
 }

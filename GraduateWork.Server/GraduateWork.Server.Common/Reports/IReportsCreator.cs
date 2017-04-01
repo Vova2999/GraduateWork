@@ -1,10 +1,10 @@
 ﻿using GraduateWork.Common.Reports;
-using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Server.Common.Reports {
 	public interface IReportsCreator {
-		FileWithContent CreateAcadem(StudentProxy student);
-		FileWithContent CreateDiploma(StudentProxy student);
-		FileWithContent CreateDiplomaSupplement(StudentProxy student);
+		FileWithContent CreateAcadem(StudentExtendedProxy student);
+		FileWithContent CreateDiploma(StudentExtendedProxy student);
+		FileWithContent CreateDiplomaSupplement(StudentExtendedProxy student);
 	}
 }

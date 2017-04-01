@@ -1,0 +1,34 @@
+﻿using System;
+using GraduateWork.Common.Tables.Attributes;
+
+namespace GraduateWork.Common.Tables.Proxies.Baseds {
+	// ReSharper disable MemberCanBePrivate.Global
+	// ReSharper disable NonReadonlyMemberInGetHashCode
+	// ReSharper disable UnusedAutoPropertyAccessor.Global
+
+	public class StudentBasedProxy {
+		[HeaderColumn("Имя")]
+		public string FirstName { get; set; }
+
+		[HeaderColumn("Фамилия")]
+		public string SecondName { get; set; }
+
+		[HeaderColumn("Отчество")]
+		public string ThirdName { get; set; }
+
+		[HeaderColumn("Дата рождения")]
+		public DateTime DateOfBirth { get; set; }
+
+		public override bool Equals(object obj) {
+			var that = obj as StudentBasedProxy;
+			return that != null &&
+				string.Equals(FirstName, that.FirstName, StringComparison.InvariantCultureIgnoreCase) &&
+				string.Equals(SecondName, that.SecondName, StringComparison.InvariantCultureIgnoreCase) &&
+				string.Equals(ThirdName, that.ThirdName, StringComparison.InvariantCultureIgnoreCase) &&
+				DateOfBirth == that.DateOfBirth;
+		}
+		public override int GetHashCode() {
+			return (FirstName?.GetHashCode() ?? 0 * 397) ^ (SecondName?.GetHashCode() ?? 0) * 397 ^ (ThirdName?.GetHashCode() ?? 0) * 397 ^ DateOfBirth.GetHashCode();
+		}
+	}
+}

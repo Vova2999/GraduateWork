@@ -14,7 +14,7 @@ namespace GraduateWork.Server.Functions.NonProtected.WithoutReturn {
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
-			if (!databaseAuthorizer.UserIsCorrect(parameters[HttpParameters.Login], parameters[HttpParameters.Password]))
+			if (!databaseAuthorizer.UserIsExist(parameters[HttpParameters.Login], parameters[HttpParameters.Password]))
 				throw new HttpException(HttpStatusCode.NotFound, "Пользователь не найден");
 		}
 	}

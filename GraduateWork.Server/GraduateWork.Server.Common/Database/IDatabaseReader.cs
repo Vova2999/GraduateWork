@@ -1,9 +1,9 @@
-﻿using GraduateWork.Common.Tables.Proxies;
+﻿using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Server.Common.Database {
 	public interface IDatabaseReader {
-		GroupProxy[] GetAllGroups();
-		StudentProxy[] GetAllStudents();
-		DisciplineProxy[] GetAllDisciplines();
+		DisciplineBasedProxy[] GetAllDisciplines();
+		GroupBasedProxy[] GetAllGroups();
+		StudentBasedProxy[] GetAllStudents();
 	}
 }

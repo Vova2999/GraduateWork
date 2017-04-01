@@ -1,20 +1,28 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Server.Database.Tables {
 	// ReSharper disable ClassWithVirtualMembersNeverInherited.Global
-	// ReSharper disable UnusedMember.Global
+	// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 	public class Discipline {
 		[Key]
 		public int DisciplineId { get; set; }
 
-		[Required]
-		[MaxLength(25)]
-		[Index(IsUnique = true)]
-		public string NameOfDiscipline { get; set; }
+		[Required, MaxLength(25), Index("IX_DisciplineUniques", 1, IsUnique = true)]
+		public string DisciplineName { get; set; }
 
-		public virtual List<AssessmentByDiscipline> AssessmentByDisciplines { get; set; }
+		[Required]
+		public ControlType ControlType { get; set; }
+
+		[Required]
+		public int TotalHours { get; set; }
+
+		[Required]
+		public int ClassHours { get; set; }
+
+		[Required, Index("IX_DisciplineUniques", 2, IsUnique = true)]
+		public virtual Group Group { get; set; }
 	}
 }

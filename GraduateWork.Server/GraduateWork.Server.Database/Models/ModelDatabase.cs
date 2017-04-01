@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using GraduateWork.Server.Database.Tables;
 
 namespace GraduateWork.Server.Database.Models {
@@ -13,7 +14,10 @@ namespace GraduateWork.Server.Database.Models {
 		public DbSet<AssessmentByDiscipline> AssessmentByDisciplines { get; set; }
 
 		public ModelDatabase() : base("GraduateWorkDatabase") {
-			System.Data.Entity.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ModelDatabase>());
+		}
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+			modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 		}
 	}
 }

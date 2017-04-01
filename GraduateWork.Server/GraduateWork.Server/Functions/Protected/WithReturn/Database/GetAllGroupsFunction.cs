@@ -1,9 +1,10 @@
 using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;
 
 namespace GraduateWork.Server.Functions.Protected.WithReturn.Database {
-	public class GetAllGroupsFunction : HttpProtectedFunctionWithReturn<GroupProxy[]> {
+	public class GetAllGroupsFunction : HttpProtectedFunctionWithReturn<GroupBasedProxy[]> {
 		public override string NameOfCalledMethod => "GetAllGroups";
 		protected override AccessType RequiredAccessType => AccessType.Read;
 		private readonly IDatabaseReader databaseReader;
@@ -12,7 +13,7 @@ namespace GraduateWork.Server.Functions.Protected.WithReturn.Database {
 			this.databaseReader = databaseReader;
 		}
 
-		protected override GroupProxy[] Run(NameValues parameters, byte[] requestBody) {
+		protected override GroupBasedProxy[] Run(NameValues parameters, byte[] requestBody) {
 			return databaseReader.GetAllGroups();
 		}
 	}

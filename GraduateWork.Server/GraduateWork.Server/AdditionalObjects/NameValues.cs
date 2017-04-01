@@ -13,11 +13,8 @@ namespace GraduateWork.Server.AdditionalObjects {
 			this.nameValues = nameValues;
 		}
 
-		public bool Contains(string key) {
-			return nameValues.ContainsKey(key);
-		}
 		public bool NotContains(string key) {
-			return !Contains(key);
+			return !nameValues.ContainsKey(key);
 		}
 	}
 }

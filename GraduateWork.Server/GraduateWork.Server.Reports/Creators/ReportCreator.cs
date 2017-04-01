@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using GraduateWork.Common.Reports;
-using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 using TemplateEngine.Docx;
 
 namespace GraduateWork.Server.Reports.Creators {
@@ -9,7 +9,7 @@ namespace GraduateWork.Server.Reports.Creators {
 		private const string tempDocumentName = "tempDocument.docx";
 		public abstract string TemplateName { get; }
 
-		public FileWithContent Execute(StudentProxy student) {
+		public FileWithContent Execute(StudentExtendedProxy student) {
 			var fullTemplateName = Path.Combine(folderWithTemplates, TemplateName);
 			File.Copy(fullTemplateName, tempDocumentName, true);
 
@@ -22,6 +22,6 @@ namespace GraduateWork.Server.Reports.Creators {
 			File.Delete(tempDocumentName);
 			return fileWithContent;
 		}
-		protected abstract Content CreateContent(StudentProxy student);
+		protected abstract Content CreateContent(StudentExtendedProxy student);
 	}
 }

@@ -3,10 +3,10 @@ using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;
 
-namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Delete {
+namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.User {
 	public class DeleteUserFunction : HttpProtectedFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "DeleteUser";
-		protected override AccessType RequiredAccessType => AccessType.Edit;
+		protected override AccessType RequiredAccessType => AccessType.AdminEdit;
 		private readonly IDatabaseEditor databaseEditor;
 
 		public DeleteUserFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseEditor databaseEditor) : base(databaseAuthorizer) {

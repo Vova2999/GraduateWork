@@ -23,6 +23,7 @@ namespace GraduateWork.Server.Test {
 			};
 
 			var databaseAuthorizer = A.Fake<IDatabaseAuthorizer>();
+			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).Returns(true);
 			A.CallTo(() => databaseAuthorizer.AccessIsAllowed(login, password, A<int>.Ignored)).Returns(true);
 
 			Task.Run(() => new HttpServer(new IHttpFunction[] { new StopServerFunction(databaseAuthorizer) }).Run());

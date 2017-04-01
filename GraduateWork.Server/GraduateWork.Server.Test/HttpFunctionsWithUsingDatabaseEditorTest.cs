@@ -2,10 +2,12 @@ using System;
 using FakeItEasy;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
-using GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Add;
-using GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Delete;
-using GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Edit;
+using GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Discipline;
+using GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Group;
+using GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Student;
+using GraduateWork.Server.Functions.Protected.WithoutReturn.Database.User;
 using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
 
@@ -21,7 +23,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void AddDisciplineFunctionTest_ShouldBeSuccess() {
-			var discipline = new DisciplineProxy { NameOfDiscipline = "nameOfDiscipline" };
+			var discipline = new DisciplineExtendedProxy { DisciplineName = "nameOfDiscipline" };
 
 			RunServer(new AddDisciplineFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("AddDiscipline", DefaultParameters, discipline.ToJson());
@@ -31,7 +33,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void AddGroupFunctionTest_ShouldBeSuccess() {
-			var group = new GroupProxy { NameOfGroup = "nameOfGroup" };
+			var group = new GroupExtendedProxy { GroupName = "nameOfGroup" };
 
 			RunServer(new AddGroupFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("AddGroup", DefaultParameters, group.ToJson());
@@ -41,7 +43,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void AddStudentFunctionTest_ShouldBeSuccess() {
-			var student = new StudentProxy { FirstName = "firstName" };
+			var student = new StudentExtendedProxy { FirstName = "firstName" };
 
 			RunServer(new AddStudentFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("AddStudent", DefaultParameters, student.ToJson());
@@ -61,7 +63,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void DeleteDisciplineFunctionTest_ShouldBeSuccess() {
-			var discipline = new DisciplineProxy { NameOfDiscipline = "nameOfDiscipline" };
+			var discipline = new DisciplineExtendedProxy { DisciplineName = "nameOfDiscipline" };
 
 			RunServer(new DeleteDisciplineFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("DeleteDiscipline", DefaultParameters, discipline.ToJson());
@@ -71,7 +73,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void DeleteGroupFunctionTest_ShouldBeSuccess() {
-			var group = new GroupProxy { NameOfGroup = "nameOfGroup" };
+			var group = new GroupExtendedProxy { GroupName = "nameOfGroup" };
 
 			RunServer(new DeleteGroupFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("DeleteGroup", DefaultParameters, group.ToJson());
@@ -81,7 +83,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void DeleteStudentFunctionTest_ShouldBeSuccess() {
-			var student = new StudentProxy { FirstName = "firstName" };
+			var student = new StudentExtendedProxy { FirstName = "firstName" };
 
 			RunServer(new DeleteStudentFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("DeleteStudent", DefaultParameters, student.ToJson());
@@ -101,8 +103,8 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void EditDisciplineFunctionTest_ShouldBeSuccess() {
-			var firstDiscipline = new DisciplineProxy { NameOfDiscipline = "firstNameOfDiscipline" };
-			var secondDiscipline = new DisciplineProxy { NameOfDiscipline = "secondNameOfDiscipline" };
+			var firstDiscipline = new DisciplineExtendedProxy { DisciplineName = "firstNameOfDiscipline" };
+			var secondDiscipline = new DisciplineExtendedProxy { DisciplineName = "secondNameOfDiscipline" };
 
 			RunServer(new EditDisciplineFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("EditDiscipline", DefaultParameters, Tuple.Create(firstDiscipline, secondDiscipline).ToJson());
@@ -112,8 +114,8 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void EditGroupFunctionTest_ShouldBeSuccess() {
-			var firstGroup = new GroupProxy { NameOfGroup = "firstNameOfGroup" };
-			var secondGroup = new GroupProxy { NameOfGroup = "secondNameOfGroup" };
+			var firstGroup = new GroupExtendedProxy { GroupName = "firstNameOfGroup" };
+			var secondGroup = new GroupExtendedProxy { GroupName = "secondNameOfGroup" };
 
 			RunServer(new EditGroupFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("EditGroup", DefaultParameters, Tuple.Create(firstGroup, secondGroup).ToJson());
@@ -123,8 +125,8 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void EditStudentFunctionTest_ShouldBeSuccess() {
-			var firstStudent = new StudentProxy { FirstName = "firstFirstName" };
-			var secondStudent = new StudentProxy { FirstName = "secondFirstName" };
+			var firstStudent = new StudentExtendedProxy { FirstName = "firstFirstName" };
+			var secondStudent = new StudentExtendedProxy { FirstName = "secondFirstName" };
 
 			RunServer(new EditStudentFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("EditStudent", DefaultParameters, Tuple.Create(firstStudent, secondStudent).ToJson());

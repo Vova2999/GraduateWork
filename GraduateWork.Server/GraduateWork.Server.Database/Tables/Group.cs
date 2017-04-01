@@ -5,17 +5,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GraduateWork.Server.Database.Tables {
 	// ReSharper disable ClassWithVirtualMembersNeverInherited.Global
 	// ReSharper disable UnusedAutoPropertyAccessor.Global
-	// ReSharper disable UnusedMember.Global
 
 	public class Group {
 		[Key]
 		public int GroupId { get; set; }
 
+		[Required, MaxLength(25), Index("IX_GroupUniques", 1, IsUnique = true)]
+		public string GroupName { get; set; }
+
+		[Required, MaxLength(25)]
+		public string SpecialtyName { get; set; }
+
 		[Required]
-		[MaxLength(15)]
-		[Index(IsUnique = true)]
-		public string NameOfGroup { get; set; }
+		public int SpecialtyNumber { get; set; }
+
+		[Required, MaxLength(25)]
+		public string FacultyName { get; set; }
 
 		public virtual List<Student> Students { get; set; }
+
+		public virtual List<Discipline> Disciplines { get; set; }
 	}
 }

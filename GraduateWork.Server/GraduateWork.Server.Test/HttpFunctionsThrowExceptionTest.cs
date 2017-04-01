@@ -68,12 +68,12 @@ namespace GraduateWork.Server.Test {
 			};
 
 			var databaseAuthorizer = A.Fake<IDatabaseAuthorizer>();
-			A.CallTo(() => databaseAuthorizer.UserIsCorrect(login, password)).Returns(false);
+			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).Returns(false);
 
 			RunServer(new CheckUserIsCorrectFunction(databaseAuthorizer));
 			var exception = Assert.Catch<WebException>(() => SendRequest("CheckUserIsCorrect", parameters));
 
-			A.CallTo(() => databaseAuthorizer.UserIsCorrect(login, password)).MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
 		}
 	}

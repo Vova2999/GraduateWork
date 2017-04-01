@@ -1,4 +1,4 @@
-﻿using GraduateWork.Common.Tables.Proxies;
+﻿using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Extensions;
 
@@ -12,14 +12,14 @@ namespace GraduateWork.Server.Database.Models {
 			this.modelDatabase = modelDatabase;
 		}
 
-		public GroupProxy[] GetAllGroups() {
-			return modelDatabase.Groups.ToProxies();
+		public DisciplineBasedProxy[] GetAllDisciplines() {
+			return modelDatabase.Disciplines.ToBasedProxies();
 		}
-		public DisciplineProxy[] GetAllDisciplines() {
-			return modelDatabase.Disciplines.ToProxies();
+		public GroupBasedProxy[] GetAllGroups() {
+			return modelDatabase.Groups.ToBasedProxies();
 		}
-		public StudentProxy[] GetAllStudents() {
-			return modelDatabase.Students.ToProxies();
+		public StudentBasedProxy[] GetAllStudents() {
+			return modelDatabase.Students.ToBasedProxies();
 		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Tables;
 
@@ -19,12 +18,12 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.Users.Add(new User {
 				Login = "login",
 				Password = "password",
-				AccessType = (int)AccessType.Read | (int)AccessType.Edit
+				AccessType = int.MaxValue
 			});
 			modelDatabase.SaveChanges();
 		}
 
-		public bool UserIsCorrect(string login, string password) {
+		public bool UserIsExist(string login, string password) {
 			return modelDatabase.Users.FirstOrDefault(user => user.Login == login && user.Password == password) != null;
 		}
 		public bool AccessIsAllowed(string login, string password, int requestedAccessType) {

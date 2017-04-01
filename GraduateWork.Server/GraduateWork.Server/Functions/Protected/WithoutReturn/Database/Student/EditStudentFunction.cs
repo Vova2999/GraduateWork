@@ -1,13 +1,14 @@
 ﻿using System;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;
 
-namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Edit {
+namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Student {
 	public class EditStudentFunction : HttpProtectedFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "EditStudent";
-		protected override AccessType RequiredAccessType => AccessType.Edit;
+		protected override AccessType RequiredAccessType => AccessType.UserEdit;
 		private readonly IDatabaseEditor databaseEditor;
 
 		public EditStudentFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseEditor databaseEditor) : base(databaseAuthorizer) {
@@ -15,7 +16,7 @@ namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Edit {
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
-			var tupleStudents = requestBody.FromJson<Tuple<StudentProxy, StudentProxy>>();
+			var tupleStudents = requestBody.FromJson<Tuple<StudentExtendedProxy, StudentExtendedProxy>>();
 			databaseEditor.EditStudent(tupleStudents.Item1, tupleStudents.Item2);
 		}
 	}
