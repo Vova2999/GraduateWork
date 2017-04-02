@@ -13,22 +13,26 @@ namespace GraduateWork.Server.Database.Extensions {
 			return groups.Select(group => group.ToBasedProxy()).ToArray();
 		}
 		public static GroupBasedProxy ToBasedProxy(this Group group) {
-			return new GroupBasedProxy {
-				GroupName = group.GroupName
-			};
+			return ToProxy<GroupBasedProxy>(group);
 		}
 
 		public static GroupExtendedProxy[] ToExtendedProxies(this IEnumerable<Group> groups) {
 			return groups.Select(group => group.ToExtendedProxy()).ToArray();
 		}
 		public static GroupExtendedProxy ToExtendedProxy(this Group group) {
-			return new GroupExtendedProxy {
+			var groupProxy = ToProxy<GroupExtendedProxy>(group);
+			groupProxy.Students = group.Students.ToBasedProxies();
+			groupProxy.Disciplines = group.Disciplines.ToBasedProxies();
+
+			return groupProxy;
+		}
+
+		private static TGroupProxy ToProxy<TGroupProxy>(Group group) where TGroupProxy : GroupBasedProxy, new() {
+			return new TGroupProxy {
 				GroupName = group.GroupName,
 				SpecialtyName = group.SpecialtyName,
 				SpecialtyNumber = group.SpecialtyNumber,
-				FacultyName = group.FacultyName,
-				Students = group.Students.ToBasedProxies(),
-				Disciplines = group.Disciplines.ToBasedProxies()
+				FacultyName = group.FacultyName
 			};
 		}
 	}

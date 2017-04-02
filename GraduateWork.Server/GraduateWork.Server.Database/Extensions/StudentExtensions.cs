@@ -14,41 +14,42 @@ namespace GraduateWork.Server.Database.Extensions {
 			return students.Select(student => student.ToBasedProxy()).ToArray();
 		}
 		public static StudentBasedProxy ToBasedProxy(this Student student) {
-			return new StudentBasedProxy {
-				FirstName = student.FirstName,
-				SecondName = student.SecondName,
-				ThirdName = student.ThirdName,
-				DateOfBirth = student.DateOfBirth
-			};
+			return ToProxy<StudentBasedProxy>(student);
 		}
 
 		public static StudentExtendedProxy[] ToExtendedProxies(this IEnumerable<Student> students) {
 			return students.Select(student => student.ToExtendedProxy()).ToArray();
 		}
 		public static StudentExtendedProxy ToExtendedProxy(this Student student) {
-			return new StudentExtendedProxy {
+			var studentProxy = ToProxy<StudentExtendedProxy>(student);
+			studentProxy.PreviousEducationName = student.PreviousEducationName;
+			studentProxy.PreviousEducationYear = student.PreviousEducationYear;
+			studentProxy.EnrollmentName = student.EnrollmentName;
+			studentProxy.EnrollmentYear = student.EnrollmentYear;
+			studentProxy.DeductionName = student.DeductionName;
+			studentProxy.DeductionYear = student.DeductionYear;
+			studentProxy.DiplomaTopic = student.DiplomaTopic;
+			studentProxy.DiplomaAssessment = student.DiplomaAssessment;
+			studentProxy.ProtectionDate = student.ProtectionDate;
+			studentProxy.ProtocolNumber = student.ProtocolNumber;
+			studentProxy.RegistrationNumber = student.RegistrationNumber;
+			studentProxy.RegistrationDate = student.RegistrationDate;
+			studentProxy.Group = student.Group.ToBasedProxy();
+			studentProxy.AssessmentByDisciplines = student.AssessmentByDisciplines.Select(
+				assessmentByDiscipline => new AssessmentByDiscipline {
+					NameOfDiscipline = assessmentByDiscipline.Discipline.DisciplineName,
+					Assessment = assessmentByDiscipline.Assessment
+				}).ToArray();
+
+			return studentProxy;
+		}
+
+		private static TStudentProxy ToProxy<TStudentProxy>(Student student) where TStudentProxy : StudentBasedProxy, new() {
+			return new TStudentProxy {
 				FirstName = student.FirstName,
 				SecondName = student.SecondName,
 				ThirdName = student.ThirdName,
-				DateOfBirth = student.DateOfBirth,
-				PreviousEducationName = student.PreviousEducationName,
-				PreviousEducationYear = student.PreviousEducationYear,
-				EnrollmentName = student.EnrollmentName,
-				EnrollmentYear = student.EnrollmentYear,
-				DeductionName = student.DeductionName,
-				DeductionYear = student.DeductionYear,
-				DiplomaTopic = student.DiplomaTopic,
-				DiplomaAssessment = student.DiplomaAssessment,
-				ProtectionDate = student.ProtectionDate,
-				ProtocolNumber = student.ProtocolNumber,
-				RegistrationNumber = student.RegistrationNumber,
-				RegistrationDate = student.RegistrationDate,
-				Group = student.Group.ToBasedProxy(),
-				AssessmentByDisciplines = student.AssessmentByDisciplines.Select(
-					assessmentByDiscipline => new AssessmentByDiscipline {
-						NameOfDiscipline = assessmentByDiscipline.Discipline.DisciplineName,
-						Assessment = assessmentByDiscipline.Assessment
-					}).ToArray()
+				DateOfBirth = student.DateOfBirth
 			};
 		}
 	}
