@@ -6,8 +6,8 @@ using Ninject.Extensions.Conventions;
 
 namespace GraduateWork.Server {
 	public static class Program {
-		public static void Main() {
-			CreateHttpServer().Run();
+		public static void Main(params string[] args) {
+			CreateHttpServer().Run(args[0]);
 		}
 
 		private static IHttpServer CreateHttpServer() {

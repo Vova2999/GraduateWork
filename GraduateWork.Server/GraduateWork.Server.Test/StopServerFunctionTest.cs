@@ -26,7 +26,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).Returns(true);
 			A.CallTo(() => databaseAuthorizer.AccessIsAllowed(login, password, A<int>.Ignored)).Returns(true);
 
-			Task.Run(() => new HttpServer(new IHttpFunction[] { new StopServerFunction(databaseAuthorizer) }).Run());
+			Task.Run(() => new HttpServer(new IHttpFunction[] { new StopServerFunction(databaseAuthorizer) }).Run("http://127.0.0.1/"));
 			Thread.Sleep(100);
 
 			SendRequest("Stop", parameters);

@@ -22,7 +22,7 @@ namespace GraduateWork.Server.Test.BaseClasses {
 		}
 
 		protected void RunServer(params IHttpFunction[] functions) {
-			Task.Run(() => new HttpServer(functions.Concat(new[] { CreateStopServerFunction() }).ToArray()).Run());
+			Task.Run(() => new HttpServer(functions.Concat(new[] { CreateStopServerFunction() }).ToArray()).Run("http://127.0.0.1/"));
 			Thread.Sleep(100);
 		}
 		private IHttpFunction CreateStopServerFunction() {

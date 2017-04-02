@@ -30,9 +30,9 @@ namespace GraduateWork.Server.Server {
 				throw new ArgumentException($"Обнаружены несколько функций с NameOfCalledMethod = {repeatedFunction.NameOfCalledMethod}");
 		}
 
-		public void Run() {
+		public void Run(string serverAddress) {
 			var httpListener = new HttpListener();
-			httpListener.Prefixes.Add("http://127.0.0.1/");
+			httpListener.Prefixes.Add(serverAddress);
 			httpListener.Start();
 
 			while (httpListener.IsListening) {

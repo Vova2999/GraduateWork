@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduateWork.Server.Common"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduateWork.Server.Reports", "GraduateWork.Server.Reports\GraduateWork.Server.Reports.csproj", "{3AD462A2-5756-4576-926C-9737EFD0BF9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduateWork.Server.UI", "GraduateWork.Server.UI\GraduateWork.Server.UI.csproj", "{4A1DCDCB-7DEF-4A33-8319-798DE6CAEF47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3AD462A2-5756-4576-926C-9737EFD0BF9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AD462A2-5756-4576-926C-9737EFD0BF9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AD462A2-5756-4576-926C-9737EFD0BF9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A1DCDCB-7DEF-4A33-8319-798DE6CAEF47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A1DCDCB-7DEF-4A33-8319-798DE6CAEF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A1DCDCB-7DEF-4A33-8319-798DE6CAEF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A1DCDCB-7DEF-4A33-8319-798DE6CAEF47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
