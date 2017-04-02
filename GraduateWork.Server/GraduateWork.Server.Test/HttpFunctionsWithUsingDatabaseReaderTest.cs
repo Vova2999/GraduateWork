@@ -1,4 +1,5 @@
 using FakeItEasy;
+using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
@@ -59,6 +60,21 @@ namespace GraduateWork.Server.Test {
 
 			A.CallTo(() => databaseReader.GetAllStudents()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputStudents, receivedStudents);
+		}
+
+		[Test]
+		public void GetAllUsersFunctionTest_ShouldBeSuccess() {
+			var inputUsers = new[] {
+				new UserProxy { Login = "firstLogin" },
+				new UserProxy { Login = "secondLogin" }
+			};
+			A.CallTo(() => databaseReader.GetAllUsers()).Returns(inputUsers);
+
+			RunServer(new GetAllUsersFunction(DatabaseAuthorizer, databaseReader));
+			var receivedUsers = SendRequest<UserProxy[]>("GetAllUsers", DefaultParameters);
+
+			A.CallTo(() => databaseReader.GetAllUsers()).MustHaveHappened(Repeated.Exactly.Once);
+			CollectionAssert.AreEqual(inputUsers, receivedUsers);
 		}
 	}
 }

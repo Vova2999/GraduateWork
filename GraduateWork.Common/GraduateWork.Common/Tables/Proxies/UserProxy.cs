@@ -28,9 +28,10 @@ namespace GraduateWork.Common.Tables.Proxies {
 	}
 
 	public enum AccessType {
-		Read = 0x01,
-		AdminEdit = 0x02,
-		UserEdit = 0x04,
-		CreateReport = 0x08
+		AdminRead = 0x01,
+		UserRead = 0x02,
+		AdminEdit = 0x04,
+		UserEdit = 0x08,
+		CreateReport = 0x10
 	}
 }

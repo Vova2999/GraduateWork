@@ -86,6 +86,7 @@
     <Compile Include="Functions\Protected\HttpProtectedFunctionWithReturn.cs" />
     <Compile Include="Functions\IHttpFunction.cs" />
     <Compile Include="Functions\NonProtected\WithoutReturn\PingFunction.cs" />
+    <Compile Include="Functions\Protected\WithReturn\Database\GetAllUsersFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Reports\CreateAcademReportFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Reports\CreateDiplomaReportFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Reports\CreateDiplomaSupplementReportFunction.cs" />
