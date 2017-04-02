@@ -1,31 +1,43 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using GraduateWork.Common.Extensions;
 
 namespace GraduateWork.Client.Client {
 	public class BaseHttpClient {
-		protected static void SendRequest(string methodName, byte[] requestBody = null, int timeoutMs = 5000) {
-			var webRequest = CreateWebRequest(methodName, requestBody, timeoutMs);
+		protected string ServerAddress;
+
+		protected void SendRequest(string methodName, byte[] requestBody = null, int timeoutMs = 2000) {
+			SendRequest(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
+		}
+		protected void SendRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 2000) {
+			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
 			SendRequest(webRequest);
 		}
-		protected static TKey SendRequest<TKey>(string methodName, byte[] requestBody = null, int timeoutMs = 5000) {
-			var webRequest = CreateWebRequest(methodName, requestBody, timeoutMs);
+		protected TKey SendRequest<TKey>(string methodName, byte[] requestBody = null, int timeoutMs = 2000) {
+			return SendRequest<TKey>(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
+		}
+		protected TKey SendRequest<TKey>(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 2000) {
+			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
 			return GetAnswer<TKey>(SendRequest(webRequest));
 		}
 
-		private static HttpWebRequest CreateWebRequest(string methodName, byte[] requestBody, int timeoutMs) {
-			var webRequest = (HttpWebRequest)WebRequest.Create($"http://127.0.0.1/{methodName}");
+		private HttpWebRequest CreateWebRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody, int timeoutMs) {
+			var webRequest = (HttpWebRequest)WebRequest.Create(ServerAddress + CreateRequestUri(methodName, parameters));
 			webRequest.Timeout = timeoutMs;
 
 			return requestBody == null
 				? CreateGetRequest(webRequest)
 				: CreatePostRequest(webRequest, requestBody);
 		}
-		private static HttpWebRequest CreateGetRequest(HttpWebRequest webRequest) {
+		private string CreateRequestUri(string methodName, Dictionary<string, string> parameters) {
+			return parameters.Any() ? $"{methodName}?{string.Join("&", parameters.Select(parameter => $"{parameter.Key}={parameter.Value}"))}" : methodName;
+		}
+		private HttpWebRequest CreateGetRequest(HttpWebRequest webRequest) {
 			webRequest.Method = "GET";
 			return webRequest;
 		}
-		private static HttpWebRequest CreatePostRequest(HttpWebRequest webRequest, byte[] requestBody) {
+		private HttpWebRequest CreatePostRequest(HttpWebRequest webRequest, byte[] requestBody) {
 			webRequest.Method = "POST";
 			webRequest.ContentLength = requestBody.Length;
 			webRequest.GetRequestStream().WriteAndDispose(requestBody);
@@ -33,15 +45,19 @@ namespace GraduateWork.Client.Client {
 			return webRequest;
 		}
 
-		private static HttpWebResponse SendRequest(HttpWebRequest webRequest) {
+		private HttpWebResponse SendRequest(HttpWebRequest webRequest) {
 			try {
 				return (HttpWebResponse)webRequest.GetResponse();
 			}
 			catch (WebException exception) {
-				throw new WebException($"{exception.Message}\n{exception.Response.GetResponseStream().ReadAndDispose().FromJson<string>()}");
+				throw new WebException(string.Join("\n",
+					new[] {
+						exception.Message,
+						exception.Response?.GetResponseStream().ReadAndDispose().FromJson<string>()
+					}.Where(message => !string.IsNullOrEmpty(message))));
 			}
 		}
-		private static TKey GetAnswer<TKey>(HttpWebResponse webResponse) {
+		private TKey GetAnswer<TKey>(HttpWebResponse webResponse) {
 			var outputBytes = webResponse.GetResponseStream().ReadAndDispose();
 			return outputBytes.Any() ? outputBytes.FromJson<TKey>() : default(TKey);
 		}

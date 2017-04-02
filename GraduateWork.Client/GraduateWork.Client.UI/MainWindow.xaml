@@ -4,32 +4,149 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		mc:Ignorable="d"
-		Title="MainWindow" Height="600" Width="700">
+		Title="MainWindow" Height="500" Width="1000">
 	<Grid>
-		<TabControl>
-			<TabItem Header="Таблицы">
+		<TabControl TabStripPlacement="Left" Margin="5">
+			<TabItem Header="Настройки" Padding="25,10,25,10">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
+					<StackPanel Grid.Row="1" Grid.Column="1" Width="300">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+
+							<Label Grid.Column="0" Content="Адрес сервера"
+									VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+							<TextBox Grid.Column="1" Name="TextBoxServerAddress" VerticalContentAlignment="Center" />
+						</Grid>
+
+						<Button Content="Соединиться с сервером" Click="ButtonConnectToServer_OnClick" Height="25" Margin="0,5,0,0" />
+					</StackPanel>
+				</Grid>
+			</TabItem>
+
+			<TabItem Header="Авторизация" Padding="25,10,25,10">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
+					<StackPanel Grid.Row="1" Grid.Column="1" Width="300">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="5" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+
+							<Label Grid.Row="0" Grid.Column="0" Content="Логин"
+									VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+							<TextBox Grid.Row="0" Grid.Column="1" Name="TextBoxUserLogin" VerticalContentAlignment="Center" />
+
+							<Label Grid.Row="2" Grid.Column="0" Content="Пароль"
+									VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+							<TextBox Grid.Row="2" Grid.Column="1" Name="TextBoxUserPassword" VerticalContentAlignment="Center" />
+						</Grid>
+
+						<Button Content="Войти" Click="ButtonSingIn_OnClick" Height="25" Margin="0,5,0,0" />
+					</StackPanel>
+				</Grid>
+			</TabItem>
+
+			<TabItem Header="Таблицы" Padding="25,10,25,10">
 				<TabControl>
+					<TabItem Header="Пользователи">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+
+							<DataGrid Name="DataGridUsers" Grid.Row="0" />
+
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<Button Grid.Column="1" Content="Фильтры" Click="ButtonUserFilters_OnClick"
+										Padding="15,5,15,5" Margin="3,3,0,0" />
+								<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateUsers_OnClick"
+										Padding="15,5,15,5" Margin="3,3,0,0" />
+							</Grid>
+						</Grid>
+					</TabItem>
+
 					<TabItem Header="Группы">
 						<Grid>
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*" />
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
-							<DataGrid Grid.Row="0" Name="DataGridTableGroups" />
-							<Button Grid.Row="1" Content="Обновить таблицу" HorizontalAlignment="Right"
-									Click="ButtonUpdateTableGroups_OnClick" Width="130" Height="30" />
+
+							<DataGrid Name="DataGridGroups" Grid.Row="0" />
+
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<Button Grid.Column="1" Content="Фильтры" Click="ButtonGroupFilters_OnClick"
+										Padding="15,5,15,5" Margin="3,3,0,0" />
+								<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateGroups_OnClick"
+										Padding="15,5,15,5" Margin="3,3,0,0" />
+							</Grid>
 						</Grid>
 					</TabItem>
 
-					<TabItem Header="Предметы">
+					<TabItem Header="Дисциплины">
 						<Grid>
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*" />
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
-							<DataGrid Grid.Row="0" Name="DataGridTableDisciplines" />
-							<Button Grid.Row="1" Content="Обновить таблицу" HorizontalAlignment="Right"
-									Click="ButtonUpdateTableDisciplines_OnClick" Width="130" Height="30" />
+
+							<DataGrid Name="DataGridDisciplines" Grid.Row="0" />
+
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<Button Grid.Column="1" Content="Фильтры" Click="ButtonDisciplineFilters_OnClick"
+										Padding="15,5,15,5" Margin="3,3,0,0" />
+								<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateDisciplines_OnClick"
+										Padding="15,5,15,5" Margin="3,3,0,0" />
+							</Grid>
 						</Grid>
 					</TabItem>
 
@@ -39,9 +156,21 @@
 								<RowDefinition Height="*" />
 								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
-							<DataGrid Grid.Row="0" Name="DataGridTableStudents" />
-							<Button Grid.Row="1" Content="Обновить таблицу" HorizontalAlignment="Right"
-									Click="ButtonUpdateTableStudents_OnClick" Width="130" Height="30" />
+
+							<DataGrid Name="DataGridStudents" Grid.Row="0" />
+
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<Button Grid.Column="1" Content="Фильтры" Click="ButtonStudentFilters_OnClick"
+										Padding="15,5,15,5" Margin="3,3,0,0" />
+								<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateStudents_OnClick"
+										Padding="15,5,15,5" Margin="3,3,0,0" />
+							</Grid>
 						</Grid>
 					</TabItem>
 				</TabControl>

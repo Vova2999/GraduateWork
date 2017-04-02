@@ -5,11 +5,11 @@ using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Exceptions;
 
 namespace GraduateWork.Server.Functions.NonProtected.WithoutReturn {
-	public class CheckUserIsCorrectFunction : HttpFunctionWithoutReturn {
-		public override string NameOfCalledMethod => "CheckUserIsCorrect";
+	public class CheckUserIsExistFunction : HttpFunctionWithoutReturn {
+		public override string NameOfCalledMethod => "CheckUserIsExist";
 		private readonly IDatabaseAuthorizer databaseAuthorizer;
 
-		public CheckUserIsCorrectFunction(IDatabaseAuthorizer databaseAuthorizer) {
+		public CheckUserIsExistFunction(IDatabaseAuthorizer databaseAuthorizer) {
 			this.databaseAuthorizer = databaseAuthorizer;
 		}
 

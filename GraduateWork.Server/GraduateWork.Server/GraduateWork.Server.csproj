@@ -69,7 +69,7 @@
     <Compile Include="Functions\Protected\WithoutReturn\Database\Group\AddGroupFunction.cs" />
     <Compile Include="Functions\Protected\WithoutReturn\Database\Student\AddStudentFunction.cs" />
     <Compile Include="Functions\Protected\WithoutReturn\Database\User\AddUserFunction.cs" />
-    <Compile Include="Functions\NonProtected\WithoutReturn\CheckUserIsCorrectFunction.cs" />
+    <Compile Include="Functions\NonProtected\WithoutReturn\CheckUserIsExistFunction.cs" />
     <Compile Include="Functions\Protected\WithoutReturn\Database\Discipline\DeleteDisciplineFunction.cs" />
     <Compile Include="Functions\Protected\WithoutReturn\Database\Group\DeleteGroupFunction.cs" />
     <Compile Include="Functions\Protected\WithoutReturn\Database\Student\DeleteStudentFunction.cs" />

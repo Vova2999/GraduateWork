@@ -3,6 +3,7 @@ using System.Windows;
 using GraduateWork.Client.Client;
 using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Client.UI {
 	public partial class MainWindow {
@@ -10,52 +11,71 @@ namespace GraduateWork.Client.UI {
 
 		public MainWindow() {
 			InitializeComponent();
-
-			DataGridTableGroups.LoadTable(typeof(GroupProxy));
-			DataGridTableDisciplines.LoadTable(typeof(DisciplineProxy));
-			DataGridTableStudents.LoadTable(typeof(StudentProxy));
-
-			DataGridTableGroups.CreateContextMenuForDatabase(AddGroup, EditGroup, DeleteGroup);
-			DataGridTableDisciplines.CreateContextMenuForDatabase(AddDiscipline, EditDiscipline, DeleteDiscipline);
-			DataGridTableStudents.CreateContextMenuForDatabase(AddStudent, EditStudent, DeleteStudent);
+			CreateTables();
+		}
+		private void CreateTables() {
+			DataGridUsers.LoadTable(typeof(UserProxy));
+			DataGridGroups.LoadTable(typeof(GroupBasedProxy));
+			DataGridDisciplines.LoadTable(typeof(DisciplineBasedProxy));
+			DataGridStudents.LoadTable(typeof(StudentBasedProxy));
 		}
 
-		private void ButtonUpdateTableGroups_OnClick(object sender, RoutedEventArgs e) {
-			DataGridTableGroups.ItemsSource = GetOrShowMessage(() => httpClient.GetAllGroups());
+		private void ButtonConnectToServer_OnClick(object sender, RoutedEventArgs e) {
+			SafeRunMethod(() => {
+				httpClient.ServerAddress = TextBoxServerAddress.Text;
+				httpClient.Ping();
+			},
+				"Соединение было успешно установлено");
 		}
-		private void ButtonUpdateTableDisciplines_OnClick(object sender, RoutedEventArgs e) {
-			DataGridTableDisciplines.ItemsSource = GetOrShowMessage(() => httpClient.GetAllDisciplines());
-		}
-		private void ButtonUpdateTableStudents_OnClick(object sender, RoutedEventArgs e) {
-			DataGridTableStudents.ItemsSource = GetOrShowMessage(() => httpClient.GetAllStudents());
+		private void ButtonSingIn_OnClick(object sender, RoutedEventArgs e) {
+			var login = TextBoxUserLogin.Text;
+			var password = TextBoxUserPassword.Text;
+
+			SafeRunMethod(() => {
+				httpClient.CheckUserIsExist(login, password);
+				httpClient.Login = login;
+				httpClient.Password = password;
+			},
+				$"Вы выполнили вход под пользователем '{login}'");
 		}
 
-		private GroupProxy GetSelectedGroup() {
-			return (GroupProxy)DataGridTableGroups.SelectedItem;
+		private void ButtonUserFilters_OnClick(object sender, RoutedEventArgs e) {
 		}
-		private DisciplineProxy GetSelectedDiscipline() {
-			return (DisciplineProxy)DataGridTableDisciplines.SelectedItem;
+		private void ButtonUpdateUsers_OnClick(object sender, RoutedEventArgs e) {
+			SafeRunMethod(() => DataGridUsers.ItemsSource = httpClient.GetAllUsers());
 		}
-		private StudentProxy GetSelectedStudent() {
-			return (StudentProxy)DataGridTableStudents.SelectedItem;
+		private void ButtonGroupFilters_OnClick(object sender, RoutedEventArgs e) {
+		}
+		private void ButtonUpdateGroups_OnClick(object sender, RoutedEventArgs e) {
+			SafeRunMethod(() => DataGridGroups.ItemsSource = httpClient.GetAllGroups());
+		}
+		private void ButtonDisciplineFilters_OnClick(object sender, RoutedEventArgs e) {
+		}
+		private void ButtonUpdateDisciplines_OnClick(object sender, RoutedEventArgs e) {
+			SafeRunMethod(() => DataGridDisciplines.ItemsSource = httpClient.GetAllDisciplines());
+		}
+		private void ButtonStudentFilters_OnClick(object sender, RoutedEventArgs e) {
+		}
+		private void ButtonUpdateStudents_OnClick(object sender, RoutedEventArgs e) {
+			SafeRunMethod(() => DataGridStudents.ItemsSource = httpClient.GetAllStudents());
 		}
 
-		private TKey GetOrShowMessage<TKey>(Func<TKey> get) {
+		private void SafeRunMethod(Action action, string successfulMessage = null) {
 			try {
-				return get();
+				action();
+
+				if (!string.IsNullOrEmpty(successfulMessage))
+					ShowInformationMessageBox(successfulMessage);
 			}
 			catch (Exception exception) {
-				MessageBox.Show(exception.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-				return default(TKey);
+				ShowErrorMessageBox(exception.Message);
 			}
 		}
-		private void RunOrShowMessage(Action run) {
-			try {
-				run();
-			}
-			catch (Exception exception) {
-				MessageBox.Show(exception.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-			}
+		private void ShowErrorMessageBox(string message) {
+			MessageBox.Show(message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+		}
+		private void ShowInformationMessageBox(string message) {
+			MessageBox.Show(message, string.Empty, MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 	}
 }

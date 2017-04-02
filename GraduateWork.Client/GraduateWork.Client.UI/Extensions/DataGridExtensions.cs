@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Data;
 using GraduateWork.Common.Tables.Attributes;
-using GraduateWork.Common.Tables.Proxies;
 
 namespace GraduateWork.Client.UI.Extensions {
 	public static class DataGridExtensions {
@@ -14,9 +13,7 @@ namespace GraduateWork.Client.UI.Extensions {
 				{ typeof(int), GenerateTextColumn },
 				{ typeof(string), GenerateTextColumn },
 				{ typeof(DateTime), GenerateDataTimeColumn },
-				{ typeof(DateTime?), GenerateDataTimeColumn },
-				{ typeof(string[]), (header, bindingName) => null },
-				{ typeof(AssessmentByDiscipline[]), (header, bindingName) => null }
+				{ typeof(DateTime?), GenerateDataTimeColumn }
 			};
 
 		public static void LoadTable(this DataGrid dataGrid, Type type) {
@@ -34,7 +31,7 @@ namespace GraduateWork.Client.UI.Extensions {
 					propertyInfo,
 					attribute = propertyInfo.GetCustomAttributes<HeaderColumnAttribute>().FirstOrDefault()
 				})
-				.Where(t => t.attribute != null)
+				.Where(t => t.attribute != null && generateColumn.ContainsKey(t.propertyInfo.PropertyType))
 				.Select(t => generateColumn[t.propertyInfo.PropertyType](t.attribute.HeaderColumn, t.propertyInfo.Name))
 				.Where(column => column != null)
 				.ToArray();

@@ -70,8 +70,8 @@ namespace GraduateWork.Server.Test {
 			var databaseAuthorizer = A.Fake<IDatabaseAuthorizer>();
 			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).Returns(false);
 
-			RunServer(new CheckUserIsCorrectFunction(databaseAuthorizer));
-			var exception = Assert.Catch<WebException>(() => SendRequest("CheckUserIsCorrect", parameters));
+			RunServer(new CheckUserIsExistFunction(databaseAuthorizer));
+			var exception = Assert.Catch<WebException>(() => SendRequest("CheckUserIsExist", parameters));
 
 			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.NotFound));

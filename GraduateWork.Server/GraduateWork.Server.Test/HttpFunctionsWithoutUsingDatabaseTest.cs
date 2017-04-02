@@ -26,8 +26,8 @@ namespace GraduateWork.Server.Test {
 			var databaseAuthorizer = A.Fake<IDatabaseAuthorizer>();
 			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).Returns(true);
 
-			RunServer(new CheckUserIsCorrectFunction(databaseAuthorizer));
-			SendRequest("CheckUserIsCorrect", parameters);
+			RunServer(new CheckUserIsExistFunction(databaseAuthorizer));
+			SendRequest("CheckUserIsExist", parameters);
 
 			A.CallTo(() => databaseAuthorizer.UserIsExist(login, password)).MustHaveHappened(Repeated.Exactly.Once);
 		}

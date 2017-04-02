@@ -8,16 +8,14 @@ namespace GraduateWork.Server.Test.BaseClasses {
 
 	public class BaseHttpClient {
 		protected static void SendRequest(string methodName, byte[] requestBody = null, int timeoutMs = 2000) {
-			var webRequest = CreateWebRequest(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
-			SendRequest(webRequest);
+			SendRequest(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
 		}
 		protected static void SendRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 2000) {
 			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
 			SendRequest(webRequest);
 		}
 		protected static TKey SendRequest<TKey>(string methodName, byte[] requestBody = null, int timeoutMs = 2000) {
-			var webRequest = CreateWebRequest(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
-			return GetAnswer<TKey>(SendRequest(webRequest));
+			return SendRequest<TKey>(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
 		}
 		protected static TKey SendRequest<TKey>(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 2000) {
 			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
