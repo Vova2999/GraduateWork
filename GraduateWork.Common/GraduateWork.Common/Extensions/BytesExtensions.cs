@@ -1,11 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using GraduateWork.Common.Serializers;
 
 namespace GraduateWork.Common.Extensions {
 	// ReSharper disable UnusedMember.Global
 
 	public static class BytesExtensions {
 		public static TKey FromJson<TKey>(this byte[] bytes) {
-			return JsonConvert.DeserializeObject<TKey>(GlobalSettings.Encoding.GetString(bytes));
+			return JsonSerializer.Deserializing<TKey>(bytes);
+		}
+
+		public static TKey FromXml<TKey>(this byte[] bytes) {
+			return XmlSerializer.Deserializing<TKey>(bytes);
 		}
 	}
 }
