@@ -133,6 +133,9 @@ namespace GraduateWork.Server.Database.Models {
 			foundStudent.ProtocolNumber = newStudent.ProtocolNumber;
 			foundStudent.RegistrationNumber = newStudent.RegistrationNumber;
 			foundStudent.RegistrationDate = newStudent.RegistrationDate;
+			foundStudent.AssessmentByDisciplines.ForEach(assessmentByDiscipline =>
+				assessmentByDiscipline.Assessment = newStudent.AssessmentByDisciplines.First(a =>
+					a.NameOfDiscipline == assessmentByDiscipline.Discipline.DisciplineName).Assessment);
 
 			modelDatabase.SaveChanges();
 		}
@@ -167,28 +170,24 @@ namespace GraduateWork.Server.Database.Models {
 
 		private Discipline GetDiscipline(DisciplineBasedProxy discipline) {
 			return modelDatabase.Disciplines.First(d =>
-				d.DisciplineName == discipline.DisciplineName &&
-					d.Group == GetGroup(discipline.Group));
+				d.DisciplineName == discipline.DisciplineName && d.Group == GetGroup(discipline.Group));
 		}
 		private Group GetGroup(GroupBasedProxy group) {
 			return modelDatabase.Groups.First(g => g.GroupName == group.GroupName);
 		}
 		private Student GetStudent(StudentBasedProxy student) {
 			return modelDatabase.Students.First(s =>
-				string.Equals(s.FirstName, student.FirstName, StringComparison.InvariantCultureIgnoreCase) &&
-					string.Equals(s.SecondName, student.SecondName, StringComparison.InvariantCultureIgnoreCase) &&
-					string.Equals(s.ThirdName, student.ThirdName, StringComparison.InvariantCultureIgnoreCase) &&
+				s.FirstName == student.FirstName &&
+					s.SecondName == student.SecondName &&
+					s.ThirdName == student.ThirdName &&
 					s.DateOfBirth == student.DateOfBirth);
 		}
 		private User GetUser(UserProxy user) {
-			return modelDatabase.Users.First(u =>
-				string.Equals(u.Login, user.Login, StringComparison.InvariantCultureIgnoreCase) &&
-					string.Equals(u.Password, user.Password, StringComparison.InvariantCultureIgnoreCase));
+			return modelDatabase.Users.First(u => u.Login == user.Login && u.Password == user.Password);
 		}
 
 		private void DeleteDiscipline(Discipline discipline) {
-			DeleteAssessmentByDisciplines(assessmentByDiscipline =>
-				assessmentByDiscipline.Discipline.DisciplineId == discipline.DisciplineId);
+			DeleteAssessmentByDisciplines(assessmentByDiscipline => assessmentByDiscipline.Discipline.DisciplineId == discipline.DisciplineId);
 			modelDatabase.Disciplines.Remove(discipline);
 		}
 		private void DeleteGroup(Group group) {
@@ -201,8 +200,7 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.Students.Remove(student);
 		}
 		private void DeleteAssessmentByDisciplines(Func<AssessmentByDiscipline, bool> predicate) {
-			modelDatabase.AssessmentByDisciplines.RemoveRange(
-				modelDatabase.AssessmentByDisciplines.Where(predicate));
+			modelDatabase.AssessmentByDisciplines.RemoveRange(modelDatabase.AssessmentByDisciplines.Where(predicate));
 		}
 	}
 }
