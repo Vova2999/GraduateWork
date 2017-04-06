@@ -17,7 +17,7 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 			var that = obj as DisciplineBasedProxy;
 			return that != null &&
 				string.Equals(DisciplineName, that.DisciplineName, StringComparison.InvariantCultureIgnoreCase) &&
-				Group == that.Group;
+				Equals(Group, that.Group);
 		}
 		public override int GetHashCode() {
 			return ((DisciplineName?.GetHashCode() ?? 0) * 397) ^ (Group?.GetHashCode() ?? 0);

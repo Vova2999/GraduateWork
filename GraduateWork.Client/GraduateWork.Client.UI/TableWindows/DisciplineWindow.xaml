@@ -1,0 +1,58 @@
+﻿<Window x:Class="GraduateWork.Client.UI.TableWindows.DisciplineWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+		Title="DisciplineWindow" Width="500" SizeToContent="Height">
+	<Grid Margin="5">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Visible" Padding="5">
+			<StackPanel>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="5" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="5" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="5" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="5" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
+					<Label Grid.Row="0" Grid.Column="0" Content="Название дисциплины" Foreground="DodgerBlue"
+							VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<TextBox Grid.Row="0" Grid.Column="1" Name="TextBoxDisciplineName" VerticalContentAlignment="Center" />
+
+					<Label Grid.Row="2" Grid.Column="0" Content="Название группы" Foreground="DodgerBlue"
+							VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<ComboBox Grid.Row="2" Grid.Column="1" Name="ComboBoxGroupName" VerticalContentAlignment="Center" />
+
+					<Label Grid.Row="4" Grid.Column="0" Content="Тип дисциплины" Foreground="DodgerBlue"
+							VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<ComboBox Grid.Row="4" Grid.Column="1" Name="ComboBoxControlType" VerticalContentAlignment="Center" />
+
+					<Label Grid.Row="6" Grid.Column="0" Content="Всего часов" Foreground="DodgerBlue"
+							VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<TextBox Grid.Row="6" Grid.Column="1" Name="TextBoxTotalHours" VerticalContentAlignment="Center" />
+
+					<Label Grid.Row="8" Grid.Column="0" Content="Аудиторных часов" Foreground="DodgerBlue"
+							VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<TextBox Grid.Row="8" Grid.Column="1" Name="TextBoxClassHours" VerticalContentAlignment="Center" />
+				</Grid>
+			</StackPanel>
+		</ScrollViewer>
+
+		<Button Grid.Row="1" Content="Ок" HorizontalAlignment="Right" MinWidth="80" Padding="15,5,15,5" Margin="3,3,0,0" />
+	</Grid>
+</Window>

@@ -25,7 +25,7 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 				string.Equals(FirstName, that.FirstName, StringComparison.InvariantCultureIgnoreCase) &&
 				string.Equals(SecondName, that.SecondName, StringComparison.InvariantCultureIgnoreCase) &&
 				string.Equals(ThirdName, that.ThirdName, StringComparison.InvariantCultureIgnoreCase) &&
-				DateOfBirth == that.DateOfBirth;
+				Equals(DateOfBirth, that.DateOfBirth);
 		}
 		public override int GetHashCode() {
 			return (FirstName?.GetHashCode() ?? 0 * 397) ^ (SecondName?.GetHashCode() ?? 0) * 397 ^ (ThirdName?.GetHashCode() ?? 0) * 397 ^ DateOfBirth.GetHashCode();

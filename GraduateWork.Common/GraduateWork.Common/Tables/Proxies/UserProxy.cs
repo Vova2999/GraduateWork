@@ -1,4 +1,5 @@
-﻿using GraduateWork.Common.Tables.Attributes;
+﻿using System;
+using GraduateWork.Common.Tables.Attributes;
 
 namespace GraduateWork.Common.Tables.Proxies {
 	// ReSharper disable MemberCanBePrivate.Global
@@ -18,12 +19,12 @@ namespace GraduateWork.Common.Tables.Proxies {
 
 		public override bool Equals(object obj) {
 			var that = (UserProxy)obj;
-			return that != null && Login == that.Login && Password == that.Password;
+			return that != null &&
+				string.Equals(Login, that.Login, StringComparison.InvariantCultureIgnoreCase) &&
+				string.Equals(Password, that.Password, StringComparison.InvariantCultureIgnoreCase);
 		}
 		public override int GetHashCode() {
-			unchecked {
-				return ((Login?.GetHashCode() ?? 0) * 397) ^ (Password?.GetHashCode() ?? 0);
-			}
+			return ((Login?.GetHashCode() ?? 0) * 397) ^ (Password?.GetHashCode() ?? 0);
 		}
 	}
 
