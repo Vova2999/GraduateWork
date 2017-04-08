@@ -3,8 +3,8 @@ using GraduateWork.Common.Tables.Attributes;
 
 namespace GraduateWork.Common.Tables.Proxies.Baseds {
 	// ReSharper disable MemberCanBePrivate.Global
+	// ReSharper disable MemberCanBeProtected.Global
 	// ReSharper disable NonReadonlyMemberInGetHashCode
-	// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 	public class StudentBasedProxy {
 		[HeaderColumn("Имя")]
@@ -29,6 +29,18 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 		}
 		public override int GetHashCode() {
 			return (FirstName?.GetHashCode() ?? 0 * 397) ^ (SecondName?.GetHashCode() ?? 0) * 397 ^ (ThirdName?.GetHashCode() ?? 0) * 397 ^ DateOfBirth.GetHashCode();
+		}
+
+		public StudentBasedProxy GetBasedClone() {
+			return GetClone<StudentBasedProxy>();
+		}
+		public TProxy GetClone<TProxy>() where TProxy : StudentBasedProxy, new() {
+			return new TProxy {
+				FirstName = FirstName,
+				SecondName = SecondName,
+				ThirdName = ThirdName,
+				DateOfBirth = DateOfBirth
+			};
 		}
 	}
 }

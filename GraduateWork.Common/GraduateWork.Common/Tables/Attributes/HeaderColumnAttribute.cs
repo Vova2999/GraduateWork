@@ -2,10 +2,10 @@
 
 namespace GraduateWork.Common.Tables.Attributes {
 	// ReSharper disable MemberCanBePrivate.Global
-	// ReSharper disable NotAccessedField.Global
+	// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 	public class HeaderColumnAttribute : Attribute {
-		public readonly string HeaderColumn;
+		public string HeaderColumn { get; set; }
 
 		public HeaderColumnAttribute(string headerColumn) {
 			HeaderColumn = headerColumn;

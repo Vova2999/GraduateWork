@@ -12,27 +12,35 @@ using GraduateWork.Common.Http;
 namespace GraduateWork.Server.UI {
 	public partial class MainWindow {
 		private const string serverUiSettingsFileName = "GraduateWork.Server.UI.Settings.xml";
-		private ServerUiSettings serverUiSettings;
-		private ServerSettings serverSettings;
+		private readonly ServerUiSettings serverUiSettings;
+		private readonly ServerSettings serverSettings;
 
 		public MainWindow() {
 			InitializeComponent();
-			LoadSettings();
+			serverUiSettings = LoadServerUiSettings();
+			serverSettings = LoadServerSettings();
 		}
-		private void LoadSettings() {
-			serverUiSettings = FileSettings.ReadSettings<ServerUiSettings>(serverUiSettingsFileName);
-			serverSettings = FileSettings.ReadSettings<ServerSettings>(Program.ServerSettingsFileName);
+		private ServerSettings LoadServerSettings() {
+			var settings = FileSettings.ReadSettings<ServerSettings>(Program.ServerSettingsFileName);
+			TextBoxServerAddress.Text = settings.ServerAddress;
 
-			TextBoxServerAddress.Text = serverSettings.ServerAddress;
-			TextBoxUserLogin.Text = serverUiSettings.UserLogin;
-			PasswordBoxUserPassword.Password = serverUiSettings.UserPassword;
-			CheckBoxSaveLoginAndPassword.IsChecked = serverUiSettings.SaveLoginAndPassword;
+			return settings;
+		}
+		private ServerUiSettings LoadServerUiSettings() {
+			var settings = FileSettings.ReadSettings<ServerUiSettings>(serverUiSettingsFileName);
+			TextBoxUserLogin.Text = settings.UserLogin;
+			PasswordBoxUserPassword.Password = settings.UserPassword;
+			CheckBoxSaveLoginAndPassword.IsChecked = settings.SaveLoginAndPassword;
+
+			return settings;
 		}
 
 		private void MainWindow_OnClosing(object sender, CancelEventArgs e) {
-			serverUiSettings.SaveLoginAndPassword = CheckBoxSaveLoginAndPassword.IsChecked == true;
-			serverUiSettings.UserLogin = serverUiSettings.SaveLoginAndPassword ? TextBoxUserLogin.Text : string.Empty;
-			serverUiSettings.UserPassword = serverUiSettings.SaveLoginAndPassword ? PasswordBoxUserPassword.Password : string.Empty;
+			var saveLoginAndPassword = CheckBoxSaveLoginAndPassword.IsChecked == true;
+
+			serverUiSettings.UserLogin = saveLoginAndPassword ? TextBoxUserLogin.Text : string.Empty;
+			serverUiSettings.UserPassword = saveLoginAndPassword ? PasswordBoxUserPassword.Password : string.Empty;
+			serverUiSettings.SaveLoginAndPassword = saveLoginAndPassword;
 
 			FileSettings.WriteSettings(serverUiSettings, serverUiSettingsFileName);
 		}

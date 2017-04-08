@@ -1,5 +1,5 @@
 using FakeItEasy;
-using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
@@ -65,16 +65,68 @@ namespace GraduateWork.Server.Test {
 		[Test]
 		public void GetAllUsersFunctionTest_ShouldBeSuccess() {
 			var inputUsers = new[] {
-				new UserProxy { Login = "firstLogin" },
-				new UserProxy { Login = "secondLogin" }
+				new UserBasedProxy { Login = "firstLogin" },
+				new UserBasedProxy { Login = "secondLogin" }
 			};
 			A.CallTo(() => databaseReader.GetAllUsers()).Returns(inputUsers);
 
 			RunServer(new GetAllUsersFunction(DatabaseAuthorizer, databaseReader));
-			var receivedUsers = SendRequest<UserProxy[]>("GetAllUsers", DefaultParameters);
+			var receivedUsers = SendRequest<UserBasedProxy[]>("GetAllUsers", DefaultParameters);
 
 			A.CallTo(() => databaseReader.GetAllUsers()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputUsers, receivedUsers);
+		}
+
+		[Test]
+		public void GetExtendedDisciplineFunctionTest_ShouldBeSuccess() {
+			var inputBasedDiscipline = new DisciplineBasedProxy { DisciplineName = "firstDiscipline" };
+			var inputExtendedDiscipline = new DisciplineExtendedProxy { DisciplineName = "firstDiscipline" };
+			A.CallTo(() => databaseReader.GetExtendedDiscipline(inputBasedDiscipline)).Returns(inputExtendedDiscipline);
+
+			RunServer(new GetExtendedDisciplineFunction(DatabaseAuthorizer, databaseReader));
+			var receivedDiscipline = SendRequest<DisciplineExtendedProxy>("GetExtendedDiscipline", DefaultParameters, inputBasedDiscipline.ToJson());
+
+			A.CallTo(() => databaseReader.GetExtendedDiscipline(inputBasedDiscipline)).MustHaveHappened(Repeated.Exactly.Once);
+			Assert.That(receivedDiscipline, Is.EqualTo(inputExtendedDiscipline));
+		}
+
+		[Test]
+		public void GetExtendedGroupFunctionTest_ShouldBeSuccess() {
+			var inputBasedGroup = new GroupBasedProxy { GroupName = "firstGroup" };
+			var inputExtendedGroup = new GroupExtendedProxy { GroupName = "firstGroup" };
+			A.CallTo(() => databaseReader.GetExtendedGroup(inputBasedGroup)).Returns(inputExtendedGroup);
+
+			RunServer(new GetExtendedGroupFunction(DatabaseAuthorizer, databaseReader));
+			var receivedGroup = SendRequest<GroupExtendedProxy>("GetExtendedGroup", DefaultParameters, inputBasedGroup.ToJson());
+
+			A.CallTo(() => databaseReader.GetExtendedGroup(inputBasedGroup)).MustHaveHappened(Repeated.Exactly.Once);
+			Assert.That(receivedGroup, Is.EqualTo(inputExtendedGroup));
+		}
+
+		[Test]
+		public void GetExtendedStudentFunctionTest_ShouldBeSuccess() {
+			var inputBasedStudent = new StudentBasedProxy { FirstName = "firstName" };
+			var inputExtendedStudent = new StudentExtendedProxy { FirstName = "firstName" };
+			A.CallTo(() => databaseReader.GetExtendedStudent(inputBasedStudent)).Returns(inputExtendedStudent);
+
+			RunServer(new GetExtendedStudentFunction(DatabaseAuthorizer, databaseReader));
+			var receivedStudent = SendRequest<StudentExtendedProxy>("GetExtendedStudent", DefaultParameters, inputBasedStudent.ToJson());
+
+			A.CallTo(() => databaseReader.GetExtendedStudent(inputBasedStudent)).MustHaveHappened(Repeated.Exactly.Once);
+			Assert.That(receivedStudent, Is.EqualTo(inputExtendedStudent));
+		}
+
+		[Test]
+		public void GetExtendedUserFunctionTest_ShouldBeSuccess() {
+			var inputBasedUser = new UserBasedProxy { Login = "login" };
+			var inputExtendedUser = new UserExtendedProxy { Login = "login" };
+			A.CallTo(() => databaseReader.GetExtendedUser(inputBasedUser)).Returns(inputExtendedUser);
+
+			RunServer(new GetExtendedUserFunction(DatabaseAuthorizer, databaseReader));
+			var receivedUser = SendRequest<UserExtendedProxy>("GetExtendedUser", DefaultParameters, inputBasedUser.ToJson());
+
+			A.CallTo(() => databaseReader.GetExtendedUser(inputBasedUser)).MustHaveHappened(Repeated.Exactly.Once);
+			Assert.That(receivedUser, Is.EqualTo(inputExtendedUser));
 		}
 	}
 }

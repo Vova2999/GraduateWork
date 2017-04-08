@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using GraduateWork.Common.Tables.Attributes;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 
@@ -51,10 +52,39 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 
 		[HeaderColumn("ќценки по дисциплинам")]
 		public AssessmentByDiscipline[] AssessmentByDisciplines { get; set; }
+
+		public StudentExtendedProxy GetExtendedClone() {
+			var clone = GetClone<StudentExtendedProxy>();
+			clone.PreviousEducationName = PreviousEducationName;
+			clone.PreviousEducationYear = PreviousEducationYear;
+			clone.EnrollmentName = EnrollmentName;
+			clone.EnrollmentYear = EnrollmentYear;
+			clone.DeductionName = DeductionName;
+			clone.DeductionYear = DeductionYear;
+			clone.DiplomaTopic = DiplomaTopic;
+			clone.DiplomaAssessment = DiplomaAssessment;
+			clone.ProtectionDate = ProtectionDate;
+			clone.ProtocolNumber = ProtocolNumber;
+			clone.RegistrationNumber = RegistrationNumber;
+			clone.RegistrationDate = RegistrationDate;
+			clone.Group = Group.GetBasedClone();
+			clone.AssessmentByDisciplines = AssessmentByDisciplines
+				.Select(assessmentByDiscipline => assessmentByDiscipline.GetClone())
+				.ToArray();
+
+			return clone;
+		}
 	}
 
 	public class AssessmentByDiscipline {
 		public string NameOfDiscipline { get; set; }
 		public int? Assessment { get; set; }
+
+		public AssessmentByDiscipline GetClone() {
+			return new AssessmentByDiscipline {
+				NameOfDiscipline = NameOfDiscipline,
+				Assessment = Assessment
+			};
+		}
 	}
 }

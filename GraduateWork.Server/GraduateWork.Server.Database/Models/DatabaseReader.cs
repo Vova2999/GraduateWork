@@ -1,5 +1,5 @@
-﻿using GraduateWork.Common.Tables.Proxies;
-using GraduateWork.Common.Tables.Proxies.Baseds;
+﻿using GraduateWork.Common.Tables.Proxies.Baseds;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Extensions;
 
@@ -22,8 +22,21 @@ namespace GraduateWork.Server.Database.Models {
 		public StudentBasedProxy[] GetAllStudents() {
 			return modelDatabase.Students.ToBasedProxies();
 		}
-		public UserProxy[] GetAllUsers() {
-			return modelDatabase.Users.ToProxies();
+		public UserBasedProxy[] GetAllUsers() {
+			return modelDatabase.Users.ToBasedProxies();
+		}
+
+		public DisciplineExtendedProxy GetExtendedDiscipline(DisciplineBasedProxy discipline) {
+			return modelDatabase.GetDiscipline(discipline).ToExtendedProxy();
+		}
+		public GroupExtendedProxy GetExtendedGroup(GroupBasedProxy @group) {
+			return modelDatabase.GetGroup(group).ToExtendedProxy();
+		}
+		public StudentExtendedProxy GetExtendedStudent(StudentBasedProxy student) {
+			return modelDatabase.GetStudent(student).ToExtendedProxy();
+		}
+		public UserExtendedProxy GetExtendedUser(UserBasedProxy user) {
+			return modelDatabase.GetUser(user).ToExtendedProxy();
 		}
 	}
 }

@@ -1,6 +1,6 @@
-﻿using GraduateWork.Common.Extensions;
+﻿using GraduateWork.Common;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Reports;
-using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;

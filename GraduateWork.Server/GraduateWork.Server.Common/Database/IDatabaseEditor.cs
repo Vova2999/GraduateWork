@@ -1,5 +1,4 @@
-﻿using GraduateWork.Common.Tables.Proxies;
-using GraduateWork.Common.Tables.Proxies.Extendeds;
+﻿using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Server.Common.Database {
 	public interface IDatabaseEditor {
@@ -15,8 +14,8 @@ namespace GraduateWork.Server.Common.Database {
 		void EditStudent(StudentExtendedProxy oldStudent, StudentExtendedProxy newStudent);
 		void DeleteStudent(StudentExtendedProxy student);
 
-		void AddUser(UserProxy user);
-		void EditUser(UserProxy oldUser, UserProxy newUser);
-		void DeleteUser(UserProxy user);
+		void AddUser(UserExtendedProxy user);
+		void EditUser(UserExtendedProxy oldUser, UserExtendedProxy newUser);
+		void DeleteUser(UserExtendedProxy user);
 	}
 }

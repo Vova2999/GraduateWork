@@ -1,7 +1,6 @@
 using System;
 using FakeItEasy;
 using GraduateWork.Common.Extensions;
-using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Discipline;
@@ -53,7 +52,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void AddUserFunctionTest_ShouldBeSuccess() {
-			var user = new UserProxy { Login = "login" };
+			var user = new UserExtendedProxy { Login = "login" };
 
 			RunServer(new AddUserFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("AddUser", DefaultParameters, user.ToJson());
@@ -93,7 +92,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void DeleteUserFunctionTest_ShouldBeSuccess() {
-			var user = new UserProxy { Login = "login" };
+			var user = new UserExtendedProxy { Login = "login" };
 
 			RunServer(new DeleteUserFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("DeleteUser", DefaultParameters, user.ToJson());
@@ -136,8 +135,8 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void EditUserFunctionTest_ShouldBeSuccess() {
-			var firstUser = new UserProxy { Login = "firstLogin" };
-			var secondUser = new UserProxy { Login = "secondLogin" };
+			var firstUser = new UserExtendedProxy { Login = "firstLogin" };
+			var secondUser = new UserExtendedProxy { Login = "secondLogin" };
 
 			RunServer(new EditUserFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("EditUser", DefaultParameters, Tuple.Create(firstUser, secondUser).ToJson());

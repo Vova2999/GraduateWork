@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GraduateWork.Common.Tables.Proxies;
-using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Tables;
@@ -19,7 +17,7 @@ namespace GraduateWork.Server.Database.Models {
 		}
 
 		public void AddDiscipline(DisciplineExtendedProxy discipline) {
-			var foundGroup = GetGroup(discipline.Group);
+			var foundGroup = modelDatabase.GetGroup(discipline.Group);
 			var newDiscipline = new Discipline {
 				DisciplineName = discipline.DisciplineName,
 				ControlType = discipline.ControlType,
@@ -41,7 +39,7 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.SaveChanges();
 		}
 		public void EditDiscipline(DisciplineExtendedProxy oldDiscipline, DisciplineExtendedProxy newDiscipline) {
-			var foundDiscipline = GetDiscipline(oldDiscipline);
+			var foundDiscipline = modelDatabase.GetDiscipline(oldDiscipline);
 
 			foundDiscipline.DisciplineName = newDiscipline.DisciplineName;
 			foundDiscipline.ControlType = newDiscipline.ControlType;
@@ -51,7 +49,7 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.SaveChanges();
 		}
 		public void DeleteDiscipline(DisciplineExtendedProxy discipline) {
-			DeleteDiscipline(GetDiscipline(discipline));
+			DeleteDiscipline(modelDatabase.GetDiscipline(discipline));
 			modelDatabase.SaveChanges();
 		}
 
@@ -68,7 +66,7 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.SaveChanges();
 		}
 		public void EditGroup(GroupExtendedProxy oldGroup, GroupExtendedProxy newGroup) {
-			var foundGroup = GetGroup(oldGroup);
+			var foundGroup = modelDatabase.GetGroup(oldGroup);
 
 			foundGroup.GroupName = newGroup.GroupName;
 			foundGroup.SpecialtyName = newGroup.SpecialtyName;
@@ -78,12 +76,12 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.SaveChanges();
 		}
 		public void DeleteGroup(GroupExtendedProxy group) {
-			DeleteGroup(GetGroup(group));
+			DeleteGroup(modelDatabase.GetGroup(group));
 			modelDatabase.SaveChanges();
 		}
 
 		public void AddStudent(StudentExtendedProxy student) {
-			var foundGroup = GetGroup(student.Group);
+			var foundGroup = modelDatabase.GetGroup(student.Group);
 			var newStudent = new Student {
 				FirstName = student.FirstName,
 				SecondName = student.SecondName,
@@ -115,7 +113,7 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.SaveChanges();
 		}
 		public void EditStudent(StudentExtendedProxy oldStudent, StudentExtendedProxy newStudent) {
-			var foundStudent = GetStudent(oldStudent);
+			var foundStudent = modelDatabase.GetStudent(oldStudent);
 
 			foundStudent.FirstName = newStudent.FirstName;
 			foundStudent.SecondName = newStudent.SecondName;
@@ -140,11 +138,11 @@ namespace GraduateWork.Server.Database.Models {
 			modelDatabase.SaveChanges();
 		}
 		public void DeleteStudent(StudentExtendedProxy student) {
-			DeleteStudent(GetStudent(student));
+			DeleteStudent(modelDatabase.GetStudent(student));
 			modelDatabase.SaveChanges();
 		}
 
-		public void AddUser(UserProxy user) {
+		public void AddUser(UserExtendedProxy user) {
 			modelDatabase.Users.Add(new User {
 				Login = user.Login,
 				Password = user.Password,
@@ -153,8 +151,8 @@ namespace GraduateWork.Server.Database.Models {
 
 			modelDatabase.SaveChanges();
 		}
-		public void EditUser(UserProxy oldUser, UserProxy newUser) {
-			var foundUser = GetUser(oldUser);
+		public void EditUser(UserExtendedProxy oldUser, UserExtendedProxy newUser) {
+			var foundUser = modelDatabase.GetUser(oldUser);
 
 			foundUser.Login = newUser.Login;
 			foundUser.Password = newUser.Password;
@@ -162,28 +160,10 @@ namespace GraduateWork.Server.Database.Models {
 
 			modelDatabase.SaveChanges();
 		}
-		public void DeleteUser(UserProxy user) {
-			var foundUser = GetUser(user);
+		public void DeleteUser(UserExtendedProxy user) {
+			var foundUser = modelDatabase.GetUser(user);
 			modelDatabase.Users.Remove(foundUser);
 			modelDatabase.SaveChanges();
-		}
-
-		private Discipline GetDiscipline(DisciplineBasedProxy discipline) {
-			return modelDatabase.Disciplines.First(d =>
-				d.DisciplineName == discipline.DisciplineName && d.Group == GetGroup(discipline.Group));
-		}
-		private Group GetGroup(GroupBasedProxy group) {
-			return modelDatabase.Groups.First(g => g.GroupName == group.GroupName);
-		}
-		private Student GetStudent(StudentBasedProxy student) {
-			return modelDatabase.Students.First(s =>
-				s.FirstName == student.FirstName &&
-					s.SecondName == student.SecondName &&
-					s.ThirdName == student.ThirdName &&
-					s.DateOfBirth == student.DateOfBirth);
-		}
-		private User GetUser(UserProxy user) {
-			return modelDatabase.Users.First(u => u.Login == user.Login && u.Password == user.Password);
 		}
 
 		private void DeleteDiscipline(Discipline discipline) {

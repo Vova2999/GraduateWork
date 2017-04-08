@@ -22,5 +22,15 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 		public override int GetHashCode() {
 			return ((DisciplineName?.GetHashCode() ?? 0) * 397) ^ (Group?.GetHashCode() ?? 0);
 		}
+
+		public DisciplineBasedProxy GetBasedClone() {
+			return GetClone<DisciplineBasedProxy>();
+		}
+		protected TProxy GetClone<TProxy>() where TProxy : DisciplineBasedProxy, new() {
+			return new TProxy {
+				DisciplineName = DisciplineName,
+				Group = Group.GetBasedClone()
+			};
+		}
 	}
 }

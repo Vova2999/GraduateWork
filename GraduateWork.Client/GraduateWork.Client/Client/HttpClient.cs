@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Http;
-using GraduateWork.Common.Tables.Proxies;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
@@ -26,27 +25,30 @@ namespace GraduateWork.Client.Client {
 				});
 		}
 
-		GroupBasedProxy[] IHttpClient.GetAllGroups() {
-			return SendRequest<GroupBasedProxy[]>("GetAllGroups", GetDefaultParameters());
-		}
-		DisciplineBasedProxy[] IHttpClient.GetAllDisciplines() {
+		public DisciplineBasedProxy[] GetAllDisciplines() {
 			return SendRequest<DisciplineBasedProxy[]>("GetAllDisciplines", GetDefaultParameters());
 		}
-		StudentBasedProxy[] IHttpClient.GetAllStudents() {
+		public GroupBasedProxy[] GetAllGroups() {
+			return SendRequest<GroupBasedProxy[]>("GetAllGroups", GetDefaultParameters());
+		}
+		public StudentBasedProxy[] GetAllStudents() {
 			return SendRequest<StudentBasedProxy[]>("GetAllStudents", GetDefaultParameters());
 		}
-		public UserProxy[] GetAllUsers() {
-			return SendRequest<UserProxy[]>("GetAllUsers", GetDefaultParameters());
+		public UserBasedProxy[] GetAllUsers() {
+			return SendRequest<UserBasedProxy[]>("GetAllUsers", GetDefaultParameters());
 		}
 
-		public void AddGroup(GroupExtendedProxy group) {
-			SendRequest("AddGroup", GetDefaultParameters(), group.ToJson());
+		public DisciplineExtendedProxy GetExtendedDiscipline(DisciplineBasedProxy discipline) {
+			return SendRequest<DisciplineExtendedProxy>("GetExtendedDiscipline", GetDefaultParameters(), discipline.ToJson());
 		}
-		public void EditGroup(GroupExtendedProxy oldGroup, GroupExtendedProxy newGroup) {
-			SendRequest("EditGroup", GetDefaultParameters(), Tuple.Create(oldGroup, newGroup).ToJson());
+		public GroupExtendedProxy GetExtendedGroup(GroupBasedProxy group) {
+			return SendRequest<GroupExtendedProxy>("GetExtendedGroup", GetDefaultParameters(), group.ToJson());
 		}
-		public void DeleteGroup(GroupExtendedProxy group) {
-			SendRequest("DeleteGroup", GetDefaultParameters(), group.ToJson());
+		public StudentExtendedProxy GetExtendedStudent(StudentBasedProxy student) {
+			return SendRequest<StudentExtendedProxy>("GetExtendedStudent", GetDefaultParameters(), student.ToJson());
+		}
+		public UserExtendedProxy GetExtendedUser(UserBasedProxy user) {
+			return SendRequest<UserExtendedProxy>("GetExtendedUser", GetDefaultParameters(), user.ToJson());
 		}
 
 		public void AddDiscipline(DisciplineExtendedProxy discipline) {
@@ -59,6 +61,16 @@ namespace GraduateWork.Client.Client {
 			SendRequest("DeleteDiscipline", GetDefaultParameters(), discipline.ToJson());
 		}
 
+		public void AddGroup(GroupExtendedProxy group) {
+			SendRequest("AddGroup", GetDefaultParameters(), group.ToJson());
+		}
+		public void EditGroup(GroupExtendedProxy oldGroup, GroupExtendedProxy newGroup) {
+			SendRequest("EditGroup", GetDefaultParameters(), Tuple.Create(oldGroup, newGroup).ToJson());
+		}
+		public void DeleteGroup(GroupExtendedProxy group) {
+			SendRequest("DeleteGroup", GetDefaultParameters(), group.ToJson());
+		}
+
 		public void AddStudent(StudentExtendedProxy student) {
 			SendRequest("AddStudent", GetDefaultParameters(), student.ToJson());
 		}
@@ -69,13 +81,13 @@ namespace GraduateWork.Client.Client {
 			SendRequest("DeleteStudent", GetDefaultParameters(), student.ToJson());
 		}
 
-		public void AddUser(UserProxy user) {
+		public void AddUser(UserExtendedProxy user) {
 			SendRequest("AddUser", GetDefaultParameters(), user.ToJson());
 		}
-		public void EditUser(UserProxy oldUser, UserProxy newUser) {
+		public void EditUser(UserExtendedProxy oldUser, UserExtendedProxy newUser) {
 			SendRequest("EditUser", GetDefaultParameters(), Tuple.Create(oldUser, newUser).ToJson());
 		}
-		public void DeleteUser(UserProxy user) {
+		public void DeleteUser(UserExtendedProxy user) {
 			SendRequest("DeleteUser", GetDefaultParameters(), user.ToJson());
 		}
 

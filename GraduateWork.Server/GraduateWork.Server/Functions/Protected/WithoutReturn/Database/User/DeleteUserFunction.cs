@@ -1,12 +1,13 @@
+using GraduateWork.Common;
 using GraduateWork.Common.Extensions;
-using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;
 
 namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.User {
 	public class DeleteUserFunction : HttpProtectedFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "DeleteUser";
-		protected override AccessType RequiredAccessType => AccessType.AdminEdit;
+		protected override AccessType RequiredAccessType => AccessType.AdminWrite;
 		private readonly IDatabaseEditor databaseEditor;
 
 		public DeleteUserFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseEditor databaseEditor) : base(databaseAuthorizer) {
@@ -14,7 +15,7 @@ namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.User {
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
-			databaseEditor.DeleteUser(requestBody.FromJson<UserProxy>());
+			databaseEditor.DeleteUser(requestBody.FromJson<UserExtendedProxy>());
 		}
 	}
 }

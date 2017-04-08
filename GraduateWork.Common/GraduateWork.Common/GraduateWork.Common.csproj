@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessType.cs" />
+    <Compile Include="ControlType.cs" />
     <Compile Include="Extensions\BytesExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
@@ -49,14 +51,15 @@
     <Compile Include="Reports\FileWithContent.cs" />
     <Compile Include="Serializers\JsonSerializer.cs" />
     <Compile Include="Serializers\XmlSerializer.cs" />
+    <Compile Include="Tables\Attributes\HeaderColumnAttribute.cs" />
     <Compile Include="Tables\Proxies\Baseds\DisciplineBasedProxy.cs" />
     <Compile Include="Tables\Proxies\Baseds\GroupBasedProxy.cs" />
     <Compile Include="Tables\Proxies\Baseds\StudentBasedProxy.cs" />
+    <Compile Include="Tables\Proxies\Baseds\UserBasedProxy.cs" />
     <Compile Include="Tables\Proxies\Extendeds\DisciplineExtendedProxy.cs" />
     <Compile Include="Tables\Proxies\Extendeds\GroupExtendedProxy.cs" />
-    <Compile Include="Tables\Attributes\NameColumnAttribute.cs" />
     <Compile Include="Tables\Proxies\Extendeds\StudentExtendedProxy.cs" />
-    <Compile Include="Tables\Proxies\UserProxy.cs" />
+    <Compile Include="Tables\Proxies\Extendeds\UserExtendedProxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

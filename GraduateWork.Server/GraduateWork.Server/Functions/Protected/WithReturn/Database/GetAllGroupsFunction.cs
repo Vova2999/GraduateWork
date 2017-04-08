@@ -1,4 +1,4 @@
-using GraduateWork.Common.Tables.Proxies;
+using GraduateWork.Common;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;

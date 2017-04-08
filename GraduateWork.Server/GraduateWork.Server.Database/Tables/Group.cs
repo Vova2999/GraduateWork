@@ -13,11 +13,11 @@ namespace GraduateWork.Server.Database.Tables {
 		[Required, MaxLength(25), Index("IX_GroupUniques", 1, IsUnique = true)]
 		public string GroupName { get; set; }
 
-		[Required, MaxLength(25)]
-		public string SpecialtyName { get; set; }
-
 		[Required]
 		public int SpecialtyNumber { get; set; }
+
+		[Required, MaxLength(25)]
+		public string SpecialtyName { get; set; }
 
 		[Required, MaxLength(25)]
 		public string FacultyName { get; set; }
