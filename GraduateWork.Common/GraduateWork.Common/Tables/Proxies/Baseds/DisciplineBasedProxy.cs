@@ -10,17 +10,17 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 		[HeaderColumn("Название дисциплины")]
 		public string DisciplineName { get; set; }
 
-		[HeaderColumn("Группа")]
-		public GroupBasedProxy Group { get; set; }
+		[HeaderColumn("Название группы")]
+		public string GroupName { get; set; }
 
 		public override bool Equals(object obj) {
 			var that = obj as DisciplineBasedProxy;
 			return that != null &&
 				string.Equals(DisciplineName, that.DisciplineName, StringComparison.InvariantCultureIgnoreCase) &&
-				Equals(Group, that.Group);
+				string.Equals(GroupName, that.GroupName, StringComparison.InvariantCultureIgnoreCase);
 		}
 		public override int GetHashCode() {
-			return ((DisciplineName?.GetHashCode() ?? 0) * 397) ^ (Group?.GetHashCode() ?? 0);
+			return ((DisciplineName?.GetHashCode() ?? 0) * 397) ^ (GroupName?.GetHashCode() ?? 0);
 		}
 
 		public DisciplineBasedProxy GetBasedClone() {
@@ -29,7 +29,7 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 		protected TProxy GetClone<TProxy>() where TProxy : DisciplineBasedProxy, new() {
 			return new TProxy {
 				DisciplineName = DisciplineName,
-				Group = Group.GetBasedClone()
+				GroupName = GroupName
 			};
 		}
 	}

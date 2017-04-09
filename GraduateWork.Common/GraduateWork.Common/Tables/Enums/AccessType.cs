@@ -1,4 +1,4 @@
-﻿namespace GraduateWork.Common {
+﻿namespace GraduateWork.Common.Tables.Enums {
 	// ReSharper disable UnusedMember.Global
 
 	public enum AccessType {

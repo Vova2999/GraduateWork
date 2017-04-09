@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Tables;
@@ -17,7 +18,7 @@ namespace GraduateWork.Server.Database.Models {
 		}
 
 		public void AddDiscipline(DisciplineExtendedProxy discipline) {
-			var foundGroup = modelDatabase.GetGroup(discipline.Group);
+			var foundGroup = modelDatabase.GetGroup(discipline.GroupName);
 			var newDiscipline = new Discipline {
 				DisciplineName = discipline.DisciplineName,
 				ControlType = discipline.ControlType,
@@ -33,7 +34,7 @@ namespace GraduateWork.Server.Database.Models {
 						Student = student,
 						Discipline = newDiscipline,
 						Group = foundGroup,
-						Assessment = null
+						Assessment = (int)Assessment.None
 					}));
 
 			modelDatabase.SaveChanges();
@@ -106,7 +107,7 @@ namespace GraduateWork.Server.Database.Models {
 					Student = newStudent,
 					Discipline = discipline,
 					Group = newStudent.Group,
-					Assessment = null
+					Assessment = (int)Assessment.None
 				}).ToList();
 
 			modelDatabase.Students.Add(newStudent);
@@ -132,7 +133,7 @@ namespace GraduateWork.Server.Database.Models {
 			foundStudent.RegistrationNumber = newStudent.RegistrationNumber;
 			foundStudent.RegistrationDate = newStudent.RegistrationDate;
 			foundStudent.AssessmentByDisciplines.ForEach(assessmentByDiscipline =>
-				assessmentByDiscipline.Assessment = newStudent.AssessmentByDisciplines.First(a =>
+				assessmentByDiscipline.Assessment = (int)newStudent.AssessmentByDisciplines.First(a =>
 					a.NameOfDiscipline == assessmentByDiscipline.Discipline.DisciplineName).Assessment);
 
 			modelDatabase.SaveChanges();

@@ -1,6 +1,6 @@
 ﻿using System;
-using GraduateWork.Common;
 using GraduateWork.Common.Extensions;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;

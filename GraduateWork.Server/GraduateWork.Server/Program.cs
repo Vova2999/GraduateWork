@@ -8,8 +8,6 @@ using Ninject.Extensions.Conventions;
 
 namespace GraduateWork.Server {
 	public static class Program {
-		public const string ServerSettingsFileName = "GraduateWork.Server.Settings.xml";
-
 		public static void Main() {
 			try {
 				RunServer();
@@ -19,7 +17,7 @@ namespace GraduateWork.Server {
 			}
 		}
 		public static void RunServer() {
-			CreateHttpServer().Run(FileSettings.ReadSettings<ServerSettings>(ServerSettingsFileName).ServerAddress);
+			CreateHttpServer().Run(FileSettings.ReadSettings<ServerSettings>(ServerSettings.FileName).ServerAddress);
 		}
 		private static IHttpServer CreateHttpServer() {
 			var container = new StandardKernel(new NinjectDatabaseModule(), new NinjectReportsModule());

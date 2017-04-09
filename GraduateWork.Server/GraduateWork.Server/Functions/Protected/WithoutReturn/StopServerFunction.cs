@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using GraduateWork.Common;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Exceptions;

@@ -31,7 +31,7 @@ namespace GraduateWork.Server.Database.Extensions {
 		private static TDisciplineProxy ToProxy<TDisciplineProxy>(Discipline discipline) where TDisciplineProxy : DisciplineBasedProxy, new() {
 			return new TDisciplineProxy {
 				DisciplineName = discipline.DisciplineName,
-				Group = discipline.Group.ToBasedProxy()
+				GroupName = discipline.Group.GroupName
 			};
 		}
 	}

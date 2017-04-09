@@ -1,9 +1,9 @@
-using GraduateWork.Common;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;
 
-namespace GraduateWork.Server.Functions.Protected.WithReturn.Database {
+namespace GraduateWork.Server.Functions.Protected.WithReturn.Database.GetBasedProxies {
 	public class GetAllDisciplinesFunction : HttpProtectedFunctionWithReturn<DisciplineBasedProxy[]> {
 		public override string NameOfCalledMethod => "GetAllDisciplines";
 		protected override AccessType RequiredAccessType => AccessType.UserRead;

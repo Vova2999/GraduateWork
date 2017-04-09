@@ -11,7 +11,6 @@ using GraduateWork.Common.Http;
 
 namespace GraduateWork.Server.UI {
 	public partial class MainWindow {
-		private const string serverUiSettingsFileName = "GraduateWork.Server.UI.Settings.xml";
 		private readonly ServerUiSettings serverUiSettings;
 		private readonly ServerSettings serverSettings;
 
@@ -21,13 +20,13 @@ namespace GraduateWork.Server.UI {
 			serverSettings = LoadServerSettings();
 		}
 		private ServerSettings LoadServerSettings() {
-			var settings = FileSettings.ReadSettings<ServerSettings>(Program.ServerSettingsFileName);
+			var settings = FileSettings.ReadSettings<ServerSettings>(ServerSettings.FileName);
 			TextBoxServerAddress.Text = settings.ServerAddress;
 
 			return settings;
 		}
 		private ServerUiSettings LoadServerUiSettings() {
-			var settings = FileSettings.ReadSettings<ServerUiSettings>(serverUiSettingsFileName);
+			var settings = FileSettings.ReadSettings<ServerUiSettings>(ServerUiSettings.FileName);
 			TextBoxUserLogin.Text = settings.UserLogin;
 			PasswordBoxUserPassword.Password = settings.UserPassword;
 			CheckBoxSaveLoginAndPassword.IsChecked = settings.SaveLoginAndPassword;
@@ -42,7 +41,7 @@ namespace GraduateWork.Server.UI {
 			serverUiSettings.UserPassword = saveLoginAndPassword ? PasswordBoxUserPassword.Password : string.Empty;
 			serverUiSettings.SaveLoginAndPassword = saveLoginAndPassword;
 
-			FileSettings.WriteSettings(serverUiSettings, serverUiSettingsFileName);
+			FileSettings.WriteSettings(serverUiSettings, ServerUiSettings.FileName);
 		}
 
 		private async void ButtonRunServer_OnClick(object sender, RoutedEventArgs e) {
@@ -50,7 +49,7 @@ namespace GraduateWork.Server.UI {
 
 			try {
 				serverSettings.ServerAddress = new UriBuilder(TextBoxServerAddress.Text).ToString();
-				FileSettings.WriteSettings(serverSettings, Program.ServerSettingsFileName);
+				FileSettings.WriteSettings(serverSettings, ServerSettings.FileName);
 				await Task.Run(() => Program.RunServer());
 			}
 			catch (Exception exception) {

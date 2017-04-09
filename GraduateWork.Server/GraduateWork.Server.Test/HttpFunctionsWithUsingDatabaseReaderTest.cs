@@ -3,7 +3,8 @@ using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
-using GraduateWork.Server.Functions.Protected.WithReturn.Database;
+using GraduateWork.Server.Functions.Protected.WithReturn.Database.GetBasedProxies;
+using GraduateWork.Server.Functions.Protected.WithReturn.Database.GetExtendedProxy;
 using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
 

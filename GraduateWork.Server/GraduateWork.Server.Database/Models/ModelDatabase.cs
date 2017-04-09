@@ -23,11 +23,15 @@ namespace GraduateWork.Server.Database.Models {
 		}
 
 		public Discipline GetDiscipline(DisciplineBasedProxy discipline) {
+			var disciplineGroup = GetGroup(discipline.GroupName);
 			return Disciplines.First(d =>
-				d.DisciplineName == discipline.DisciplineName && d.Group == GetGroup(discipline.Group));
+				d.DisciplineName == discipline.DisciplineName && d.Group.GroupId == disciplineGroup.GroupId);
 		}
 		public Group GetGroup(GroupBasedProxy group) {
-			return Groups.First(g => g.GroupName == group.GroupName);
+			return GetGroup(group.GroupName);
+		}
+		public Group GetGroup(string groupName) {
+			return Groups.First(g => g.GroupName == groupName);
 		}
 		public Student GetStudent(StudentBasedProxy student) {
 			return Students.First(s =>

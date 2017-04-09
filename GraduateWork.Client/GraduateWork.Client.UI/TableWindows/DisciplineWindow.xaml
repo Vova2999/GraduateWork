@@ -27,24 +27,33 @@
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
 
-					<Label Grid.Row="0" Grid.Column="0" Content="Название дисциплины" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<Label Grid.Row="0" Grid.Column="0" Name="LabelDisciplineName" Content="Название дисциплины" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
 					<TextBox Grid.Row="0" Grid.Column="1" Name="TextBoxDisciplineName" VerticalContentAlignment="Center" />
 
-					<Label Grid.Row="2" Grid.Column="0" Content="Название группы" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<Label Grid.Row="2" Grid.Column="0" Name="LabelGroupName" Content="Название группы" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
 					<ComboBox Grid.Row="2" Grid.Column="1" Name="ComboBoxGroupName" VerticalContentAlignment="Center" />
 
-					<Label Grid.Row="4" Grid.Column="0" Content="Тип дисциплины" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<Label Grid.Row="4" Grid.Column="0" Name="LabelControlType" Content="Тип дисциплины" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
 					<ComboBox Grid.Row="4" Grid.Column="1" Name="ComboBoxControlType" VerticalContentAlignment="Center" />
 
-					<Label Grid.Row="6" Grid.Column="0" Content="Всего часов" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<Label Grid.Row="6" Grid.Column="0" Name="LabelTotalHours" Content="Всего часов" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
 					<TextBox Grid.Row="6" Grid.Column="1" Name="TextBoxTotalHours" VerticalContentAlignment="Center" />
 
-					<Label Grid.Row="8" Grid.Column="0" Content="Аудиторных часов" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+					<Label Grid.Row="8" Grid.Column="0" Name="LabelClassHours" Content="Аудиторных часов" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
 					<TextBox Grid.Row="8" Grid.Column="1" Name="TextBoxClassHours" VerticalContentAlignment="Center" />
 				</Grid>
 			</StackPanel>
 		</ScrollViewer>
 
-		<Button Grid.Row="1" Content="Ок" HorizontalAlignment="Right" MinWidth="80" Padding="15,5,15,5" Margin="3,3,0,0" />
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<Button Grid.Column="1" Content="Ок" Click="ButtonOk_OnClick" HorizontalAlignment="Right" MinWidth="80" Padding="15,5,15,5" Margin="3,3,0,0" />
+			<Button Grid.Column="2" Content="Отмена" Click="ButtonCancel_OnClick" HorizontalAlignment="Right" MinWidth="80" Padding="15,5,15,5" Margin="3,3,0,0" />
+		</Grid>
 	</Grid>
 </Window>

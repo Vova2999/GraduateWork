@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Database.Tables;
@@ -38,7 +39,7 @@ namespace GraduateWork.Server.Database.Extensions {
 			studentProxy.AssessmentByDisciplines = student.AssessmentByDisciplines.Select(
 				assessmentByDiscipline => new AssessmentByDiscipline {
 					NameOfDiscipline = assessmentByDiscipline.Discipline.DisciplineName,
-					Assessment = assessmentByDiscipline.Assessment
+					Assessment = (Assessment)assessmentByDiscipline.Assessment
 				}).ToArray();
 
 			return studentProxy;

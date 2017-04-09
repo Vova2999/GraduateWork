@@ -63,6 +63,7 @@
     <Compile Include="TableWindows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IProxyWindow.cs" />
     <Compile Include="TableWindows\StudentWindow.xaml.cs">
       <DependentUpon>StudentWindow.xaml</DependentUpon>
     </Compile>

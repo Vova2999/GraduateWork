@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using GraduateWork.Common;
+using GraduateWork.Common.Tables.Enums;
 
 namespace GraduateWork.Server.Database.Tables {
 	// ReSharper disable ClassWithVirtualMembersNeverInherited.Global

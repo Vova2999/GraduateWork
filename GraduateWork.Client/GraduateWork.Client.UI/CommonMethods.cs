@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,17 +13,34 @@ namespace GraduateWork.Client.UI {
 			public static void ReadOnly(CheckBox checkBox, bool isReadOnly) {
 				checkBox.IsEnabled = !isReadOnly;
 			}
+
+			public static void ReadOnly(ComboBox comboBox, bool isReadOnly) {
+				comboBox.IsEnabled = !isReadOnly;
+			}
 		}
 
 		public static class Check {
 			public static bool FieldIsEmpty(TextBox textBox) {
 				return string.IsNullOrEmpty(textBox.Text);
 			}
+
+			public static bool FieldIsEmpty(ComboBox comboBox) {
+				return string.IsNullOrEmpty((string)comboBox.SelectedItem);
+			}
+
+			public static bool FieldIsNotNumber(TextBox textBox) {
+				int result;
+				return !int.TryParse(textBox.Text, out result);
+			}
 		}
 
 		public static class GenerateMessage {
 			public static string FieldIsEmpty(Label label) {
 				return $"Необходимо заполнить поле '{(string)label.Content}'";
+			}
+
+			public static string FieldIsNotNumber(Label label) {
+				return $"Поле '{(string)label.Content}' должно быть числом";
 			}
 		}
 
@@ -37,16 +53,65 @@ namespace GraduateWork.Client.UI {
 			}
 		}
 
-		public static class CloseWindow {
-			public static void TrueDialogResult(Window window, bool isReadOnly, IEnumerable<string> errors, Action actionBeforeClose) {
-				if (isReadOnly)
-					window.Close();
+		public static class WorkWithTables {
+			public static void View<TBasedProxy, TExtendedProxy>(TBasedProxy selectedItem, Func<TBasedProxy, TExtendedProxy> getExtendedProxy, Func<TExtendedProxy, bool, Window> getWindow) {
+				if (selectedItem == null)
+					return;
 
-				var arrayErrors = errors.ToArray();
-				if (arrayErrors.Any())
-					ShowMessageBox.Error(string.Join("\n", arrayErrors));
+				var extendedProxy = SafeRunMethod.WithReturn(() => getExtendedProxy(selectedItem));
+				if (extendedProxy == null)
+					return;
+
+				getWindow(extendedProxy, true).ShowDialog();
+			}
+
+			public static void Add<TExtendedProxy, TWindow>(TExtendedProxy defaultExtendedProxy, Func<TExtendedProxy, bool, TWindow> getWindow, Action<TExtendedProxy> addExtendedProxy, Func<TWindow, TExtendedProxy> getExtendedProxyFromWindow) where TWindow : Window {
+				var window = getWindow(defaultExtendedProxy, false);
+				if (window.ShowDialog() != true)
+					return;
+
+				SafeRunMethod.WithoutReturn(() => addExtendedProxy(getExtendedProxyFromWindow(window)));
+			}
+
+			public static void Edit<TBasedProxy, TExtendedProxy, TWindow>(TBasedProxy selectedItem, Func<TBasedProxy, TExtendedProxy> getExtendedProxy, Func<TExtendedProxy, bool, TWindow> getWindow, Action<TExtendedProxy, TExtendedProxy> editExtendedProxy, Func<TWindow, TExtendedProxy> getExtendedProxyFromWindow) where TWindow : Window {
+				if (selectedItem == null)
+					return;
+
+				var oldProxy = SafeRunMethod.WithReturn(() => getExtendedProxy(selectedItem));
+				if (oldProxy == null)
+					return;
+
+				var window = getWindow(oldProxy, false);
+				if (window.ShowDialog() != true)
+					return;
+
+				SafeRunMethod.WithoutReturn(() => editExtendedProxy(oldProxy, getExtendedProxyFromWindow(window)));
+			}
+
+			public static void Delete<TBasedProxy, TExtendedProxy>(TBasedProxy selectedItem, Func<TBasedProxy, TExtendedProxy> getExtendedProxy, Action<TExtendedProxy> deleteExtendedProxy) {
+				if (selectedItem == null)
+					return;
+
+				var extendedProxy = SafeRunMethod.WithReturn(() => getExtendedProxy(selectedItem));
+				if (extendedProxy == null)
+					return;
+
+				SafeRunMethod.WithoutReturn(() => deleteExtendedProxy(extendedProxy));
+			}
+		}
+
+		public static class CloseWindow {
+			public static void TrueDialogResult<TWindow>(TWindow window) where TWindow : Window, IProxyWindow {
+				if (window.IsReadOnly) {
+					window.Close();
+					return;
+				}
+
+				var errors = window.GetErrors().ToArray();
+				if (errors.Any())
+					ShowMessageBox.Error(string.Join("\n", errors));
 				else {
-					actionBeforeClose();
+					window.WriteProxy();
 					window.DialogResult = true;
 					window.Close();
 				}

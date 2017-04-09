@@ -1,4 +1,4 @@
-﻿using GraduateWork.Common;
+﻿using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.UI.Extensions {

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using GraduateWork.Common.Tables.Attributes;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Common.Tables.Proxies.Extendeds {
@@ -77,8 +78,11 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 	}
 
 	public class AssessmentByDiscipline {
+		[HeaderColumn("Название дисциплины")]
 		public string NameOfDiscipline { get; set; }
-		public int? Assessment { get; set; }
+
+		[HeaderColumn("Оценка")]
+		public Assessment Assessment { get; set; }
 
 		public AssessmentByDiscipline GetClone() {
 			return new AssessmentByDiscipline {

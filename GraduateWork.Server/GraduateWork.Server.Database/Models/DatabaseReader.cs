@@ -29,7 +29,7 @@ namespace GraduateWork.Server.Database.Models {
 		public DisciplineExtendedProxy GetExtendedDiscipline(DisciplineBasedProxy discipline) {
 			return modelDatabase.GetDiscipline(discipline).ToExtendedProxy();
 		}
-		public GroupExtendedProxy GetExtendedGroup(GroupBasedProxy @group) {
+		public GroupExtendedProxy GetExtendedGroup(GroupBasedProxy group) {
 			return modelDatabase.GetGroup(group).ToExtendedProxy();
 		}
 		public StudentExtendedProxy GetExtendedStudent(StudentBasedProxy student) {

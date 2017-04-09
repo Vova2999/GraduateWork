@@ -1,4 +1,5 @@
 ﻿using GraduateWork.Common.Tables.Attributes;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Common.Tables.Proxies.Extendeds {

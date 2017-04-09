@@ -1,14 +1,14 @@
-﻿using GraduateWork.Common;
-using GraduateWork.Common.Extensions;
+﻿using GraduateWork.Common.Extensions;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;
 
-namespace GraduateWork.Server.Functions.Protected.WithReturn.Database {
+namespace GraduateWork.Server.Functions.Protected.WithReturn.Database.GetExtendedProxy {
 	public class GetExtendedUserFunction : HttpProtectedFunctionWithReturn<UserExtendedProxy> {
 		public override string NameOfCalledMethod => "GetExtendedUser";
-		protected override AccessType RequiredAccessType => AccessType.UserRead;
+		protected override AccessType RequiredAccessType => AccessType.AdminRead;
 		private readonly IDatabaseReader databaseReader;
 
 		public GetExtendedUserFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseReader databaseReader) : base(databaseAuthorizer) {
