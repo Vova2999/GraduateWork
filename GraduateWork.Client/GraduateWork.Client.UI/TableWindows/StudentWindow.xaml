@@ -135,7 +135,7 @@
 							</Grid.ColumnDefinitions>
 
 							<Label Grid.Row="0" Grid.Column="0" Name="LabelDiplomaAssessment" Content="Оценка" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-							<TextBox Grid.Row="0" Grid.Column="1" Name="TextBoxDiplomaAssessment" VerticalContentAlignment="Center" />
+							<ComboBox Grid.Row="0" Grid.Column="1" Name="ComboBoxDiplomaAssessment" VerticalContentAlignment="Center" />
 
 							<Label Grid.Row="2" Grid.Column="0" Name="LabelProtectionDate" Content="Дата защиты" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
 							<DatePicker Grid.Row="2" Grid.Column="1" Name="DatePickerProtectionDate" VerticalContentAlignment="Center" />
@@ -174,7 +174,8 @@
 				</GroupBox>
 
 				<Label Content="Оценки по дисциплинам" Foreground="IndianRed" HorizontalContentAlignment="Center" Margin="0,5,0,0" />
-				<DataGrid Name="DataGridAssessmentByDisciplines" Height="200" />
+				<DataGrid Name="DataGridAssessmentByDisciplines" Height="200">
+				</DataGrid>
 			</StackPanel>
 		</ScrollViewer>
 

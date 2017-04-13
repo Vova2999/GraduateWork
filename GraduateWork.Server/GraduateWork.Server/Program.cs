@@ -17,7 +17,7 @@ namespace GraduateWork.Server {
 			}
 		}
 		public static void RunServer() {
-			CreateHttpServer().Run(FileSettings.ReadSettings<ServerSettings>(ServerSettings.FileName).ServerAddress);
+			CreateHttpServer().Run(ServerSettings.ReadSettings().ServerAddress);
 		}
 		private static IHttpServer CreateHttpServer() {
 			var container = new StandardKernel(new NinjectDatabaseModule(), new NinjectReportsModule());

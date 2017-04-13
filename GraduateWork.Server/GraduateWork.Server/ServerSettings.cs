@@ -1,6 +1,8 @@
-﻿namespace GraduateWork.Server {
-	public class ServerSettings {
-		public const string FileName = "GraduateWork.Server.Settings.xml";
+﻿using GraduateWork.Common;
+
+namespace GraduateWork.Server {
+	public class ServerSettings : FileSettings<ServerSettings> {
+		protected override string SettingsFileName => "GraduateWork.Server.Settings.xml";
 
 		public string ServerAddress { get; set; }
 	}

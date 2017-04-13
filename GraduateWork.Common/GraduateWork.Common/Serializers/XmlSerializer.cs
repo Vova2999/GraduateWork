@@ -23,8 +23,8 @@ namespace GraduateWork.Common.Serializers {
 			xmlSerializers = new ConcurrentDictionary<Type, SystemXmlSerializer>();
 		}
 
-		public static byte[] Serializing<TKey>(TKey obj) {
-			var xmlSerializer = GetXmlSerializer(typeof(TKey));
+		public static byte[] Serializing(object obj) {
+			var xmlSerializer = GetXmlSerializer(obj.GetType());
 
 			using (var memoryStream = new MemoryStream())
 			using (var xmlWriter = XmlWriter.Create(memoryStream, settings)) {

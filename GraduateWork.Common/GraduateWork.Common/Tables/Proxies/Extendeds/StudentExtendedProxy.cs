@@ -34,7 +34,7 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 		public string DiplomaTopic { get; set; }
 
 		[HeaderColumn("Оценка диплома")]
-		public int DiplomaAssessment { get; set; }
+		public Assessment DiplomaAssessment { get; set; }
 
 		[HeaderColumn("Дата защиты")]
 		public DateTime ProtectionDate { get; set; }

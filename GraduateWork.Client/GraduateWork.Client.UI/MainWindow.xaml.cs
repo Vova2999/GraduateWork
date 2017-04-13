@@ -24,7 +24,7 @@ namespace GraduateWork.Client.UI {
 			DataGridUsers.LoadTable(typeof(UserBasedProxy));
 		}
 		private ClientUiSettings LoadClientUiSettings() {
-			var settings = FileSettings.ReadSettings<ClientUiSettings>(ClientUiSettings.FileName);
+			var settings = ClientUiSettings.ReadSettings();
 			TextBoxServerAddress.Text = settings.ServerAddress;
 			TextBoxUserLogin.Text = settings.UserLogin;
 			PasswordBoxUserPassword.Password = settings.UserPassword;
@@ -44,7 +44,7 @@ namespace GraduateWork.Client.UI {
 			clientUiSettings.UserPassword = saveLoginAndPassword ? PasswordBoxUserPassword.Password : string.Empty;
 			clientUiSettings.SaveLoginAndPassword = saveLoginAndPassword;
 
-			FileSettings.WriteSettings(clientUiSettings, ClientUiSettings.FileName);
+			clientUiSettings.WriteSettings();
 		}
 
 		private void ButtonConnectToServer_OnClick(object sender, RoutedEventArgs e) {
@@ -100,14 +100,17 @@ namespace GraduateWork.Client.UI {
 		}
 
 		private void DataGridStudents_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) {
-			CommonMethods.WorkWithTables.View((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, isReadOnly));
+			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups()).Select(group => group.GroupName).ToArray();
+			CommonMethods.WorkWithTables.View((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, isReadOnly));
 		}
 		private void MenuItemAddStudent_OnClick(object sender, RoutedEventArgs e) {
-			CommonMethods.WorkWithTables.Add(default(StudentExtendedProxy), (proxy, isReadOnly) => new StudentWindow(proxy, isReadOnly), httpClient.AddStudent, window => window.Student);
+			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups()).Select(group => group.GroupName).ToArray();
+			CommonMethods.WorkWithTables.Add(default(StudentExtendedProxy), (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, isReadOnly), httpClient.AddStudent, window => window.Student);
 			UpdateDataGridStudents();
 		}
 		private void MenuItemEditStudent_OnClick(object sender, RoutedEventArgs e) {
-			CommonMethods.WorkWithTables.Edit((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, isReadOnly), httpClient.EditStudent, window => window.Student);
+			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups()).Select(group => group.GroupName).ToArray();
+			CommonMethods.WorkWithTables.Edit((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, isReadOnly), httpClient.EditStudent, window => window.Student);
 			UpdateDataGridStudents();
 		}
 		private void MenuItemDeleteStudent_OnClick(object sender, RoutedEventArgs e) {

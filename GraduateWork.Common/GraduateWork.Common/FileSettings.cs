@@ -5,8 +5,11 @@ using GraduateWork.Common.Extensions;
 namespace GraduateWork.Common {
 	// ReSharper disable UnusedMember.Global
 
-	public static class FileSettings {
-		public static TSettings ReadSettings<TSettings>(string settingsFileName) where TSettings : new() {
+	public abstract class FileSettings<TSettings> where TSettings : FileSettings<TSettings>, new() {
+		protected abstract string SettingsFileName { get; }
+
+		public static TSettings ReadSettings() {
+			var settingsFileName = new TSettings().SettingsFileName;
 			try {
 				return File.Exists(settingsFileName)
 					? File.ReadAllBytes(settingsFileName).FromXml<TSettings>()
@@ -16,8 +19,8 @@ namespace GraduateWork.Common {
 				return new TSettings();
 			}
 		}
-		public static void WriteSettings<TSettings>(TSettings settings, string settingsFileName) {
-			File.WriteAllBytes(settingsFileName, settings.ToXml());
+		public void WriteSettings() {
+			File.WriteAllBytes(SettingsFileName, this.ToXml());
 		}
 	}
 }

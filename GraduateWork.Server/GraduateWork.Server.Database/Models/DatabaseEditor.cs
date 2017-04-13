@@ -95,7 +95,7 @@ namespace GraduateWork.Server.Database.Models {
 				DeductionName = student.DeductionName,
 				DeductionYear = student.DeductionYear,
 				DiplomaTopic = student.DiplomaTopic,
-				DiplomaAssessment = student.DiplomaAssessment,
+				DiplomaAssessment = (int)student.DiplomaAssessment,
 				ProtectionDate = student.ProtectionDate,
 				ProtocolNumber = student.ProtocolNumber,
 				RegistrationNumber = student.RegistrationNumber,
@@ -127,7 +127,7 @@ namespace GraduateWork.Server.Database.Models {
 			foundStudent.DeductionName = newStudent.DeductionName;
 			foundStudent.DeductionYear = newStudent.DeductionYear;
 			foundStudent.DiplomaTopic = newStudent.DiplomaTopic;
-			foundStudent.DiplomaAssessment = newStudent.DiplomaAssessment;
+			foundStudent.DiplomaAssessment = (int)newStudent.DiplomaAssessment;
 			foundStudent.ProtectionDate = newStudent.ProtectionDate;
 			foundStudent.ProtocolNumber = newStudent.ProtocolNumber;
 			foundStudent.RegistrationNumber = newStudent.RegistrationNumber;

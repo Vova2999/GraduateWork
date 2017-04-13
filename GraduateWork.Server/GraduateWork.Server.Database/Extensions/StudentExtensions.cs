@@ -30,7 +30,7 @@ namespace GraduateWork.Server.Database.Extensions {
 			studentProxy.DeductionName = student.DeductionName;
 			studentProxy.DeductionYear = student.DeductionYear;
 			studentProxy.DiplomaTopic = student.DiplomaTopic;
-			studentProxy.DiplomaAssessment = student.DiplomaAssessment;
+			studentProxy.DiplomaAssessment = (Assessment)student.DiplomaAssessment;
 			studentProxy.ProtectionDate = student.ProtectionDate;
 			studentProxy.ProtocolNumber = student.ProtocolNumber;
 			studentProxy.RegistrationNumber = student.RegistrationNumber;
