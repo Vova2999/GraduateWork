@@ -6,7 +6,7 @@ using GraduateWork.Server.Common.Reports;
 using GraduateWork.Server.Reports.Creators;
 
 namespace GraduateWork.Server.Reports {
-	// ReSharper disable ClassNeverInstantiated.Global
+	// ReSharper disable UnusedMember.Global
 
 	public class ReportsCreator : IReportsCreator {
 		private readonly ReportCreator[] reportCreators;

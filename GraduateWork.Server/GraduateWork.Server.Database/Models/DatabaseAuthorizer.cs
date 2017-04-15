@@ -3,7 +3,7 @@ using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Tables;
 
 namespace GraduateWork.Server.Database.Models {
-	// ReSharper disable ClassNeverInstantiated.Global
+	// ReSharper disable UnusedMember.Global
 
 	public class DatabaseAuthorizer : IDatabaseAuthorizer {
 		private readonly ModelDatabase modelDatabase;

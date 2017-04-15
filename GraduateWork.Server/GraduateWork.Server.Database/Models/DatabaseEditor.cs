@@ -8,7 +8,7 @@ using GraduateWork.Server.Database.Tables;
 using AssessmentByDiscipline = GraduateWork.Server.Database.Tables.AssessmentByDiscipline;
 
 namespace GraduateWork.Server.Database.Models {
-	// ReSharper disable ClassNeverInstantiated.Global
+	// ReSharper disable UnusedMember.Global
 
 	public class DatabaseEditor : IDatabaseEditor {
 		private readonly ModelDatabase modelDatabase;

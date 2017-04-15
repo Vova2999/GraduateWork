@@ -5,7 +5,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using GraduateWork.Common;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Http;
 

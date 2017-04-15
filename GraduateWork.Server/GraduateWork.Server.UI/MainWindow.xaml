@@ -38,10 +38,8 @@
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
-			<Button Grid.Column="0" Name="ButtonRunServer" Content="Run server"
-					Click="ButtonRunServer_OnClick" Height="25" />
-			<Button Grid.Column="2" Name="ButtonStopServer" Content="Stop server"
-					Click="ButtonStopServer_OnClick" Height="25" IsEnabled="False" />
+			<Button Grid.Column="0" Name="ButtonRunServer" Content="Run server" Click="ButtonRunServer_OnClick" Height="25" />
+			<Button Grid.Column="2" Name="ButtonStopServer" Content="Stop server" Click="ButtonStopServer_OnClick" Height="25" IsEnabled="False" />
 		</Grid>
 	</StackPanel>
 </Window>

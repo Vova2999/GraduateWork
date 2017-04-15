@@ -4,7 +4,7 @@ using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Extensions;
 
 namespace GraduateWork.Server.Database.Models {
-	// ReSharper disable ClassNeverInstantiated.Global
+	// ReSharper disable UnusedMember.Global
 
 	public class DatabaseReader : IDatabaseReader {
 		private readonly ModelDatabase modelDatabase;
