@@ -5,7 +5,6 @@ using System.Windows.Input;
 using GraduateWork.Client.Client;
 using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Client.UI.TableWindows;
-using GraduateWork.Common;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 

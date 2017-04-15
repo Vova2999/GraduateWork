@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
-using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.UI.TableWindows {
@@ -14,7 +12,7 @@ namespace GraduateWork.Client.UI.TableWindows {
 
 			Discipline = discipline?.GetExtendedClone() ?? new DisciplineExtendedProxy();
 			IsReadOnly = isReadOnly;
-			
+
 			SetGroupFields(groupNames);
 			SetReadOnly();
 		}

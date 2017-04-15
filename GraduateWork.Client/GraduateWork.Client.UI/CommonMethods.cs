@@ -40,6 +40,10 @@ namespace GraduateWork.Client.UI {
 				return string.IsNullOrEmpty((string)comboBox.SelectedItem);
 			}
 
+			public static bool FieldIsEmpty(DatePicker datePicker) {
+				return datePicker.SelectedDate == null;
+			}
+
 			public static bool FieldIsNotNumber(TextBox textBox) {
 				int result;
 				return !int.TryParse(textBox.Text, out result);
@@ -60,6 +64,7 @@ namespace GraduateWork.Client.UI {
 			public static void Information(string successfulMessage) {
 				MessageBox.Show(successfulMessage, string.Empty, MessageBoxButton.OK, MessageBoxImage.Information);
 			}
+
 			public static void Error(string exceptionMessage) {
 				MessageBox.Show(exceptionMessage, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 			}

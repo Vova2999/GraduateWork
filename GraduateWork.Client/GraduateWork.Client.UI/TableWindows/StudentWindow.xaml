@@ -174,8 +174,7 @@
 				</GroupBox>
 
 				<Label Content="Оценки по дисциплинам" Foreground="IndianRed" HorizontalContentAlignment="Center" Margin="0,5,0,0" />
-				<DataGrid Name="DataGridAssessmentByDisciplines" Height="200">
-				</DataGrid>
+				<DataGrid Name="DataGridAssessmentByDisciplines" Height="200" />
 			</StackPanel>
 		</ScrollViewer>
 
