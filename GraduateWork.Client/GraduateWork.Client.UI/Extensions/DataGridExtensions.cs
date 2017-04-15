@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Controls;
@@ -17,7 +18,8 @@ namespace GraduateWork.Client.UI.Extensions {
 				{ typeof(DateTime), GenerateDataTimeColumn },
 				{ typeof(DateTime?), GenerateDataTimeColumn },
 				{ typeof(GroupBasedProxy), GenerateGroupColumn },
-				{ typeof(Assessment), GenerateAssessmentColumn }
+				{ typeof(Assessment), GenerateAssessmentColumn },
+				{ typeof(ControlType), GenerateControlTypeColumn }
 			};
 
 		public static void LoadTable(this DataGrid dataGrid, Type type, bool isReadOnly = true) {
@@ -72,8 +74,37 @@ namespace GraduateWork.Client.UI.Extensions {
 			return new DataGridComboBoxColumn {
 				Header = header,
 				ItemsSource = CommonMethods.Enum.GetAssessmentNames(),
-				SelectedItemBinding = new Binding(bindingName)
+				SelectedItemBinding = new Binding(bindingName) {
+					Converter = new AssessmentToNameEnumValueConverter()
+				}
 			};
+		}
+		private static DataGridColumn GenerateControlTypeColumn(string header, string bindingName) {
+			return new DataGridComboBoxColumn {
+				Header = header,
+				ItemsSource = CommonMethods.Enum.GetControlTypeNames(),
+				SelectedItemBinding = new Binding(bindingName) {
+					Converter = new ControlTypeToNameEnumValueConverter()
+				}
+			};
+		}
+	}
+
+	public class AssessmentToNameEnumValueConverter : IValueConverter {
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+			return value == null ? string.Empty : CommonMethods.Enum.GetAssessmentName((Assessment)value);
+		}
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+			return CommonMethods.Enum.GetAssessmentValue((string)value);
+		}
+	}
+
+	public class ControlTypeToNameEnumValueConverter : IValueConverter {
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+			return value == null ? string.Empty : CommonMethods.Enum.GetControlTypeName((ControlType)value);
+		}
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
+			return CommonMethods.Enum.GetControlTypeValue((string)value);
 		}
 	}
 }

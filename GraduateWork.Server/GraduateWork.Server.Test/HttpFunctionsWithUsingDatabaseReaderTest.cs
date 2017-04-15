@@ -1,8 +1,10 @@
 using FakeItEasy;
 using GraduateWork.Common.Extensions;
+using GraduateWork.Common.Http;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
+using GraduateWork.Server.Functions.Protected.WithReturn.Database;
 using GraduateWork.Server.Functions.Protected.WithReturn.Database.GetBasedProxies;
 using GraduateWork.Server.Functions.Protected.WithReturn.Database.GetExtendedProxy;
 using GraduateWork.Server.Test.BaseClasses;
@@ -27,7 +29,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseReader.GetAllDisciplines()).Returns(inputDiscipline);
 
 			RunServer(new GetAllDisciplinesFunction(DatabaseAuthorizer, databaseReader));
-			var receivedDisciplines = SendRequest<DisciplineExtendedProxy[]>("GetAllDisciplines", DefaultParameters);
+			var receivedDisciplines = SendRequest<DisciplineExtendedProxy[]>("GetAllDisciplines", GetDefaultParameters());
 
 			A.CallTo(() => databaseReader.GetAllDisciplines()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputDiscipline, receivedDisciplines);
@@ -42,7 +44,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseReader.GetAllGroups()).Returns(inputGroups);
 
 			RunServer(new GetAllGroupsFunction(DatabaseAuthorizer, databaseReader));
-			var receivedGroups = SendRequest<GroupExtendedProxy[]>("GetAllGroups", DefaultParameters);
+			var receivedGroups = SendRequest<GroupExtendedProxy[]>("GetAllGroups", GetDefaultParameters());
 
 			A.CallTo(() => databaseReader.GetAllGroups()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputGroups, receivedGroups);
@@ -57,7 +59,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseReader.GetAllStudents()).Returns(inputStudents);
 
 			RunServer(new GetAllStudentsFunction(DatabaseAuthorizer, databaseReader));
-			var receivedStudents = SendRequest<StudentExtendedProxy[]>("GetAllStudents", DefaultParameters);
+			var receivedStudents = SendRequest<StudentExtendedProxy[]>("GetAllStudents", GetDefaultParameters());
 
 			A.CallTo(() => databaseReader.GetAllStudents()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputStudents, receivedStudents);
@@ -72,7 +74,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseReader.GetAllUsers()).Returns(inputUsers);
 
 			RunServer(new GetAllUsersFunction(DatabaseAuthorizer, databaseReader));
-			var receivedUsers = SendRequest<UserBasedProxy[]>("GetAllUsers", DefaultParameters);
+			var receivedUsers = SendRequest<UserBasedProxy[]>("GetAllUsers", GetDefaultParameters());
 
 			A.CallTo(() => databaseReader.GetAllUsers()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputUsers, receivedUsers);
@@ -85,7 +87,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseReader.GetExtendedDiscipline(inputBasedDiscipline)).Returns(inputExtendedDiscipline);
 
 			RunServer(new GetExtendedDisciplineFunction(DatabaseAuthorizer, databaseReader));
-			var receivedDiscipline = SendRequest<DisciplineExtendedProxy>("GetExtendedDiscipline", DefaultParameters, inputBasedDiscipline.ToJson());
+			var receivedDiscipline = SendRequest<DisciplineExtendedProxy>("GetExtendedDiscipline", GetDefaultParameters(), inputBasedDiscipline.ToJson());
 
 			A.CallTo(() => databaseReader.GetExtendedDiscipline(inputBasedDiscipline)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedDiscipline, Is.EqualTo(inputExtendedDiscipline));
@@ -98,7 +100,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseReader.GetExtendedGroup(inputBasedGroup)).Returns(inputExtendedGroup);
 
 			RunServer(new GetExtendedGroupFunction(DatabaseAuthorizer, databaseReader));
-			var receivedGroup = SendRequest<GroupExtendedProxy>("GetExtendedGroup", DefaultParameters, inputBasedGroup.ToJson());
+			var receivedGroup = SendRequest<GroupExtendedProxy>("GetExtendedGroup", GetDefaultParameters(), inputBasedGroup.ToJson());
 
 			A.CallTo(() => databaseReader.GetExtendedGroup(inputBasedGroup)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedGroup, Is.EqualTo(inputExtendedGroup));
@@ -111,7 +113,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseReader.GetExtendedStudent(inputBasedStudent)).Returns(inputExtendedStudent);
 
 			RunServer(new GetExtendedStudentFunction(DatabaseAuthorizer, databaseReader));
-			var receivedStudent = SendRequest<StudentExtendedProxy>("GetExtendedStudent", DefaultParameters, inputBasedStudent.ToJson());
+			var receivedStudent = SendRequest<StudentExtendedProxy>("GetExtendedStudent", GetDefaultParameters(), inputBasedStudent.ToJson());
 
 			A.CallTo(() => databaseReader.GetExtendedStudent(inputBasedStudent)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedStudent, Is.EqualTo(inputExtendedStudent));
@@ -124,10 +126,25 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseReader.GetExtendedUser(inputBasedUser)).Returns(inputExtendedUser);
 
 			RunServer(new GetExtendedUserFunction(DatabaseAuthorizer, databaseReader));
-			var receivedUser = SendRequest<UserExtendedProxy>("GetExtendedUser", DefaultParameters, inputBasedUser.ToJson());
+			var receivedUser = SendRequest<UserExtendedProxy>("GetExtendedUser", GetDefaultParameters(), inputBasedUser.ToJson());
 
 			A.CallTo(() => databaseReader.GetExtendedUser(inputBasedUser)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedUser, Is.EqualTo(inputExtendedUser));
+		}
+
+		[Test]
+		public void GetDisciplineNamesFromGroupNameFunctionTest_ShouldBeSuccess() {
+			var groupName = "firstGroup";
+			var inputDisciplineNames = new[] { "firstNameOfGroup", "secondNameOfGroup" };
+			A.CallTo(() => databaseReader.GetDisciplineNamesFromGroupName(groupName)).Returns(inputDisciplineNames);
+
+			RunServer(new GetDisciplineNamesFromGroupNameFunction(DatabaseAuthorizer, databaseReader));
+			var parameters = GetDefaultParameters();
+			parameters[HttpParameters.GroupName] = groupName;
+			var receivedDisciplineNames = SendRequest<string[]>("GetDisciplineNamesFromGroupName", parameters);
+
+			A.CallTo(() => databaseReader.GetDisciplineNamesFromGroupName(groupName)).MustHaveHappened(Repeated.Exactly.Once);
+			CollectionAssert.AreEqual(inputDisciplineNames, receivedDisciplineNames);
 		}
 	}
 }

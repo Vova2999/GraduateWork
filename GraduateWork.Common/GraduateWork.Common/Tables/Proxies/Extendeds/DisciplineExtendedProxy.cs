@@ -1,5 +1,4 @@
 ﻿using GraduateWork.Common.Tables.Attributes;
-using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Common.Tables.Proxies.Extendeds {
@@ -9,9 +8,6 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 	// ReSharper disable UnusedMember.Global
 
 	public class DisciplineExtendedProxy : DisciplineBasedProxy {
-		[HeaderColumn("Тип дисциплины")]
-		public ControlType ControlType { get; set; }
-
 		[HeaderColumn("Всего часов")]
 		public int TotalHours { get; set; }
 
@@ -20,7 +16,6 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 
 		public DisciplineExtendedProxy GetExtendedClone() {
 			var clone = GetClone<DisciplineExtendedProxy>();
-			clone.ControlType = ControlType;
 			clone.TotalHours = TotalHours;
 			clone.ClassHours = ClassHours;
 

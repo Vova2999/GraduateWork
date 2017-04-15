@@ -81,12 +81,16 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 		[HeaderColumn("Название дисциплины")]
 		public string NameOfDiscipline { get; set; }
 
+		[HeaderColumn("Тип дисциплины")]
+		public ControlType ControlType { get; set; }
+
 		[HeaderColumn("Оценка")]
 		public Assessment Assessment { get; set; }
 
 		public AssessmentByDiscipline GetClone() {
 			return new AssessmentByDiscipline {
 				NameOfDiscipline = NameOfDiscipline,
+				ControlType = ControlType,
 				Assessment = Assessment
 			};
 		}

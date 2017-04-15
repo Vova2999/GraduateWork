@@ -24,7 +24,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => reportsCreator.CreateAcadem(student)).Returns(fileWithContent);
 
 			RunServer(new CreateAcademReportFunction(DatabaseAuthorizer, reportsCreator));
-			var receivedFileWithContent = SendRequest<FileWithContent>("CreateAcademReport", DefaultParameters, student.ToJson());
+			var receivedFileWithContent = SendRequest<FileWithContent>("CreateAcademReport", GetDefaultParameters(), student.ToJson());
 
 			A.CallTo(() => reportsCreator.CreateAcadem(student)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedFileWithContent.FileName, Is.EqualTo(fileWithContent.FileName));
@@ -37,7 +37,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => reportsCreator.CreateDiploma(student)).Returns(fileWithContent);
 
 			RunServer(new CreateDiplomaReportFunction(DatabaseAuthorizer, reportsCreator));
-			var receivedFileWithContent = SendRequest<FileWithContent>("CreateDiplomaReport", DefaultParameters, student.ToJson());
+			var receivedFileWithContent = SendRequest<FileWithContent>("CreateDiplomaReport", GetDefaultParameters(), student.ToJson());
 
 			A.CallTo(() => reportsCreator.CreateDiploma(student)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedFileWithContent.FileName, Is.EqualTo(fileWithContent.FileName));
@@ -50,7 +50,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => reportsCreator.CreateDiplomaSupplement(student)).Returns(fileWithContent);
 
 			RunServer(new CreateDiplomaSupplementReportFunction(DatabaseAuthorizer, reportsCreator));
-			var receivedFileWithContent = SendRequest<FileWithContent>("CreateDiplomaSupplementReport", DefaultParameters, student.ToJson());
+			var receivedFileWithContent = SendRequest<FileWithContent>("CreateDiplomaSupplementReport", GetDefaultParameters(), student.ToJson());
 
 			A.CallTo(() => reportsCreator.CreateDiplomaSupplement(student)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedFileWithContent.FileName, Is.EqualTo(fileWithContent.FileName));

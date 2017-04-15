@@ -10,6 +10,8 @@ namespace GraduateWork.Client.Client {
 		void Ping();
 		void CheckUserIsExist(string login, string password);
 
+		string[] GetDisciplineNamesFromGroupName(string groupName);
+
 		DisciplineBasedProxy[] GetAllDisciplines();
 		GroupBasedProxy[] GetAllGroups();
 		StudentBasedProxy[] GetAllStudents();

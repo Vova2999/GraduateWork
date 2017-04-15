@@ -41,7 +41,7 @@ namespace GraduateWork.Server.Database.Models {
 					s.DateOfBirth == student.DateOfBirth);
 		}
 		public User GetUser(UserBasedProxy user) {
-			return Users.First(u => u.Login == user.Login && u.Password == user.Password);
+			return Users.First(u => u.Login == user.Login);
 		}
 	}
 }

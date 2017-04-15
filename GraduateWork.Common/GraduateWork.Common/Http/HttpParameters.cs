@@ -2,7 +2,8 @@
 	// ReSharper disable UnusedMember.Global
 
 	public static class HttpParameters {
-		public static string Login = "Login";
-		public static string Password = "Password";
+		public const string Login = "Login";
+		public const string Password = "Password";
+		public const string GroupName = "GroupName";
 	}
 }

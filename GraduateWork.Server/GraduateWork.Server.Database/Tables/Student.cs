@@ -20,7 +20,7 @@ namespace GraduateWork.Server.Database.Tables {
 		[Required, MaxLength(25), Index("IX_StudentUniques", 3, IsUnique = true)]
 		public string ThirdName { get; set; }
 
-		[Required, Index("IX_StudentIdentifiers", 4, IsUnique = true)]
+		[Required, Index("IX_StudentUniques", 4, IsUnique = true)]
 		public DateTime DateOfBirth { get; set; }
 
 		[Required, MaxLength(100)]

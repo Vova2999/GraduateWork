@@ -1,4 +1,5 @@
-﻿using GraduateWork.Common.Tables.Proxies.Baseds;
+﻿using System.Linq;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Extensions;
@@ -11,6 +12,10 @@ namespace GraduateWork.Server.Database.Models {
 
 		public DatabaseReader(ModelDatabase modelDatabase) {
 			this.modelDatabase = modelDatabase;
+		}
+
+		public string[] GetDisciplineNamesFromGroupName(string groupName) {
+			return modelDatabase.GetGroup(groupName).Disciplines.Select(discipline => discipline.DisciplineName).ToArray();
 		}
 
 		public DisciplineBasedProxy[] GetAllDisciplines() {

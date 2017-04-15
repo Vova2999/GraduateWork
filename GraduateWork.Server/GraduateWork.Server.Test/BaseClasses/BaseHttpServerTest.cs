@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -13,11 +12,10 @@ using NUnit.Framework;
 namespace GraduateWork.Server.Test.BaseClasses {
 	public class BaseHttpServerTest : BaseHttpClient {
 		private const string nameOfCalledStopFunction = "Stop";
-		protected readonly Dictionary<string, string> DefaultParameters = new Dictionary<string, string>();
 
 		[TearDown]
 		public void BaseHttpServerTest_TearDown() {
-			SendRequest(nameOfCalledStopFunction, DefaultParameters);
+			SendRequest(nameOfCalledStopFunction);
 			Thread.Sleep(200);
 		}
 

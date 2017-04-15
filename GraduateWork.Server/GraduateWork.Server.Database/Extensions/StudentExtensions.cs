@@ -39,6 +39,7 @@ namespace GraduateWork.Server.Database.Extensions {
 			studentProxy.AssessmentByDisciplines = student.AssessmentByDisciplines.Select(
 				assessmentByDiscipline => new AssessmentByDiscipline {
 					NameOfDiscipline = assessmentByDiscipline.Discipline.DisciplineName,
+					ControlType = assessmentByDiscipline.Discipline.ControlType,
 					Assessment = (Assessment)assessmentByDiscipline.Assessment
 				}).ToArray();
 

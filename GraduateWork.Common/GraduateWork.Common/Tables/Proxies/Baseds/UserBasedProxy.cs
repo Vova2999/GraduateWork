@@ -11,17 +11,13 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 		[HeaderColumn("Логин")]
 		public string Login { get; set; }
 
-		[HeaderColumn("Пароль")]
-		public string Password { get; set; }
-
 		public override bool Equals(object obj) {
 			var that = (UserBasedProxy)obj;
 			return that != null &&
-				string.Equals(Login, that.Login, StringComparison.InvariantCultureIgnoreCase) &&
-				string.Equals(Password, that.Password, StringComparison.InvariantCultureIgnoreCase);
+				string.Equals(Login, that.Login, StringComparison.InvariantCultureIgnoreCase);
 		}
 		public override int GetHashCode() {
-			return ((Login?.GetHashCode() ?? 0) * 397) ^ (Password?.GetHashCode() ?? 0);
+			return Login?.GetHashCode() ?? 0;
 		}
 
 		public UserBasedProxy GetBasedClone() {
@@ -29,8 +25,7 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 		}
 		public TProxy GetClone<TProxy>() where TProxy : UserBasedProxy, new() {
 			return new TProxy {
-				Login = Login,
-				Password = Password
+				Login = Login
 			};
 		}
 	}

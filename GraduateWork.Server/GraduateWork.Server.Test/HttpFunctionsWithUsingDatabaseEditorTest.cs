@@ -25,7 +25,7 @@ namespace GraduateWork.Server.Test {
 			var discipline = new DisciplineExtendedProxy { DisciplineName = "nameOfDiscipline" };
 
 			RunServer(new AddDisciplineFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("AddDiscipline", DefaultParameters, discipline.ToJson());
+			SendRequest("AddDiscipline", GetDefaultParameters(), discipline.ToJson());
 
 			A.CallTo(() => databaseEditor.AddDiscipline(discipline)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -35,7 +35,7 @@ namespace GraduateWork.Server.Test {
 			var group = new GroupExtendedProxy { GroupName = "nameOfGroup" };
 
 			RunServer(new AddGroupFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("AddGroup", DefaultParameters, group.ToJson());
+			SendRequest("AddGroup", GetDefaultParameters(), group.ToJson());
 
 			A.CallTo(() => databaseEditor.AddGroup(group)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -45,7 +45,7 @@ namespace GraduateWork.Server.Test {
 			var student = new StudentExtendedProxy { FirstName = "firstName" };
 
 			RunServer(new AddStudentFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("AddStudent", DefaultParameters, student.ToJson());
+			SendRequest("AddStudent", GetDefaultParameters(), student.ToJson());
 
 			A.CallTo(() => databaseEditor.AddStudent(student)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -55,7 +55,7 @@ namespace GraduateWork.Server.Test {
 			var user = new UserExtendedProxy { Login = "login" };
 
 			RunServer(new AddUserFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("AddUser", DefaultParameters, user.ToJson());
+			SendRequest("AddUser", GetDefaultParameters(), user.ToJson());
 
 			A.CallTo(() => databaseEditor.AddUser(user)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -65,7 +65,7 @@ namespace GraduateWork.Server.Test {
 			var discipline = new DisciplineExtendedProxy { DisciplineName = "nameOfDiscipline" };
 
 			RunServer(new DeleteDisciplineFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("DeleteDiscipline", DefaultParameters, discipline.ToJson());
+			SendRequest("DeleteDiscipline", GetDefaultParameters(), discipline.ToJson());
 
 			A.CallTo(() => databaseEditor.DeleteDiscipline(discipline)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -75,7 +75,7 @@ namespace GraduateWork.Server.Test {
 			var group = new GroupExtendedProxy { GroupName = "nameOfGroup" };
 
 			RunServer(new DeleteGroupFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("DeleteGroup", DefaultParameters, group.ToJson());
+			SendRequest("DeleteGroup", GetDefaultParameters(), group.ToJson());
 
 			A.CallTo(() => databaseEditor.DeleteGroup(group)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -85,7 +85,7 @@ namespace GraduateWork.Server.Test {
 			var student = new StudentExtendedProxy { FirstName = "firstName" };
 
 			RunServer(new DeleteStudentFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("DeleteStudent", DefaultParameters, student.ToJson());
+			SendRequest("DeleteStudent", GetDefaultParameters(), student.ToJson());
 
 			A.CallTo(() => databaseEditor.DeleteStudent(student)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -95,7 +95,7 @@ namespace GraduateWork.Server.Test {
 			var user = new UserExtendedProxy { Login = "login" };
 
 			RunServer(new DeleteUserFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("DeleteUser", DefaultParameters, user.ToJson());
+			SendRequest("DeleteUser", GetDefaultParameters(), user.ToJson());
 
 			A.CallTo(() => databaseEditor.DeleteUser(user)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -106,7 +106,7 @@ namespace GraduateWork.Server.Test {
 			var secondDiscipline = new DisciplineExtendedProxy { DisciplineName = "secondNameOfDiscipline" };
 
 			RunServer(new EditDisciplineFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("EditDiscipline", DefaultParameters, Tuple.Create(firstDiscipline, secondDiscipline).ToJson());
+			SendRequest("EditDiscipline", GetDefaultParameters(), Tuple.Create(firstDiscipline, secondDiscipline).ToJson());
 
 			A.CallTo(() => databaseEditor.EditDiscipline(firstDiscipline, secondDiscipline)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -117,7 +117,7 @@ namespace GraduateWork.Server.Test {
 			var secondGroup = new GroupExtendedProxy { GroupName = "secondNameOfGroup" };
 
 			RunServer(new EditGroupFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("EditGroup", DefaultParameters, Tuple.Create(firstGroup, secondGroup).ToJson());
+			SendRequest("EditGroup", GetDefaultParameters(), Tuple.Create(firstGroup, secondGroup).ToJson());
 
 			A.CallTo(() => databaseEditor.EditGroup(firstGroup, secondGroup)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -128,7 +128,7 @@ namespace GraduateWork.Server.Test {
 			var secondStudent = new StudentExtendedProxy { FirstName = "secondFirstName" };
 
 			RunServer(new EditStudentFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("EditStudent", DefaultParameters, Tuple.Create(firstStudent, secondStudent).ToJson());
+			SendRequest("EditStudent", GetDefaultParameters(), Tuple.Create(firstStudent, secondStudent).ToJson());
 
 			A.CallTo(() => databaseEditor.EditStudent(firstStudent, secondStudent)).MustHaveHappened(Repeated.Exactly.Once);
 		}
@@ -139,7 +139,7 @@ namespace GraduateWork.Server.Test {
 			var secondUser = new UserExtendedProxy { Login = "secondLogin" };
 
 			RunServer(new EditUserFunction(DatabaseAuthorizer, databaseEditor));
-			SendRequest("EditUser", DefaultParameters, Tuple.Create(firstUser, secondUser).ToJson());
+			SendRequest("EditUser", GetDefaultParameters(), Tuple.Create(firstUser, secondUser).ToJson());
 
 			A.CallTo(() => databaseEditor.EditUser(firstUser, secondUser)).MustHaveHappened(Repeated.Exactly.Once);
 		}

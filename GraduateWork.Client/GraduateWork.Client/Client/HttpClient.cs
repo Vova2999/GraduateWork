@@ -25,6 +25,13 @@ namespace GraduateWork.Client.Client {
 				});
 		}
 
+		public string[] GetDisciplineNamesFromGroupName(string groupName) {
+			var parameters = GetDefaultParameters();
+			parameters[HttpParameters.GroupName] = groupName;
+
+			return SendRequest<string[]>("GetDisciplineNamesFromGroupName", parameters);
+		}
+
 		public DisciplineBasedProxy[] GetAllDisciplines() {
 			return SendRequest<DisciplineBasedProxy[]>("GetAllDisciplines", GetDefaultParameters());
 		}

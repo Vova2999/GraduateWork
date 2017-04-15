@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
@@ -9,11 +8,13 @@ namespace GraduateWork.Client.UI.TableWindows {
 	// ReSharper disable PossibleInvalidOperationException
 
 	public partial class StudentWindow : IProxyWindow {
+		private readonly Func<string, string[]> getDisciplineNamesFromGroupName;
 		public readonly StudentExtendedProxy Student;
 		public bool IsReadOnly { get; }
 
-		public StudentWindow(StudentExtendedProxy student, string[] groupNames, bool isReadOnly) {
+		public StudentWindow(StudentExtendedProxy student, string[] groupNames, Func<string, string[]> getDisciplineNamesFromGroupName, bool isReadOnly) {
 			InitializeComponent();
+			this.getDisciplineNamesFromGroupName = getDisciplineNamesFromGroupName;
 
 			Student = student?.GetExtendedClone() ?? new StudentExtendedProxy();
 			IsReadOnly = isReadOnly;
@@ -21,7 +22,7 @@ namespace GraduateWork.Client.UI.TableWindows {
 			DataGridAssessmentByDisciplines.LoadTable(typeof(AssessmentByDiscipline), false);
 
 			SetGroupFields(groupNames);
-			SetReadOnly(student != null);
+			SetReadOnly();
 		}
 		private void SetGroupFields(string[] groupNames) {
 			TextBoxFirstName.Text = Student.FirstName;
@@ -46,13 +47,9 @@ namespace GraduateWork.Client.UI.TableWindows {
 				DatePickerRegistrationDate.SelectedDate = Student.RegistrationDate;
 			ComboBoxGroupName.ItemsSource = groupNames;
 			ComboBoxGroupName.SelectedItem = Student.Group?.GroupName;
-			DataGridAssessmentByDisciplines.ItemsSource = Student.AssessmentByDisciplines?
-				.Select(assessmentByDiscipline => new NameAssessmentValueByDiscipline {
-					NameOfDiscipline = assessmentByDiscipline.NameOfDiscipline,
-					Assessment = CommonMethods.Enum.GetAssessmentName(assessmentByDiscipline.Assessment)
-				}).ToArray();
+			DataGridAssessmentByDisciplines.ItemsSource = Student.AssessmentByDisciplines;
 		}
-		private void SetReadOnly(bool readOnlyComboBoxGroupName) {
+		private void SetReadOnly() {
 			CommonMethods.Set.ReadOnly(TextBoxFirstName, IsReadOnly);
 			CommonMethods.Set.ReadOnly(TextBoxSecondName, IsReadOnly);
 			CommonMethods.Set.ReadOnly(TextBoxThirdName, IsReadOnly);
@@ -69,7 +66,7 @@ namespace GraduateWork.Client.UI.TableWindows {
 			CommonMethods.Set.ReadOnly(TextBoxProtocolNumber, IsReadOnly);
 			CommonMethods.Set.ReadOnly(TextBoxRegistrationNumber, IsReadOnly);
 			CommonMethods.Set.ReadOnly(DatePickerRegistrationDate, IsReadOnly);
-			CommonMethods.Set.ReadOnly(ComboBoxGroupName, readOnlyComboBoxGroupName || IsReadOnly);
+			CommonMethods.Set.ReadOnly(ComboBoxGroupName, IsReadOnly);
 			CommonMethods.Set.ReadOnly(DataGridAssessmentByDisciplines, IsReadOnly);
 		}
 
@@ -137,13 +134,6 @@ namespace GraduateWork.Client.UI.TableWindows {
 
 			if (CommonMethods.Check.FieldIsEmpty(ComboBoxGroupName))
 				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelGroupName);
-
-			if (DataGridAssessmentByDisciplines.ItemsSource == null)
-				yield break;
-			foreach (var disciplineName in ((NameAssessmentValueByDiscipline[])DataGridAssessmentByDisciplines.ItemsSource)
-				.Where(assessmentByDiscipline => string.IsNullOrEmpty(assessmentByDiscipline.Assessment))
-				.Select(assessmentByDiscipline => assessmentByDiscipline.NameOfDiscipline))
-				yield return $"Выберите оценку для предмета '{disciplineName}'";
 		}
 		public void WriteProxy() {
 			Student.FirstName = TextBoxFirstName.Text;
@@ -163,18 +153,7 @@ namespace GraduateWork.Client.UI.TableWindows {
 			Student.RegistrationNumber = TextBoxRegistrationNumber.Text;
 			Student.RegistrationDate = DatePickerRegistrationDate.SelectedDate.Value;
 			Student.Group = new GroupExtendedProxy { GroupName = (string)ComboBoxGroupName.SelectedItem };
-			var nameAssessmentValueByDisciplines = (NameAssessmentValueByDiscipline[])DataGridAssessmentByDisciplines.ItemsSource;
-
-			if (Student.AssessmentByDisciplines == null)
-				return;
-			foreach (var assessmentByDiscipline in Student.AssessmentByDisciplines)
-				assessmentByDiscipline.Assessment = CommonMethods.Enum.GetAssessmentValue(nameAssessmentValueByDisciplines
-					.First(x => x.NameOfDiscipline == assessmentByDiscipline.NameOfDiscipline).Assessment);
-		}
-
-		private class NameAssessmentValueByDiscipline {
-			public string NameOfDiscipline { get; set; }
-			public string Assessment { get; set; }
+			Student.AssessmentByDisciplines = (AssessmentByDiscipline[])DataGridAssessmentByDisciplines.ItemsSource;
 		}
 	}
 }

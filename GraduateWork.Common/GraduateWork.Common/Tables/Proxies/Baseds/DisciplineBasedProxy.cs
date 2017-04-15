@@ -1,5 +1,6 @@
 ﻿using System;
 using GraduateWork.Common.Tables.Attributes;
+using GraduateWork.Common.Tables.Enums;
 
 namespace GraduateWork.Common.Tables.Proxies.Baseds {
 	// ReSharper disable MemberCanBePrivate.Global
@@ -10,6 +11,9 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 		[HeaderColumn("Название дисциплины")]
 		public string DisciplineName { get; set; }
 
+		[HeaderColumn("Тип дисциплины")]
+		public ControlType ControlType { get; set; }
+
 		[HeaderColumn("Название группы")]
 		public string GroupName { get; set; }
 
@@ -17,10 +21,11 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 			var that = obj as DisciplineBasedProxy;
 			return that != null &&
 				string.Equals(DisciplineName, that.DisciplineName, StringComparison.InvariantCultureIgnoreCase) &&
+				ControlType == that.ControlType &&
 				string.Equals(GroupName, that.GroupName, StringComparison.InvariantCultureIgnoreCase);
 		}
 		public override int GetHashCode() {
-			return ((DisciplineName?.GetHashCode() ?? 0) * 397) ^ (GroupName?.GetHashCode() ?? 0);
+			return (DisciplineName?.GetHashCode() ?? 0 * 397) ^ (int)ControlType * 397 ^ (GroupName?.GetHashCode() ?? 0);
 		}
 
 		public DisciplineBasedProxy GetBasedClone() {
@@ -29,6 +34,7 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 		protected TProxy GetClone<TProxy>() where TProxy : DisciplineBasedProxy, new() {
 			return new TProxy {
 				DisciplineName = DisciplineName,
+				ControlType = ControlType,
 				GroupName = GroupName
 			};
 		}

@@ -19,7 +19,7 @@ namespace GraduateWork.Server.Test {
 		public void CalledFunctionDoesNotExist_ShouldBeThrowException() {
 			RunServer();
 
-			var exception = Assert.Catch<WebException>(() => SendRequest("notExistFunction", DefaultParameters));
+			var exception = Assert.Catch<WebException>(() => SendRequest("notExistFunction"));
 			Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
 		}
 
@@ -36,7 +36,7 @@ namespace GraduateWork.Server.Test {
 
 			RunServer(function);
 
-			var exception = Assert.Catch<WebException>(() => SendRequest(nameOfCalledMethod, DefaultParameters));
+			var exception = Assert.Catch<WebException>(() => SendRequest(nameOfCalledMethod));
 			Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(exceptionStatusCode));
 			Assert.That(exception.Response.GetResponseStream().ReadAndDispose().FromJson<string>(), Is.EqualTo(exceptionMessage));
 		}
@@ -53,7 +53,7 @@ namespace GraduateWork.Server.Test {
 
 			RunServer(function);
 
-			var exception = Assert.Catch<WebException>(() => SendRequest(nameOfCalledMethod, DefaultParameters));
+			var exception = Assert.Catch<WebException>(() => SendRequest(nameOfCalledMethod));
 			Assert.That(((HttpWebResponse)exception.Response).StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
 			Assert.That(exception.Response.GetResponseStream().ReadAndDispose().FromJson<string>(), Is.EqualTo(exceptionMessage));
 		}

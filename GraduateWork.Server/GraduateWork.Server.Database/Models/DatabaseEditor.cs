@@ -41,11 +41,28 @@ namespace GraduateWork.Server.Database.Models {
 		}
 		public void EditDiscipline(DisciplineExtendedProxy oldDiscipline, DisciplineExtendedProxy newDiscipline) {
 			var foundDiscipline = modelDatabase.GetDiscipline(oldDiscipline);
+			var newGroupDiscipline = modelDatabase.GetGroup(newDiscipline.GroupName);
 
 			foundDiscipline.DisciplineName = newDiscipline.DisciplineName;
-			foundDiscipline.ControlType = newDiscipline.ControlType;
 			foundDiscipline.TotalHours = newDiscipline.TotalHours;
 			foundDiscipline.ClassHours = newDiscipline.ClassHours;
+			if (foundDiscipline.ControlType != newDiscipline.ControlType) {
+				foreach (var assessmentByDiscipline in modelDatabase.AssessmentByDisciplines.Where(a => a.Discipline.DisciplineId == foundDiscipline.DisciplineId))
+					assessmentByDiscipline.Assessment = (int)Assessment.None;
+				foundDiscipline.ControlType = newDiscipline.ControlType;
+			}
+			if (foundDiscipline.Group.GroupId != newGroupDiscipline.GroupId) {
+				DeleteAssessmentByDisciplines(assessmentByDiscipline => assessmentByDiscipline.Discipline.DisciplineId == foundDiscipline.DisciplineId);
+				modelDatabase.AssessmentByDisciplines.AddRange(
+					newGroupDiscipline.Students.Select(student =>
+						new AssessmentByDiscipline {
+							Student = student,
+							Discipline = foundDiscipline,
+							Group = newGroupDiscipline,
+							Assessment = (int)Assessment.None
+						}));
+				foundDiscipline.Group = newGroupDiscipline;
+			}
 
 			modelDatabase.SaveChanges();
 		}
@@ -106,8 +123,8 @@ namespace GraduateWork.Server.Database.Models {
 				new AssessmentByDiscipline {
 					Student = newStudent,
 					Discipline = discipline,
-					Group = newStudent.Group,
-					Assessment = (int)Assessment.None
+					Group = foundGroup,
+					Assessment = (int)student.AssessmentByDisciplines.First(a => a.NameOfDiscipline == discipline.DisciplineName).Assessment
 				}).ToList();
 
 			modelDatabase.Students.Add(newStudent);

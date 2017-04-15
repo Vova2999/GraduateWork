@@ -21,6 +21,7 @@ namespace GraduateWork.Server.Database.Extensions {
 		}
 		public static UserExtendedProxy ToExtendedProxy(this User user) {
 			var userProxy = ToProxy<UserExtendedProxy>(user);
+			userProxy.Password = user.Password;
 			userProxy.AccessType = user.AccessType;
 
 			return userProxy;
@@ -28,8 +29,7 @@ namespace GraduateWork.Server.Database.Extensions {
 
 		private static TUserProxy ToProxy<TUserProxy>(User user) where TUserProxy : UserBasedProxy, new() {
 			return new TUserProxy {
-				Login = user.Login,
-				Password = user.Password
+				Login = user.Login
 			};
 		}
 	}

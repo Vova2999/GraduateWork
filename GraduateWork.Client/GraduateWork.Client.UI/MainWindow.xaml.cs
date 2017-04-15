@@ -64,16 +64,16 @@ namespace GraduateWork.Client.UI {
 		}
 
 		private void DataGridDisciplines_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) {
-			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups()).Select(group => group.GroupName).ToArray();
+			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups())?.Select(group => group.GroupName).ToArray();
 			CommonMethods.WorkWithTables.View((DisciplineBasedProxy)DataGridDisciplines.SelectedItem, httpClient.GetExtendedDiscipline, (proxy, isReadOnly) => new DisciplineWindow(proxy, groupNames, isReadOnly));
 		}
 		private void MenuItemAddDiscipline_OnClick(object sender, RoutedEventArgs e) {
-			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups()).Select(group => group.GroupName).ToArray();
+			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups())?.Select(group => group.GroupName).ToArray();
 			CommonMethods.WorkWithTables.Add(default(DisciplineExtendedProxy), (proxy, isReadOnly) => new DisciplineWindow(proxy, groupNames, isReadOnly), httpClient.AddDiscipline, window => window.Discipline);
 			UpdateDataGridDisciplines();
 		}
 		private void MenuItemEditDiscipline_OnClick(object sender, RoutedEventArgs e) {
-			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups()).Select(group => group.GroupName).ToArray();
+			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups())?.Select(group => group.GroupName).ToArray();
 			CommonMethods.WorkWithTables.Edit((DisciplineBasedProxy)DataGridDisciplines.SelectedItem, httpClient.GetExtendedDiscipline, (proxy, isReadOnly) => new DisciplineWindow(proxy, groupNames, isReadOnly), httpClient.EditDiscipline, window => window.Discipline);
 			UpdateDataGridDisciplines();
 		}
@@ -99,17 +99,17 @@ namespace GraduateWork.Client.UI {
 		}
 
 		private void DataGridStudents_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) {
-			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups()).Select(group => group.GroupName).ToArray();
-			CommonMethods.WorkWithTables.View((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, isReadOnly));
+			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups())?.Select(group => group.GroupName).ToArray();
+			CommonMethods.WorkWithTables.View((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, httpClient.GetDisciplineNamesFromGroupName, isReadOnly));
 		}
 		private void MenuItemAddStudent_OnClick(object sender, RoutedEventArgs e) {
-			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups()).Select(group => group.GroupName).ToArray();
-			CommonMethods.WorkWithTables.Add(default(StudentExtendedProxy), (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, isReadOnly), httpClient.AddStudent, window => window.Student);
+			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups())?.Select(group => group.GroupName).ToArray();
+			CommonMethods.WorkWithTables.Add(default(StudentExtendedProxy), (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, httpClient.GetDisciplineNamesFromGroupName, isReadOnly), httpClient.AddStudent, window => window.Student);
 			UpdateDataGridStudents();
 		}
 		private void MenuItemEditStudent_OnClick(object sender, RoutedEventArgs e) {
-			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups()).Select(group => group.GroupName).ToArray();
-			CommonMethods.WorkWithTables.Edit((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, isReadOnly), httpClient.EditStudent, window => window.Student);
+			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups())?.Select(group => group.GroupName).ToArray();
+			CommonMethods.WorkWithTables.Edit((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, httpClient.GetDisciplineNamesFromGroupName, isReadOnly), httpClient.EditStudent, window => window.Student);
 			UpdateDataGridStudents();
 		}
 		private void MenuItemDeleteStudent_OnClick(object sender, RoutedEventArgs e) {

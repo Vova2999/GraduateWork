@@ -21,7 +21,6 @@ namespace GraduateWork.Server.Database.Extensions {
 		}
 		public static DisciplineExtendedProxy ToExtendedProxy(this Discipline discipline) {
 			var disciplineProxy = ToProxy<DisciplineExtendedProxy>(discipline);
-			disciplineProxy.ControlType = discipline.ControlType;
 			disciplineProxy.TotalHours = discipline.TotalHours;
 			disciplineProxy.ClassHours = discipline.ClassHours;
 
@@ -31,6 +30,7 @@ namespace GraduateWork.Server.Database.Extensions {
 		private static TDisciplineProxy ToProxy<TDisciplineProxy>(Discipline discipline) where TDisciplineProxy : DisciplineBasedProxy, new() {
 			return new TDisciplineProxy {
 				DisciplineName = discipline.DisciplineName,
+				ControlType = discipline.ControlType,
 				GroupName = discipline.Group.GroupName
 			};
 		}
