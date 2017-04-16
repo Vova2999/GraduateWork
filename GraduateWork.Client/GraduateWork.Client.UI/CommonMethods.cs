@@ -105,15 +105,11 @@ namespace GraduateWork.Client.UI {
 				SafeRunMethod.WithoutReturn(() => editExtendedProxy(oldProxy, getExtendedProxyFromWindow(window)));
 			}
 
-			public static void Delete<TBasedProxy, TExtendedProxy>(TBasedProxy selectedItem, Func<TBasedProxy, TExtendedProxy> getExtendedProxy, Action<TExtendedProxy> deleteExtendedProxy) {
+			public static void Delete<TBasedProxy>(TBasedProxy selectedItem, Action<TBasedProxy> deleteBasedProxy) {
 				if (selectedItem == null)
 					return;
 
-				var extendedProxy = SafeRunMethod.WithReturn(() => getExtendedProxy(selectedItem));
-				if (extendedProxy == null)
-					return;
-
-				SafeRunMethod.WithoutReturn(() => deleteExtendedProxy(extendedProxy));
+				SafeRunMethod.WithoutReturn(() => deleteBasedProxy(selectedItem));
 			}
 		}
 

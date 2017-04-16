@@ -78,7 +78,7 @@ namespace GraduateWork.Client.UI {
 			UpdateDataGridDisciplines();
 		}
 		private void MenuItemDeleteDiscipline_OnClick(object sender, RoutedEventArgs e) {
-			CommonMethods.WorkWithTables.Delete((DisciplineBasedProxy)DataGridDisciplines.SelectedItem, httpClient.GetExtendedDiscipline, httpClient.DeleteDiscipline);
+			CommonMethods.WorkWithTables.Delete((DisciplineBasedProxy)DataGridDisciplines.SelectedItem, httpClient.DeleteDiscipline);
 			UpdateDataGridDisciplines();
 		}
 
@@ -94,26 +94,26 @@ namespace GraduateWork.Client.UI {
 			UpdateDataGridGroups();
 		}
 		private void MenuItemDeleteGroup_OnClick(object sender, RoutedEventArgs e) {
-			CommonMethods.WorkWithTables.Delete((GroupBasedProxy)DataGridGroups.SelectedItem, httpClient.GetExtendedGroup, httpClient.DeleteGroup);
+			CommonMethods.WorkWithTables.Delete((GroupBasedProxy)DataGridGroups.SelectedItem, httpClient.DeleteGroup);
 			UpdateDataGridGroups();
 		}
 
 		private void DataGridStudents_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) {
 			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups())?.Select(group => group.GroupName).ToArray();
-			CommonMethods.WorkWithTables.View((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, httpClient.GetDisciplineNamesFromGroupName, isReadOnly));
+			CommonMethods.WorkWithTables.View((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, httpClient.GetAssessmentByDisciplinesFromGroupName, isReadOnly));
 		}
 		private void MenuItemAddStudent_OnClick(object sender, RoutedEventArgs e) {
 			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups())?.Select(group => group.GroupName).ToArray();
-			CommonMethods.WorkWithTables.Add(default(StudentExtendedProxy), (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, httpClient.GetDisciplineNamesFromGroupName, isReadOnly), httpClient.AddStudent, window => window.Student);
+			CommonMethods.WorkWithTables.Add(default(StudentExtendedProxy), (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, httpClient.GetAssessmentByDisciplinesFromGroupName, isReadOnly), httpClient.AddStudent, window => window.Student);
 			UpdateDataGridStudents();
 		}
 		private void MenuItemEditStudent_OnClick(object sender, RoutedEventArgs e) {
 			var groupNames = CommonMethods.SafeRunMethod.WithReturn(() => httpClient.GetAllGroups())?.Select(group => group.GroupName).ToArray();
-			CommonMethods.WorkWithTables.Edit((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, httpClient.GetDisciplineNamesFromGroupName, isReadOnly), httpClient.EditStudent, window => window.Student);
+			CommonMethods.WorkWithTables.Edit((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, (proxy, isReadOnly) => new StudentWindow(proxy, groupNames, httpClient.GetAssessmentByDisciplinesFromGroupName, isReadOnly), httpClient.EditStudent, window => window.Student);
 			UpdateDataGridStudents();
 		}
 		private void MenuItemDeleteStudent_OnClick(object sender, RoutedEventArgs e) {
-			CommonMethods.WorkWithTables.Delete((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.GetExtendedStudent, httpClient.DeleteStudent);
+			CommonMethods.WorkWithTables.Delete((StudentBasedProxy)DataGridStudents.SelectedItem, httpClient.DeleteStudent);
 			UpdateDataGridStudents();
 		}
 
@@ -129,7 +129,7 @@ namespace GraduateWork.Client.UI {
 			UpdateDataGridUsers();
 		}
 		private void MenuItemDeleteUser_OnClick(object sender, RoutedEventArgs e) {
-			CommonMethods.WorkWithTables.Delete((UserBasedProxy)DataGridUsers.SelectedItem, httpClient.GetExtendedUser, httpClient.DeleteUser);
+			CommonMethods.WorkWithTables.Delete((UserBasedProxy)DataGridUsers.SelectedItem, httpClient.DeleteUser);
 			UpdateDataGridUsers();
 		}
 

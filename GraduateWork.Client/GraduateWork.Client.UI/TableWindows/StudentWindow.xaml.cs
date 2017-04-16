@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
@@ -8,13 +9,13 @@ namespace GraduateWork.Client.UI.TableWindows {
 	// ReSharper disable PossibleInvalidOperationException
 
 	public partial class StudentWindow : IProxyWindow {
-		private readonly Func<string, string[]> getDisciplineNamesFromGroupName;
+		private readonly Func<string, AssessmentByDiscipline[]> getAssessmentByDisciplinesFromGroupName;
 		public readonly StudentExtendedProxy Student;
 		public bool IsReadOnly { get; }
 
-		public StudentWindow(StudentExtendedProxy student, string[] groupNames, Func<string, string[]> getDisciplineNamesFromGroupName, bool isReadOnly) {
+		public StudentWindow(StudentExtendedProxy student, string[] groupNames, Func<string, AssessmentByDiscipline[]> getAssessmentByDisciplinesFromGroupName, bool isReadOnly) {
 			InitializeComponent();
-			this.getDisciplineNamesFromGroupName = getDisciplineNamesFromGroupName;
+			this.getAssessmentByDisciplinesFromGroupName = getAssessmentByDisciplinesFromGroupName;
 
 			Student = student?.GetExtendedClone() ?? new StudentExtendedProxy();
 			IsReadOnly = isReadOnly;
@@ -70,6 +71,9 @@ namespace GraduateWork.Client.UI.TableWindows {
 			CommonMethods.Set.ReadOnly(DataGridAssessmentByDisciplines, IsReadOnly);
 		}
 
+		private void ComboBoxGroupName_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
+			DataGridAssessmentByDisciplines.ItemsSource = getAssessmentByDisciplinesFromGroupName((string)ComboBoxGroupName.SelectedItem);
+		}
 		private void ButtonOk_OnClick(object sender, RoutedEventArgs e) {
 			CommonMethods.CloseWindow.TrueDialogResult(this);
 		}

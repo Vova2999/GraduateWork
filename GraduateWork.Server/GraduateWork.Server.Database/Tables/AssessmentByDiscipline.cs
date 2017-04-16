@@ -10,10 +10,19 @@ namespace GraduateWork.Server.Database.Tables {
 		public int AssessmentByDisciplineId { get; set; }
 
 		[Required]
+		public int StudentId { get; set; }
+
+		[Required]
 		public virtual Student Student { get; set; }
 
 		[Required]
+		public int DisciplineId { get; set; }
+
+		[Required]
 		public virtual Discipline Discipline { get; set; }
+
+		[Required]
+		public int GroupId { get; set; }
 
 		[Required]
 		public virtual Group Group { get; set; }

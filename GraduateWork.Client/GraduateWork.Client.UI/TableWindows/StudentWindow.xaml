@@ -169,7 +169,7 @@
 						<DatePicker Grid.Row="4" Grid.Column="1" Name="DatePickerRegistrationDate" VerticalContentAlignment="Center" />
 
 						<Label Grid.Row="6" Grid.Column="0" Name="LabelGroupName" Content="Название группы" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-						<ComboBox Grid.Row="6" Grid.Column="1" Name="ComboBoxGroupName" VerticalContentAlignment="Center" />
+						<ComboBox Grid.Row="6" Grid.Column="1" Name="ComboBoxGroupName" SelectionChanged="ComboBoxGroupName_OnSelectionChanged" VerticalContentAlignment="Center" />
 					</Grid>
 				</GroupBox>
 

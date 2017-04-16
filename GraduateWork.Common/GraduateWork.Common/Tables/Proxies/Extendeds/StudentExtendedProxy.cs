@@ -87,6 +87,14 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 		[HeaderColumn("ќценка")]
 		public Assessment Assessment { get; set; }
 
+		public override bool Equals(object obj) {
+			var that = obj as AssessmentByDiscipline;
+			return that != null && string.Equals(NameOfDiscipline, that.NameOfDiscipline, StringComparison.InvariantCultureIgnoreCase);
+		}
+		public override int GetHashCode() {
+			return NameOfDiscipline?.GetHashCode() ?? 0;
+		}
+
 		public AssessmentByDiscipline GetClone() {
 			return new AssessmentByDiscipline {
 				NameOfDiscipline = NameOfDiscipline,

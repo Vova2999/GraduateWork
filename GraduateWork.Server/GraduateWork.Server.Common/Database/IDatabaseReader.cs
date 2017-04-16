@@ -3,7 +3,7 @@ using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Server.Common.Database {
 	public interface IDatabaseReader {
-		string[] GetDisciplineNamesFromGroupName(string groupName);
+		AssessmentByDiscipline[] GetAssessmentByDisciplinesFromGroupName(string groupName);
 
 		DisciplineBasedProxy[] GetAllDisciplines();
 		GroupBasedProxy[] GetAllGroups();

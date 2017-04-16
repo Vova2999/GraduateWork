@@ -23,6 +23,9 @@ namespace GraduateWork.Server.Database.Tables {
 		public int ClassHours { get; set; }
 
 		[Required, Index("IX_DisciplineUniques", 2, IsUnique = true)]
+		public int GroupId { get; set; }
+
+		[Required]
 		public virtual Group Group { get; set; }
 	}
 }

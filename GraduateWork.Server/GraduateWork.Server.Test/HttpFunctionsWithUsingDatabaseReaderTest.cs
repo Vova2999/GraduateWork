@@ -135,16 +135,19 @@ namespace GraduateWork.Server.Test {
 		[Test]
 		public void GetDisciplineNamesFromGroupNameFunctionTest_ShouldBeSuccess() {
 			var groupName = "firstGroup";
-			var inputDisciplineNames = new[] { "firstNameOfGroup", "secondNameOfGroup" };
-			A.CallTo(() => databaseReader.GetDisciplineNamesFromGroupName(groupName)).Returns(inputDisciplineNames);
+			var inputAssessmentByDisciplines = new[] {
+				new AssessmentByDiscipline { NameOfDiscipline = "firstDiscipline" },
+				new AssessmentByDiscipline { NameOfDiscipline = "secondDiscipline" }
+			};
+			A.CallTo(() => databaseReader.GetAssessmentByDisciplinesFromGroupName(groupName)).Returns(inputAssessmentByDisciplines);
 
-			RunServer(new GetDisciplineNamesFromGroupNameFunction(DatabaseAuthorizer, databaseReader));
+			RunServer(new GetAssessmentByDisciplinesFromGroupNameFunction(DatabaseAuthorizer, databaseReader));
 			var parameters = GetDefaultParameters();
 			parameters[HttpParameters.GroupName] = groupName;
-			var receivedDisciplineNames = SendRequest<string[]>("GetDisciplineNamesFromGroupName", parameters);
+			var receivedAssessmentByDisciplines = SendRequest<AssessmentByDiscipline[]>("GetAssessmentByDisciplinesFromGroupName", parameters);
 
-			A.CallTo(() => databaseReader.GetDisciplineNamesFromGroupName(groupName)).MustHaveHappened(Repeated.Exactly.Once);
-			CollectionAssert.AreEqual(inputDisciplineNames, receivedDisciplineNames);
+			A.CallTo(() => databaseReader.GetAssessmentByDisciplinesFromGroupName(groupName)).MustHaveHappened(Repeated.Exactly.Once);
+			CollectionAssert.AreEqual(inputAssessmentByDisciplines, receivedAssessmentByDisciplines);
 		}
 	}
 }

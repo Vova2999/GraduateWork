@@ -25,11 +25,11 @@ namespace GraduateWork.Client.Client {
 				});
 		}
 
-		public string[] GetDisciplineNamesFromGroupName(string groupName) {
+		public AssessmentByDiscipline[] GetAssessmentByDisciplinesFromGroupName(string groupName) {
 			var parameters = GetDefaultParameters();
 			parameters[HttpParameters.GroupName] = groupName;
 
-			return SendRequest<string[]>("GetDisciplineNamesFromGroupName", parameters);
+			return SendRequest<AssessmentByDiscipline[]>("GetAssessmentByDisciplinesFromGroupName", parameters);
 		}
 
 		public DisciplineBasedProxy[] GetAllDisciplines() {
@@ -64,7 +64,7 @@ namespace GraduateWork.Client.Client {
 		public void EditDiscipline(DisciplineExtendedProxy oldDiscipline, DisciplineExtendedProxy newDiscipline) {
 			SendRequest("EditDiscipline", GetDefaultParameters(), Tuple.Create(oldDiscipline, newDiscipline).ToJson());
 		}
-		public void DeleteDiscipline(DisciplineExtendedProxy discipline) {
+		public void DeleteDiscipline(DisciplineBasedProxy discipline) {
 			SendRequest("DeleteDiscipline", GetDefaultParameters(), discipline.ToJson());
 		}
 
@@ -74,7 +74,7 @@ namespace GraduateWork.Client.Client {
 		public void EditGroup(GroupExtendedProxy oldGroup, GroupExtendedProxy newGroup) {
 			SendRequest("EditGroup", GetDefaultParameters(), Tuple.Create(oldGroup, newGroup).ToJson());
 		}
-		public void DeleteGroup(GroupExtendedProxy group) {
+		public void DeleteGroup(GroupBasedProxy group) {
 			SendRequest("DeleteGroup", GetDefaultParameters(), group.ToJson());
 		}
 
@@ -84,7 +84,7 @@ namespace GraduateWork.Client.Client {
 		public void EditStudent(StudentExtendedProxy oldStudent, StudentExtendedProxy newStudent) {
 			SendRequest("EditStudent", GetDefaultParameters(), Tuple.Create(oldStudent, newStudent).ToJson());
 		}
-		public void DeleteStudent(StudentExtendedProxy student) {
+		public void DeleteStudent(StudentBasedProxy student) {
 			SendRequest("DeleteStudent", GetDefaultParameters(), student.ToJson());
 		}
 
@@ -94,7 +94,7 @@ namespace GraduateWork.Client.Client {
 		public void EditUser(UserExtendedProxy oldUser, UserExtendedProxy newUser) {
 			SendRequest("EditUser", GetDefaultParameters(), Tuple.Create(oldUser, newUser).ToJson());
 		}
-		public void DeleteUser(UserExtendedProxy user) {
+		public void DeleteUser(UserBasedProxy user) {
 			SendRequest("DeleteUser", GetDefaultParameters(), user.ToJson());
 		}
 

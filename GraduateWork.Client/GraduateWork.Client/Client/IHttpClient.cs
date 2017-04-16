@@ -10,7 +10,7 @@ namespace GraduateWork.Client.Client {
 		void Ping();
 		void CheckUserIsExist(string login, string password);
 
-		string[] GetDisciplineNamesFromGroupName(string groupName);
+		AssessmentByDiscipline[] GetAssessmentByDisciplinesFromGroupName(string groupName);
 
 		DisciplineBasedProxy[] GetAllDisciplines();
 		GroupBasedProxy[] GetAllGroups();
@@ -24,18 +24,18 @@ namespace GraduateWork.Client.Client {
 
 		void AddDiscipline(DisciplineExtendedProxy discipline);
 		void EditDiscipline(DisciplineExtendedProxy oldDiscipline, DisciplineExtendedProxy newDiscipline);
-		void DeleteDiscipline(DisciplineExtendedProxy discipline);
+		void DeleteDiscipline(DisciplineBasedProxy discipline);
 
 		void AddGroup(GroupExtendedProxy group);
 		void EditGroup(GroupExtendedProxy oldGroup, GroupExtendedProxy newGroup);
-		void DeleteGroup(GroupExtendedProxy group);
+		void DeleteGroup(GroupBasedProxy group);
 
 		void AddStudent(StudentExtendedProxy student);
 		void EditStudent(StudentExtendedProxy oldGroup, StudentExtendedProxy newGroup);
-		void DeleteStudent(StudentExtendedProxy student);
+		void DeleteStudent(StudentBasedProxy student);
 
 		void AddUser(UserExtendedProxy user);
 		void EditUser(UserExtendedProxy oldUser, UserExtendedProxy newUser);
-		void DeleteUser(UserExtendedProxy user);
+		void DeleteUser(UserBasedProxy user);
 	}
 }

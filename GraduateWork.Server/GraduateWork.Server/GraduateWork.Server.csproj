@@ -88,7 +88,7 @@
     <Compile Include="Functions\IHttpFunction.cs" />
     <Compile Include="Functions\NonProtected\WithoutReturn\PingFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Database\GetBasedProxies\GetAllUsersFunction.cs" />
-    <Compile Include="Functions\Protected\WithReturn\Database\GetDisciplineNamesFromGroupNameFunction.cs" />
+    <Compile Include="Functions\Protected\WithReturn\Database\GetDisciplinesFromGroupNameFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Database\GetExtendedProxy\GetExtendedDisciplineFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Database\GetExtendedProxy\GetExtendedGroupFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Database\GetExtendedProxy\GetExtendedStudentFunction.cs" />

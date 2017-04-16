@@ -25,7 +25,7 @@ namespace GraduateWork.Server.Database.Models {
 		public Discipline GetDiscipline(DisciplineBasedProxy discipline) {
 			var disciplineGroup = GetGroup(discipline.GroupName);
 			return Disciplines.First(d =>
-				d.DisciplineName == discipline.DisciplineName && d.Group.GroupId == disciplineGroup.GroupId);
+				d.DisciplineName == discipline.DisciplineName && d.GroupId == disciplineGroup.GroupId);
 		}
 		public Group GetGroup(GroupBasedProxy group) {
 			return GetGroup(group.GroupName);

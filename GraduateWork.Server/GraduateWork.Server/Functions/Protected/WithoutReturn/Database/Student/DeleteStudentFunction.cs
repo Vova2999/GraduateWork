@@ -1,6 +1,6 @@
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Enums;
-using GraduateWork.Common.Tables.Proxies.Extendeds;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Server.AdditionalObjects;
 using GraduateWork.Server.Common.Database;
 
@@ -15,7 +15,7 @@ namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Student
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
-			databaseEditor.DeleteStudent(requestBody.FromJson<StudentExtendedProxy>());
+			databaseEditor.DeleteStudent(requestBody.FromJson<StudentBasedProxy>());
 		}
 	}
 }

@@ -44,7 +44,7 @@ namespace GraduateWork.Server.Database.Tables {
 		[Required, MaxLength(100)]
 		public string DiplomaTopic { get; set; }
 
-		[Required, Range(3, 5)]
+		[Required]
 		public int DiplomaAssessment { get; set; }
 
 		[Required]
@@ -58,6 +58,9 @@ namespace GraduateWork.Server.Database.Tables {
 
 		[Required]
 		public DateTime RegistrationDate { get; set; }
+
+		[Required]
+		public int GroupId { get; set; }
 
 		[Required]
 		public virtual Group Group { get; set; }

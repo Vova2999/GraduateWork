@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GraduateWork.Common.Tables.Enums;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Database.Tables;
@@ -47,12 +48,12 @@ namespace GraduateWork.Server.Database.Models {
 			foundDiscipline.TotalHours = newDiscipline.TotalHours;
 			foundDiscipline.ClassHours = newDiscipline.ClassHours;
 			if (foundDiscipline.ControlType != newDiscipline.ControlType) {
-				foreach (var assessmentByDiscipline in modelDatabase.AssessmentByDisciplines.Where(a => a.Discipline.DisciplineId == foundDiscipline.DisciplineId))
+				foreach (var assessmentByDiscipline in modelDatabase.AssessmentByDisciplines.Where(a => a.DisciplineId == foundDiscipline.DisciplineId))
 					assessmentByDiscipline.Assessment = (int)Assessment.None;
 				foundDiscipline.ControlType = newDiscipline.ControlType;
 			}
-			if (foundDiscipline.Group.GroupId != newGroupDiscipline.GroupId) {
-				DeleteAssessmentByDisciplines(assessmentByDiscipline => assessmentByDiscipline.Discipline.DisciplineId == foundDiscipline.DisciplineId);
+			if (foundDiscipline.GroupId != newGroupDiscipline.GroupId) {
+				DeleteAssessmentByDisciplines(assessmentByDiscipline => assessmentByDiscipline.DisciplineId == foundDiscipline.DisciplineId);
 				modelDatabase.AssessmentByDisciplines.AddRange(
 					newGroupDiscipline.Students.Select(student =>
 						new AssessmentByDiscipline {
@@ -66,7 +67,7 @@ namespace GraduateWork.Server.Database.Models {
 
 			modelDatabase.SaveChanges();
 		}
-		public void DeleteDiscipline(DisciplineExtendedProxy discipline) {
+		public void DeleteDiscipline(DisciplineBasedProxy discipline) {
 			DeleteDiscipline(modelDatabase.GetDiscipline(discipline));
 			modelDatabase.SaveChanges();
 		}
@@ -93,7 +94,7 @@ namespace GraduateWork.Server.Database.Models {
 
 			modelDatabase.SaveChanges();
 		}
-		public void DeleteGroup(GroupExtendedProxy group) {
+		public void DeleteGroup(GroupBasedProxy group) {
 			DeleteGroup(modelDatabase.GetGroup(group));
 			modelDatabase.SaveChanges();
 		}
@@ -155,7 +156,7 @@ namespace GraduateWork.Server.Database.Models {
 
 			modelDatabase.SaveChanges();
 		}
-		public void DeleteStudent(StudentExtendedProxy student) {
+		public void DeleteStudent(StudentBasedProxy student) {
 			DeleteStudent(modelDatabase.GetStudent(student));
 			modelDatabase.SaveChanges();
 		}
@@ -178,23 +179,23 @@ namespace GraduateWork.Server.Database.Models {
 
 			modelDatabase.SaveChanges();
 		}
-		public void DeleteUser(UserExtendedProxy user) {
+		public void DeleteUser(UserBasedProxy user) {
 			var foundUser = modelDatabase.GetUser(user);
 			modelDatabase.Users.Remove(foundUser);
 			modelDatabase.SaveChanges();
 		}
 
 		private void DeleteDiscipline(Discipline discipline) {
-			DeleteAssessmentByDisciplines(assessmentByDiscipline => assessmentByDiscipline.Discipline.DisciplineId == discipline.DisciplineId);
+			DeleteAssessmentByDisciplines(assessmentByDiscipline => assessmentByDiscipline.DisciplineId == discipline.DisciplineId);
 			modelDatabase.Disciplines.Remove(discipline);
 		}
 		private void DeleteGroup(Group group) {
-			modelDatabase.Students.Where(student => student.Group.GroupId == group.GroupId).ToList().ForEach(DeleteStudent);
-			modelDatabase.Disciplines.Where(discipline => discipline.Group.GroupId == group.GroupId).ToList().ForEach(DeleteDiscipline);
+			modelDatabase.Students.Where(student => student.GroupId == group.GroupId).ToList().ForEach(DeleteStudent);
+			modelDatabase.Disciplines.Where(discipline => discipline.GroupId == group.GroupId).ToList().ForEach(DeleteDiscipline);
 			modelDatabase.Groups.Remove(group);
 		}
 		private void DeleteStudent(Student student) {
-			DeleteAssessmentByDisciplines(assessmentByDiscipline => assessmentByDiscipline.Student.StudentId == student.StudentId);
+			DeleteAssessmentByDisciplines(assessmentByDiscipline => assessmentByDiscipline.StudentId == student.StudentId);
 			modelDatabase.Students.Remove(student);
 		}
 		private void DeleteAssessmentByDisciplines(Func<AssessmentByDiscipline, bool> predicate) {

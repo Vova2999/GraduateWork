@@ -1,6 +1,7 @@
 using System;
 using FakeItEasy;
 using GraduateWork.Common.Extensions;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Functions.Protected.WithoutReturn.Database.Discipline;
@@ -62,7 +63,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void DeleteDisciplineFunctionTest_ShouldBeSuccess() {
-			var discipline = new DisciplineExtendedProxy { DisciplineName = "nameOfDiscipline" };
+			var discipline = new DisciplineBasedProxy { DisciplineName = "nameOfDiscipline" };
 
 			RunServer(new DeleteDisciplineFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("DeleteDiscipline", GetDefaultParameters(), discipline.ToJson());
@@ -72,7 +73,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void DeleteGroupFunctionTest_ShouldBeSuccess() {
-			var group = new GroupExtendedProxy { GroupName = "nameOfGroup" };
+			var group = new GroupBasedProxy { GroupName = "nameOfGroup" };
 
 			RunServer(new DeleteGroupFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("DeleteGroup", GetDefaultParameters(), group.ToJson());
@@ -82,7 +83,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void DeleteStudentFunctionTest_ShouldBeSuccess() {
-			var student = new StudentExtendedProxy { FirstName = "firstName" };
+			var student = new StudentBasedProxy { FirstName = "firstName" };
 
 			RunServer(new DeleteStudentFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("DeleteStudent", GetDefaultParameters(), student.ToJson());
@@ -92,7 +93,7 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void DeleteUserFunctionTest_ShouldBeSuccess() {
-			var user = new UserExtendedProxy { Login = "login" };
+			var user = new UserBasedProxy { Login = "login" };
 
 			RunServer(new DeleteUserFunction(DatabaseAuthorizer, databaseEditor));
 			SendRequest("DeleteUser", GetDefaultParameters(), user.ToJson());

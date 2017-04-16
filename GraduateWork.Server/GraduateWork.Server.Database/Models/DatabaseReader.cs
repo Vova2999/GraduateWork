@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
@@ -14,8 +15,13 @@ namespace GraduateWork.Server.Database.Models {
 			this.modelDatabase = modelDatabase;
 		}
 
-		public string[] GetDisciplineNamesFromGroupName(string groupName) {
-			return modelDatabase.GetGroup(groupName).Disciplines.Select(discipline => discipline.DisciplineName).ToArray();
+		public AssessmentByDiscipline[] GetAssessmentByDisciplinesFromGroupName(string groupName) {
+			return modelDatabase.GetGroup(groupName).Disciplines.Select(
+				discipline => new AssessmentByDiscipline {
+					NameOfDiscipline = discipline.DisciplineName,
+					ControlType = discipline.ControlType,
+					Assessment = Assessment.None
+				}).ToArray();
 		}
 
 		public DisciplineBasedProxy[] GetAllDisciplines() {
