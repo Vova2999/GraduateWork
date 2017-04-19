@@ -22,7 +22,7 @@ namespace GraduateWork.Server.Test.BaseClasses {
 			A.CallTo(() => DatabaseAuthorizer.AccessIsAllowed(login, password, A<int>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
 		}
 
-		public Dictionary<string, string> GetDefaultParameters() {
+		protected static Dictionary<string, string> GetDefaultParameters() {
 			return new Dictionary<string, string> {
 				[HttpParameters.Login] = login,
 				[HttpParameters.Password] = password

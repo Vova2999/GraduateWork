@@ -1,11 +1,14 @@
+using System;
 using FakeItEasy;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Http;
+using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Functions.Protected.WithReturn.Database;
-using GraduateWork.Server.Functions.Protected.WithReturn.Database.GetBasedProxies;
+using GraduateWork.Server.Functions.Protected.WithReturn.Database.GetBasedProxies.WithoutUsingFilters;
+using GraduateWork.Server.Functions.Protected.WithReturn.Database.GetBasedProxies.WithUsingFilters;
 using GraduateWork.Server.Functions.Protected.WithReturn.Database.GetExtendedProxy;
 using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
@@ -22,17 +25,17 @@ namespace GraduateWork.Server.Test {
 
 		[Test]
 		public void GetAllDisciplinesFunctionTest_ShouldBeSuccess() {
-			var inputDiscipline = new[] {
+			var inputDisciplines = new[] {
 				new DisciplineBasedProxy { DisciplineName = "firstNameOfDiscipline" },
 				new DisciplineBasedProxy { DisciplineName = "secondNameOfDiscipline" }
 			};
-			A.CallTo(() => databaseReader.GetAllDisciplines()).Returns(inputDiscipline);
+			A.CallTo(() => databaseReader.GetAllDisciplines()).Returns(inputDisciplines);
 
 			RunServer(new GetAllDisciplinesFunction(DatabaseAuthorizer, databaseReader));
 			var receivedDisciplines = SendRequest<DisciplineExtendedProxy[]>("GetAllDisciplines", GetDefaultParameters());
 
 			A.CallTo(() => databaseReader.GetAllDisciplines()).MustHaveHappened(Repeated.Exactly.Once);
-			CollectionAssert.AreEqual(inputDiscipline, receivedDisciplines);
+			CollectionAssert.AreEqual(inputDisciplines, receivedDisciplines);
 		}
 
 		[Test]
@@ -77,6 +80,98 @@ namespace GraduateWork.Server.Test {
 			var receivedUsers = SendRequest<UserBasedProxy[]>("GetAllUsers", GetDefaultParameters());
 
 			A.CallTo(() => databaseReader.GetAllUsers()).MustHaveHappened(Repeated.Exactly.Once);
+			CollectionAssert.AreEqual(inputUsers, receivedUsers);
+		}
+
+		[Test]
+		public void GetDisciplinesWithUsingFiltersFunctionTest_ShouldBeSuccess() {
+			var disciplineName = "disciplineName";
+			var controlType = ControlType.CourseWork;
+			var groupName = "groupName";
+			var inputDiscipline = new[] {
+				new DisciplineBasedProxy { DisciplineName = "firstNameOfDiscipline" },
+				new DisciplineBasedProxy { DisciplineName = "secondNameOfDiscipline" }
+			};
+			A.CallTo(() => databaseReader.GetDisciplinesWithUsingFilters(disciplineName, controlType, groupName)).Returns(inputDiscipline);
+
+			RunServer(new GetDisciplinesWithUsingFiltersFunction(DatabaseAuthorizer, databaseReader));
+
+			var parameters = GetDefaultParameters();
+			parameters[HttpParameters.DisciplineName] = disciplineName;
+			parameters[HttpParameters.ControlType] = controlType.ToString();
+			parameters[HttpParameters.GroupName] = groupName;
+			var receivedDisciplines = SendRequest<DisciplineExtendedProxy[]>("GetDisciplinesWithUsingFilters", parameters);
+
+			A.CallTo(() => databaseReader.GetDisciplinesWithUsingFilters(disciplineName, controlType, groupName)).MustHaveHappened(Repeated.Exactly.Once);
+			CollectionAssert.AreEqual(inputDiscipline, receivedDisciplines);
+		}
+
+		[Test]
+		public void GetGroupsWithUsingFiltersFunctionTest_ShouldBeSuccess() {
+			var groupName = "groupName";
+			var specialtyNumber = 123;
+			var specialtyName = "specialtyName";
+			var facultyName = "facultyName";
+			var inputGroups = new[] {
+				new GroupBasedProxy { GroupName = "firstNameOfGroup" },
+				new GroupBasedProxy { GroupName = "secondNameOfGroup" }
+			};
+			A.CallTo(() => databaseReader.GetGroupsWithUsingFilters(groupName, specialtyNumber, specialtyName, facultyName)).Returns(inputGroups);
+
+			RunServer(new GetGroupsWithUsingFiltersFunction(DatabaseAuthorizer, databaseReader));
+
+			var parameters = GetDefaultParameters();
+			parameters[HttpParameters.GroupName] = groupName;
+			parameters[HttpParameters.SpecialtyNumber] = specialtyNumber.ToString();
+			parameters[HttpParameters.SpecialtyName] = specialtyName;
+			parameters[HttpParameters.FacultyName] = facultyName;
+			var receivedGroups = SendRequest<GroupExtendedProxy[]>("GetGroupsWithUsingFilters", parameters);
+
+			A.CallTo(() => databaseReader.GetGroupsWithUsingFilters(groupName, specialtyNumber, specialtyName, facultyName)).MustHaveHappened(Repeated.Exactly.Once);
+			CollectionAssert.AreEqual(inputGroups, receivedGroups);
+		}
+
+		[Test]
+		public void GetStudentsWithUsingFiltersFunctionTest_ShouldBeSuccess() {
+			var firstName = "firstName";
+			var secondName = "secondName";
+			var thirdName = "thirdName";
+			var dateOfBirth = new DateTime(2000, 1, 1);
+			var inputStudents = new[] {
+				new StudentBasedProxy { FirstName = "firstFirstName" },
+				new StudentBasedProxy { FirstName = "secondFirstName" }
+			};
+			A.CallTo(() => databaseReader.GetStudentsWithUsingFilters(firstName, secondName, thirdName, dateOfBirth)).Returns(inputStudents);
+
+			RunServer(new GetStudentsWithUsingFiltersFunction(DatabaseAuthorizer, databaseReader));
+
+			var parameters = GetDefaultParameters();
+			parameters[HttpParameters.FirstName] = firstName;
+			parameters[HttpParameters.SecondName] = secondName;
+			parameters[HttpParameters.ThirdName] = thirdName;
+			parameters[HttpParameters.DateOfBirth] = dateOfBirth.ToShortDateString();
+			var receivedStudents = SendRequest<StudentExtendedProxy[]>("GetStudentsWithUsingFilters", parameters);
+
+			A.CallTo(() => databaseReader.GetStudentsWithUsingFilters(firstName, secondName, thirdName, dateOfBirth)).MustHaveHappened(Repeated.Exactly.Once);
+			CollectionAssert.AreEqual(inputStudents, receivedStudents);
+		}
+
+		[Test]
+		public void GetUsersWithUsingFiltersFunctionTest_ShouldBeSuccess() {
+			var login = "login";
+			var inputUsers = new[] {
+				new UserBasedProxy { Login = "firstLogin" },
+				new UserBasedProxy { Login = "secondLogin" }
+			};
+			A.CallTo(() => databaseReader.GetUsersWithUsingFilters(login)).Returns(inputUsers);
+
+			RunServer(new GetUsersWithUsingFiltersFunction(DatabaseAuthorizer, databaseReader));
+
+			var parameters = GetDefaultParameters();
+			parameters[HttpParameters.LoginForFilter] = login;
+			var receivedUsers = SendRequest<UserBasedProxy[]>("GetUsersWithUsingFilters", parameters);
+
+			A.CallTo(() => databaseReader.GetUsersWithUsingFilters(login)).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputUsers, receivedUsers);
 		}
 
@@ -142,6 +237,7 @@ namespace GraduateWork.Server.Test {
 			A.CallTo(() => databaseReader.GetAssessmentByDisciplinesFromGroupName(groupName)).Returns(inputAssessmentByDisciplines);
 
 			RunServer(new GetAssessmentByDisciplinesFromGroupNameFunction(DatabaseAuthorizer, databaseReader));
+
 			var parameters = GetDefaultParameters();
 			parameters[HttpParameters.GroupName] = groupName;
 			var receivedAssessmentByDisciplines = SendRequest<AssessmentByDiscipline[]>("GetAssessmentByDisciplinesFromGroupName", parameters);

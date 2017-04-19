@@ -16,5 +16,9 @@ namespace GraduateWork.Server.AdditionalObjects {
 		public bool NotContains(string key) {
 			return !nameValues.ContainsKey(key);
 		}
+
+		public string GetValueOrNull(string key) {
+			return nameValues.ContainsKey(key) ? nameValues[key] : null;
+		}
 	}
 }

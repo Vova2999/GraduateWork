@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Tables\Enums\AccessType.cs" />
     <Compile Include="Tables\Enums\Assessment.cs" />
     <Compile Include="Tables\Enums\ControlType.cs" />
