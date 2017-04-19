@@ -11,7 +11,7 @@ namespace GraduateWork.Client.Client {
 		public string Password { get; set; }
 		public new string ServerAddress {
 			get { return base.ServerAddress; }
-			set { base.ServerAddress = new UriBuilder(value).Uri.ToString(); }
+			set { base.ServerAddress = value == null ? string.Empty : new UriBuilder(value).Uri.ToString(); }
 		}
 
 		public void Ping() {
