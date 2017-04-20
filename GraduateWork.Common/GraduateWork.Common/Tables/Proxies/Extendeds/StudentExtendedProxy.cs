@@ -12,7 +12,7 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 	// ReSharper disable UnusedMember.Global
 
 	public class StudentExtendedProxy : StudentBasedProxy {
-		[HeaderColumn("Назваие предыдущего документа об образовании")]
+		[HeaderColumn("Название предыдущего документа об образовании")]
 		public string PreviousEducationName { get; set; }
 
 		[HeaderColumn("Год выдачи предыдущего документа об образовании")]
