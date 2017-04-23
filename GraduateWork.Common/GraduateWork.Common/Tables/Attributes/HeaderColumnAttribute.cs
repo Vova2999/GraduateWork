@@ -3,6 +3,7 @@
 namespace GraduateWork.Common.Tables.Attributes {
 	// ReSharper disable MemberCanBePrivate.Global
 	// ReSharper disable UnusedAutoPropertyAccessor.Global
+	// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 
 	public class HeaderColumnAttribute : Attribute {
 		public string HeaderColumn { get; set; }

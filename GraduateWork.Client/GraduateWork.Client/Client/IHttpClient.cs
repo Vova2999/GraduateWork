@@ -2,6 +2,8 @@
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.Client {
+	// ReSharper disable UnusedMemberInSuper.Global
+
 	public interface IHttpClient {
 		string Login { get; set; }
 		string Password { get; set; }

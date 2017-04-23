@@ -10,8 +10,8 @@ namespace GraduateWork.Client.Client {
 		public string Login { get; set; }
 		public string Password { get; set; }
 		public new string ServerAddress {
-			get { return base.ServerAddress; }
-			set { base.ServerAddress = value == null ? string.Empty : new UriBuilder(value).Uri.ToString(); }
+			get => base.ServerAddress;
+			set => base.ServerAddress = value == null ? string.Empty : new UriBuilder(value).Uri.ToString();
 		}
 
 		public void Ping() {

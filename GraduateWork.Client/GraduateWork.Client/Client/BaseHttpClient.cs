@@ -4,6 +4,8 @@ using System.Net;
 using GraduateWork.Common.Extensions;
 
 namespace GraduateWork.Client.Client {
+	// ReSharper disable UnusedMember.Global
+
 	public class BaseHttpClient {
 		protected string ServerAddress;
 

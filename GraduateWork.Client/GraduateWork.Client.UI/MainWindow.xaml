@@ -3,211 +3,209 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		Title="MainWindow" Height="500" Width="1000"
 		Closing="MainWindow_OnClosing">
-	<Grid>
-		<TabControl TabStripPlacement="Left" Margin="5">
-			<TabItem Header="Авторизация" Padding="25,10,25,10">
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="*" />
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="*" />
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
+	<TabControl TabStripPlacement="Left" Margin="5">
+		<TabItem Header="Авторизация" Padding="25,10,25,10">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 
-					<StackPanel Grid.Row="1" Grid.Column="1" Width="300">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="5" />
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="5" />
-								<RowDefinition Height="Auto" />
-							</Grid.RowDefinitions>
+				<StackPanel Grid.Row="1" Grid.Column="1" Width="300">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="5" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="5" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<Label Grid.Row="0" Grid.Column="0" Content="Логин" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<TextBox Grid.Row="0" Grid.Column="1" Name="TextBoxUserLogin" VerticalContentAlignment="Center" />
+
+						<Label Grid.Row="2" Grid.Column="0" Content="Пароль" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<PasswordBox Grid.Row="2" Grid.Column="1" Name="PasswordBoxUserPassword" VerticalContentAlignment="Center" />
+
+						<CheckBox Grid.Row="4" Grid.Column="1" Name="CheckBoxSaveLoginAndPassword" Content="Сохранять логин и пароль" />
+					</Grid>
+
+					<Button Content="Войти" Click="ButtonSingIn_OnClick" Height="25" Margin="0,10,0,0" />
+				</StackPanel>
+			</Grid>
+		</TabItem>
+
+		<TabItem Header="Таблицы" Padding="25,10,25,10">
+			<TabControl>
+				<TabItem Header="Пользователи">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<DataGrid Name="DataGridUsers" Grid.Row="0" MouseDoubleClick="DataGridUsers_OnMouseDoubleClick">
+							<DataGrid.ContextMenu>
+								<ContextMenu>
+									<MenuItem Header="Добавить" Click="MenuItemAddUser_OnClick" />
+									<MenuItem Header="Редактировать" Click="MenuItemEditUser_OnClick" />
+									<MenuItem Header="Удалить" Click="MenuItemDeleteUser_OnClick" />
+								</ContextMenu>
+							</DataGrid.ContextMenu>
+						</DataGrid>
+
+						<Grid Grid.Row="1">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
-							<Label Grid.Row="0" Grid.Column="0" Content="Логин" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-							<TextBox Grid.Row="0" Grid.Column="1" Name="TextBoxUserLogin" VerticalContentAlignment="Center" />
-
-							<Label Grid.Row="2" Grid.Column="0" Content="Пароль" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-							<PasswordBox Grid.Row="2" Grid.Column="1" Name="PasswordBoxUserPassword" VerticalContentAlignment="Center" />
-
-							<CheckBox Grid.Row="4" Grid.Column="1" Name="CheckBoxSaveLoginAndPassword" Content="Сохранять логин и пароль" />
+							<Button Grid.Column="1" Content="Фильтры" Click="ButtonUserFilters_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
+							<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateUsers_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
 						</Grid>
+					</Grid>
+				</TabItem>
 
-						<Button Content="Войти" Click="ButtonSingIn_OnClick" Height="25" Margin="0,10,0,0" />
-					</StackPanel>
-				</Grid>
-			</TabItem>
+				<TabItem Header="Группы">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
 
-			<TabItem Header="Таблицы" Padding="25,10,25,10">
-				<TabControl>
-					<TabItem Header="Пользователи">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="*" />
-								<RowDefinition Height="Auto" />
-							</Grid.RowDefinitions>
+						<DataGrid Name="DataGridGroups" Grid.Row="0" MouseDoubleClick="DataGridGroups_OnMouseDoubleClick">
+							<DataGrid.ContextMenu>
+								<ContextMenu>
+									<MenuItem Header="Добавить" Click="MenuItemAddGroup_OnClick" />
+									<MenuItem Header="Редактировать" Click="MenuItemEditGroup_OnClick" />
+									<MenuItem Header="Удалить" Click="MenuItemDeleteGroup_OnClick" />
+								</ContextMenu>
+							</DataGrid.ContextMenu>
+						</DataGrid>
 
-							<DataGrid Name="DataGridUsers" Grid.Row="0" MouseDoubleClick="DataGridUsers_OnMouseDoubleClick">
-								<DataGrid.ContextMenu>
-									<ContextMenu>
-										<MenuItem Header="Добавить" Click="MenuItemAddUser_OnClick" />
-										<MenuItem Header="Редактировать" Click="MenuItemEditUser_OnClick" />
-										<MenuItem Header="Удалить" Click="MenuItemDeleteUser_OnClick" />
-									</ContextMenu>
-								</DataGrid.ContextMenu>
-							</DataGrid>
-
-							<Grid Grid.Row="1">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<Button Grid.Column="1" Content="Фильтры" Click="ButtonUserFilters_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
-								<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateUsers_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
-							</Grid>
-						</Grid>
-					</TabItem>
-
-					<TabItem Header="Группы">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="*" />
-								<RowDefinition Height="Auto" />
-							</Grid.RowDefinitions>
-
-							<DataGrid Name="DataGridGroups" Grid.Row="0" MouseDoubleClick="DataGridGroups_OnMouseDoubleClick">
-								<DataGrid.ContextMenu>
-									<ContextMenu>
-										<MenuItem Header="Добавить" Click="MenuItemAddGroup_OnClick" />
-										<MenuItem Header="Редактировать" Click="MenuItemEditGroup_OnClick" />
-										<MenuItem Header="Удалить" Click="MenuItemDeleteGroup_OnClick" />
-									</ContextMenu>
-								</DataGrid.ContextMenu>
-							</DataGrid>
-
-							<Grid Grid.Row="1">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<Button Grid.Column="1" Content="Фильтры" Click="ButtonGroupFilters_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
-								<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateGroups_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
-							</Grid>
-						</Grid>
-					</TabItem>
-
-					<TabItem Header="Дисциплины">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="*" />
-								<RowDefinition Height="Auto" />
-							</Grid.RowDefinitions>
-
-							<DataGrid Name="DataGridDisciplines" Grid.Row="0" MouseDoubleClick="DataGridDisciplines_OnMouseDoubleClick">
-								<DataGrid.ContextMenu>
-									<ContextMenu>
-										<MenuItem Header="Добавить" Click="MenuItemAddDiscipline_OnClick" />
-										<MenuItem Header="Редактировать" Click="MenuItemEditDiscipline_OnClick" />
-										<MenuItem Header="Удалить" Click="MenuItemDeleteDiscipline_OnClick" />
-									</ContextMenu>
-								</DataGrid.ContextMenu>
-							</DataGrid>
-
-							<Grid Grid.Row="1">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<Button Grid.Column="1" Content="Фильтры" Click="ButtonDisciplineFilters_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
-								<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateDisciplines_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
-							</Grid>
-						</Grid>
-					</TabItem>
-
-					<TabItem Header="Студенты">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition Height="*" />
-								<RowDefinition Height="Auto" />
-							</Grid.RowDefinitions>
-
-							<DataGrid Name="DataGridStudents" Grid.Row="0" MouseDoubleClick="DataGridStudents_OnMouseDoubleClick">
-								<DataGrid.ContextMenu>
-									<ContextMenu>
-										<MenuItem Header="Добавить" Click="MenuItemAddStudent_OnClick" />
-										<MenuItem Header="Редактировать" Click="MenuItemEditStudent_OnClick" />
-										<MenuItem Header="Удалить" Click="MenuItemDeleteStudent_OnClick" />
-									</ContextMenu>
-								</DataGrid.ContextMenu>
-							</DataGrid>
-
-							<Grid Grid.Row="1">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-
-								<Button Grid.Column="1" Content="Фильтры" Click="ButtonStudentFilters_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
-								<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateStudents_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
-							</Grid>
-						</Grid>
-					</TabItem>
-				</TabControl>
-			</TabItem>
-
-			<TabItem Header="Настройки" Padding="25,10,25,10">
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="*" />
-						<RowDefinition Height="Auto" />
-						<RowDefinition Height="*" />
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
-
-					<StackPanel Grid.Row="1" Grid.Column="1" Width="300">
-						<Grid>
+						<Grid Grid.Row="1">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
-							<Label Grid.Column="0" Content="Адрес сервера" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-							<TextBox Grid.Column="1" Name="TextBoxServerAddress" VerticalContentAlignment="Center" />
+							<Button Grid.Column="1" Content="Фильтры" Click="ButtonGroupFilters_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
+							<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateGroups_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
 						</Grid>
+					</Grid>
+				</TabItem>
 
-						<Grid Margin="0,5,0,0">
+				<TabItem Header="Дисциплины">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<DataGrid Name="DataGridDisciplines" Grid.Row="0" MouseDoubleClick="DataGridDisciplines_OnMouseDoubleClick">
+							<DataGrid.ContextMenu>
+								<ContextMenu>
+									<MenuItem Header="Добавить" Click="MenuItemAddDiscipline_OnClick" />
+									<MenuItem Header="Редактировать" Click="MenuItemEditDiscipline_OnClick" />
+									<MenuItem Header="Удалить" Click="MenuItemDeleteDiscipline_OnClick" />
+								</ContextMenu>
+							</DataGrid.ContextMenu>
+						</DataGrid>
+
+						<Grid Grid.Row="1">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 
-							<Label Grid.Column="0" Content="Время ожидания ответа от сервера в мс" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-							<TextBox Grid.Column="1" Name="TextBoxRequestTimeout" VerticalContentAlignment="Center" />
+							<Button Grid.Column="1" Content="Фильтры" Click="ButtonDisciplineFilters_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
+							<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateDisciplines_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
 						</Grid>
+					</Grid>
+				</TabItem>
 
-						<Button Content="Соединиться с сервером" Click="ButtonConnectToServer_OnClick" Height="25" Margin="0,5,0,0" />
-					</StackPanel>
-				</Grid>
-			</TabItem>
-		</TabControl>
-	</Grid>
+				<TabItem Header="Студенты">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<DataGrid Name="DataGridStudents" Grid.Row="0" MouseDoubleClick="DataGridStudents_OnMouseDoubleClick">
+							<DataGrid.ContextMenu>
+								<ContextMenu>
+									<MenuItem Header="Добавить" Click="MenuItemAddStudent_OnClick" />
+									<MenuItem Header="Редактировать" Click="MenuItemEditStudent_OnClick" />
+									<MenuItem Header="Удалить" Click="MenuItemDeleteStudent_OnClick" />
+								</ContextMenu>
+							</DataGrid.ContextMenu>
+						</DataGrid>
+
+						<Grid Grid.Row="1">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+
+							<Button Grid.Column="1" Content="Фильтры" Click="ButtonStudentFilters_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
+							<Button Grid.Column="2" Content="Обновить таблицу" Click="ButtonUpdateStudents_OnClick" Padding="15,5,15,5" Margin="3,3,0,0" />
+						</Grid>
+					</Grid>
+				</TabItem>
+			</TabControl>
+		</TabItem>
+
+		<TabItem Header="Настройки" Padding="25,10,25,10">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<StackPanel Grid.Row="1" Grid.Column="1" Width="300">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<Label Grid.Column="0" Content="Адрес сервера" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<TextBox Grid.Column="1" Name="TextBoxServerAddress" VerticalContentAlignment="Center" />
+					</Grid>
+
+					<Grid Margin="0,5,0,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<Label Grid.Column="0" Content="Время ожидания ответа от сервера в мс" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<TextBox Grid.Column="1" Name="TextBoxRequestTimeout" VerticalContentAlignment="Center" />
+					</Grid>
+
+					<Button Content="Соединиться с сервером" Click="ButtonConnectToServer_OnClick" Height="25" Margin="0,5,0,0" />
+				</StackPanel>
+			</Grid>
+		</TabItem>
+	</TabControl>
 </Window>
