@@ -6,7 +6,7 @@ using GraduateWork.Common.Extensions;
 namespace GraduateWork.Client.Client {
 	// ReSharper disable UnusedMember.Global
 
-	public class BaseHttpClient {
+	public abstract class BaseHttpClient {
 		protected string ServerAddress;
 
 		protected void SendRequest(string methodName, byte[] requestBody = null, int timeoutMs = 2000) {

@@ -7,7 +7,7 @@ using GraduateWork.Server.Extensions;
 namespace GraduateWork.Server.Functions.Protected {
 	// ReSharper disable UnusedParameter.Global
 
-	public abstract class HttpProtectedFunctionWithReturn<TKey> : HttpProtectedFunction {
+	public abstract class HttpProtectedFunctionWithReturn<TResult> : HttpProtectedFunction {
 		protected HttpProtectedFunctionWithReturn(IDatabaseAuthorizer databaseAuthorizer) : base(databaseAuthorizer) {
 		}
 
@@ -15,6 +15,6 @@ namespace GraduateWork.Server.Functions.Protected {
 			var outputBytes = Run(parameters, requestBody).ToJson();
 			context.Response.Respond(HttpStatusCode.OK, outputBytes);
 		}
-		protected abstract TKey Run(NameValues parameters, byte[] requestBody);
+		protected abstract TResult Run(NameValues parameters, byte[] requestBody);
 	}
 }

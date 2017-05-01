@@ -92,7 +92,7 @@
     <Compile Include="Functions\Protected\WithReturn\Database\GetBasedProxies\WithUsingFilters\GetGroupsWithUsingFiltersFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Database\GetBasedProxies\WithUsingFilters\GetStudentsWithUsingFiltersFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Database\GetBasedProxies\WithUsingFilters\GetUsersWithUsingFiltersFunction.cs" />
-    <Compile Include="Functions\Protected\WithReturn\Database\GetDisciplinesFromGroupNameFunction.cs" />
+    <Compile Include="Functions\Protected\WithReturn\Database\GetAssessmentByDisciplinesFromGroupNameFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Database\GetExtendedProxy\GetExtendedDisciplineFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Database\GetExtendedProxy\GetExtendedGroupFunction.cs" />
     <Compile Include="Functions\Protected\WithReturn\Database\GetExtendedProxy\GetExtendedStudentFunction.cs" />
