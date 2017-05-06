@@ -1,22 +1,23 @@
-﻿using GraduateWork.Common.Extensions;
+﻿using GraduateWork.Common.Database;
+using GraduateWork.Common.Database.Readers;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common.Database;
 
 namespace GraduateWork.Server.Functions.Protected.WithReturn.Database.GetExtendedProxy {
 	public class GetExtendedDisciplineFunction : HttpProtectedFunctionWithReturn<DisciplineExtendedProxy> {
 		public override string NameOfCalledMethod => "GetExtendedDiscipline";
 		protected override AccessType RequiredAccessType => AccessType.UserRead;
-		private readonly IDatabaseReader databaseReader;
+		private readonly IDatabaseDisciplineReader databaseDisciplineReader;
 
-		public GetExtendedDisciplineFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseReader databaseReader) : base(databaseAuthorizer) {
-			this.databaseReader = databaseReader;
+		public GetExtendedDisciplineFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseDisciplineReader databaseDisciplineReader) : base(databaseAuthorizer) {
+			this.databaseDisciplineReader = databaseDisciplineReader;
 		}
 
 		protected override DisciplineExtendedProxy Run(NameValues parameters, byte[] requestBody) {
-			return databaseReader.GetExtendedDiscipline(requestBody.FromJson<DisciplineBasedProxy>());
+			return databaseDisciplineReader.GetExtendedProxy(requestBody.FromJson<DisciplineBasedProxy>());
 		}
 	}
 }

@@ -8,16 +8,16 @@ using GraduateWork.Common.Tables.Proxies.Extendeds;
 namespace GraduateWork.Client.UI.TableWindows {
 	// ReSharper disable PossibleInvalidOperationException
 
-	public partial class StudentWindow : IProxyWindow {
+	public partial class StudentWindow : IProxyWindowWithExtendedProxy<StudentExtendedProxy> {
 		private readonly Func<string, AssessmentByDiscipline[]> getAssessmentByDisciplinesFromGroupName;
-		public readonly StudentExtendedProxy Student;
+		public StudentExtendedProxy ExtendedProxy { get; private set; }
 		public bool IsReadOnly { get; }
 
 		public StudentWindow(StudentExtendedProxy student, string[] groupNames, Func<string, AssessmentByDiscipline[]> getAssessmentByDisciplinesFromGroupName, bool isReadOnly) {
 			InitializeComponent();
 			this.getAssessmentByDisciplinesFromGroupName = getAssessmentByDisciplinesFromGroupName;
 
-			Student = student?.GetExtendedClone() ?? new StudentExtendedProxy();
+			ExtendedProxy = student?.GetExtendedClone() ?? new StudentExtendedProxy();
 			IsReadOnly = isReadOnly;
 
 			DataGridAssessmentByDisciplines.LoadTable(typeof(AssessmentByDiscipline), false);
@@ -26,29 +26,29 @@ namespace GraduateWork.Client.UI.TableWindows {
 			SetReadOnly();
 		}
 		private void SetGroupFields(string[] groupNames) {
-			TextBoxFirstName.Text = Student.FirstName;
-			TextBoxSecondName.Text = Student.SecondName;
-			TextBoxThirdName.Text = Student.ThirdName;
-			if (Student.DateOfBirth != default(DateTime))
-				DatePickerDateOfBirth.SelectedDate = Student.DateOfBirth;
-			TextBoxPreviousEducationName.Text = Student.PreviousEducationName;
-			TextBoxPreviousEducationYear.Text = Student.PreviousEducationYear.ToString();
-			TextBoxEnrollmentName.Text = Student.EnrollmentName;
-			TextBoxEnrollmentYear.Text = Student.EnrollmentYear.ToString();
-			TextBoxDeductionName.Text = Student.DeductionName;
-			TextBoxDeductionYear.Text = Student.DeductionYear.ToString();
-			TextBoxDiplomaTopic.Text = Student.DiplomaTopic;
+			TextBoxFirstName.Text = ExtendedProxy.FirstName;
+			TextBoxSecondName.Text = ExtendedProxy.SecondName;
+			TextBoxThirdName.Text = ExtendedProxy.ThirdName;
+			if (ExtendedProxy.DateOfBirth != default(DateTime))
+				DatePickerDateOfBirth.SelectedDate = ExtendedProxy.DateOfBirth;
+			TextBoxPreviousEducationName.Text = ExtendedProxy.PreviousEducationName;
+			TextBoxPreviousEducationYear.Text = ExtendedProxy.PreviousEducationYear.ToString();
+			TextBoxEnrollmentName.Text = ExtendedProxy.EnrollmentName;
+			TextBoxEnrollmentYear.Text = ExtendedProxy.EnrollmentYear.ToString();
+			TextBoxDeductionName.Text = ExtendedProxy.DeductionName;
+			TextBoxDeductionYear.Text = ExtendedProxy.DeductionYear.ToString();
+			TextBoxDiplomaTopic.Text = ExtendedProxy.DiplomaTopic;
 			ComboBoxDiplomaAssessment.ItemsSource = CommonMethods.Enum.GetAssessmentNames();
-			ComboBoxDiplomaAssessment.SelectedItem = CommonMethods.Enum.GetAssessmentName(Student.DiplomaAssessment);
-			if (Student.ProtectionDate != default(DateTime))
-				DatePickerProtectionDate.SelectedDate = Student.ProtectionDate;
-			TextBoxProtocolNumber.Text = Student.ProtocolNumber;
-			TextBoxRegistrationNumber.Text = Student.RegistrationNumber;
-			if (Student.RegistrationDate != default(DateTime))
-				DatePickerRegistrationDate.SelectedDate = Student.RegistrationDate;
+			ComboBoxDiplomaAssessment.SelectedItem = CommonMethods.Enum.GetAssessmentName(ExtendedProxy.DiplomaAssessment);
+			if (ExtendedProxy.ProtectionDate != default(DateTime))
+				DatePickerProtectionDate.SelectedDate = ExtendedProxy.ProtectionDate;
+			TextBoxProtocolNumber.Text = ExtendedProxy.ProtocolNumber;
+			TextBoxRegistrationNumber.Text = ExtendedProxy.RegistrationNumber;
+			if (ExtendedProxy.RegistrationDate != default(DateTime))
+				DatePickerRegistrationDate.SelectedDate = ExtendedProxy.RegistrationDate;
 			ComboBoxGroupName.ItemsSource = groupNames;
-			ComboBoxGroupName.SelectedItem = Student.Group?.GroupName;
-			DataGridAssessmentByDisciplines.ItemsSource = Student.AssessmentByDisciplines;
+			ComboBoxGroupName.SelectedItem = ExtendedProxy.Group?.GroupName;
+			DataGridAssessmentByDisciplines.ItemsSource = ExtendedProxy.AssessmentByDisciplines;
 		}
 		private void SetReadOnly() {
 			CommonMethods.Set.ReadOnly(TextBoxFirstName, IsReadOnly);
@@ -140,24 +140,24 @@ namespace GraduateWork.Client.UI.TableWindows {
 				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelGroupName);
 		}
 		public void WriteProxy() {
-			Student.FirstName = TextBoxFirstName.Text;
-			Student.SecondName = TextBoxSecondName.Text;
-			Student.ThirdName = TextBoxThirdName.Text;
-			Student.DateOfBirth = DatePickerDateOfBirth.SelectedDate.Value;
-			Student.PreviousEducationName = TextBoxPreviousEducationName.Text;
-			Student.PreviousEducationYear = int.Parse(TextBoxPreviousEducationYear.Text);
-			Student.EnrollmentName = TextBoxEnrollmentName.Text;
-			Student.EnrollmentYear = int.Parse(TextBoxEnrollmentYear.Text);
-			Student.DeductionName = TextBoxDeductionName.Text;
-			Student.DeductionYear = int.Parse(TextBoxDeductionYear.Text);
-			Student.DiplomaTopic = TextBoxDiplomaTopic.Text;
-			Student.DiplomaAssessment = CommonMethods.Enum.GetAssessmentValue((string)ComboBoxDiplomaAssessment.SelectedItem);
-			Student.ProtectionDate = DatePickerProtectionDate.SelectedDate.Value;
-			Student.ProtocolNumber = TextBoxProtocolNumber.Text;
-			Student.RegistrationNumber = TextBoxRegistrationNumber.Text;
-			Student.RegistrationDate = DatePickerRegistrationDate.SelectedDate.Value;
-			Student.Group = new GroupExtendedProxy { GroupName = (string)ComboBoxGroupName.SelectedItem };
-			Student.AssessmentByDisciplines = (AssessmentByDiscipline[])DataGridAssessmentByDisciplines.ItemsSource;
+			ExtendedProxy.FirstName = TextBoxFirstName.Text;
+			ExtendedProxy.SecondName = TextBoxSecondName.Text;
+			ExtendedProxy.ThirdName = TextBoxThirdName.Text;
+			ExtendedProxy.DateOfBirth = DatePickerDateOfBirth.SelectedDate.Value;
+			ExtendedProxy.PreviousEducationName = TextBoxPreviousEducationName.Text;
+			ExtendedProxy.PreviousEducationYear = int.Parse(TextBoxPreviousEducationYear.Text);
+			ExtendedProxy.EnrollmentName = TextBoxEnrollmentName.Text;
+			ExtendedProxy.EnrollmentYear = int.Parse(TextBoxEnrollmentYear.Text);
+			ExtendedProxy.DeductionName = TextBoxDeductionName.Text;
+			ExtendedProxy.DeductionYear = int.Parse(TextBoxDeductionYear.Text);
+			ExtendedProxy.DiplomaTopic = TextBoxDiplomaTopic.Text;
+			ExtendedProxy.DiplomaAssessment = CommonMethods.Enum.GetAssessmentValue((string)ComboBoxDiplomaAssessment.SelectedItem);
+			ExtendedProxy.ProtectionDate = DatePickerProtectionDate.SelectedDate.Value;
+			ExtendedProxy.ProtocolNumber = TextBoxProtocolNumber.Text;
+			ExtendedProxy.RegistrationNumber = TextBoxRegistrationNumber.Text;
+			ExtendedProxy.RegistrationDate = DatePickerRegistrationDate.SelectedDate.Value;
+			ExtendedProxy.Group = new GroupExtendedProxy { GroupName = (string)ComboBoxGroupName.SelectedItem };
+			ExtendedProxy.AssessmentByDisciplines = (AssessmentByDiscipline[])DataGridAssessmentByDisciplines.ItemsSource;
 		}
 	}
 }

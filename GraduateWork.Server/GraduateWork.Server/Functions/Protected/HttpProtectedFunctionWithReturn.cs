@@ -1,7 +1,7 @@
 ﻿using System.Net;
+using GraduateWork.Common.Database;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Extensions;
 
 namespace GraduateWork.Server.Functions.Protected {

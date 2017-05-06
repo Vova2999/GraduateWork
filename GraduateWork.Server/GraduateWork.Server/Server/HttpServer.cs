@@ -23,8 +23,8 @@ namespace GraduateWork.Server.Server {
 		private void CheckInputFunctions(IHttpFunction[] httpFunctions) {
 			var repeatedFunction = httpFunctions
 				.GroupBy(function => function.NameOfCalledMethod)
-				.FirstOrDefault(group => group.Count() != 1)?
-				.First();
+				.FirstOrDefault(group => group.Count() != 1)
+				?.First();
 
 			if (repeatedFunction != null)
 				throw new ArgumentException($"Обнаружены несколько функций с NameOfCalledMethod = {repeatedFunction.NameOfCalledMethod}");

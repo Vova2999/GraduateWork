@@ -5,30 +5,30 @@ using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.UI.TableWindows {
-	public partial class UserWindow : IProxyWindow {
-		public readonly UserExtendedProxy User;
+	public partial class UserWindow : IProxyWindowWithExtendedProxy<UserExtendedProxy> {
+		public UserExtendedProxy ExtendedProxy { get; private set; }
 		public bool IsReadOnly { get; }
 
 		public UserWindow(UserExtendedProxy user, bool isReadOnly) {
 			InitializeComponent();
 
-			User = user?.GetExtendedClone() ?? new UserExtendedProxy();
+			ExtendedProxy = user?.GetExtendedClone() ?? new UserExtendedProxy();
 			IsReadOnly = isReadOnly;
 
 			SetUserFields();
 			SetReadOnly();
 		}
 		private void SetUserFields() {
-			if (User == null)
+			if (ExtendedProxy == null)
 				return;
 
-			TextBoxUserLogin.Text = User.Login;
-			TextBoxUserPassword.Text = User.Password;
-			CheckBoxUserRead.IsChecked = User.IsHaveAccess(AccessType.UserRead);
-			CheckBoxUserWrite.IsChecked = User.IsHaveAccess(AccessType.UserWrite);
-			CheckBoxAdminRead.IsChecked = User.IsHaveAccess(AccessType.AdminRead);
-			CheckBoxAdminWrite.IsChecked = User.IsHaveAccess(AccessType.AdminWrite);
-			CheckBoxCreateReport.IsChecked = User.IsHaveAccess(AccessType.CreateReport);
+			TextBoxUserLogin.Text = ExtendedProxy.Login;
+			TextBoxUserPassword.Text = ExtendedProxy.Password;
+			CheckBoxUserRead.IsChecked = ExtendedProxy.IsHaveAccess(AccessType.UserRead);
+			CheckBoxUserWrite.IsChecked = ExtendedProxy.IsHaveAccess(AccessType.UserWrite);
+			CheckBoxAdminRead.IsChecked = ExtendedProxy.IsHaveAccess(AccessType.AdminRead);
+			CheckBoxAdminWrite.IsChecked = ExtendedProxy.IsHaveAccess(AccessType.AdminWrite);
+			CheckBoxCreateReport.IsChecked = ExtendedProxy.IsHaveAccess(AccessType.CreateReport);
 		}
 		private void SetReadOnly() {
 			CommonMethods.Set.ReadOnly(TextBoxUserLogin, IsReadOnly);
@@ -55,20 +55,20 @@ namespace GraduateWork.Client.UI.TableWindows {
 				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelUserPassword);
 		}
 		public void WriteProxy() {
-			User.Login = TextBoxUserLogin.Text;
-			User.Password = TextBoxUserPassword.Text;
+			ExtendedProxy.Login = TextBoxUserLogin.Text;
+			ExtendedProxy.Password = TextBoxUserPassword.Text;
 
-			User.AccessType = 0;
+			ExtendedProxy.AccessType = 0;
 			if (CheckBoxUserRead.IsChecked == true)
-				User.AddAccess(AccessType.UserRead);
+				ExtendedProxy.AddAccess(AccessType.UserRead);
 			if (CheckBoxUserWrite.IsChecked == true)
-				User.AddAccess(AccessType.UserWrite);
+				ExtendedProxy.AddAccess(AccessType.UserWrite);
 			if (CheckBoxAdminRead.IsChecked == true)
-				User.AddAccess(AccessType.AdminRead);
+				ExtendedProxy.AddAccess(AccessType.AdminRead);
 			if (CheckBoxAdminWrite.IsChecked == true)
-				User.AddAccess(AccessType.AdminWrite);
+				ExtendedProxy.AddAccess(AccessType.AdminWrite);
 			if (CheckBoxCreateReport.IsChecked == true)
-				User.AddAccess(AccessType.CreateReport);
+				ExtendedProxy.AddAccess(AccessType.CreateReport);
 		}
 	}
 }

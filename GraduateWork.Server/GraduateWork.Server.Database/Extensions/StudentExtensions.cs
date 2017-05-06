@@ -37,11 +37,12 @@ namespace GraduateWork.Server.Database.Extensions {
 			studentProxy.RegistrationDate = student.RegistrationDate;
 			studentProxy.Group = student.Group.ToBasedProxy();
 			studentProxy.AssessmentByDisciplines = student.AssessmentByDisciplines.Select(
-				assessmentByDiscipline => new AssessmentByDiscipline {
-					NameOfDiscipline = assessmentByDiscipline.Discipline.DisciplineName,
-					ControlType = assessmentByDiscipline.Discipline.ControlType,
-					Assessment = (Assessment)assessmentByDiscipline.Assessment
-				}).ToArray();
+					assessmentByDiscipline => new AssessmentByDiscipline {
+						NameOfDiscipline = assessmentByDiscipline.Discipline.DisciplineName,
+						ControlType = assessmentByDiscipline.Discipline.ControlType,
+						Assessment = (Assessment)assessmentByDiscipline.Assessment
+					})
+				.ToArray();
 
 			return studentProxy;
 		}

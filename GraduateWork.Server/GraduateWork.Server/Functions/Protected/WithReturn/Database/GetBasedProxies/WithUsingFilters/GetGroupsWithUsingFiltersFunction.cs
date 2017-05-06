@@ -1,18 +1,19 @@
+using GraduateWork.Common.Database;
+using GraduateWork.Common.Database.Readers;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Http;
 using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common.Database;
 
 namespace GraduateWork.Server.Functions.Protected.WithReturn.Database.GetBasedProxies.WithUsingFilters {
 	public class GetGroupsWithUsingFiltersFunction : HttpProtectedFunctionWithReturn<GroupBasedProxy[]> {
 		public override string NameOfCalledMethod => "GetGroupsWithUsingFilters";
 		protected override AccessType RequiredAccessType => AccessType.UserRead;
-		private readonly IDatabaseReader databaseReader;
+		private readonly IDatabaseGroupReader databaseGroupReader;
 
-		public GetGroupsWithUsingFiltersFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseReader databaseReader) : base(databaseAuthorizer) {
-			this.databaseReader = databaseReader;
+		public GetGroupsWithUsingFiltersFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseGroupReader databaseGroupReader) : base(databaseAuthorizer) {
+			this.databaseGroupReader = databaseGroupReader;
 		}
 
 		protected override GroupBasedProxy[] Run(NameValues parameters, byte[] requestBody) {
@@ -21,7 +22,7 @@ namespace GraduateWork.Server.Functions.Protected.WithReturn.Database.GetBasedPr
 			var specialtyName = parameters.GetValueOrNull(HttpParameters.SpecialtyName);
 			var facultyName = parameters.GetValueOrNull(HttpParameters.FacultyName);
 
-			return databaseReader.GetGroupsWithUsingFilters(groupName, specialtyNumber, specialtyName, facultyName);
+			return databaseGroupReader.GetGroupsWithUsingFilters(groupName, specialtyNumber, specialtyName, facultyName);
 		}
 	}
 }

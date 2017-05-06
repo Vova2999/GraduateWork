@@ -1,7 +1,7 @@
 ﻿using System.Net;
+using GraduateWork.Common.Database;
 using GraduateWork.Common.Http;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Exceptions;
 
 namespace GraduateWork.Server.Functions.NonProtected.WithoutReturn {
@@ -14,6 +14,8 @@ namespace GraduateWork.Server.Functions.NonProtected.WithoutReturn {
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
+			if (parameters.NotContains(HttpParameters.Login) || parameters.NotContains(HttpParameters.Password))
+				throw new HttpException(HttpStatusCode.BadRequest, "Для вызова этой функции необходимо передать логин и пароль");
 			if (!databaseAuthorizer.UserIsExist(parameters[HttpParameters.Login], parameters[HttpParameters.Password]))
 				throw new HttpException(HttpStatusCode.NotFound, "Пользователь не найден");
 		}

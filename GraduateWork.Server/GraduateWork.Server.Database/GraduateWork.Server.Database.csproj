@@ -56,9 +56,18 @@
     <Compile Include="Extensions\StudentExtensions.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Models\DatabaseAuthorizer.cs" />
+    <Compile Include="Models\Editors\DatabaseDisciplineEditor.cs" />
+    <Compile Include="Models\Editors\DatabaseGroupEditor.cs" />
+    <Compile Include="Models\Editors\DatabaseStudentEditor.cs" />
+    <Compile Include="Models\Editors\DatabaseUserEditor.cs" />
     <Compile Include="Models\ModelDatabase.cs" />
     <Compile Include="Models\DatabaseEditor.cs" />
     <Compile Include="Models\DatabaseReader.cs" />
+    <Compile Include="Models\Readers\DatabaseAssessmentByDisciplinesReader.cs" />
+    <Compile Include="Models\Readers\DatabaseDisciplineReader.cs" />
+    <Compile Include="Models\Readers\DatabaseGroupReader.cs" />
+    <Compile Include="Models\Readers\DatabaseStudentReader.cs" />
+    <Compile Include="Models\Readers\DatabaseUserReader.cs" />
     <Compile Include="NinjectDatabaseModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tables\AssessmentByDiscipline.cs" />
@@ -70,12 +79,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GraduateWork.Server.Common\GraduateWork.Server.Common.csproj">
-      <Project>{5e51152b-43dc-4b8e-9e22-3c54e6ef416f}</Project>
-      <Name>GraduateWork.Server.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

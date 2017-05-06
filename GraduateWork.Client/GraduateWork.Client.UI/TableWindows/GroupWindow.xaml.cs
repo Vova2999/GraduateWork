@@ -5,14 +5,14 @@ using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.UI.TableWindows {
-	public partial class GroupWindow : IProxyWindow {
-		public readonly GroupExtendedProxy Group;
+	public partial class GroupWindow : IProxyWindowWithExtendedProxy<GroupExtendedProxy> {
+		public GroupExtendedProxy ExtendedProxy { get; private set; }
 		public bool IsReadOnly { get; }
 
 		public GroupWindow(GroupExtendedProxy group, bool isReadOnly) {
 			InitializeComponent();
 
-			Group = group?.GetExtendedClone() ?? new GroupExtendedProxy();
+			ExtendedProxy = group?.GetExtendedClone() ?? new GroupExtendedProxy();
 			IsReadOnly = isReadOnly;
 
 			DataGridStudents.LoadTable(typeof(StudentBasedProxy));
@@ -22,12 +22,12 @@ namespace GraduateWork.Client.UI.TableWindows {
 			SetReadOnly();
 		}
 		private void SetGroupFields() {
-			TextBoxGroupName.Text = Group.GroupName;
-			TextBoxSpecialtyName.Text = Group.SpecialtyName;
-			TextBoxSpecialtyNumber.Text = Group.SpecialtyNumber.ToString();
-			TextBoxFacultyName.Text = Group.FacultyName;
-			DataGridStudents.ItemsSource = Group.Students;
-			DataGridDisciplines.ItemsSource = Group.Disciplines;
+			TextBoxGroupName.Text = ExtendedProxy.GroupName;
+			TextBoxSpecialtyName.Text = ExtendedProxy.SpecialtyName;
+			TextBoxSpecialtyNumber.Text = ExtendedProxy.SpecialtyNumber.ToString();
+			TextBoxFacultyName.Text = ExtendedProxy.FacultyName;
+			DataGridStudents.ItemsSource = ExtendedProxy.Students;
+			DataGridDisciplines.ItemsSource = ExtendedProxy.Disciplines;
 		}
 		private void SetReadOnly() {
 			CommonMethods.Set.ReadOnly(TextBoxGroupName, IsReadOnly);
@@ -59,10 +59,10 @@ namespace GraduateWork.Client.UI.TableWindows {
 				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelFacultyName);
 		}
 		public void WriteProxy() {
-			Group.GroupName = TextBoxGroupName.Text;
-			Group.SpecialtyName = TextBoxSpecialtyName.Text;
-			Group.SpecialtyNumber = int.Parse(TextBoxSpecialtyNumber.Text);
-			Group.FacultyName = TextBoxFacultyName.Text;
+			ExtendedProxy.GroupName = TextBoxGroupName.Text;
+			ExtendedProxy.SpecialtyName = TextBoxSpecialtyName.Text;
+			ExtendedProxy.SpecialtyNumber = int.Parse(TextBoxSpecialtyNumber.Text);
+			ExtendedProxy.FacultyName = TextBoxFacultyName.Text;
 		}
 	}
 }

@@ -2,7 +2,6 @@
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Reports;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
-using GraduateWork.Server.Common.Reports;
 using GraduateWork.Server.Functions.Protected.WithReturn.Reports;
 using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;

@@ -36,9 +36,9 @@ namespace GraduateWork.Server.Database.Models {
 		public Student GetStudent(StudentBasedProxy student) {
 			return Students.First(s =>
 				s.FirstName == student.FirstName &&
-					s.SecondName == student.SecondName &&
-					s.ThirdName == student.ThirdName &&
-					s.DateOfBirth == student.DateOfBirth);
+				s.SecondName == student.SecondName &&
+				s.ThirdName == student.ThirdName &&
+				s.DateOfBirth == student.DateOfBirth);
 		}
 		public User GetUser(UserBasedProxy user) {
 			return Users.First(u => u.Login == user.Login);

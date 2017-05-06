@@ -65,12 +65,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraduateWork.Server.Common\GraduateWork.Server.Common.csproj">
-      <Project>{5e51152b-43dc-4b8e-9e22-3c54e6ef416f}</Project>
-      <Name>GraduateWork.Server.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Templates\Академ.docx">

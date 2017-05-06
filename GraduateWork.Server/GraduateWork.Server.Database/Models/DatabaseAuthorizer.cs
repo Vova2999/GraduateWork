@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using GraduateWork.Server.Common.Database;
+using GraduateWork.Common.Database;
 using GraduateWork.Server.Database.Tables;
 
 namespace GraduateWork.Server.Database.Models {
@@ -28,7 +28,7 @@ namespace GraduateWork.Server.Database.Models {
 		}
 		public bool AccessIsAllowed(string login, string password, int requestedAccessType) {
 			var foundUser = modelDatabase.Users.First(user => user.Login == login && user.Password == password);
-			return -(foundUser.AccessType | -requestedAccessType - 1) - 1 == 0;
+			return -(foundUser.AccessType | (-requestedAccessType - 1)) - 1 == 0;
 		}
 	}
 }

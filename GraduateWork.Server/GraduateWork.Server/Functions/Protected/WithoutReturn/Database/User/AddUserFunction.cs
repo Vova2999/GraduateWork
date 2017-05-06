@@ -1,21 +1,22 @@
+using GraduateWork.Common.Database;
+using GraduateWork.Common.Database.Editors;
 using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common.Database;
 
 namespace GraduateWork.Server.Functions.Protected.WithoutReturn.Database.User {
 	public class AddUserFunction : HttpProtectedFunctionWithoutReturn {
 		public override string NameOfCalledMethod => "AddUser";
 		protected override AccessType RequiredAccessType => AccessType.AdminWrite;
-		private readonly IDatabaseEditor databaseEditor;
+		private readonly IDatabaseUserEditor databaseUserEditor;
 
-		public AddUserFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseEditor databaseEditor) : base(databaseAuthorizer) {
-			this.databaseEditor = databaseEditor;
+		public AddUserFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseUserEditor databaseUserEditor) : base(databaseAuthorizer) {
+			this.databaseUserEditor = databaseUserEditor;
 		}
 
 		protected override void Run(NameValues parameters, byte[] requestBody) {
-			databaseEditor.AddUser(requestBody.FromJson<UserExtendedProxy>());
+			databaseUserEditor.Add(requestBody.FromJson<UserExtendedProxy>());
 		}
 	}
 }

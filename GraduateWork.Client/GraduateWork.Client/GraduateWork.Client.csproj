@@ -38,9 +38,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\BaseHttpClient.cs" />
-    <Compile Include="Client\HttpClient.cs" />
-    <Compile Include="Client\IHttpClient.cs" />
+    <Compile Include="Clients\Database\Editors\DatabaseDisciplineEditor.cs" />
+    <Compile Include="Clients\Database\Editors\DatabaseGroupEditor.cs" />
+    <Compile Include="Clients\Database\Editors\DatabaseStudentEditor.cs" />
+    <Compile Include="Clients\Database\Editors\DatabaseUserEditor.cs" />
+    <Compile Include="Clients\Database\Readers\DatabaseAssessmentByDisciplinesReader.cs" />
+    <Compile Include="Clients\Database\Readers\DatabaseDisciplineReader.cs" />
+    <Compile Include="Clients\Database\Readers\DatabaseGroupReader.cs" />
+    <Compile Include="Clients\Database\Readers\DatabaseStudentReader.cs" />
+    <Compile Include="Clients\Database\Readers\DatabaseUserReader.cs" />
+    <Compile Include="Clients\ParameretsClient.cs" />
+    <Compile Include="HttpClientParameters.cs" />
+    <Compile Include="Clients\BaseHttpClient.cs" />
+    <Compile Include="Clients\Reports\ReportsCreator.cs" />
+    <Compile Include="HttpClientProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

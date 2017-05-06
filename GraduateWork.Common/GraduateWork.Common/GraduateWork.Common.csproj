@@ -39,7 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\Editors\IDatabaseDisciplineEditor.cs" />
+    <Compile Include="Database\Editors\IDatabaseGroupEditor.cs" />
+    <Compile Include="Database\Editors\IDatabaseStudentEditor.cs" />
+    <Compile Include="Database\Editors\IDatabaseUserEditor.cs" />
+    <Compile Include="Database\IDatabaseAuthorizer.cs" />
+    <Compile Include="Database\IDatabaseEditor.cs" />
+    <Compile Include="Database\IDatabaseReader.cs" />
+    <Compile Include="Database\Readers\IDatabaseAssessmentByDisciplinesReader.cs" />
+    <Compile Include="Database\Readers\IDatabaseDisciplineReader.cs" />
+    <Compile Include="Database\Readers\IDatabaseGroupReader.cs" />
+    <Compile Include="Database\Readers\IDatabaseStudentReader.cs" />
+    <Compile Include="Database\Readers\IDatabaseUserReader.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Reports\IReportsCreator.cs" />
     <Compile Include="Tables\Enums\AccessType.cs" />
     <Compile Include="Tables\Enums\Assessment.cs" />
     <Compile Include="Tables\Enums\ControlType.cs" />

@@ -3,27 +3,27 @@ using System.Windows;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.UI.TableWindows {
-	public partial class DisciplineWindow : IProxyWindow {
-		public readonly DisciplineExtendedProxy Discipline;
+	public partial class DisciplineWindow : IProxyWindowWithExtendedProxy<DisciplineExtendedProxy> {
+		public DisciplineExtendedProxy ExtendedProxy { get; private set; }
 		public bool IsReadOnly { get; }
 
 		public DisciplineWindow(DisciplineExtendedProxy discipline, string[] groupNames, bool isReadOnly) {
 			InitializeComponent();
 
-			Discipline = discipline?.GetExtendedClone() ?? new DisciplineExtendedProxy();
+			ExtendedProxy = discipline?.GetExtendedClone() ?? new DisciplineExtendedProxy();
 			IsReadOnly = isReadOnly;
 
 			SetGroupFields(groupNames);
 			SetReadOnly();
 		}
 		private void SetGroupFields(string[] groupNames) {
-			TextBoxDisciplineName.Text = Discipline.DisciplineName;
+			TextBoxDisciplineName.Text = ExtendedProxy.DisciplineName;
 			ComboBoxGroupName.ItemsSource = groupNames;
-			ComboBoxGroupName.SelectedItem = Discipline.GroupName;
+			ComboBoxGroupName.SelectedItem = ExtendedProxy.GroupName;
 			ComboBoxControlType.ItemsSource = CommonMethods.Enum.GetControlTypeNames();
-			ComboBoxControlType.SelectedItem = CommonMethods.Enum.GetControlTypeName(Discipline.ControlType);
-			TextBoxTotalHours.Text = Discipline.TotalHours.ToString();
-			TextBoxClassHours.Text = Discipline.ClassHours.ToString();
+			ComboBoxControlType.SelectedItem = CommonMethods.Enum.GetControlTypeName(ExtendedProxy.ControlType);
+			TextBoxTotalHours.Text = ExtendedProxy.TotalHours.ToString();
+			TextBoxClassHours.Text = ExtendedProxy.ClassHours.ToString();
 		}
 		private void SetReadOnly() {
 			CommonMethods.Set.ReadOnly(TextBoxDisciplineName, IsReadOnly);
@@ -61,11 +61,11 @@ namespace GraduateWork.Client.UI.TableWindows {
 				yield return CommonMethods.GenerateMessage.FieldIsNotNumber(LabelClassHours);
 		}
 		public void WriteProxy() {
-			Discipline.DisciplineName = TextBoxDisciplineName.Text;
-			Discipline.GroupName = (string)ComboBoxGroupName.SelectedItem;
-			Discipline.ControlType = CommonMethods.Enum.GetControlTypeValue((string)ComboBoxControlType.SelectedItem);
-			Discipline.TotalHours = int.Parse(TextBoxTotalHours.Text);
-			Discipline.ClassHours = int.Parse(TextBoxClassHours.Text);
+			ExtendedProxy.DisciplineName = TextBoxDisciplineName.Text;
+			ExtendedProxy.GroupName = (string)ComboBoxGroupName.SelectedItem;
+			ExtendedProxy.ControlType = CommonMethods.Enum.GetControlTypeValue((string)ComboBoxControlType.SelectedItem);
+			ExtendedProxy.TotalHours = int.Parse(TextBoxTotalHours.Text);
+			ExtendedProxy.ClassHours = int.Parse(TextBoxClassHours.Text);
 		}
 	}
 }

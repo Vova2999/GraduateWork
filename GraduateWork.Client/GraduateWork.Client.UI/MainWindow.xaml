@@ -150,6 +150,7 @@
 									<MenuItem Header="Добавить" Click="MenuItemAddStudent_OnClick" />
 									<MenuItem Header="Редактировать" Click="MenuItemEditStudent_OnClick" />
 									<MenuItem Header="Удалить" Click="MenuItemDeleteStudent_OnClick" />
+									<MenuItem Header="Создать отчет" Click="MenuItemCreateReport_OnClick" />
 								</ContextMenu>
 							</DataGrid.ContextMenu>
 						</DataGrid>

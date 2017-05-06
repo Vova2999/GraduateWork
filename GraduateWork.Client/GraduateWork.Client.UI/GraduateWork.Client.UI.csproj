@@ -56,6 +56,9 @@
     </ApplicationDefinition>
     <Compile Include="CommonMethods.cs" />
     <Compile Include="ClientUiSettings.cs" />
+    <Compile Include="CreateReportWindow.xaml.cs">
+      <DependentUpon>CreateReportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\DataGridExtensions.cs" />
     <Compile Include="Extensions\UserProxyExtensions.cs" />
     <Compile Include="TableWindows\DisciplineWindow.xaml.cs">
@@ -64,13 +67,18 @@
     <Compile Include="TableWindows\GroupWindow.xaml.cs">
       <DependentUpon>GroupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IProxyWindow.cs" />
+    <Compile Include="TableWindows\IProxyWindow.cs" />
+    <Compile Include="TableWindows\IProxyWindowWithExtendedProxy.cs" />
     <Compile Include="TableWindows\StudentWindow.xaml.cs">
       <DependentUpon>StudentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TableWindows\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="CreateReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

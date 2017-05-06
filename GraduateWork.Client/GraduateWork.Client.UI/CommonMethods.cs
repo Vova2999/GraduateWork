@@ -4,8 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using GraduateWork.Client.UI.TableWindows;
+using GraduateWork.Common.Database;
 using GraduateWork.Common.Tables.Attributes;
 using GraduateWork.Common.Tables.Enums;
+using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.UI {
 	public static class CommonMethods {
@@ -70,31 +73,53 @@ namespace GraduateWork.Client.UI {
 			}
 		}
 
+		public static class GetWindow {
+			public static Func<DisciplineExtendedProxy, bool, DisciplineWindow> Discipline(HttpClientProvider httpClientProvider) {
+				return (proxy, isReadOnly) => new DisciplineWindow(proxy, GetGroupNames(httpClientProvider), isReadOnly);
+			}
+
+			public static Func<GroupExtendedProxy, bool, GroupWindow> Group() {
+				return (proxy, isReadOnly) => new GroupWindow(proxy, isReadOnly);
+			}
+
+			public static Func<StudentExtendedProxy, bool, StudentWindow> Student(HttpClientProvider httpClientProvider) {
+				return (proxy, isReadOnly) => new StudentWindow(proxy, GetGroupNames(httpClientProvider), groupName => httpClientProvider.GetDatabaseAssessmentByDisciplinesReader().GetAssessmentByDisciplinesFromGroupName(groupName), isReadOnly);
+			}
+
+			public static Func<UserExtendedProxy, bool, UserWindow> User() {
+				return (proxy, isReadOnly) => new UserWindow(proxy, isReadOnly);
+			}
+
+			private static string[] GetGroupNames(HttpClientProvider httpClientProvider) {
+				return SafeRunMethod.WithReturn(() => httpClientProvider.GetDatabaseGroupReader().GetAllBasedProies())?.Select(group => group.GroupName).ToArray();
+			}
+		}
+
 		public static class WorkWithTables {
-			public static void View<TBasedProxy, TExtendedProxy>(TBasedProxy selectedItem, Func<TBasedProxy, TExtendedProxy> getExtendedProxy, Func<TExtendedProxy, bool, Window> getWindow) {
+			public static void View<TBasedProxy, TExtendedProxy>(TBasedProxy selectedItem, IDatabaseReader<TBasedProxy, TExtendedProxy> databaseReader, Func<TExtendedProxy, bool, Window> getWindow) {
 				if (selectedItem == null)
 					return;
 
-				var extendedProxy = SafeRunMethod.WithReturn(() => getExtendedProxy(selectedItem));
+				var extendedProxy = SafeRunMethod.WithReturn(() => databaseReader.GetExtendedProxy(selectedItem));
 				if (extendedProxy == null)
 					return;
 
 				getWindow(extendedProxy, true).ShowDialog();
 			}
 
-			public static void Add<TExtendedProxy, TWindow>(TExtendedProxy defaultExtendedProxy, Func<TExtendedProxy, bool, TWindow> getWindow, Action<TExtendedProxy> addExtendedProxy, Func<TWindow, TExtendedProxy> getExtendedProxyFromWindow) where TWindow : Window {
-				var window = getWindow(defaultExtendedProxy, false);
+			public static void Add<TBasedProxy, TExtendedProxy, TWindow>(Func<TExtendedProxy, bool, TWindow> getWindow, IDatabaseEditor<TBasedProxy, TExtendedProxy> databaseEditor) where TWindow : Window, IProxyWindowWithExtendedProxy<TExtendedProxy> {
+				var window = getWindow(default(TExtendedProxy), false);
 				if (window.ShowDialog() != true)
 					return;
 
-				SafeRunMethod.WithoutReturn(() => addExtendedProxy(getExtendedProxyFromWindow(window)));
+				SafeRunMethod.WithoutReturn(() => databaseEditor.Add(window.ExtendedProxy));
 			}
 
-			public static void Edit<TBasedProxy, TExtendedProxy, TWindow>(TBasedProxy selectedItem, Func<TBasedProxy, TExtendedProxy> getExtendedProxy, Func<TExtendedProxy, bool, TWindow> getWindow, Action<TExtendedProxy, TExtendedProxy> editExtendedProxy, Func<TWindow, TExtendedProxy> getExtendedProxyFromWindow) where TWindow : Window {
+			public static void Edit<TBasedProxy, TExtendedProxy, TWindow>(TBasedProxy selectedItem, IDatabaseReader<TBasedProxy, TExtendedProxy> databaseReader, Func<TExtendedProxy, bool, TWindow> getWindow, IDatabaseEditor<TBasedProxy, TExtendedProxy> databaseEditor) where TWindow : Window, IProxyWindowWithExtendedProxy<TExtendedProxy> {
 				if (selectedItem == null)
 					return;
 
-				var oldProxy = SafeRunMethod.WithReturn(() => getExtendedProxy(selectedItem));
+				var oldProxy = SafeRunMethod.WithReturn(() => databaseReader.GetExtendedProxy(selectedItem));
 				if (oldProxy == null)
 					return;
 
@@ -102,14 +127,14 @@ namespace GraduateWork.Client.UI {
 				if (window.ShowDialog() != true)
 					return;
 
-				SafeRunMethod.WithoutReturn(() => editExtendedProxy(oldProxy, getExtendedProxyFromWindow(window)));
+				SafeRunMethod.WithoutReturn(() => databaseEditor.Edit(oldProxy, window.ExtendedProxy));
 			}
 
-			public static void Delete<TBasedProxy>(TBasedProxy selectedItem, Action<TBasedProxy> deleteBasedProxy) {
+			public static void Delete<TBasedProxy, TExtendedProxy>(TBasedProxy selectedItem, IDatabaseEditor<TBasedProxy, TExtendedProxy> databaseEditor) {
 				if (selectedItem == null)
 					return;
 
-				SafeRunMethod.WithoutReturn(() => deleteBasedProxy(selectedItem));
+				SafeRunMethod.WithoutReturn(() => databaseEditor.Delete(selectedItem));
 			}
 		}
 

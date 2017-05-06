@@ -1,8 +1,8 @@
 ﻿using System.Net;
+using GraduateWork.Common.Database;
 using GraduateWork.Common.Http;
 using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Exceptions;
 
 namespace GraduateWork.Server.Functions.Protected {

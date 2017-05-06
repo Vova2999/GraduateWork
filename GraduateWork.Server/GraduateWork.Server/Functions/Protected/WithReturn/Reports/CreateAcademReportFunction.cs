@@ -1,10 +1,9 @@
-﻿using GraduateWork.Common.Extensions;
+﻿using GraduateWork.Common.Database;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Reports;
 using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common.Database;
-using GraduateWork.Server.Common.Reports;
 
 namespace GraduateWork.Server.Functions.Protected.WithReturn.Reports {
 	public class CreateAcademReportFunction : HttpProtectedFunctionWithReturn<FileWithContent> {

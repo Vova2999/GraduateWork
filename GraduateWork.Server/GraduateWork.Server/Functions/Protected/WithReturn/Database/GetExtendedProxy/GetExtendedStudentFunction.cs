@@ -1,22 +1,23 @@
-﻿using GraduateWork.Common.Extensions;
+﻿using GraduateWork.Common.Database;
+using GraduateWork.Common.Database.Readers;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using GraduateWork.Server.AdditionalObjects;
-using GraduateWork.Server.Common.Database;
 
 namespace GraduateWork.Server.Functions.Protected.WithReturn.Database.GetExtendedProxy {
 	public class GetExtendedStudentFunction : HttpProtectedFunctionWithReturn<StudentExtendedProxy> {
 		public override string NameOfCalledMethod => "GetExtendedStudent";
 		protected override AccessType RequiredAccessType => AccessType.UserRead;
-		private readonly IDatabaseReader databaseReader;
+		private readonly IDatabaseStudentReader databaseStudentReader;
 
-		public GetExtendedStudentFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseReader databaseReader) : base(databaseAuthorizer) {
-			this.databaseReader = databaseReader;
+		public GetExtendedStudentFunction(IDatabaseAuthorizer databaseAuthorizer, IDatabaseStudentReader databaseStudentReader) : base(databaseAuthorizer) {
+			this.databaseStudentReader = databaseStudentReader;
 		}
 
 		protected override StudentExtendedProxy Run(NameValues parameters, byte[] requestBody) {
-			return databaseReader.GetExtendedStudent(requestBody.FromJson<StudentBasedProxy>());
+			return databaseStudentReader.GetExtendedProxy(requestBody.FromJson<StudentBasedProxy>());
 		}
 	}
 }

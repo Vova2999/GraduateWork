@@ -65,13 +65,20 @@
     <Compile Include="BaseClasses\BaseHttpClient.cs" />
     <Compile Include="BaseClasses\BaseHttpServerTest.cs" />
     <Compile Include="BaseClasses\BaseHttpServerWithUsingDatabaseAuthorizerTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseEditorTests\HttpFunctionsWithUsingDatabaseDisciplineEditorTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseEditorTests\HttpFunctionsWithUsingDatabaseGroupEditorTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseEditorTests\HttpFunctionsWithUsingDatabaseStudentEditorTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseEditorTests\HttpFunctionsWithUsingDatabaseUserEditorTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseReaderTests\HttpFunctionsWithUsingDatabaseDisciplineReaderTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseReaderTests\HttpFunctionsWithUsingDatabaseAssessmentByDisciplinesReaderTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseReaderTests\HttpFunctionsWithUsingDatabaseGroupReaderTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseReaderTests\HttpFunctionsWithUsingDatabaseStudentReaderTest.cs" />
+    <Compile Include="HttpFunctionsWithUsingDatabaseReaderTests\HttpFunctionsWithUsingDatabaseUserReaderTest.cs" />
     <Compile Include="StopServerFunctionTest.cs" />
     <Compile Include="HttpFunctionsThrowExceptionTest.cs" />
     <Compile Include="HttpFunctionsWithoutUsingDatabaseTest.cs" />
-    <Compile Include="HttpFunctionsWithUsingDatabaseReaderTest.cs" />
     <Compile Include="HttpFunctionsWithUsingReportCreatorTest.cs" />
     <Compile Include="HttpServerCreateTest.cs" />
-    <Compile Include="HttpFunctionsWithUsingDatabaseEditorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,10 +86,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraduateWork.Server.Common\GraduateWork.Server.Common.csproj">
-      <Project>{5e51152b-43dc-4b8e-9e22-3c54e6ef416f}</Project>
-      <Name>GraduateWork.Server.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GraduateWork.Server\GraduateWork.Server.csproj">
       <Project>{be2202c2-6895-4103-8d37-489cdfbb2f97}</Project>
       <Name>GraduateWork.Server</Name>

@@ -1,7 +1,7 @@
 ﻿namespace GraduateWork.Common.Reports {
+	// ReSharper disable ClassNeverInstantiated.Global
 	// ReSharper disable MemberCanBePrivate.Global
 	// ReSharper disable NotAccessedField.Global
-	// ReSharper disable UnusedMember.Global
 
 	public class FileWithContent {
 		public readonly string FileName;

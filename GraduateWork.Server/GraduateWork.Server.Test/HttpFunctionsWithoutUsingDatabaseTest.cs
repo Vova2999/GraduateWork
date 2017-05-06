@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FakeItEasy;
+using GraduateWork.Common.Database;
 using GraduateWork.Common.Http;
-using GraduateWork.Server.Common.Database;
 using GraduateWork.Server.Functions.NonProtected.WithoutReturn;
 using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
