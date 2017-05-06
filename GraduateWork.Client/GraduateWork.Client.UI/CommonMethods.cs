@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -8,6 +9,7 @@ using GraduateWork.Client.UI.TableWindows;
 using GraduateWork.Common.Database;
 using GraduateWork.Common.Tables.Attributes;
 using GraduateWork.Common.Tables.Enums;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.UI {
@@ -51,6 +53,10 @@ namespace GraduateWork.Client.UI {
 				int result;
 				return !int.TryParse(textBox.Text, out result);
 			}
+
+			public static bool DirectoryNotExists(TextBox textBox) {
+				return !Directory.Exists(textBox.Text);
+			}
 		}
 
 		public static class GenerateMessage {
@@ -88,6 +94,10 @@ namespace GraduateWork.Client.UI {
 
 			public static Func<UserExtendedProxy, bool, UserWindow> User() {
 				return (proxy, isReadOnly) => new UserWindow(proxy, isReadOnly);
+			}
+
+			public static CreateReportWindow CreateReport(HttpClientProvider httpClientProvider, StudentBasedProxy proxy) {
+				return new CreateReportWindow(httpClientProvider.GetDatabaseStudentReader().GetExtendedProxy(proxy), httpClientProvider.GetReportsCreator());
 			}
 
 			private static string[] GetGroupNames(HttpClientProvider httpClientProvider) {

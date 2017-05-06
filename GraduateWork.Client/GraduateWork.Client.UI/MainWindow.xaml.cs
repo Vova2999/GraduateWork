@@ -36,17 +36,19 @@ namespace GraduateWork.Client.UI {
 
 		private void MainWindow_OnClosing(object sender, CancelEventArgs e) {
 			var saveLoginAndPassword = CheckBoxSaveLoginAndPassword.IsChecked == true;
-			clientUiSettings.ServerAddress = TextBoxServerAddress.Text;
-			clientUiSettings.UserLogin = saveLoginAndPassword ? TextBoxUserLogin.Text : string.Empty;
-			clientUiSettings.UserPassword = saveLoginAndPassword ? PasswordBoxUserPassword.Password : string.Empty;
+			clientUiSettings.ServerAddress = httpClientProvider.ServerAddress;
+			clientUiSettings.UserLogin = saveLoginAndPassword ? httpClientProvider.Login : string.Empty;
+			clientUiSettings.UserPassword = saveLoginAndPassword ? httpClientProvider.Password : string.Empty;
 			clientUiSettings.SaveLoginAndPassword = saveLoginAndPassword;
 
 			clientUiSettings.WriteSettings();
 		}
 
 		private void ButtonConnectToServer_OnClick(object sender, RoutedEventArgs e) {
-			CommonMethods.SafeRunMethod.WithoutReturn(() =>
-					httpClientProvider.GetParameretsClient().SetServerAddress(TextBoxServerAddress.Text),
+			CommonMethods.SafeRunMethod.WithoutReturn(() => {
+					httpClientProvider.GetParameretsClient().SetServerAddress(TextBoxServerAddress.Text);
+					TextBoxServerAddress.Text = httpClientProvider.ServerAddress;
+				},
 				"Соединение было успешно установлено");
 		}
 		private void ButtonSingIn_OnClick(object sender, RoutedEventArgs e) {
@@ -103,12 +105,8 @@ namespace GraduateWork.Client.UI {
 			UpdateDataGridStudents();
 		}
 		private void MenuItemCreateReport_OnClick(object sender, RoutedEventArgs e) {
-			//if (DataGridStudents.SelectedItem == null)
-			//	CommonMethods.ShowMessageBox.Error("Выберите студента");
-			//else {
-			//	var student = httpClientProvider.GetExtendedStudent((StudentBasedProxy)DataGridStudents.SelectedItem);
-			//	new CreateReportWindow(student).ShowDialog();
-			//}
+			if (DataGridStudents.SelectedItem != null)
+				CommonMethods.GetWindow.CreateReport(httpClientProvider, SelectedStudent).ShowDialog();
 		}
 
 		private void DataGridUsers_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) {

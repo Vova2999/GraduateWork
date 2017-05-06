@@ -12,6 +12,9 @@ namespace GraduateWork.Client {
 	public class HttpClientProvider {
 		private readonly ConcurrentDictionary<string, BaseHttpClient> hashedClients;
 		private readonly HttpClientParameters httpClientParameters;
+		public string ServerAddress => httpClientParameters.ServerAddress;
+		public string Login => httpClientParameters.Login;
+		public string Password => httpClientParameters.Password;
 
 		public HttpClientProvider(string serverAddress, string login, string password) {
 			hashedClients = new ConcurrentDictionary<string, BaseHttpClient>();
