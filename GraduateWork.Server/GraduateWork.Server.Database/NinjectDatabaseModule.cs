@@ -20,6 +20,7 @@ namespace GraduateWork.Server.Database {
 			Kernel?.Bind<DatabaseGroupReader>().ToSelf().InSingletonScope();
 			Kernel?.Bind<DatabaseStudentReader>().ToSelf().InSingletonScope();
 			Kernel?.Bind<DatabaseUserReader>().ToSelf().InSingletonScope();
+			Kernel?.Bind<TestDataLoader>().ToSelf().InSingletonScope();
 			Kernel?.Bind(c => c.FromThisAssembly().SelectAllClasses().BindAllInterfaces());
 		}
 	}

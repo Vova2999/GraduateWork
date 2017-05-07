@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -54,8 +55,19 @@ namespace GraduateWork.Server.Server {
 				catch (HttpException exception) {
 					context.Response.Respond(exception.StatusCode, exception.Message.ToJson());
 				}
+				catch (DbEntityValidationException exception) {
+					context.Response.Respond(HttpStatusCode.BadRequest,
+						string.Join("\n",
+								new[] { exception.Message }
+									.Concat(exception.EntityValidationErrors
+										.SelectMany(entityError => entityError.ValidationErrors
+											.Select(validationError => validationError.ErrorMessage)))
+									.Where(error => error != null))
+							.ToJson());
+				}
 				catch (Exception exception) {
-					context.Response.Respond(HttpStatusCode.BadRequest, exception.Message.ToJson());
+					context.Response.Respond(HttpStatusCode.BadRequest,
+						string.Join("\n", new[] { exception.Message, exception.InnerException?.Message }.Where(error => error != null)).ToJson());
 				}
 			}
 		}

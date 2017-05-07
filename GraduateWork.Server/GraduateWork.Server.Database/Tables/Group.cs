@@ -10,16 +10,16 @@ namespace GraduateWork.Server.Database.Tables {
 		[Key]
 		public int GroupId { get; set; }
 
-		[Required, MaxLength(25), Index("IX_GroupUniques", 1, IsUnique = true)]
+		[Required, MaxLength(64), Index("IX_GroupUniques", 1, IsUnique = true)]
 		public string GroupName { get; set; }
 
 		[Required]
 		public int SpecialtyNumber { get; set; }
 
-		[Required, MaxLength(25)]
+		[Required, MaxLength(128)]
 		public string SpecialtyName { get; set; }
 
-		[Required, MaxLength(25)]
+		[Required, MaxLength(128)]
 		public string FacultyName { get; set; }
 
 		public virtual List<Student> Students { get; set; }

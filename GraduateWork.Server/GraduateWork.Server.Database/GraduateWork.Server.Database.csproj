@@ -68,6 +68,7 @@
     <Compile Include="Models\Readers\DatabaseGroupReader.cs" />
     <Compile Include="Models\Readers\DatabaseStudentReader.cs" />
     <Compile Include="Models\Readers\DatabaseUserReader.cs" />
+    <Compile Include="Models\TestDataLoader.cs" />
     <Compile Include="NinjectDatabaseModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tables\AssessmentByDiscipline.cs" />

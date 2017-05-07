@@ -10,7 +10,7 @@ namespace GraduateWork.Server.Database.Tables {
 		[Key]
 		public int DisciplineId { get; set; }
 
-		[Required, MaxLength(25), Index("IX_DisciplineUniques", 1, IsUnique = true)]
+		[Required, MaxLength(64), Index("IX_DisciplineUniques", 1, IsUnique = true)]
 		public string DisciplineName { get; set; }
 
 		[Required]
