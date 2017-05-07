@@ -27,8 +27,10 @@ namespace GraduateWork.Server.Database.Extensions {
 			studentProxy.PreviousEducationYear = student.PreviousEducationYear;
 			studentProxy.EnrollmentName = student.EnrollmentName;
 			studentProxy.EnrollmentYear = student.EnrollmentYear;
-			studentProxy.DeductionName = student.DeductionName;
-			studentProxy.DeductionYear = student.DeductionYear;
+			studentProxy.ExpulsionName = student.ExpulsionName;
+			studentProxy.ExpulsionYear = student.ExpulsionYear;
+			studentProxy.ExpulsionOrderDate = student.ExpulsionOrderDate;
+			studentProxy.ExpulsionOrderNumber = student.ExpulsionOrderNumber;
 			studentProxy.DiplomaTopic = student.DiplomaTopic;
 			studentProxy.DiplomaAssessment = (Assessment)student.DiplomaAssessment;
 			studentProxy.ProtectionDate = student.ProtectionDate;

@@ -25,10 +25,16 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 		public int EnrollmentYear { get; set; }
 
 		[HeaderColumn("Место отчисления")]
-		public string DeductionName { get; set; }
+		public string ExpulsionName { get; set; }
 
 		[HeaderColumn("Год отчисления")]
-		public int DeductionYear { get; set; }
+		public int ExpulsionYear { get; set; }
+
+		[HeaderColumn("Дата приказа отчисления")]
+		public DateTime ExpulsionOrderDate { get; set; }
+
+		[HeaderColumn("Номер приказа отчисления")]
+		public int ExpulsionOrderNumber { get; set; }
 
 		[HeaderColumn("Тема диплома")]
 		public string DiplomaTopic { get; set; }
@@ -60,8 +66,10 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 			clone.PreviousEducationYear = PreviousEducationYear;
 			clone.EnrollmentName = EnrollmentName;
 			clone.EnrollmentYear = EnrollmentYear;
-			clone.DeductionName = DeductionName;
-			clone.DeductionYear = DeductionYear;
+			clone.ExpulsionName = ExpulsionName;
+			clone.ExpulsionYear = ExpulsionYear;
+			clone.ExpulsionOrderDate = ExpulsionOrderDate;
+			clone.ExpulsionOrderNumber = ExpulsionOrderNumber;
 			clone.DiplomaTopic = DiplomaTopic;
 			clone.DiplomaAssessment = DiplomaAssessment;
 			clone.ProtectionDate = ProtectionDate;

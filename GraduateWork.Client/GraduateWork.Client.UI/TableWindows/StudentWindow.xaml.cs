@@ -35,8 +35,11 @@ namespace GraduateWork.Client.UI.TableWindows {
 			TextBoxPreviousEducationYear.Text = ExtendedProxy.PreviousEducationYear.ToString();
 			TextBoxEnrollmentName.Text = ExtendedProxy.EnrollmentName;
 			TextBoxEnrollmentYear.Text = ExtendedProxy.EnrollmentYear.ToString();
-			TextBoxDeductionName.Text = ExtendedProxy.DeductionName;
-			TextBoxDeductionYear.Text = ExtendedProxy.DeductionYear.ToString();
+			TextBoxExpulsionName.Text = ExtendedProxy.ExpulsionName;
+			TextBoxExpulsionYear.Text = ExtendedProxy.ExpulsionYear.ToString();
+			if (ExtendedProxy.ExpulsionOrderDate != default(DateTime))
+				DatePickerExpulsionOrderDate.SelectedDate = ExtendedProxy.ExpulsionOrderDate;
+			TextBoxExpulsionOrderNumber.Text = ExtendedProxy.ExpulsionOrderNumber.ToString();
 			TextBoxDiplomaTopic.Text = ExtendedProxy.DiplomaTopic;
 			ComboBoxDiplomaAssessment.ItemsSource = CommonMethods.Enum.GetAssessmentNames();
 			ComboBoxDiplomaAssessment.SelectedItem = CommonMethods.Enum.GetAssessmentName(ExtendedProxy.DiplomaAssessment);
@@ -59,8 +62,10 @@ namespace GraduateWork.Client.UI.TableWindows {
 			CommonMethods.Set.ReadOnly(TextBoxPreviousEducationYear, IsReadOnly);
 			CommonMethods.Set.ReadOnly(TextBoxEnrollmentName, IsReadOnly);
 			CommonMethods.Set.ReadOnly(TextBoxEnrollmentYear, IsReadOnly);
-			CommonMethods.Set.ReadOnly(TextBoxDeductionName, IsReadOnly);
-			CommonMethods.Set.ReadOnly(TextBoxDeductionYear, IsReadOnly);
+			CommonMethods.Set.ReadOnly(TextBoxExpulsionName, IsReadOnly);
+			CommonMethods.Set.ReadOnly(TextBoxExpulsionYear, IsReadOnly);
+			CommonMethods.Set.ReadOnly(DatePickerExpulsionOrderDate, IsReadOnly);
+			CommonMethods.Set.ReadOnly(TextBoxExpulsionOrderNumber, IsReadOnly);
 			CommonMethods.Set.ReadOnly(TextBoxDiplomaTopic, IsReadOnly);
 			CommonMethods.Set.ReadOnly(ComboBoxDiplomaAssessment, IsReadOnly);
 			CommonMethods.Set.ReadOnly(DatePickerProtectionDate, IsReadOnly);
@@ -110,13 +115,13 @@ namespace GraduateWork.Client.UI.TableWindows {
 			else if (CommonMethods.Check.FieldIsNotNumber(TextBoxEnrollmentYear))
 				yield return CommonMethods.GenerateMessage.FieldIsNotNumber(LabelEnrollmentYear);
 
-			if (CommonMethods.Check.FieldIsEmpty(TextBoxDeductionName))
-				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelDeductionName);
+			if (CommonMethods.Check.FieldIsEmpty(TextBoxExpulsionName))
+				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelExpulsionName);
 
-			if (CommonMethods.Check.FieldIsEmpty(TextBoxDeductionYear))
-				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelDeductionYear);
-			else if (CommonMethods.Check.FieldIsNotNumber(TextBoxDeductionYear))
-				yield return CommonMethods.GenerateMessage.FieldIsNotNumber(LabelDeductionYear);
+			if (CommonMethods.Check.FieldIsEmpty(TextBoxExpulsionYear))
+				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelExpulsionYear);
+			else if (CommonMethods.Check.FieldIsNotNumber(TextBoxExpulsionYear))
+				yield return CommonMethods.GenerateMessage.FieldIsNotNumber(LabelExpulsionYear);
 
 			if (CommonMethods.Check.FieldIsEmpty(TextBoxDiplomaTopic))
 				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelDiplomaTopic);
@@ -126,6 +131,12 @@ namespace GraduateWork.Client.UI.TableWindows {
 
 			if (CommonMethods.Check.FieldIsEmpty(DatePickerProtectionDate))
 				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelProtectionDate);
+
+			if (CommonMethods.Check.FieldIsEmpty(DatePickerExpulsionOrderDate))
+				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelExpulsionOrderDate);
+
+			if (CommonMethods.Check.FieldIsEmpty(TextBoxExpulsionOrderNumber))
+				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelExpulsionOrderNumber);
 
 			if (CommonMethods.Check.FieldIsEmpty(TextBoxProtocolNumber))
 				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelProtocolNumber);
@@ -148,8 +159,10 @@ namespace GraduateWork.Client.UI.TableWindows {
 			ExtendedProxy.PreviousEducationYear = int.Parse(TextBoxPreviousEducationYear.Text);
 			ExtendedProxy.EnrollmentName = TextBoxEnrollmentName.Text;
 			ExtendedProxy.EnrollmentYear = int.Parse(TextBoxEnrollmentYear.Text);
-			ExtendedProxy.DeductionName = TextBoxDeductionName.Text;
-			ExtendedProxy.DeductionYear = int.Parse(TextBoxDeductionYear.Text);
+			ExtendedProxy.ExpulsionName = TextBoxExpulsionName.Text;
+			ExtendedProxy.ExpulsionYear = int.Parse(TextBoxExpulsionYear.Text);
+			ExtendedProxy.ExpulsionOrderDate = DatePickerExpulsionOrderDate.SelectedDate.Value;
+			ExtendedProxy.ExpulsionOrderNumber = int.Parse(TextBoxExpulsionOrderNumber.Text);
 			ExtendedProxy.DiplomaTopic = TextBoxDiplomaTopic.Text;
 			ExtendedProxy.DiplomaAssessment = CommonMethods.Enum.GetAssessmentValue((string)ComboBoxDiplomaAssessment.SelectedItem);
 			ExtendedProxy.ProtectionDate = DatePickerProtectionDate.SelectedDate.Value;

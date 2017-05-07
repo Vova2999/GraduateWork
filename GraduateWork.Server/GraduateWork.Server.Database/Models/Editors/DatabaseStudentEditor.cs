@@ -23,8 +23,10 @@ namespace GraduateWork.Server.Database.Models.Editors {
 				PreviousEducationYear = extendedProxy.PreviousEducationYear,
 				EnrollmentName = extendedProxy.EnrollmentName,
 				EnrollmentYear = extendedProxy.EnrollmentYear,
-				DeductionName = extendedProxy.DeductionName,
-				DeductionYear = extendedProxy.DeductionYear,
+				ExpulsionName = extendedProxy.ExpulsionName,
+				ExpulsionYear = extendedProxy.ExpulsionYear,
+				ExpulsionOrderDate = extendedProxy.ExpulsionOrderDate,
+				ExpulsionOrderNumber = extendedProxy.ExpulsionOrderNumber,
 				DiplomaTopic = extendedProxy.DiplomaTopic,
 				DiplomaAssessment = (int)extendedProxy.DiplomaAssessment,
 				ProtectionDate = extendedProxy.ProtectionDate,
@@ -56,8 +58,10 @@ namespace GraduateWork.Server.Database.Models.Editors {
 			foundStudent.PreviousEducationYear = newExtendedProxy.PreviousEducationYear;
 			foundStudent.EnrollmentName = newExtendedProxy.EnrollmentName;
 			foundStudent.EnrollmentYear = newExtendedProxy.EnrollmentYear;
-			foundStudent.DeductionName = newExtendedProxy.DeductionName;
-			foundStudent.DeductionYear = newExtendedProxy.DeductionYear;
+			foundStudent.ExpulsionName = newExtendedProxy.ExpulsionName;
+			foundStudent.ExpulsionYear = newExtendedProxy.ExpulsionYear;
+			foundStudent.ExpulsionOrderDate = newExtendedProxy.ExpulsionOrderDate;
+			foundStudent.ExpulsionOrderNumber = newExtendedProxy.ExpulsionOrderNumber;
 			foundStudent.DiplomaTopic = newExtendedProxy.DiplomaTopic;
 			foundStudent.DiplomaAssessment = (int)newExtendedProxy.DiplomaAssessment;
 			foundStudent.ProtectionDate = newExtendedProxy.ProtectionDate;

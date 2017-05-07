@@ -36,10 +36,16 @@ namespace GraduateWork.Server.Database.Tables {
 		public int EnrollmentYear { get; set; }
 
 		[Required, MaxLength(256)]
-		public string DeductionName { get; set; }
+		public string ExpulsionName { get; set; }
 
 		[Required]
-		public int DeductionYear { get; set; }
+		public int ExpulsionYear { get; set; }
+
+		[Required]
+		public DateTime ExpulsionOrderDate { get; set; }
+
+		[Required]
+		public int ExpulsionOrderNumber { get; set; }
 
 		[Required, MaxLength(256)]
 		public string DiplomaTopic { get; set; }

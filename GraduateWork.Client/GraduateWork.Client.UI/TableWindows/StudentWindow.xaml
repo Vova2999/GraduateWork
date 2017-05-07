@@ -98,11 +98,11 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<Label Grid.Row="1" Grid.Column="0" Name="LabelDeductionName" Content="Название" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-						<TextBox Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Name="TextBoxDeductionName" VerticalContentAlignment="Center" TextWrapping="Wrap" Height="50" />
+						<Label Grid.Row="1" Grid.Column="0" Name="LabelExpulsionName" Content="Название" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<TextBox Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Name="TextBoxExpulsionName" VerticalContentAlignment="Center" TextWrapping="Wrap" Height="50" />
 
-						<Label Grid.Row="1" Grid.Column="2" Name="LabelDeductionYear" Content="Год" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-						<TextBox Grid.Row="1" Grid.Column="3" Name="TextBoxDeductionYear" VerticalContentAlignment="Center" />
+						<Label Grid.Row="1" Grid.Column="2" Name="LabelExpulsionYear" Content="Год" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<TextBox Grid.Row="1" Grid.Column="3" Name="TextBoxExpulsionYear" VerticalContentAlignment="Center" />
 					</Grid>
 				</GroupBox>
 
@@ -153,23 +153,33 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="5" />
 							<RowDefinition Height="Auto" />
+							<RowDefinition Height="5" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="5" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<Label Grid.Row="0" Grid.Column="0" Name="LabelProtocolNumber" Content="Номер протокола" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-						<TextBox Grid.Row="0" Grid.Column="1" Name="TextBoxProtocolNumber" VerticalContentAlignment="Center" />
+						<Label Grid.Row="0" Grid.Column="0" Name="LabelExpulsionOrderDate" Content="Дата приказа отчисления" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<DatePicker Grid.Row="0" Grid.Column="1" Name="DatePickerExpulsionOrderDate" VerticalContentAlignment="Center" />
 
-						<Label Grid.Row="2" Grid.Column="0" Name="LabelRegistrationNumber" Content="Регистрационный номер" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-						<TextBox Grid.Row="2" Grid.Column="1" Name="TextBoxRegistrationNumber" VerticalContentAlignment="Center" />
+						<Label Grid.Row="2" Grid.Column="0" Name="LabelExpulsionOrderNumber" Content="Номер приказа отчисления" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<TextBox Grid.Row="2" Grid.Column="1" Name="TextBoxExpulsionOrderNumber" VerticalContentAlignment="Center" />
 
-						<Label Grid.Row="4" Grid.Column="0" Name="LabelRegistrationDate" Content="Дата регистрации" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-						<DatePicker Grid.Row="4" Grid.Column="1" Name="DatePickerRegistrationDate" VerticalContentAlignment="Center" />
+						<Label Grid.Row="4" Grid.Column="0" Name="LabelProtocolNumber" Content="Номер протокола" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<TextBox Grid.Row="4" Grid.Column="1" Name="TextBoxProtocolNumber" VerticalContentAlignment="Center" />
 
-						<Label Grid.Row="6" Grid.Column="0" Name="LabelGroupName" Content="Название группы" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-						<ComboBox Grid.Row="6" Grid.Column="1" Name="ComboBoxGroupName" SelectionChanged="ComboBoxGroupName_OnSelectionChanged" VerticalContentAlignment="Center" />
+						<Label Grid.Row="6" Grid.Column="0" Name="LabelRegistrationNumber" Content="Регистрационный номер" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<TextBox Grid.Row="6" Grid.Column="1" Name="TextBoxRegistrationNumber" VerticalContentAlignment="Center" />
+
+						<Label Grid.Row="8" Grid.Column="0" Name="LabelRegistrationDate" Content="Дата регистрации" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<DatePicker Grid.Row="8" Grid.Column="1" Name="DatePickerRegistrationDate" VerticalContentAlignment="Center" />
+
+						<Label Grid.Row="10" Grid.Column="0" Name="LabelGroupName" Content="Название группы" Foreground="DodgerBlue" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+						<ComboBox Grid.Row="10" Grid.Column="1" Name="ComboBoxGroupName" SelectionChanged="ComboBoxGroupName_OnSelectionChanged" VerticalContentAlignment="Center" />
 					</Grid>
 				</GroupBox>
 
