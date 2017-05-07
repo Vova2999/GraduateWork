@@ -1,18 +1,26 @@
+using GraduateWork.Common.Database.Readers;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 using TemplateEngine.Docx;
 
 namespace GraduateWork.Server.Reports.Creators {
-	// ReSharper disable UnusedMember.Global
+	// ReSharper disable ClassNeverInstantiated.Global
 
 	public class DiplomaSupplementCreator : ReportCreator {
 		public override string TemplateName => "Приложение.docx";
 
-		protected override Content CreateContent(StudentExtendedProxy student) {
+		public DiplomaSupplementCreator(IDatabaseDisciplineReader databaseDisciplineReader,
+										IDatabaseGroupReader databaseGroupReader,
+										IDatabaseStudentReader databaseStudentReader)
+			: base(databaseDisciplineReader, databaseGroupReader, databaseStudentReader) {
+		}
+
+		protected override Content CreateContent(StudentExtendedProxy student, DisciplineExtendedProxy[] disciplines, GroupExtendedProxy group) {
 			var content = new Content(
 				new FieldContent("FirstName", student.FirstName),
 				new FieldContent("SecondName", student.SecondName),
 				new FieldContent("ThirdName", student.ThirdName),
-				CreateDisciplinesTableContent(student));
+				CreateDisciplinesTableContent(student)
+			);
 
 			return content;
 		}

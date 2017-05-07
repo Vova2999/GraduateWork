@@ -21,12 +21,9 @@ namespace GraduateWork.Server.Database.Models.Readers {
 		public GroupExtendedProxy GetExtendedProxy(GroupBasedProxy basedProxy) {
 			return modelDatabase.GetGroup(basedProxy).ToExtendedProxy();
 		}
-		public GroupBasedProxy[] GetGroupsWithUsingFilters(string groupName, int? specialtyNumber, string specialtyName, string facultyName) {
+		public GroupBasedProxy[] GetGroupsWithUsingFilters(string groupName) {
 			IQueryable<Group> groups = modelDatabase.Groups;
 			UseFilter(groupName != null, ref groups, group => group.GroupName.Contains(groupName));
-			UseFilter(specialtyNumber != null, ref groups, group => group.SpecialtyNumber == specialtyNumber);
-			UseFilter(specialtyName != null, ref groups, group => group.SpecialtyName.Contains(specialtyName));
-			UseFilter(facultyName != null, ref groups, group => group.FacultyName.Contains(facultyName));
 
 			return groups.ToBasedProxies();
 		}

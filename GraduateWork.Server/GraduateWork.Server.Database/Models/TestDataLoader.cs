@@ -86,6 +86,20 @@ namespace GraduateWork.Server.Database.Models {
 				ClassHours = 0,
 				TotalHours = 0
 			});
+			databaseDisciplineEditor.Add(new DisciplineExtendedProxy {
+				DisciplineName = "Производственно-технологическая",
+				ControlType = ControlType.Practice,
+				GroupName = group.GroupName,
+				ClassHours = 4,
+				TotalHours = 0
+			});
+			databaseDisciplineEditor.Add(new DisciplineExtendedProxy {
+				DisciplineName = "Междисциплинарный экзамен по направлению",
+				ControlType = ControlType.StateExam,
+				GroupName = group.GroupName,
+				ClassHours = 0,
+				TotalHours = 0
+			});
 
 			databaseStudentEditor.Add(new StudentExtendedProxy {
 				FirstName = "Владимир",
@@ -106,7 +120,7 @@ namespace GraduateWork.Server.Database.Models {
 				ProtocolNumber = "2015-231000-28",
 				RegistrationNumber = "76 004",
 				RegistrationDate = DateTime.Now,
-				Group = group,
+				GroupName = group.GroupName,
 				AssessmentByDisciplines = new[] {
 					new AssessmentByDiscipline {
 						NameOfDiscipline = "Английский язык",
@@ -126,6 +140,14 @@ namespace GraduateWork.Server.Database.Models {
 					},
 					new AssessmentByDiscipline {
 						NameOfDiscipline = "Инженерная графика",
+						Assessment = Assessment.Excellent
+					},
+					new AssessmentByDiscipline {
+						NameOfDiscipline = "Производственно-технологическая",
+						Assessment = Assessment.Excellent
+					},
+					new AssessmentByDiscipline {
+						NameOfDiscipline = "Междисциплинарный экзамен по направлению",
 						Assessment = Assessment.Excellent
 					}
 				}

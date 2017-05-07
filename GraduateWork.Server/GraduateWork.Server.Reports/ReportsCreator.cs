@@ -1,11 +1,11 @@
 ﻿using System.Collections.Concurrent;
 using System.Linq;
 using GraduateWork.Common.Reports;
-using GraduateWork.Common.Tables.Proxies.Extendeds;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Server.Reports.Creators;
 
 namespace GraduateWork.Server.Reports {
-	// ReSharper disable UnusedMember.Global
+	// ReSharper disable ClassNeverInstantiated.Global
 
 	public class ReportsCreator : IReportsCreator {
 		private readonly ReportCreator[] reportCreators;
@@ -16,13 +16,13 @@ namespace GraduateWork.Server.Reports {
 			hashedCreators = new ConcurrentDictionary<string, ReportCreator>();
 		}
 
-		public FileWithContent CreateAcadem(StudentExtendedProxy student) {
+		public FileWithContent CreateAcadem(StudentBasedProxy student) {
 			return hashedCreators.GetOrAdd("Академ.docx", GetReportCreator).Execute(student);
 		}
-		public FileWithContent CreateDiploma(StudentExtendedProxy student) {
+		public FileWithContent CreateDiploma(StudentBasedProxy student) {
 			return hashedCreators.GetOrAdd("Диплом.docx", GetReportCreator).Execute(student);
 		}
-		public FileWithContent CreateDiplomaSupplement(StudentExtendedProxy student) {
+		public FileWithContent CreateDiplomaSupplement(StudentBasedProxy student) {
 			return hashedCreators.GetOrAdd("Приложение.docx", GetReportCreator).Execute(student);
 		}
 		private ReportCreator GetReportCreator(string templateName) {

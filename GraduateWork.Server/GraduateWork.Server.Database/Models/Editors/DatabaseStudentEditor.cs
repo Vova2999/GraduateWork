@@ -13,7 +13,7 @@ namespace GraduateWork.Server.Database.Models.Editors {
 		}
 
 		public void Add(StudentExtendedProxy extendedProxy) {
-			var foundGroup = ModelDatabase.GetGroup(extendedProxy.Group);
+			var foundGroup = ModelDatabase.GetGroup(extendedProxy.GroupName);
 			var newStudent = new Student {
 				FirstName = extendedProxy.FirstName,
 				SecondName = extendedProxy.SecondName,

@@ -54,8 +54,8 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 		[HeaderColumn("Дата регистрации")]
 		public DateTime RegistrationDate { get; set; }
 
-		[HeaderColumn("Группа")]
-		public GroupBasedProxy Group { get; set; }
+		[HeaderColumn("Название группы")]
+		public string GroupName { get; set; }
 
 		[HeaderColumn("Оценки по дисциплинам")]
 		public AssessmentByDiscipline[] AssessmentByDisciplines { get; set; }
@@ -76,7 +76,7 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 			clone.ProtocolNumber = ProtocolNumber;
 			clone.RegistrationNumber = RegistrationNumber;
 			clone.RegistrationDate = RegistrationDate;
-			clone.Group = Group.GetBasedClone();
+			clone.GroupName = GroupName;
 			clone.AssessmentByDisciplines = AssessmentByDisciplines
 				.Select(assessmentByDiscipline => assessmentByDiscipline.GetClone())
 				.ToArray();

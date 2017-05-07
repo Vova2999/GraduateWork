@@ -15,12 +15,9 @@ namespace GraduateWork.Client.Clients.Database.Readers {
 		public GroupExtendedProxy GetExtendedProxy(GroupBasedProxy basedProxy) {
 			return SendRequest<GroupExtendedProxy>("GetExtendedGroup", GetDefaultParameters(), basedProxy.ToJson());
 		}
-		public GroupBasedProxy[] GetGroupsWithUsingFilters(string groupName, int? specialtyNumber, string specialtyName, string facultyName) {
+		public GroupBasedProxy[] GetGroupsWithUsingFilters(string groupName) {
 			var parameters = GetDefaultParameters();
 			AddParameterInNotNull(parameters, HttpParameters.GroupName, groupName);
-			AddParameterInNotNull(parameters, HttpParameters.SpecialtyNumber, specialtyNumber?.ToString());
-			AddParameterInNotNull(parameters, HttpParameters.SpecialtyName, specialtyName);
-			AddParameterInNotNull(parameters, HttpParameters.FacultyName, facultyName);
 
 			return SendRequest<GroupBasedProxy[]>("GetGroupsWithUsingFilters", parameters);
 		}

@@ -28,7 +28,7 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 				Equals(DateOfBirth, that.DateOfBirth);
 		}
 		public override int GetHashCode() {
-			return (FirstName?.GetHashCode() ?? 0 * 397) ^ (SecondName?.GetHashCode() ?? 0) * 397 ^ (ThirdName?.GetHashCode() ?? 0) * 397 ^ DateOfBirth.GetHashCode();
+			return (FirstName?.GetHashCode() ?? 0 * 397) ^ ((SecondName?.GetHashCode() ?? 0) * 397) ^ ((ThirdName?.GetHashCode() ?? 0) * 397) ^ DateOfBirth.GetHashCode();
 		}
 
 		public StudentBasedProxy GetBasedClone() {

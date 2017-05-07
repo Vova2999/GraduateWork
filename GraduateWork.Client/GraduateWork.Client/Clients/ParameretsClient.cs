@@ -11,7 +11,7 @@ namespace GraduateWork.Client.Clients {
 		}
 
 		public void SetServerAddress(string serverAddress) {
-			serverAddress = new UriBuilder(serverAddress).Uri.ToString(); ;
+			serverAddress = new UriBuilder(serverAddress).Uri.ToString();
 
 			new ParameretsClient(new HttpClientParameters { ServerAddress = serverAddress }).SendRequest("Ping");
 			httpClientParameters.ServerAddress = serverAddress;

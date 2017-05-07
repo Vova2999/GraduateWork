@@ -50,7 +50,7 @@ namespace GraduateWork.Client.UI.TableWindows {
 			if (ExtendedProxy.RegistrationDate != default(DateTime))
 				DatePickerRegistrationDate.SelectedDate = ExtendedProxy.RegistrationDate;
 			ComboBoxGroupName.ItemsSource = groupNames;
-			ComboBoxGroupName.SelectedItem = ExtendedProxy.Group?.GroupName;
+			ComboBoxGroupName.SelectedItem = ExtendedProxy.GroupName;
 			DataGridAssessmentByDisciplines.ItemsSource = ExtendedProxy.AssessmentByDisciplines;
 		}
 		private void SetReadOnly() {
@@ -169,7 +169,7 @@ namespace GraduateWork.Client.UI.TableWindows {
 			ExtendedProxy.ProtocolNumber = TextBoxProtocolNumber.Text;
 			ExtendedProxy.RegistrationNumber = TextBoxRegistrationNumber.Text;
 			ExtendedProxy.RegistrationDate = DatePickerRegistrationDate.SelectedDate.Value;
-			ExtendedProxy.Group = new GroupExtendedProxy { GroupName = (string)ComboBoxGroupName.SelectedItem };
+			ExtendedProxy.GroupName = (string)ComboBoxGroupName.SelectedItem;
 			ExtendedProxy.AssessmentByDisciplines = (AssessmentByDiscipline[])DataGridAssessmentByDisciplines.ItemsSource;
 		}
 	}

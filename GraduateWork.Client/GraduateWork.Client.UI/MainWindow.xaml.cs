@@ -46,10 +46,9 @@ namespace GraduateWork.Client.UI {
 
 		private void ButtonConnectToServer_OnClick(object sender, RoutedEventArgs e) {
 			CommonMethods.SafeRunMethod.WithoutReturn(() => {
-					httpClientProvider.GetParameretsClient().SetServerAddress(TextBoxServerAddress.Text);
-					TextBoxServerAddress.Text = httpClientProvider.ServerAddress;
-				},
-				"Соединение было успешно установлено");
+				httpClientProvider.GetParameretsClient().SetServerAddress(TextBoxServerAddress.Text);
+				TextBoxServerAddress.Text = httpClientProvider.ServerAddress;
+			}, "Соединение было успешно установлено");
 		}
 		private void ButtonSingIn_OnClick(object sender, RoutedEventArgs e) {
 			CommonMethods.SafeRunMethod.WithoutReturn(() =>
@@ -106,7 +105,7 @@ namespace GraduateWork.Client.UI {
 		}
 		private void MenuItemCreateReport_OnClick(object sender, RoutedEventArgs e) {
 			if (DataGridStudents.SelectedItem != null)
-				CommonMethods.GetWindow.CreateReport(httpClientProvider, SelectedStudent).ShowDialog();
+				new CreateReportWindow(SelectedStudent, httpClientProvider.GetReportsCreator()).ShowDialog();
 		}
 
 		private void DataGridUsers_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) {

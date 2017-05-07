@@ -10,14 +10,14 @@ namespace GraduateWork.Server.Database.Extensions {
 
 	public static class DisciplineExtensions {
 		public static DisciplineBasedProxy[] ToBasedProxies(this IEnumerable<Discipline> disciplines) {
-			return disciplines.Select(group => group.ToBasedProxy()).ToArray();
+			return disciplines.Select(ToBasedProxy).ToArray();
 		}
 		public static DisciplineBasedProxy ToBasedProxy(this Discipline discipline) {
 			return ToProxy<DisciplineBasedProxy>(discipline);
 		}
 
 		public static DisciplineExtendedProxy[] ToExtendedProxies(this IEnumerable<Discipline> disciplines) {
-			return disciplines.Select(group => group.ToExtendedProxy()).ToArray();
+			return disciplines.Select(ToExtendedProxy).ToArray();
 		}
 		public static DisciplineExtendedProxy ToExtendedProxy(this Discipline discipline) {
 			var disciplineProxy = ToProxy<DisciplineExtendedProxy>(discipline);

@@ -10,14 +10,14 @@ namespace GraduateWork.Server.Database.Extensions {
 
 	public static class UserExtensions {
 		public static UserBasedProxy[] ToBasedProxies(this IEnumerable<User> users) {
-			return users.Select(user => user.ToBasedProxy()).ToArray();
+			return users.Select(ToBasedProxy).ToArray();
 		}
 		public static UserBasedProxy ToBasedProxy(this User user) {
 			return ToProxy<UserBasedProxy>(user);
 		}
 
 		public static UserExtendedProxy[] ToExtendedProxies(this IEnumerable<User> users) {
-			return users.Select(user => user.ToExtendedProxy()).ToArray();
+			return users.Select(ToExtendedProxy).ToArray();
 		}
 		public static UserExtendedProxy ToExtendedProxy(this User user) {
 			var userProxy = ToProxy<UserExtendedProxy>(user);

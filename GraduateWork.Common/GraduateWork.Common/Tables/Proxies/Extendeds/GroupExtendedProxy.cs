@@ -7,6 +7,15 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 	// ReSharper disable UnusedMember.Global
 
 	public class GroupExtendedProxy : GroupBasedProxy {
+		[HeaderColumn("Номер специальности")]
+		public int SpecialtyNumber { get; set; }
+
+		[HeaderColumn("Название специальности")]
+		public string SpecialtyName { get; set; }
+
+		[HeaderColumn("Название факультета")]
+		public string FacultyName { get; set; }
+
 		[HeaderColumn("Студенты")]
 		public StudentBasedProxy[] Students { get; set; }
 
@@ -15,6 +24,9 @@ namespace GraduateWork.Common.Tables.Proxies.Extendeds {
 
 		public GroupExtendedProxy GetExtendedClone() {
 			var clone = GetClone<GroupExtendedProxy>();
+			clone.SpecialtyNumber = SpecialtyNumber;
+			clone.SpecialtyName = SpecialtyName;
+			clone.FacultyName = FacultyName;
 			clone.Students = Students.Select(student => student.GetBasedClone()).ToArray();
 			clone.Disciplines = Disciplines.Select(discipline => discipline.GetBasedClone()).ToArray();
 

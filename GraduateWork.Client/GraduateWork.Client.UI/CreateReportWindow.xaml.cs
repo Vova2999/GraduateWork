@@ -5,22 +5,22 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using GraduateWork.Common.Reports;
-using GraduateWork.Common.Tables.Proxies.Extendeds;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Client.UI {
 	public partial class CreateReportWindow {
-		private readonly StudentExtendedProxy student;
-		private readonly Dictionary<string, Func<StudentExtendedProxy, FileWithContent>> reportCreators;
+		private readonly StudentBasedProxy student;
+		private readonly Dictionary<string, Func<StudentBasedProxy, FileWithContent>> reportCreators;
 
-		public CreateReportWindow(StudentExtendedProxy student, IReportsCreator reportsCreator) {
+		public CreateReportWindow(StudentBasedProxy student, IReportsCreator reportsCreator) {
 			InitializeComponent();
 			this.student = student;
 
 			reportCreators = CreateReportCreators(reportsCreator);
 			ComboBoxSelectedReport.ItemsSource = reportCreators.Keys;
 		}
-		private Dictionary<string, Func<StudentExtendedProxy, FileWithContent>> CreateReportCreators(IReportsCreator reportsCreator) {
-			return new Dictionary<string, Func<StudentExtendedProxy, FileWithContent>> {
+		private Dictionary<string, Func<StudentBasedProxy, FileWithContent>> CreateReportCreators(IReportsCreator reportsCreator) {
+			return new Dictionary<string, Func<StudentBasedProxy, FileWithContent>> {
 				{ "Академ", reportsCreator.CreateAcadem },
 				{ "Диплом", reportsCreator.CreateDiploma },
 				{ "Приложение", reportsCreator.CreateDiplomaSupplement }
@@ -50,9 +50,17 @@ namespace GraduateWork.Client.UI {
 				return;
 			}
 
-			var report = reportCreators[(string)ComboBoxSelectedReport.SelectedItem](student);
-			File.WriteAllBytes(Path.Combine(TextBoxPath.Text, report.FileName), report.Content);
-			Close();
+			var report = CommonMethods.SafeRunMethod.WithReturn(() => reportCreators[(string)ComboBoxSelectedReport.SelectedItem](student));
+			if (report == null)
+				return;
+
+			try {
+				File.WriteAllBytes(Path.Combine(TextBoxPath.Text, report.FileName), report.Content);
+				Close();
+			}
+			catch (Exception exception) {
+				CommonMethods.ShowMessageBox.Error(exception.Message);
+			}
 		}
 		private void ButtonCancel_OnClick(object sender, RoutedEventArgs e) {
 			Close();

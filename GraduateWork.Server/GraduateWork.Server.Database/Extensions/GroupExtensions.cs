@@ -10,17 +10,20 @@ namespace GraduateWork.Server.Database.Extensions {
 
 	public static class GroupExtensions {
 		public static GroupBasedProxy[] ToBasedProxies(this IEnumerable<Group> groups) {
-			return groups.Select(group => group.ToBasedProxy()).ToArray();
+			return groups.Select(ToBasedProxy).ToArray();
 		}
 		public static GroupBasedProxy ToBasedProxy(this Group group) {
 			return ToProxy<GroupBasedProxy>(group);
 		}
 
 		public static GroupExtendedProxy[] ToExtendedProxies(this IEnumerable<Group> groups) {
-			return groups.Select(group => group.ToExtendedProxy()).ToArray();
+			return groups.Select(ToExtendedProxy).ToArray();
 		}
 		public static GroupExtendedProxy ToExtendedProxy(this Group group) {
 			var groupProxy = ToProxy<GroupExtendedProxy>(group);
+			groupProxy.SpecialtyName = group.SpecialtyName;
+			groupProxy.SpecialtyNumber = group.SpecialtyNumber;
+			groupProxy.FacultyName = group.FacultyName;
 			groupProxy.Students = group.Students.ToBasedProxies();
 			groupProxy.Disciplines = group.Disciplines.ToBasedProxies();
 
@@ -29,10 +32,7 @@ namespace GraduateWork.Server.Database.Extensions {
 
 		private static TGroupProxy ToProxy<TGroupProxy>(Group group) where TGroupProxy : GroupBasedProxy, new() {
 			return new TGroupProxy {
-				GroupName = group.GroupName,
-				SpecialtyName = group.SpecialtyName,
-				SpecialtyNumber = group.SpecialtyNumber,
-				FacultyName = group.FacultyName
+				GroupName = group.GroupName
 			};
 		}
 	}

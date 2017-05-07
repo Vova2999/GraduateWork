@@ -12,14 +12,14 @@ namespace GraduateWork.Server.Database.Extensions {
 
 	public static class StudentExtensions {
 		public static StudentBasedProxy[] ToBasedProxies(this IEnumerable<Student> students) {
-			return students.Select(student => student.ToBasedProxy()).ToArray();
+			return students.Select(ToBasedProxy).ToArray();
 		}
 		public static StudentBasedProxy ToBasedProxy(this Student student) {
 			return ToProxy<StudentBasedProxy>(student);
 		}
 
 		public static StudentExtendedProxy[] ToExtendedProxies(this IEnumerable<Student> students) {
-			return students.Select(student => student.ToExtendedProxy()).ToArray();
+			return students.Select(ToExtendedProxy).ToArray();
 		}
 		public static StudentExtendedProxy ToExtendedProxy(this Student student) {
 			var studentProxy = ToProxy<StudentExtendedProxy>(student);
@@ -37,7 +37,7 @@ namespace GraduateWork.Server.Database.Extensions {
 			studentProxy.ProtocolNumber = student.ProtocolNumber;
 			studentProxy.RegistrationNumber = student.RegistrationNumber;
 			studentProxy.RegistrationDate = student.RegistrationDate;
-			studentProxy.Group = student.Group.ToBasedProxy();
+			studentProxy.GroupName = student.Group.GroupName;
 			studentProxy.AssessmentByDisciplines = student.AssessmentByDisciplines.Select(
 					assessmentByDiscipline => new AssessmentByDiscipline {
 						NameOfDiscipline = assessmentByDiscipline.Discipline.DisciplineName,

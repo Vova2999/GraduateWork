@@ -1,11 +1,11 @@
-﻿using GraduateWork.Common.Tables.Proxies.Extendeds;
+﻿using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Common.Reports {
 	// ReSharper disable UnusedMember.Global
 
 	public interface IReportsCreator {
-		FileWithContent CreateAcadem(StudentExtendedProxy student);
-		FileWithContent CreateDiploma(StudentExtendedProxy student);
-		FileWithContent CreateDiplomaSupplement(StudentExtendedProxy student);
+		FileWithContent CreateAcadem(StudentBasedProxy student);
+		FileWithContent CreateDiploma(StudentBasedProxy student);
+		FileWithContent CreateDiplomaSupplement(StudentBasedProxy student);
 	}
 }

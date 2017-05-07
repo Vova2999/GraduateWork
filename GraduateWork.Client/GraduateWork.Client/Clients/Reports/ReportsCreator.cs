@@ -1,19 +1,19 @@
 ﻿using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Reports;
-using GraduateWork.Common.Tables.Proxies.Extendeds;
+using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Client.Clients.Reports {
 	public class ReportsCreator : BaseHttpClient, IReportsCreator {
 		public ReportsCreator(HttpClientParameters httpClientParameters) : base(httpClientParameters) {
 		}
 
-		public FileWithContent CreateAcadem(StudentExtendedProxy student) {
+		public FileWithContent CreateAcadem(StudentBasedProxy student) {
 			return SendRequest<FileWithContent>("CreateAcademReport", GetDefaultParameters(), student.ToJson());
 		}
-		public FileWithContent CreateDiploma(StudentExtendedProxy student) {
+		public FileWithContent CreateDiploma(StudentBasedProxy student) {
 			return SendRequest<FileWithContent>("CreateDiplomaReport", GetDefaultParameters(), student.ToJson());
 		}
-		public FileWithContent CreateDiplomaSupplement(StudentExtendedProxy student) {
+		public FileWithContent CreateDiplomaSupplement(StudentBasedProxy student) {
 			return SendRequest<FileWithContent>("CreateDiplomaSupplementReport", GetDefaultParameters(), student.ToJson());
 		}
 	}

@@ -5,6 +5,6 @@ namespace GraduateWork.Common.Database.Readers {
 	// ReSharper disable UnusedMember.Global
 
 	public interface IDatabaseGroupReader : IDatabaseReader<GroupBasedProxy, GroupExtendedProxy> {
-		GroupBasedProxy[] GetGroupsWithUsingFilters(string groupName, int? specialtyNumber, string specialtyName, string facultyName);
+		GroupBasedProxy[] GetGroupsWithUsingFilters(string groupName);
 	}
 }

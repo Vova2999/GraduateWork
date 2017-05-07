@@ -37,25 +37,19 @@ namespace GraduateWork.Server.Test.HttpFunctionsWithUsingDatabaseReaderTests {
 		[Test]
 		public void GetGroupsWithUsingFiltersFunctionTest_ShouldBeSuccess() {
 			var groupName = "groupName";
-			var specialtyNumber = 123;
-			var specialtyName = "specialtyName";
-			var facultyName = "facultyName";
 			var inputGroups = new[] {
 				new GroupBasedProxy { GroupName = "firstNameOfGroup" },
 				new GroupBasedProxy { GroupName = "secondNameOfGroup" }
 			};
-			A.CallTo(() => databaseGroupReader.GetGroupsWithUsingFilters(groupName, specialtyNumber, specialtyName, facultyName)).Returns(inputGroups);
+			A.CallTo(() => databaseGroupReader.GetGroupsWithUsingFilters(groupName)).Returns(inputGroups);
 
 			RunServer(new GetGroupsWithUsingFiltersFunction(DatabaseAuthorizer, databaseGroupReader));
 
 			var parameters = GetDefaultParameters();
 			parameters[HttpParameters.GroupName] = groupName;
-			parameters[HttpParameters.SpecialtyNumber] = specialtyNumber.ToString();
-			parameters[HttpParameters.SpecialtyName] = specialtyName;
-			parameters[HttpParameters.FacultyName] = facultyName;
 			var receivedGroups = SendRequest<GroupExtendedProxy[]>("GetGroupsWithUsingFilters", parameters);
 
-			A.CallTo(() => databaseGroupReader.GetGroupsWithUsingFilters(groupName, specialtyNumber, specialtyName, facultyName)).MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => databaseGroupReader.GetGroupsWithUsingFilters(groupName)).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputGroups, receivedGroups);
 		}
 
