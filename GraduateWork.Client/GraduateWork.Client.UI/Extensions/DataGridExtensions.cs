@@ -59,7 +59,7 @@ namespace GraduateWork.Client.UI.Extensions {
 				Header = header,
 				IsReadOnly = true,
 				Binding = new Binding(bindingName) {
-					StringFormat = "dd.hh.yyyy"
+					StringFormat = "dd.MM.yyyy"
 				}
 			};
 		}
