@@ -110,7 +110,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\HttpServer.cs" />
     <Compile Include="Server\IHttpServer.cs" />
-    <Compile Include="ServerSettings.cs" />
+    <Compile Include="ServerConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

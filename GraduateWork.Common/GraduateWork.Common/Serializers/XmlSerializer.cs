@@ -16,7 +16,7 @@ namespace GraduateWork.Common.Serializers {
 				Indent = true,
 				IndentChars = "\t",
 				OmitXmlDeclaration = false,
-				Encoding = GlobalSettings.Encoding
+				Encoding = GlobalConfiguration.Encoding
 			};
 
 			emptyNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });

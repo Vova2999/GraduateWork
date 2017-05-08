@@ -1,8 +1,8 @@
 ﻿using GraduateWork.Common;
 
 namespace GraduateWork.Client.UI {
-	public class ClientUiSettings : FileSettings<ClientUiSettings> {
-		protected override string SettingsFileName => "GraduateWork.Client.UI.Settings.xml";
+	public class ClientUiConfiguration : ConfigurationFile<ClientUiConfiguration> {
+		protected override string ConfigurationFileName => "GraduateWork.Client.UI.Configuration.xml";
 
 		public string ServerAddress { get; set; }
 		public string UserLogin { get; set; }

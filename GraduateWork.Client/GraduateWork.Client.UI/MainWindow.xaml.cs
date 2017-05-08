@@ -7,7 +7,7 @@ using GraduateWork.Common.Tables.Proxies.Baseds;
 namespace GraduateWork.Client.UI {
 	public partial class MainWindow {
 		private readonly HttpClientProvider httpClientProvider;
-		private readonly ClientUiSettings clientUiSettings;
+		private readonly ClientUiConfiguration clientUiConfiguration;
 
 		private DisciplineBasedProxy SelectedDiscipline => (DisciplineBasedProxy)DataGridDisciplines.SelectedItem;
 		private GroupBasedProxy SelectedGroup => (GroupBasedProxy)DataGridGroups.SelectedItem;
@@ -16,32 +16,32 @@ namespace GraduateWork.Client.UI {
 
 		public MainWindow() {
 			InitializeComponent();
-			clientUiSettings = LoadClientUiSettings();
-			httpClientProvider = new HttpClientProvider(clientUiSettings.ServerAddress, clientUiSettings.UserLogin, clientUiSettings.UserPassword);
+			clientUiConfiguration = LoadClientUiConfiguration();
+			httpClientProvider = new HttpClientProvider(clientUiConfiguration.ServerAddress, clientUiConfiguration.UserLogin, clientUiConfiguration.UserPassword);
 
 			DataGridDisciplines.LoadTable(typeof(DisciplineBasedProxy));
 			DataGridGroups.LoadTable(typeof(GroupBasedProxy));
 			DataGridStudents.LoadTable(typeof(StudentBasedProxy));
 			DataGridUsers.LoadTable(typeof(UserBasedProxy));
 		}
-		private ClientUiSettings LoadClientUiSettings() {
-			var settings = ClientUiSettings.ReadSettings();
-			TextBoxServerAddress.Text = settings.ServerAddress;
-			TextBoxUserLogin.Text = settings.UserLogin;
-			PasswordBoxUserPassword.Password = settings.UserPassword;
-			CheckBoxSaveLoginAndPassword.IsChecked = settings.SaveLoginAndPassword;
+		private ClientUiConfiguration LoadClientUiConfiguration() {
+			var configuration = ClientUiConfiguration.ReadConfiguration();
+			TextBoxServerAddress.Text = configuration.ServerAddress;
+			TextBoxUserLogin.Text = configuration.UserLogin;
+			PasswordBoxUserPassword.Password = configuration.UserPassword;
+			CheckBoxSaveLoginAndPassword.IsChecked = configuration.SaveLoginAndPassword;
 
-			return settings;
+			return configuration;
 		}
 
 		private void MainWindow_OnClosing(object sender, CancelEventArgs e) {
 			var saveLoginAndPassword = CheckBoxSaveLoginAndPassword.IsChecked == true;
-			clientUiSettings.ServerAddress = httpClientProvider.ServerAddress;
-			clientUiSettings.UserLogin = saveLoginAndPassword ? httpClientProvider.Login : string.Empty;
-			clientUiSettings.UserPassword = saveLoginAndPassword ? httpClientProvider.Password : string.Empty;
-			clientUiSettings.SaveLoginAndPassword = saveLoginAndPassword;
+			clientUiConfiguration.ServerAddress = httpClientProvider.ServerAddress;
+			clientUiConfiguration.UserLogin = saveLoginAndPassword ? httpClientProvider.Login : string.Empty;
+			clientUiConfiguration.UserPassword = saveLoginAndPassword ? httpClientProvider.Password : string.Empty;
+			clientUiConfiguration.SaveLoginAndPassword = saveLoginAndPassword;
 
-			clientUiSettings.WriteSettings();
+			clientUiConfiguration.WriteConfiguration();
 		}
 
 		private void ButtonConnectToServer_OnClick(object sender, RoutedEventArgs e) {

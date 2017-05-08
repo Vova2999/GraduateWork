@@ -10,45 +10,45 @@ using GraduateWork.Common.Http;
 
 namespace GraduateWork.Server.UI {
 	public partial class MainWindow {
-		private readonly ServerUiSettings serverUiSettings;
-		private readonly ServerSettings serverSettings;
+		private readonly ServerUiConfiguration serverUiConfiguration;
+		private readonly ServerConfiguration serverConfiguration;
 
 		public MainWindow() {
 			InitializeComponent();
-			serverUiSettings = LoadServerUiSettings();
-			serverSettings = LoadServerSettings();
+			serverUiConfiguration = LoadServerUiConfiguration();
+			serverConfiguration = LoadServerConfiguration();
 		}
-		private ServerSettings LoadServerSettings() {
-			var settings = ServerSettings.ReadSettings();
-			TextBoxServerAddress.Text = settings.ServerAddress;
+		private ServerConfiguration LoadServerConfiguration() {
+			var configuration = ServerConfiguration.ReadConfiguration();
+			TextBoxServerAddress.Text = configuration.ServerAddress;
 
-			return settings;
+			return configuration;
 		}
-		private ServerUiSettings LoadServerUiSettings() {
-			var settings = ServerUiSettings.ReadSettings();
-			TextBoxUserLogin.Text = settings.UserLogin;
-			PasswordBoxUserPassword.Password = settings.UserPassword;
-			CheckBoxSaveLoginAndPassword.IsChecked = settings.SaveLoginAndPassword;
+		private ServerUiConfiguration LoadServerUiConfiguration() {
+			var configuration = ServerUiConfiguration.ReadConfiguration();
+			TextBoxUserLogin.Text = configuration.UserLogin;
+			PasswordBoxUserPassword.Password = configuration.UserPassword;
+			CheckBoxSaveLoginAndPassword.IsChecked = configuration.SaveLoginAndPassword;
 
-			return settings;
+			return configuration;
 		}
 
 		private void MainWindow_OnClosing(object sender, CancelEventArgs e) {
 			var saveLoginAndPassword = CheckBoxSaveLoginAndPassword.IsChecked == true;
 
-			serverUiSettings.UserLogin = saveLoginAndPassword ? TextBoxUserLogin.Text : string.Empty;
-			serverUiSettings.UserPassword = saveLoginAndPassword ? PasswordBoxUserPassword.Password : string.Empty;
-			serverUiSettings.SaveLoginAndPassword = saveLoginAndPassword;
+			serverUiConfiguration.UserLogin = saveLoginAndPassword ? TextBoxUserLogin.Text : string.Empty;
+			serverUiConfiguration.UserPassword = saveLoginAndPassword ? PasswordBoxUserPassword.Password : string.Empty;
+			serverUiConfiguration.SaveLoginAndPassword = saveLoginAndPassword;
 
-			serverUiSettings.WriteSettings();
+			serverUiConfiguration.WriteConfiguration();
 		}
 
 		private async void ButtonRunServer_OnClick(object sender, RoutedEventArgs e) {
 			SetEnabledControls(true);
 
 			try {
-				serverSettings.ServerAddress = new UriBuilder(TextBoxServerAddress.Text).ToString();
-				serverSettings.WriteSettings();
+				serverConfiguration.ServerAddress = new UriBuilder(TextBoxServerAddress.Text).ToString();
+				serverConfiguration.WriteConfiguration();
 				await Task.Run(() => Program.RunServer());
 			}
 			catch (Exception exception) {
@@ -59,7 +59,7 @@ namespace GraduateWork.Server.UI {
 		}
 		private void ButtonStopServer_OnClick(object sender, RoutedEventArgs e) {
 			try {
-				var webRequest = (HttpWebRequest)WebRequest.Create($"{serverSettings.ServerAddress}Stop?{GetParametersForStop()}");
+				var webRequest = (HttpWebRequest)WebRequest.Create($"{serverConfiguration.ServerAddress}Stop?{GetParametersForStop()}");
 				webRequest.Method = "GET";
 				webRequest.Timeout = 5000;
 				webRequest.GetResponse();

@@ -56,7 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CommonMethods.cs" />
-    <Compile Include="ClientUiSettings.cs" />
+    <Compile Include="ClientUiConfiguration.cs" />
     <Compile Include="CreateReportWindow.xaml.cs">
       <DependentUpon>CreateReportWindow.xaml</DependentUpon>
     </Compile>

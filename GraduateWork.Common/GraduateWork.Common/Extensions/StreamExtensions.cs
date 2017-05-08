@@ -11,7 +11,7 @@ namespace GraduateWork.Common.Extensions {
 
 		public static byte[] ReadAndDispose(this Stream stream) {
 			using (var streamReader = new StreamReader(stream))
-				return GlobalSettings.Encoding.GetBytes(streamReader.ReadToEnd());
+				return GlobalConfiguration.Encoding.GetBytes(streamReader.ReadToEnd());
 		}
 	}
 }
