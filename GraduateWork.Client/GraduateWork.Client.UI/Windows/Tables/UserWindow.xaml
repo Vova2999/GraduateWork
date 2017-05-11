@@ -1,4 +1,4 @@
-﻿<Window x:Class="GraduateWork.Client.UI.TableWindows.UserWindow"
+﻿<Window x:Class="GraduateWork.Client.UI.Windows.Tables.UserWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		Title="UserWindow" Width="500" SizeToContent="Height">

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using GraduateWork.Common.Reports;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 
-namespace GraduateWork.Client.UI {
+namespace GraduateWork.Client.UI.Windows {
 	public partial class CreateReportWindow {
 		private readonly StudentBasedProxy student;
 		private readonly Dictionary<string, Func<StudentBasedProxy, FileWithContent>> reportCreators;

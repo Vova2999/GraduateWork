@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
-namespace GraduateWork.Client.UI.TableWindows {
+namespace GraduateWork.Client.UI.Windows.Tables {
 	// ReSharper disable PossibleInvalidOperationException
 
 	public partial class StudentWindow : IProxyWindowWithExtendedProxy<StudentExtendedProxy> {

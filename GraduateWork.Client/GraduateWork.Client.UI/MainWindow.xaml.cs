@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using GraduateWork.Client.UI.Extensions;
+using GraduateWork.Client.UI.Windows;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Client.UI {

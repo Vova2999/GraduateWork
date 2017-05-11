@@ -2,7 +2,7 @@
 using System.Windows;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
-namespace GraduateWork.Client.UI.TableWindows {
+namespace GraduateWork.Client.UI.Windows.Tables {
 	public partial class DisciplineWindow : IProxyWindowWithExtendedProxy<DisciplineExtendedProxy> {
 		public DisciplineExtendedProxy ExtendedProxy { get; private set; }
 		public bool IsReadOnly { get; }

@@ -4,7 +4,7 @@ using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
-namespace GraduateWork.Client.UI.TableWindows {
+namespace GraduateWork.Client.UI.Windows.Tables {
 	public partial class GroupWindow : IProxyWindowWithExtendedProxy<GroupExtendedProxy> {
 		public GroupExtendedProxy ExtendedProxy { get; private set; }
 		public bool IsReadOnly { get; }

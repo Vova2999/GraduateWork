@@ -1,4 +1,4 @@
-﻿<Window x:Class="GraduateWork.Client.UI.TableWindows.DisciplineWindow"
+﻿<Window x:Class="GraduateWork.Client.UI.Windows.Tables.DisciplineWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		Title="DisciplineWindow" Width="500" SizeToContent="Height">
