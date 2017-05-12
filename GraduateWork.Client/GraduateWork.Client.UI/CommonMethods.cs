@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using GraduateWork.Client.UI.Windows;
 using GraduateWork.Client.UI.Windows.Tables;
 using GraduateWork.Common.Database;
@@ -33,6 +34,17 @@ namespace GraduateWork.Client.UI {
 
 			public static void ReadOnly(DataGrid dataGrid, bool isReadOnly) {
 				dataGrid.IsReadOnly = isReadOnly;
+			}
+
+			public static void Enabled(Label label, Control control, bool isEnabled) {
+				if (isEnabled) {
+					label.Foreground = Brushes.DodgerBlue;
+					control.IsEnabled = true;
+				}
+				else {
+					label.Foreground = Brushes.Silver;
+					control.IsEnabled = false;
+				}
 			}
 		}
 

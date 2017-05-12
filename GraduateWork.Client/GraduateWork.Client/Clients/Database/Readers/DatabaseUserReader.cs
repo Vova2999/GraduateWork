@@ -17,7 +17,7 @@ namespace GraduateWork.Client.Clients.Database.Readers {
 		}
 		public UserBasedProxy[] GetUsersWithUsingFilters(string login) {
 			var parameters = GetDefaultParameters();
-			AddParameterInNotNull(parameters, HttpParameters.LoginForFilter, login);
+			AddParameterIfNotNullOrEmpty(parameters, HttpParameters.LoginForFilter, login);
 
 			return SendRequest<UserBasedProxy[]>("GetUsersWithUsingFilters", parameters);
 		}

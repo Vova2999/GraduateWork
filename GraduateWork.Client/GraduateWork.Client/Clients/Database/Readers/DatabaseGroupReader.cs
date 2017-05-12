@@ -17,7 +17,7 @@ namespace GraduateWork.Client.Clients.Database.Readers {
 		}
 		public GroupBasedProxy[] GetGroupsWithUsingFilters(string groupName) {
 			var parameters = GetDefaultParameters();
-			AddParameterInNotNull(parameters, HttpParameters.GroupName, groupName);
+			AddParameterIfNotNullOrEmpty(parameters, HttpParameters.GroupName, groupName);
 
 			return SendRequest<GroupBasedProxy[]>("GetGroupsWithUsingFilters", parameters);
 		}

@@ -18,9 +18,9 @@ namespace GraduateWork.Client.Clients.Database.Readers {
 		}
 		public DisciplineBasedProxy[] GetDisciplinesWithUsingFilters(string disciplineName, ControlType? controlType, string groupName) {
 			var parameters = GetDefaultParameters();
-			AddParameterInNotNull(parameters, HttpParameters.DisciplineName, disciplineName);
-			AddParameterInNotNull(parameters, HttpParameters.ControlType, controlType?.ToString());
-			AddParameterInNotNull(parameters, HttpParameters.GroupName, groupName);
+			AddParameterIfNotNullOrEmpty(parameters, HttpParameters.DisciplineName, disciplineName);
+			AddParameterIfNotNullOrEmpty(parameters, HttpParameters.ControlType, controlType?.ToString());
+			AddParameterIfNotNullOrEmpty(parameters, HttpParameters.GroupName, groupName);
 
 			return SendRequest<DisciplineBasedProxy[]>("GetDisciplinesWithUsingFilters", parameters);
 		}

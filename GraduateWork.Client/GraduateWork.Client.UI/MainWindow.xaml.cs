@@ -3,12 +3,17 @@ using System.Windows;
 using System.Windows.Input;
 using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Client.UI.Windows;
+using GraduateWork.Client.UI.Windows.Filters;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Client.UI {
 	public partial class MainWindow {
 		private readonly HttpClientProvider httpClientProvider;
 		private readonly ClientUiConfiguration clientUiConfiguration;
+		private readonly DisciplineFilterWindow disciplineFilterWindow = new DisciplineFilterWindow();
+		private readonly GroupFilterWindow groupFilterWindow = new GroupFilterWindow();
+		private readonly StudentFilterWindow studentFilterWindow = new StudentFilterWindow();
+		private readonly UserFilterWindow userFilterWindow = new UserFilterWindow();
 
 		private DisciplineBasedProxy SelectedDiscipline => (DisciplineBasedProxy)DataGridDisciplines.SelectedItem;
 		private GroupBasedProxy SelectedGroup => (GroupBasedProxy)DataGridGroups.SelectedItem;
@@ -43,6 +48,11 @@ namespace GraduateWork.Client.UI {
 			clientUiConfiguration.SaveLoginAndPassword = saveLoginAndPassword;
 
 			clientUiConfiguration.WriteConfiguration();
+
+			disciplineFilterWindow.Close();
+			groupFilterWindow.Close();
+			studentFilterWindow.Close();
+			userFilterWindow.Close();
 		}
 
 		private void ButtonConnectToServer_OnClick(object sender, RoutedEventArgs e) {
@@ -126,12 +136,20 @@ namespace GraduateWork.Client.UI {
 		}
 
 		private void ButtonDisciplineFilters_OnClick(object sender, RoutedEventArgs e) {
+			disciplineFilterWindow.ShowDialog();
+			UpdateDataGridDisciplines();
 		}
 		private void ButtonGroupFilters_OnClick(object sender, RoutedEventArgs e) {
+			groupFilterWindow.ShowDialog();
+			UpdateDataGridGroups();
 		}
 		private void ButtonStudentFilters_OnClick(object sender, RoutedEventArgs e) {
+			studentFilterWindow.ShowDialog();
+			UpdateDataGridStudents();
 		}
 		private void ButtonUserFilters_OnClick(object sender, RoutedEventArgs e) {
+			userFilterWindow.ShowDialog();
+			UpdateDataGridUsers();
 		}
 		private void ButtonUpdateDisciplines_OnClick(object sender, RoutedEventArgs e) {
 			UpdateDataGridDisciplines();
@@ -147,16 +165,24 @@ namespace GraduateWork.Client.UI {
 		}
 
 		private void UpdateDataGridDisciplines() {
-			DataGridDisciplines.ItemsSource = CommonMethods.SafeRunMethod.WithReturn(httpClientProvider.GetDatabaseDisciplineReader().GetAllBasedProies);
+			DataGridDisciplines.ItemsSource = disciplineFilterWindow.UseFilters
+				? CommonMethods.SafeRunMethod.WithReturn(() => httpClientProvider.GetDatabaseDisciplineReader().GetDisciplinesWithUsingFilters(disciplineFilterWindow.DisciplineName, disciplineFilterWindow.ControlType, disciplineFilterWindow.GroupName))
+				: CommonMethods.SafeRunMethod.WithReturn(httpClientProvider.GetDatabaseDisciplineReader().GetAllBasedProies);
 		}
 		private void UpdateDataGridGroups() {
-			DataGridGroups.ItemsSource = CommonMethods.SafeRunMethod.WithReturn(httpClientProvider.GetDatabaseGroupReader().GetAllBasedProies);
+			DataGridGroups.ItemsSource = groupFilterWindow.UseFilters
+				? CommonMethods.SafeRunMethod.WithReturn(() => httpClientProvider.GetDatabaseGroupReader().GetGroupsWithUsingFilters(groupFilterWindow.GroupName))
+				: CommonMethods.SafeRunMethod.WithReturn(httpClientProvider.GetDatabaseGroupReader().GetAllBasedProies);
 		}
 		private void UpdateDataGridStudents() {
-			DataGridStudents.ItemsSource = CommonMethods.SafeRunMethod.WithReturn(httpClientProvider.GetDatabaseStudentReader().GetAllBasedProies);
+			DataGridStudents.ItemsSource = studentFilterWindow.UseFilters
+				? CommonMethods.SafeRunMethod.WithReturn(() => httpClientProvider.GetDatabaseStudentReader().GetStudentsWithUsingFilters(studentFilterWindow.FirstName, studentFilterWindow.SecondName, studentFilterWindow.ThirdName, studentFilterWindow.DateOfBirth))
+				: CommonMethods.SafeRunMethod.WithReturn(httpClientProvider.GetDatabaseStudentReader().GetAllBasedProies);
 		}
 		private void UpdateDataGridUsers() {
-			DataGridUsers.ItemsSource = CommonMethods.SafeRunMethod.WithReturn(httpClientProvider.GetDatabaseUserReader().GetAllBasedProies);
+			DataGridUsers.ItemsSource = userFilterWindow.UseFilters
+				? CommonMethods.SafeRunMethod.WithReturn(() => httpClientProvider.GetDatabaseUserReader().GetUsersWithUsingFilters(userFilterWindow.UserLogin))
+				: CommonMethods.SafeRunMethod.WithReturn(httpClientProvider.GetDatabaseUserReader().GetAllBasedProies);
 		}
 	}
 }

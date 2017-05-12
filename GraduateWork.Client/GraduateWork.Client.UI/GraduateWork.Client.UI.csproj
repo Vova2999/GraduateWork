@@ -61,6 +61,18 @@
     </Compile>
     <Compile Include="Extensions\DataGridExtensions.cs" />
     <Compile Include="Extensions\UserProxyExtensions.cs" />
+    <Compile Include="Windows\Filters\DisciplineFilterWindow.xaml.cs">
+      <DependentUpon>DisciplineFilterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Filters\GroupFilterWindow.xaml.cs">
+      <DependentUpon>GroupFilterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Filters\StudentFilterWindow.xaml.cs">
+      <DependentUpon>StudentFilterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Filters\UserFilterWindow.xaml.cs">
+      <DependentUpon>UserFilterWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Tables\DisciplineWindow.xaml.cs">
       <DependentUpon>DisciplineWindow.xaml</DependentUpon>
     </Compile>
@@ -91,6 +103,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\Filters\DisciplineFilterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Filters\GroupFilterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Filters\StudentFilterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Filters\UserFilterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Tables\DisciplineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

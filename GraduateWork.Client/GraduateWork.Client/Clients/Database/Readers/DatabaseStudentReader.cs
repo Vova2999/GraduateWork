@@ -18,10 +18,10 @@ namespace GraduateWork.Client.Clients.Database.Readers {
 		}
 		public StudentBasedProxy[] GetStudentsWithUsingFilters(string firstName, string secondName, string thirdName, DateTime? dateOfBirth) {
 			var parameters = GetDefaultParameters();
-			AddParameterInNotNull(parameters, HttpParameters.FirstName, firstName);
-			AddParameterInNotNull(parameters, HttpParameters.SecondName, secondName);
-			AddParameterInNotNull(parameters, HttpParameters.ThirdName, thirdName);
-			AddParameterInNotNull(parameters, HttpParameters.DateOfBirth, dateOfBirth?.ToString());
+			AddParameterIfNotNullOrEmpty(parameters, HttpParameters.FirstName, firstName);
+			AddParameterIfNotNullOrEmpty(parameters, HttpParameters.SecondName, secondName);
+			AddParameterIfNotNullOrEmpty(parameters, HttpParameters.ThirdName, thirdName);
+			AddParameterIfNotNullOrEmpty(parameters, HttpParameters.DateOfBirth, dateOfBirth?.ToString());
 
 			return SendRequest<StudentBasedProxy[]>("GetStudentsWithUsingFilters", parameters);
 		}

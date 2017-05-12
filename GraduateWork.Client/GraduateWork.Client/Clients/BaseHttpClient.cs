@@ -20,8 +20,8 @@ namespace GraduateWork.Client.Clients {
 				{ HttpParameters.Password, httpClientParameters.Password }
 			};
 		}
-		protected static void AddParameterInNotNull(Dictionary<string, string> parameters, string key, string value) {
-			if (value != null)
+		protected static void AddParameterIfNotNullOrEmpty(Dictionary<string, string> parameters, string key, string value) {
+			if (!string.IsNullOrEmpty(value))
 				parameters[key] = value;
 		}
 
