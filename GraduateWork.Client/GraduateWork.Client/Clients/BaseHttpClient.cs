@@ -25,24 +25,24 @@ namespace GraduateWork.Client.Clients {
 				parameters[key] = value;
 		}
 
-		protected void SendRequest(string methodName, byte[] requestBody = null, int timeoutMs = 2000) {
-			SendRequest(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
+		protected void SendRequest(string methodName, byte[] requestBody = null) {
+			SendRequest(methodName, new Dictionary<string, string>(), requestBody);
 		}
-		protected void SendRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 2000) {
-			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
+		protected void SendRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null) {
+			var webRequest = CreateWebRequest(methodName, parameters, requestBody);
 			SendRequest(webRequest);
 		}
-		protected TKey SendRequest<TKey>(string methodName, byte[] requestBody = null, int timeoutMs = 2000) {
-			return SendRequest<TKey>(methodName, new Dictionary<string, string>(), requestBody, timeoutMs);
+		protected TKey SendRequest<TKey>(string methodName, byte[] requestBody = null) {
+			return SendRequest<TKey>(methodName, new Dictionary<string, string>(), requestBody);
 		}
-		protected TKey SendRequest<TKey>(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null, int timeoutMs = 2000) {
-			var webRequest = CreateWebRequest(methodName, parameters, requestBody, timeoutMs);
+		protected TKey SendRequest<TKey>(string methodName, Dictionary<string, string> parameters, byte[] requestBody = null) {
+			var webRequest = CreateWebRequest(methodName, parameters, requestBody);
 			return GetAnswer<TKey>(SendRequest(webRequest));
 		}
 
-		private HttpWebRequest CreateWebRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody, int timeoutMs) {
+		private HttpWebRequest CreateWebRequest(string methodName, Dictionary<string, string> parameters, byte[] requestBody) {
 			var webRequest = (HttpWebRequest)WebRequest.Create(httpClientParameters.ServerAddress + CreateRequestUri(methodName, parameters));
-			webRequest.Timeout = timeoutMs;
+			webRequest.Timeout = httpClientParameters.TimeoutMs;
 
 			return requestBody == null
 				? CreateGetRequest(webRequest)

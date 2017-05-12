@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using GraduateWork.Client.UI.Extensions;
@@ -23,7 +26,7 @@ namespace GraduateWork.Client.UI {
 		public MainWindow() {
 			InitializeComponent();
 			clientUiConfiguration = LoadClientUiConfiguration();
-			httpClientProvider = new HttpClientProvider(clientUiConfiguration.ServerAddress, clientUiConfiguration.UserLogin, clientUiConfiguration.UserPassword);
+			httpClientProvider = new HttpClientProvider(clientUiConfiguration.ServerAddress, clientUiConfiguration.TimeoutMs, clientUiConfiguration.UserLogin, clientUiConfiguration.UserPassword);
 
 			DataGridDisciplines.LoadTable(typeof(DisciplineBasedProxy));
 			DataGridGroups.LoadTable(typeof(GroupBasedProxy));
@@ -33,6 +36,7 @@ namespace GraduateWork.Client.UI {
 		private ClientUiConfiguration LoadClientUiConfiguration() {
 			var configuration = ClientUiConfiguration.ReadConfiguration();
 			TextBoxServerAddress.Text = configuration.ServerAddress;
+			TextBoxRequestTimeoutMs.Text = configuration.TimeoutMs.ToString();
 			TextBoxUserLogin.Text = configuration.UserLogin;
 			PasswordBoxUserPassword.Password = configuration.UserPassword;
 			CheckBoxSaveLoginAndPassword.IsChecked = configuration.SaveLoginAndPassword;
@@ -43,6 +47,7 @@ namespace GraduateWork.Client.UI {
 		private void MainWindow_OnClosing(object sender, CancelEventArgs e) {
 			var saveLoginAndPassword = CheckBoxSaveLoginAndPassword.IsChecked == true;
 			clientUiConfiguration.ServerAddress = httpClientProvider.ServerAddress;
+			clientUiConfiguration.TimeoutMs = httpClientProvider.TimeoutMs;
 			clientUiConfiguration.UserLogin = saveLoginAndPassword ? httpClientProvider.Login : string.Empty;
 			clientUiConfiguration.UserPassword = saveLoginAndPassword ? httpClientProvider.Password : string.Empty;
 			clientUiConfiguration.SaveLoginAndPassword = saveLoginAndPassword;
@@ -56,10 +61,26 @@ namespace GraduateWork.Client.UI {
 		}
 
 		private void ButtonConnectToServer_OnClick(object sender, RoutedEventArgs e) {
-			CommonMethods.SafeRunMethod.WithoutReturn(() => {
-				httpClientProvider.GetParameretsClient().SetServerAddress(TextBoxServerAddress.Text);
-				TextBoxServerAddress.Text = httpClientProvider.ServerAddress;
-			}, "Соединение было успешно установлено");
+			CommonMethods.SafeRunMethod.WithoutReturn(SetServerAddress, "Соединение было успешно установлено");
+		}
+		private void SetServerAddress() {
+			var errors = GetConnectToServerErrors().ToArray();
+			if (errors.Any())
+				throw new ArgumentException(string.Join("\n", errors));
+
+			httpClientProvider.GetParameretsClient().SetServerAddressAndTimeoutMs(TextBoxServerAddress.Text, int.Parse(TextBoxRequestTimeoutMs.Text));
+			TextBoxServerAddress.Text = httpClientProvider.ServerAddress;
+		}
+		private IEnumerable<string> GetConnectToServerErrors() {
+			if (CommonMethods.Check.FieldIsEmpty(TextBoxServerAddress))
+				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelServerAddress);
+
+			if (CommonMethods.Check.FieldIsEmpty(TextBoxRequestTimeoutMs))
+				yield return CommonMethods.GenerateMessage.FieldIsEmpty(LabelRequestTimeoutMs);
+			else if (CommonMethods.Check.FieldIsNotNumber(TextBoxRequestTimeoutMs))
+				yield return CommonMethods.GenerateMessage.FieldIsNotNumber(LabelRequestTimeoutMs);
+			else if (CommonMethods.Check.FieldNumberIsNotPositive(TextBoxRequestTimeoutMs))
+				yield return CommonMethods.GenerateMessage.FieldNumberIsNotPositive(LabelRequestTimeoutMs);
 		}
 		private void ButtonSingIn_OnClick(object sender, RoutedEventArgs e) {
 			CommonMethods.SafeRunMethod.WithoutReturn(() =>

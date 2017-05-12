@@ -62,8 +62,11 @@ namespace GraduateWork.Client.UI {
 			}
 
 			public static bool FieldIsNotNumber(TextBox textBox) {
-				int result;
-				return !int.TryParse(textBox.Text, out result);
+				return !int.TryParse(textBox.Text, out int _);
+			}
+
+			public static bool FieldNumberIsNotPositive(TextBox textBox) {
+				return int.Parse(textBox.Text) <= 0;
 			}
 
 			public static bool DirectoryNotExists(TextBox textBox) {
@@ -78,6 +81,10 @@ namespace GraduateWork.Client.UI {
 
 			public static string FieldIsNotNumber(Label label) {
 				return $"Поле '{(string)label.Content}' должно быть числом";
+			}
+
+			public static string FieldNumberIsNotPositive(Label label) {
+				return $"Поле '{(string)label.Content}' должно быть положительным числом";
 			}
 		}
 
@@ -182,7 +189,7 @@ namespace GraduateWork.Client.UI {
 		public static class SafeRunMethod {
 			public static TKey WithReturn<TKey>(Func<TKey> action, string successfulMessage = null) {
 				var result = default(TKey);
-				RunMethod(() => { result = action(); }, successfulMessage);
+				RunMethod(() => result = action(), successfulMessage);
 				return result;
 			}
 

@@ -10,11 +10,12 @@ namespace GraduateWork.Client.Clients {
 			this.httpClientParameters = httpClientParameters;
 		}
 
-		public void SetServerAddress(string serverAddress) {
+		public void SetServerAddressAndTimeoutMs(string serverAddress, int timeoutMs) {
 			serverAddress = new UriBuilder(serverAddress).Uri.ToString();
 
-			new ParameretsClient(new HttpClientParameters { ServerAddress = serverAddress }).SendRequest("Ping");
+			new ParameretsClient(new HttpClientParameters { ServerAddress = serverAddress, TimeoutMs = timeoutMs }).SendRequest("Ping");
 			httpClientParameters.ServerAddress = serverAddress;
+			httpClientParameters.TimeoutMs = timeoutMs;
 		}
 		public void SetLoginAndPassword(string login, string password) {
 			var parameters = new Dictionary<string, string> {
