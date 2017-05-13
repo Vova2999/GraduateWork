@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace GraduateWork.Server.Test {
 	[TestFixture]
-	public class HttpSesrverCreateTest {
+	public class HttpServerCreateTest {
 		[Test]
 		public void SimpleCreateTest_ShouldBeSuccess() {
 			var firstFunction = A.Fake<IHttpFunction>();

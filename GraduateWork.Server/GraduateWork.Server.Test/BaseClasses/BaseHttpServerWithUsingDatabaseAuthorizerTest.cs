@@ -5,7 +5,7 @@ using GraduateWork.Common.Http;
 using NUnit.Framework;
 
 namespace GraduateWork.Server.Test.BaseClasses {
-	public class BaseHttpServerWithUsingDatabaseAuthorizerTest : BaseHttpServerTest {
+	public abstract class BaseHttpServerWithUsingDatabaseAuthorizerTest : BaseHttpServerTest {
 		private const string login = "login";
 		private const string password = "password";
 		protected IDatabaseAuthorizer DatabaseAuthorizer;

@@ -9,6 +9,7 @@ using System.Windows.Media;
 using GraduateWork.Client.UI.Windows;
 using GraduateWork.Client.UI.Windows.Tables;
 using GraduateWork.Common.Database;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Attributes;
 using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
@@ -66,7 +67,7 @@ namespace GraduateWork.Client.UI {
 			}
 
 			public static bool FieldNumberIsNotPositive(TextBox textBox) {
-				return int.Parse(textBox.Text) <= 0;
+				return textBox.Text.ToInt() <= 0;
 			}
 
 			public static bool DirectoryNotExists(TextBox textBox) {

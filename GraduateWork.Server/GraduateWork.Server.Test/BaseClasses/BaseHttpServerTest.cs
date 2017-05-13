@@ -10,7 +10,7 @@ using GraduateWork.Server.Server;
 using NUnit.Framework;
 
 namespace GraduateWork.Server.Test.BaseClasses {
-	public class BaseHttpServerTest : BaseHttpClient {
+	public abstract class BaseHttpServerTest : BaseHttpClient {
 		private const string nameOfCalledStopFunction = "Stop";
 
 		[TearDown]

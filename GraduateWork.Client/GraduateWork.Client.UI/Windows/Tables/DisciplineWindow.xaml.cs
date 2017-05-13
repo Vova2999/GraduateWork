@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.UI.Windows.Tables {
@@ -64,8 +65,8 @@ namespace GraduateWork.Client.UI.Windows.Tables {
 			ExtendedProxy.DisciplineName = TextBoxDisciplineName.Text;
 			ExtendedProxy.GroupName = (string)ComboBoxGroupName.SelectedItem;
 			ExtendedProxy.ControlType = CommonMethods.Enum.GetControlTypeValue((string)ComboBoxControlType.SelectedItem);
-			ExtendedProxy.TotalHours = int.Parse(TextBoxTotalHours.Text);
-			ExtendedProxy.ClassHours = int.Parse(TextBoxClassHours.Text);
+			ExtendedProxy.TotalHours = TextBoxTotalHours.Text.ToInt();
+			ExtendedProxy.ClassHours = TextBoxClassHours.Text.ToInt();
 		}
 	}
 }

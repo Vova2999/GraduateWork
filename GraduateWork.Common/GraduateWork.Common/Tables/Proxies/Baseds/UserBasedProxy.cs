@@ -5,7 +5,7 @@ namespace GraduateWork.Common.Tables.Proxies.Baseds {
 	// ReSharper disable MemberCanBePrivate.Global
 	// ReSharper disable MemberCanBeProtected.Global
 	// ReSharper disable NonReadonlyMemberInGetHashCode
-	// ReSharper disable once UnusedMember.Global
+	// ReSharper disable UnusedMember.Global
 
 	public class UserBasedProxy {
 		[HeaderColumn("Логин")]

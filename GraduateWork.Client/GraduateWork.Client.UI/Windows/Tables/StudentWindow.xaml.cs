@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using GraduateWork.Client.UI.Extensions;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
 namespace GraduateWork.Client.UI.Windows.Tables {
@@ -156,13 +157,13 @@ namespace GraduateWork.Client.UI.Windows.Tables {
 			ExtendedProxy.ThirdName = TextBoxThirdName.Text;
 			ExtendedProxy.DateOfBirth = DatePickerDateOfBirth.SelectedDate.Value;
 			ExtendedProxy.PreviousEducationName = TextBoxPreviousEducationName.Text;
-			ExtendedProxy.PreviousEducationYear = int.Parse(TextBoxPreviousEducationYear.Text);
+			ExtendedProxy.PreviousEducationYear = TextBoxPreviousEducationYear.Text.ToInt();
 			ExtendedProxy.EnrollmentName = TextBoxEnrollmentName.Text;
-			ExtendedProxy.EnrollmentYear = int.Parse(TextBoxEnrollmentYear.Text);
+			ExtendedProxy.EnrollmentYear = TextBoxEnrollmentYear.Text.ToInt();
 			ExtendedProxy.ExpulsionName = TextBoxExpulsionName.Text;
-			ExtendedProxy.ExpulsionYear = int.Parse(TextBoxExpulsionYear.Text);
+			ExtendedProxy.ExpulsionYear = TextBoxExpulsionYear.Text.ToInt();
 			ExtendedProxy.ExpulsionOrderDate = DatePickerExpulsionOrderDate.SelectedDate.Value;
-			ExtendedProxy.ExpulsionOrderNumber = int.Parse(TextBoxExpulsionOrderNumber.Text);
+			ExtendedProxy.ExpulsionOrderNumber = TextBoxExpulsionOrderNumber.Text.ToInt();
 			ExtendedProxy.DiplomaTopic = TextBoxDiplomaTopic.Text;
 			ExtendedProxy.DiplomaAssessment = CommonMethods.Enum.GetAssessmentValue((string)ComboBoxDiplomaAssessment.SelectedItem);
 			ExtendedProxy.ProtectionDate = DatePickerProtectionDate.SelectedDate.Value;

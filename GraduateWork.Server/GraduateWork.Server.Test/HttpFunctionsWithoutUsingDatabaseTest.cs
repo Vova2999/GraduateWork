@@ -7,6 +7,7 @@ using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
 
 namespace GraduateWork.Server.Test {
+	[TestFixture]
 	public class HttpFunctionsWithoutUsingDatabaseTest : BaseHttpServerTest {
 		[Test]
 		public void PingFunctionTest_ShouldBeSuccess() {

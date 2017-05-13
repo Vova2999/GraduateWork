@@ -5,7 +5,6 @@ using GraduateWork.Common.Tables.Enums;
 namespace GraduateWork.Common.Tables.Proxies.Baseds {
 	// ReSharper disable MemberCanBePrivate.Global
 	// ReSharper disable NonReadonlyMemberInGetHashCode
-	// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 	public class DisciplineBasedProxy {
 		[HeaderColumn("Название дисциплины")]

@@ -11,12 +11,13 @@ using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
 
 namespace GraduateWork.Server.Test.HttpFunctionsWithUsingDatabaseReaderTests {
+	[TestFixture]
 	public class HttpFunctionsWithUsingDatabaseUserReaderTest : BaseHttpServerWithUsingDatabaseAuthorizerTest {
-		private IDatabaseUserReader databaseReader;
+		private IDatabaseUserReader databaseUserReader;
 
 		[SetUp]
 		public void SetUp() {
-			databaseReader = A.Fake<IDatabaseUserReader>();
+			databaseUserReader = A.Fake<IDatabaseUserReader>();
 		}
 
 		[Test]
@@ -25,12 +26,12 @@ namespace GraduateWork.Server.Test.HttpFunctionsWithUsingDatabaseReaderTests {
 				new UserBasedProxy { Login = "firstLogin" },
 				new UserBasedProxy { Login = "secondLogin" }
 			};
-			A.CallTo(() => databaseReader.GetAllBasedProies()).Returns(inputUsers);
+			A.CallTo(() => databaseUserReader.GetAllBasedProies()).Returns(inputUsers);
 
-			RunServer(new GetAllUsersFunction(DatabaseAuthorizer, databaseReader));
+			RunServer(new GetAllUsersFunction(DatabaseAuthorizer, databaseUserReader));
 			var receivedUsers = SendRequest<UserBasedProxy[]>("GetAllUsers", GetDefaultParameters());
 
-			A.CallTo(() => databaseReader.GetAllBasedProies()).MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => databaseUserReader.GetAllBasedProies()).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputUsers, receivedUsers);
 		}
 
@@ -41,15 +42,15 @@ namespace GraduateWork.Server.Test.HttpFunctionsWithUsingDatabaseReaderTests {
 				new UserBasedProxy { Login = "firstLogin" },
 				new UserBasedProxy { Login = "secondLogin" }
 			};
-			A.CallTo(() => databaseReader.GetUsersWithUsingFilters(login)).Returns(inputUsers);
+			A.CallTo(() => databaseUserReader.GetUsersWithUsingFilters(login)).Returns(inputUsers);
 
-			RunServer(new GetUsersWithUsingFiltersFunction(DatabaseAuthorizer, databaseReader));
+			RunServer(new GetUsersWithUsingFiltersFunction(DatabaseAuthorizer, databaseUserReader));
 
 			var parameters = GetDefaultParameters();
 			parameters[HttpParameters.LoginForFilter] = login;
 			var receivedUsers = SendRequest<UserBasedProxy[]>("GetUsersWithUsingFilters", parameters);
 
-			A.CallTo(() => databaseReader.GetUsersWithUsingFilters(login)).MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => databaseUserReader.GetUsersWithUsingFilters(login)).MustHaveHappened(Repeated.Exactly.Once);
 			CollectionAssert.AreEqual(inputUsers, receivedUsers);
 		}
 
@@ -57,12 +58,12 @@ namespace GraduateWork.Server.Test.HttpFunctionsWithUsingDatabaseReaderTests {
 		public void GetExtendedUserFunctionTest_ShouldBeSuccess() {
 			var inputBasedUser = new UserBasedProxy { Login = "login" };
 			var inputExtendedUser = new UserExtendedProxy { Login = "login" };
-			A.CallTo(() => databaseReader.GetExtendedProxy(inputBasedUser)).Returns(inputExtendedUser);
+			A.CallTo(() => databaseUserReader.GetExtendedProxy(inputBasedUser)).Returns(inputExtendedUser);
 
-			RunServer(new GetExtendedUserFunction(DatabaseAuthorizer, databaseReader));
+			RunServer(new GetExtendedUserFunction(DatabaseAuthorizer, databaseUserReader));
 			var receivedUser = SendRequest<UserExtendedProxy>("GetExtendedUser", GetDefaultParameters(), inputBasedUser.ToJson());
 
-			A.CallTo(() => databaseReader.GetExtendedProxy(inputBasedUser)).MustHaveHappened(Repeated.Exactly.Once);
+			A.CallTo(() => databaseUserReader.GetExtendedProxy(inputBasedUser)).MustHaveHappened(Repeated.Exactly.Once);
 			Assert.That(receivedUser, Is.EqualTo(inputExtendedUser));
 		}
 	}

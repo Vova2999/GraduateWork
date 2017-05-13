@@ -7,6 +7,7 @@ using System.Windows.Input;
 using GraduateWork.Client.UI.Extensions;
 using GraduateWork.Client.UI.Windows;
 using GraduateWork.Client.UI.Windows.Filters;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Client.UI {
@@ -68,7 +69,7 @@ namespace GraduateWork.Client.UI {
 			if (errors.Any())
 				throw new ArgumentException(string.Join("\n", errors));
 
-			httpClientProvider.GetParameretsClient().SetServerAddressAndTimeoutMs(TextBoxServerAddress.Text, int.Parse(TextBoxRequestTimeoutMs.Text));
+			httpClientProvider.GetParameretsClient().SetServerAddressAndTimeoutMs(TextBoxServerAddress.Text, TextBoxRequestTimeoutMs.Text.ToInt());
 			TextBoxServerAddress.Text = httpClientProvider.ServerAddress;
 		}
 		private IEnumerable<string> GetConnectToServerErrors() {

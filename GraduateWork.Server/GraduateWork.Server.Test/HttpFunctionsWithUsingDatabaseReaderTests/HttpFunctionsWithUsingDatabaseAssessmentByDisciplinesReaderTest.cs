@@ -7,6 +7,7 @@ using GraduateWork.Server.Test.BaseClasses;
 using NUnit.Framework;
 
 namespace GraduateWork.Server.Test.HttpFunctionsWithUsingDatabaseReaderTests {
+	[TestFixture]
 	public class HttpFunctionsWithUsingDatabaseAssessmentByDisciplinesReaderTest : BaseHttpServerWithUsingDatabaseAuthorizerTest {
 		private IDatabaseAssessmentByDisciplinesReader databaseAssessmentByDisciplinesReader;
 

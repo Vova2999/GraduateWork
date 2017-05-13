@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using GraduateWork.Client.UI.Extensions;
+using GraduateWork.Common.Extensions;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 using GraduateWork.Common.Tables.Proxies.Extendeds;
 
@@ -61,7 +62,7 @@ namespace GraduateWork.Client.UI.Windows.Tables {
 		public void WriteProxy() {
 			ExtendedProxy.GroupName = TextBoxGroupName.Text;
 			ExtendedProxy.SpecialtyName = TextBoxSpecialtyName.Text;
-			ExtendedProxy.SpecialtyNumber = int.Parse(TextBoxSpecialtyNumber.Text);
+			ExtendedProxy.SpecialtyNumber = TextBoxSpecialtyNumber.Text.ToInt();
 			ExtendedProxy.FacultyName = TextBoxFacultyName.Text;
 		}
 	}

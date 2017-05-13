@@ -5,10 +5,8 @@ using GraduateWork.Common.Tables.Enums;
 using GraduateWork.Common.Tables.Proxies.Baseds;
 
 namespace GraduateWork.Common.Tables.Proxies.Extendeds {
-	// ReSharper disable ClassNeverInstantiated.Global
 	// ReSharper disable MemberCanBePrivate.Global
 	// ReSharper disable NonReadonlyMemberInGetHashCode
-	// ReSharper disable UnusedAutoPropertyAccessor.Global
 	// ReSharper disable UnusedMember.Global
 
 	public class StudentExtendedProxy : StudentBasedProxy {
